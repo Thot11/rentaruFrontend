@@ -2,14 +2,14 @@ import axios from 'axios'
 
 export function getStrapiURL(path) {
   return `${
-    process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:8082"
+    process.env.NEXT_PUBLIC_STRAPI_API_URL || "https://quiet-wave-32161.herokuapp.com"
   }${path}`;
 }
 
   export async function postConnect(mail, password) {
 
     const { data } = await axios
-    .post('http://localhost:8082/auth/local', {
+    .post('https://quiet-wave-32161.herokuapp.com/auth/local', {
       identifier: mail,
       password: password,
     })
@@ -31,7 +31,7 @@ export function getStrapiURL(path) {
     ) {
 
     const {data} = await axios
-    .post('http://localhost:8082/auth/local/register', {
+    .post('https://quiet-wave-32161.herokuapp.com/auth/local/register', {
         email: mail,
         password,
         username,
@@ -51,7 +51,7 @@ export function getStrapiURL(path) {
   export async function postTokenToUser(data) {
 
     const resp = await axios
-    .post('http://localhost:8082/tokens', {
+    .post('https://quiet-wave-32161.herokuapp.com/tokens', {
       token: data.jwt,
       user: data.user.id,
     })
@@ -62,7 +62,7 @@ export function getStrapiURL(path) {
   export async function postUploadImg(data, token) {
 
     const resp = await axios
-    .post(`http://localhost:8082/upload?token=${token}`,data)
+    .post(`https://quiet-wave-32161.herokuapp.com/upload?token=${token}`,data)
     
     return resp
   }
@@ -82,7 +82,7 @@ export async function getCategories() {
 
 export async function getMe(token) {
   const { data } = await axios
-  .get(`http://localhost:8082/users/me?token=${token}`)
+  .get(`https://quiet-wave-32161.herokuapp.com/users/me?token=${token}`)
   
   return data;
 }
