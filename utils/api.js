@@ -2,14 +2,14 @@ import axios from 'axios'
 
 export function getStrapiURL(path) {
   return `${
-    process.env.NEXT_PUBLIC_STRAPI_API_URL || "https://quiet-wave-32161.herokuapp.com"
+    process.env.NEXT_PUBLIC_STRAPI_API_URL
   }${path}`;
 }
 
   export async function postConnect(mail, password) {
 
     const { data } = await axios
-    .post('https://quiet-wave-32161.herokuapp.com/auth/local', {
+    .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/auth/local`, {
       identifier: mail,
       password: password,
     })
@@ -31,7 +31,7 @@ export function getStrapiURL(path) {
     ) {
 
     const {data} = await axios
-    .post('https://quiet-wave-32161.herokuapp.com/auth/local/register', {
+    .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/auth/local/register`, {
         email: mail,
         password,
         username,
@@ -51,7 +51,7 @@ export function getStrapiURL(path) {
   export async function postTokenToUser(data) {
 
     const resp = await axios
-    .post('https://quiet-wave-32161.herokuapp.com/tokens', {
+    .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/tokens`, {
       token: data.jwt,
       user: data.user.id,
     })
@@ -62,7 +62,7 @@ export function getStrapiURL(path) {
   export async function postUploadImg(data, token) {
 
     const resp = await axios
-    .post(`https://quiet-wave-32161.herokuapp.com/upload?token=${token}`,data)
+    .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/upload?token=${token}`,data)
     
     return resp
   }
@@ -82,21 +82,21 @@ export async function getCategories() {
 
 export async function getMe(token) {
   const { data } = await axios
-  .get(`https://quiet-wave-32161.herokuapp.com/users/me?token=${token}`)
+  .get(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/me?token=${token}`)
   
   return data;
 }
 
 export async function updateMe(data, token) {
   const resp = await axios
-  .put(`http://localhost:8082/users/me?token=${token}`, data)
+  .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/me?token=${token}`, data)
   
   return resp;
 }
 
 export async function postProduct(data, token) {
   const resp = await axios
-  .post(`http://localhost:8082/products?token=${token}`, data)
+  .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/products?token=${token}`, data)
   return resp;
 }
 
