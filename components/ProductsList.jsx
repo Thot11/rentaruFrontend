@@ -4,7 +4,6 @@ import CardProduct from "./CardProduct";
 
 const ProductsList = ({ products, user }) => {
   
-  console.log('products :', products);
   return (
     <div className="productsContainers">
       {products.map((_product, key) => (

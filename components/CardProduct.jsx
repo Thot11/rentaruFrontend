@@ -4,7 +4,6 @@ import { getStrapiMedia } from "../utils/medias";
 
 const CardProduct = ({ product, key, user }) => {
 
-  console.log(user)
   return (
     <div className="cardProduct" key={key}>
       <Link href={`/products/${product.slug}`}>
