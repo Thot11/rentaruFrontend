@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getStrapiMedia } from "../utils/medias";
-import CardProduct from "./cardProduct";
+import CardProduct from "./CardProduct";
 
 const ProductsList = ({ products, user }) => {
   
