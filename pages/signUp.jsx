@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { postSignUp } from "../store";
 import Step1 from "../components/signUpStep/Step1";
+import Step2 from "../components/signUpStep/Step2";
+import Step3 from "../components/signUpStep/Step3";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [address, setAddress] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+  const [step, setStep] = useState(1);
 
   const signUp = () => {
     if (password === confirmPassword) {
@@ -54,57 +57,10 @@ const SignUp = () => {
       </Head>
       <div className="signInContainer">
         <img className="background" src="/japBckg.svg" alt="background"/>
-        <Step1 mail={mail} setMail={setMail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} />
-        username
-        <input
-          type="text"
-          defaultValue={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        prenom
-        <input
-          type="text"
-          defaultValue={prenom}
-          onChange={(e) => setPrenom(e.target.value)}
-        />
-        nom
-        <input
-          type="text"
-          defaultValue={nom}
-          onChange={(e) => setNom(e.target.value)}
-        />
-        adresse
-        <input
-          type="text"
-          defaultValue={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        ville
-        <input
-          type="text"
-          defaultValue={ville}
-          onChange={(e) => setVille(e.target.value)}
-        />
-        departement
-        <input
-          type="number"
-          defaultValue={departement}
-          onChange={(e) => setDepartement(e.target.value)}
-        />
-        telephone
-        <input
-          type="tel"
-          defaultValue={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        
-        Photo de profil
-        <input
-          type="file"
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
-        <div onClick={signUp}>Submit</div>
-        <Link href={"/login"}> Connexion </Link>
+        {step === 1 && <Step1 setStep={setStep} mail={mail} setMail={setMail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} /> }
+        {step === 2 && <Step2 setStep={setStep} nom={nom} setNom={setNom} prenom={prenom} setPrenom={setPrenom} phone={phone} setPhone={setPhone} username={username} setUsername={setUsername} setSelectedFile={setSelectedFile} />}
+        {step === 3 && <Step3 signUp={signUp} adresse={address} setAddress={setAddress} ville={ville} setVille={setVille} departement={departement} setDepartement={setDepartement} />}        
+        {/* <Link href={"/login"}> Connexion </Link> */}
       </div>
     </div>
   );
