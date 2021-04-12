@@ -16,10 +16,12 @@ const Step2 = ({ address, setAddress, ville, setVille, departement, setDeparteme
           <label>Durée de location </label>
           <input
             type="text"
+            placeholder='15 jours'
           />
           <label>Adresse </label>
           <input
             type="text"
+            placeholder='27 rue du progrès'
             defaultValue={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -28,6 +30,7 @@ const Step2 = ({ address, setAddress, ville, setVille, departement, setDeparteme
               <label>Ville</label>
               <input
                 type="text"
+                placeholder='Montreuil'
                 defaultValue={ville}
                 onChange={(e) => setVille(e.target.value)}
               />
@@ -36,6 +39,7 @@ const Step2 = ({ address, setAddress, ville, setVille, departement, setDeparteme
               <label>Code postal </label>
               <input
                 type="number"
+                placeholder='93100'
                 defaultValue={departement}
                 onChange={(e) => setDepartement(e.target.value)}
               />
