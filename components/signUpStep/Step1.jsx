@@ -2,11 +2,12 @@
 
 
 
-const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfirmPassword }) => {
+const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfirmPassword, setStep }) => {
 
 
   return (
     <div className="stepContainer">
+      <h2 className='stepNumber'>1/3</h2>
       <h2>Création d'un compte</h2>
       <div className="stepWrapper">
         <h3>Création d'un mot de passe</h3>
@@ -38,7 +39,7 @@ const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfi
           </div>
         </div>
         <div className="confirmContainer">
-          <button className="confirm">Continuer</button>
+          <button className="confirm" onClick={() => setStep(2)}>Continuer</button>
         </div>        
       </div>
       
