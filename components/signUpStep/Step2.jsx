@@ -17,6 +17,7 @@ const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setU
               <label>Nom*</label>
               <input
                 type="text"
+                placeholder='Luffy'
                 defaultValue={nom}
                 onChange={(e) => setNom(e.target.value)}
               />
@@ -25,6 +26,7 @@ const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setU
               <label>Prenom* </label>
               <input
                 type="text"
+                placeholder='Monkey D'
                 defaultValue={prenom}
                 onChange={(e) => setPrenom(e.target.value)}
               />
@@ -35,12 +37,14 @@ const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setU
           <label>Numéro de téléphone </label>
           <input
             type="tel"
+            placeholder='06 00 00 00 00'
             defaultValue={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
           <label>Pseudo </label>
           <input
             type="text"
+            placeholder='Mon pseudal'
             defaultValue={username}
             onChange={(e) => setUsername(e.target.value)}
           />
