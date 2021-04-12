@@ -3,9 +3,7 @@ import axios from 'axios'
 // Helpers
 
 export function getStrapiURL(path) {
-  return `${
-    process.env.NEXT_PUBLIC_STRAPI_API_URL || "https://quiet-wave-32161.herokuapp.com/"
-  }${path}`;
+  return `https://quiet-wave-32161.herokuapp.com/${path}`;
 }
 
 export async function fetchAPI(path) {
