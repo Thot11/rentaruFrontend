@@ -22,10 +22,6 @@ const Login = () => {
     dispatch(postConnect(mail, password));
   };
 
-  const disconnect = () => {
-    dispatch(logOut());
-  };
-
   return (
     <div>
       <Head>
@@ -37,12 +33,14 @@ const Login = () => {
         <div className="loginWrapper">
           <h3>Connexion</h3>
           <input
+            className="inputText"
             type="text"
             defaultValue={mail}
             placeholder='E-mail'
             onChange={(e) => setMail(e.target.value)}
           />
           <input
+            className="password inputText"
             type="password"
             placeholder='Mot de passe'
             defaultValue={password}
