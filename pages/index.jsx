@@ -26,7 +26,7 @@ const HomePage = ({ home }) => {
         <title>{home.title}</title>
       </Head>
       <div className='banner'>
-        <img src={getStrapiMedia(home.slider[0].url)} alt="cover"/>
+        {/* <img src={getStrapiMedia(home.slider[0].url)} alt="cover"/> */}
         <div className='hero'>
           <h1>{home.heroTitle}</h1>
           <p>{home.heroDescription}</p>
