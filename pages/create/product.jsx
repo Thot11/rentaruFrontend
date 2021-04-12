@@ -7,6 +7,7 @@ import Step2 from "../../components/createProductStep/Step2"
 import Step3 from "../../components/createProductStep/Step3"
 import Step4 from "../../components/createProductStep/Step4"
 import Step5 from "../../components/createProductStep/Step5"
+import PreviewProduct from "../../components/createProductStep/PreviewProduct"
 import { postProduct } from '../../store'
 
 
@@ -20,8 +21,12 @@ const CreateProduct = () => {
     return <div>Loading category...</div>;
   }
 
+  console.log(user);
+
   const [step, setStep] = useState(1)
   const [data, setData] = useState()
+
+  console.log(data);
 
   // useEffect(() => {
   //   if (createdProduct && createdProduct.slug) {
@@ -53,43 +58,50 @@ const CreateProduct = () => {
         <div className="stepCount">{step}/6</div>
         <h2>Création d'une annonce</h2>
       </div>
-    
-      <div className="step">
-        
-        {(() => {
-    
-          switch (step) {
-            case 1:
-              return (
-                <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-            case 2:
-              return (
-                <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-            case 3:
-              return (
-                <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-            case 4:
-              return (
-                <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-            case 5:
-              return (
-                <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-            case 6:
-              return (
-                <div>Annonce ajoutée, merci bitch</div>
-              )
-            default:
-              return (
-                <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-              )
-          }
 
-        })()}
+      <div className="middleContainer">
+        <div className="step">
+          
+          {(() => {
+      
+            switch (step) {
+              case 1:
+                return (
+                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+              case 2:
+                return (
+                  <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+              case 3:
+                return (
+                  <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+              case 4:
+                return (
+                  <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+              case 5:
+                return (
+                  <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+              case 6:
+                return (
+                  <div>Annonce ajoutée, merci bitch</div>
+                )
+              default:
+                return (
+                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                )
+            }
+
+          })()}
+        </div>
+        <div className="preview">
+          {data && (
+            <PreviewProduct data={data} user={user}/>
+          )}
+        </div>
       </div>
     </div>
   );

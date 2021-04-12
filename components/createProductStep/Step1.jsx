@@ -20,9 +20,9 @@ const Step1 = ({ step, setStep, user, data, setData }) => {
 
   return (
     <>
-       Quelle série mettez vous en location ?
-      <input type="text" className="inputText" defaultValue={name} onChange={(e) => setName(e.target.value)} />
-      <div onClick={nextStep}>Submit</div>
+       <h3>Quelle série mettez vous en location ?</h3>
+      <input type="text" className="inputText" defaultValue={name} onChange={(e) => setName(e.target.value)} placeholder="Dites nous le titre de votre manga..."/>
+      <div onClick={nextStep} className="nextStepBtn">Submit</div>
     </>
   );
 };
