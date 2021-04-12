@@ -1,0 +1,22 @@
+@import './../color.scss';
+
+
+.loginContainer {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 136px);
+  overflow: hidden;
+  padding: 98px 0 0 206px;
+
+  .background {
+    position: absolute;
+    top: -136px;
+    right: 0;
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 25px;
+    color: color(secondary);
+  }
+}
