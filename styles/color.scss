@@ -3,6 +3,7 @@ $colors: (
   secondary: #F5F6F7,
   red: #DD0C18,
   dark: #25333D,
+  grey: #8D9296,
 );
 
 @function color($name, $opacity: 1) {

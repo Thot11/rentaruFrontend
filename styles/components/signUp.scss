@@ -1,11 +1,110 @@
 .signInContainer {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 136px);
+  overflow: hidden;
+  padding: 98px 0 0 206px;
+  color: color(secondary);
 
-  input {
-    margin: 10px;
-    color: black;
-    background-color: white;
+  .background {
+    position: absolute;
+    top: -136px;
+    right: 0;
+    z-index: -1;
   }
+
+  .stepContainer {
+    h2 {
+      margin-bottom: 38px;
+      color: color(secondary);
+      font-weight: 200;
+      font-size: 25px;
+    }
+  
+    .stepWrapper {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      padding: 31px 99px 38px 35px;
+      border: 0.2px solid color(secondary, 0.4);
+      border-radius: 3px;
+  
+      h3 {
+        margin-bottom: 48px;
+        font-size: 18px;
+        font-weight: 400;
+      }
+
+      .inputContainer {
+        display: flex;
+        flex-direction: column;
+        width: 240px;
+        margin-left: 100px;
+
+        label {
+          margin-bottom: 10px;
+          font-size: 16px;
+          font-weight: 400;
+        }
+
+        input {
+          width: 100%;
+          margin-bottom: 20px;
+          padding: 9px 16px;
+          color: color(secondary);
+          font-size: 12px;
+          background-color: color(dark);
+          border-radius: 3px;
+
+          &.password {
+            margin-bottom: 30px;
+          }
+
+          &::placeholder {
+            color: color(grey);
+            font-size: 13px;
+          }
+        }
+
+        .newsletter {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 61px;
+
+          input {
+            width: 20px;
+            height: 15px;
+            margin: 0;
+            margin-right: 13px;
+          }
+
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .confirmContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 159px;
+          height: 28px;
+          margin-bottom: 20px;
+          color: color(secondary);
+          font-size: 12px;
+          background-color: color(red);
+          border-radius: 3px;
+          margin-left: 105px;
+        }
+      }
+    }
+    
+  } 
 }

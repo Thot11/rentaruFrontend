@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { postSignUp } from "../store";
+import Step1 from "../components/signUpStep/Step1";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -52,12 +53,8 @@ const SignUp = () => {
         <title>SignUp</title>
       </Head>
       <div className="signInContainer">
-        mail
-        <input
-          type="email"
-          defaultValue={mail}
-          onChange={(e) => setMail(e.target.value)}
-        />
+        <img className="background" src="/japBckg.svg" alt="background"/>
+        <Step1 mail={mail} setMail={setMail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} />
         username
         <input
           type="text"
@@ -100,18 +97,7 @@ const SignUp = () => {
           defaultValue={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
-        mdp
-        <input
-          type="password"
-          defaultValue={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        confirm mdp
-        <input
-          type="password"
-          defaultValue={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+        
         Photo de profil
         <input
           type="file"
