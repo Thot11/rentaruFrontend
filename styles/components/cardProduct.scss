@@ -1,0 +1,116 @@
+.cardProduct {
+  position: relative;
+  width: 250px;
+  height: 400px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 109px;
+    padding: 10px 11px 11px 13px;
+    color: #F5F6F7;
+    background-color: #31383D;
+
+    .upperInfo {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      .titles {
+        h3 {
+          font-weight: 600;
+          font-size: 15px;
+          margin-bottom: 5px;
+          line-height: 100%;
+        }
+        p {
+          font-size: 11px;
+          line-height: 100%;
+        }
+      }
+
+      .like {
+        position: relative;
+        z-index: 0;
+
+        .backgroundLike {
+          position: absolute;
+          top: -10px;
+          left: -6.5px;
+          z-index: -1;
+          width: 32px;
+          height: 49px;
+        }
+
+        svg {
+          path:last-child {
+            fill: transparent;
+            transition-duration: 0.3s;
+            
+            &:hover {
+              fill: white;
+              transition-duration: 0.3s;
+            }
+          }
+        }
+        
+      }
+      
+    }
+
+    .downerInfo {      
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      .collector {
+        display: flex;
+        align-items: flex-end;
+
+        .picture {
+          width: 30px;
+          height: 30px;
+          margin-right: 7px;
+          overflow: hidden;
+          background-color: black;
+          border-radius: 50%;
+        }
+
+        .name {
+          font-size: 8px;
+          margin-bottom: 5px;
+        }
+
+        .stars {
+          display: flex;
+          height: 5px;
+
+          svg {
+            margin-right: 3px;
+
+            &.starEmpty {
+              path {
+                fill: black;
+              }
+            }
+          }
+        }
+      }
+
+      .price {
+        font-size: 14px;
+      }
+    }
+  }
+}
