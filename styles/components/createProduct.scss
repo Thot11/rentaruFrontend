@@ -1,0 +1,29 @@
+@import './../color.scss';
+
+
+.createProductContainer {
+  position: relative;
+  overflow: hidden;
+  margin: 88px 239px 88px 171px;
+
+  h2 {
+    margin-bottom: 38px;
+    color: color(secondary);
+    font-weight: 200;
+    font-size: 25px;
+  }
+
+  .stepCount {
+    color: color(secondary, 0.6);
+    font-weight: 200;
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .step {
+    width: 100%;
+    border: color(secondary, 0.4) solid .2px;
+    border-radius: 3px;
+  }
+
+}
