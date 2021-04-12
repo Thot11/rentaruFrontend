@@ -45,45 +45,52 @@ const CreateProduct = () => {
   }, [step])
 
   return (
-    <div className="productPage">
+    <div className="createProductContainer">
       <Head>
         <title>Créer votre annonce</title>
       </Head>
-      <div>{step}/6 Création d'une annonce</div>
-      {(() => {
-  
-      switch (step) {
-        case 1:
-          return (
-            <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-        case 2:
-          return (
-            <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-        case 3:
-          return (
-            <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-        case 4:
-          return (
-            <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-        case 5:
-          return (
-            <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-        case 6:
-          return (
-            <div>Annonce ajoutée, merci bitch</div>
-          )
-        default:
-          return (
-            <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
-          )
-      }
+      <div className="topContainer">
+        <div className="stepCount">{step}/6</div>
+        <h2>Création d'une annonce</h2>
+      </div>
+    
+      <div className="step">
+        
+        {(() => {
+    
+          switch (step) {
+            case 1:
+              return (
+                <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+            case 2:
+              return (
+                <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+            case 3:
+              return (
+                <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+            case 4:
+              return (
+                <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+            case 5:
+              return (
+                <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+            case 6:
+              return (
+                <div>Annonce ajoutée, merci bitch</div>
+              )
+            default:
+              return (
+                <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+              )
+          }
 
-    })()}
+        })()}
+      </div>
     </div>
   );
 };

@@ -19,11 +19,11 @@ const Step1 = ({ step, setStep, user, data, setData }) => {
   }
 
   return (
-    <div className="container flex flex-wrap mx-auto gap-2 mt-8">
+    <>
        Quelle série mettez vous en location ?
-      <input type="text" defaultValue={name} onChange={(e) => setName(e.target.value)} />
+      <input type="text" className="inputText" defaultValue={name} onChange={(e) => setName(e.target.value)} />
       <div onClick={nextStep}>Submit</div>
-    </div>
+    </>
   );
 };
 
