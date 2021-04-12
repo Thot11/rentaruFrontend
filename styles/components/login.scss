@@ -15,8 +15,90 @@
   }
 
   h2 {
-    font-weight: 400;
-    font-size: 25px;
+    margin-bottom: 38px;
     color: color(secondary);
+    font-weight: 200;
+    font-size: 25px;
+  }
+
+  .loginWrapper {
+    width: fit-content;
+    padding: 31px 43px 81px 35px;
+    border: 0.2px solid color(secondary, 0.4);
+    border-radius: 3px;
+
+    h3 {
+      margin-bottom: 56px;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .inputText {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 9px 16px;
+      color: color(secondary);
+      font-size: 12px;
+      background-color: color(dark);
+      border-radius: 3px;
+
+      &.password {
+        margin-bottom: 30px;
+      }
+
+      &::placeholder {
+        color: color(secondary);
+        font-size: 12px;
+      }
+    }
+
+    .rememberMe {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      p {
+        font-size: 14px;
+      }
+
+      input {
+        width: 20px;
+        height: 20px;
+        padding: 7px;
+      }
+    }
+
+    .btnUnderline {
+      text-decoration: underline;
+      font-size: 14px;
+      margin-bottom: 71px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 159px;
+        height: 28px;
+        margin-bottom: 20px;
+        color: color(secondary);
+        font-size: 12px;
+        background-color: color(red);
+        border-radius: 3px;
+
+        &:last-child {
+          margin-bottom: 0;
+          color: color(primary);
+          background-color: color(secondary);
+        }
+      }
+    }
   }
 }
