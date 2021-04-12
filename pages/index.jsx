@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Head from "next/head";
 import ProductsList from "../components/ProductsList";
 import { getHomePage, getConnect } from "../utils/api";

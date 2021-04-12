@@ -1,10 +1,14 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios'
 
 // Helpers
 
 export function getStrapiURL(path) {
-  return `https://quiet-wave-32161.herokuapp.com/${path}`;
+  return `${
+    process.env.NEXT_PUBLIC_STRAPI_API_URL
+  }${path}`;
 }
+
 
 export async function fetchAPI(path) {
   const requestUrl = getStrapiURL(path);
