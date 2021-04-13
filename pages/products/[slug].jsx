@@ -20,11 +20,13 @@ const ProductPage = ({ product }) => {
       <div className="mainContent">
         <div className="leftContent">          
           <div className="images">
+            {product.images &&
             <img
               className='bigImage'
               src={getStrapiMedia(product.images[0].url)}
               alt={product.images[0].alternativeText}
             />
+            }
             <div className="otherImg">
               {product.images && product.images.map((image, index) => {
                 if(index !== 0 && index < 3) {
@@ -34,7 +36,10 @@ const ProductPage = ({ product }) => {
                       alt={image.alternativeText}
                     />
                   )
-                }                
+                }
+                else {
+                  return null;
+                }               
               })}
             </div>
           </div>
