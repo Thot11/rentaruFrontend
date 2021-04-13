@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Step4 = ({ step, setStep, user, data, setData }) => {
+const Step4 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
   const [price, setPrice] = useState('')
 
@@ -13,6 +13,13 @@ const Step4 = ({ step, setStep, user, data, setData }) => {
     })
     setStep(step+1)
   }
+
+  useEffect(() => {
+    setPreview({
+      ...preview,
+      price: price ? parseInt(price) : undefined,
+    })
+}, [price])
 
   const previousStep = () => {
     setStep(step-1)

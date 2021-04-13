@@ -25,6 +25,7 @@ const CreateProduct = () => {
 
   const [step, setStep] = useState(1)
   const [data, setData] = useState()
+  const [preview, setPreview] = useState()
 
   console.log(data);
 
@@ -67,23 +68,23 @@ const CreateProduct = () => {
             switch (step) {
               case 1:
                 return (
-                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} session={session} />
                 )
               case 2:
                 return (
-                  <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                  <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
                 )
               case 3:
                 return (
-                  <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                  <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
                 )
               case 4:
                 return (
-                  <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                  <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
                 )
               case 5:
                 return (
-                  <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} />
+                  <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
                 )
               case 6:
                 return (
@@ -98,8 +99,8 @@ const CreateProduct = () => {
           })()}
         </div>
         <div className="preview">
-          {data && (
-            <PreviewProduct data={data} user={user}/>
+          {preview && (
+            <PreviewProduct data={preview} user={user}/>
           )}
         </div>
       </div>

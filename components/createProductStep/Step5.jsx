@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const Step5 = ({ step, setStep, user, data, setData }) => {
+const Step5 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
   const [description, setDescription] = useState('')
 

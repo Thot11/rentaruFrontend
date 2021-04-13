@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Step2 = ({ step, setStep, user, data, setData }) => {
+const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
   const [integrale, setIntegrale] = useState(false)
-  const [from, setFrom] = useState('')
-  const [to, setTo] = useState('')
+  const [from, setFrom] = useState()
+  const [to, setTo] = useState()
   const [langue, setLangue] = useState('')
   const [edition, setEdition] = useState('')
   const [etat, setEtat] = useState('')
@@ -22,6 +22,14 @@ const Step2 = ({ step, setStep, user, data, setData }) => {
     })
     setStep(step+1)
   }
+
+  useEffect(() => {
+      setPreview({
+        ...preview,
+        tomeInitial: from ? parseInt(from) : undefined,
+        tomeFinal: to ? parseInt(to) : undefined
+      })
+  }, [from, to])
 
   const previousStep = () => {
     setStep(step-1)

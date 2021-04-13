@@ -7,12 +7,12 @@ const PreviewProduct = ({ data, user }) => {
   return (
     <div className="cardProduct">
       <a>
-        {/* <img src={getStrapiMedia(data.imageCover.url)} alt="cover"/> */}
+        {data.imageCover.url && (<img src={getStrapiMedia(data.imageCover.url)} alt="cover"/>)}
         <div className="info">
           <div className="upperInfo">
             <div className="titles">
-              {/* <h3>{data.title}</h3>
-              <p>Tome {data.tomeInitial} à {data.tomeFinal} </p> */}
+              {data.title && (<h3>{data.title}</h3>)}
+              {data.tomeInitial && data.tomeInitial && (<p>Tome {data.tomeInitial} à {data.tomeFinal} </p>)}
             </div>
           </div>
           <div className="downerInfo">
@@ -35,9 +35,11 @@ const PreviewProduct = ({ data, user }) => {
                 </div>
               </div>
             </a>
-            {/* <div className="price">
+            {data.price && (
+               <div className="price">
               {data.price}€
-            </div> */}
+            </div>
+            )}
           </div>
         </div>
       </a>
