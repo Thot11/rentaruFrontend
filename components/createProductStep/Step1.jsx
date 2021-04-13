@@ -54,8 +54,10 @@ const Step1 = ({ session, step, setStep, user, data, setData, preview, setPrevie
 
   return (
     <>
-      <h3>Quelle série mettez vous en location ?</h3>
-      <Dropdown filters={mangaCollection?.map(manga => {return manga.title})} selectedItem={selectedManga} setSelectedItem={setSelectedManga} />
+      <div>
+        <h3>Quelle série mettez vous en location ?</h3>
+        <Dropdown filters={mangaCollection?.map(manga => {return manga.title})} selectedItem={selectedManga} setSelectedItem={setSelectedManga} />
+      </div>
       <div className="buttonsContainer">
         <div />
         <Button color={'Red'} functionOnClick={() => {

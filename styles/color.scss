@@ -2,8 +2,11 @@ $colors: (
   primary: #171F25,
   secondary: #F5F6F7,
   red: #DD0C18,
+  green: #54BC22,
+  orange: #F8B34B,
   dark: #25333D,
   grey: #8D9296,
+  secondaryText: #D9D8D8,
 );
 
 @function color($name, $opacity: 1) {
