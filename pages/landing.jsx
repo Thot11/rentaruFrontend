@@ -4,9 +4,7 @@ import Link from "next/link";
 import { getLandingPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
-const Landing = ({landing}) => {  
-
-  console.log(landing)
+const Landing = ({landing}) => {
 
   return (
     <div>
