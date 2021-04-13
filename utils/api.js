@@ -58,6 +58,11 @@ export async function getMe(token) {
   return me;
 }
 
+export async function getMangaCollection(token) {
+  const mangaCollection = await fetchAPI(`/manga-apis?token=${token}`);
+  return mangaCollection;
+}
+
 // POST Request
 
 export async function postConnect(mail, password) {
