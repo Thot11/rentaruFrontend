@@ -33,7 +33,7 @@
     .step {
       display: flex;
       flex-direction: column;
-      // justify-content: space-between;
+      justify-content: space-between;
       width: 55%;
 
       h3 {
@@ -118,6 +118,102 @@
           color: color(secondary, 0.8);
           font-size: 15px;
         }
+      }
+
+      input[type="file"] { 
+        opacity: 0; /* make transparent */
+        z-index: -1; /* move under anything else */
+        position: absolute; /* don't let it take up space */
+      }
+
+      .addImages {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 150px;
+        height: 125px;
+        background-color: color(grey, 0.2);
+        cursor: pointer;
+        border-radius: 3px;
+      }
+
+      .priceContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 150px;
+
+        .warning {
+          font-size: 13px;
+          color: color(secondaryText);
+          font-weight: 300;
+
+          span {
+            font-weight: 400;
+          }
+        }
+
+        .selectPrice {
+          width: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-around;
+          height: 82px;
+
+
+          .less, .more {
+            width: 68px;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            background-color: color(dark);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all .2s ease-in;
+  
+            &:hover {
+              transform: scale(1.2);
+            }
+          }
+  
+          .middle {
+            font-size: 40px;
+  
+            &.green {
+              color: color(green);
+            }
+  
+            &.red {
+              color: color(red);
+            }
+  
+            &.orange {
+              color: color(orange);
+            }
+          }
+        }
+
+      }
+
+      .previewContainer {
+        display: inline-flex;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 10px;
+
+        img {
+          height: 100px;
+          width: auto;
+          margin-right: 10px;
+        }
+      }
+
+      .buttonsContainer {
+        display: inline-flex;
+        justify-content: space-between;
+        margin-top: 20px;
       }
 
       .nextStepBtn {

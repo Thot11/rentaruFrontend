@@ -53,7 +53,7 @@ const Login = () => {
           </div>
           <button className="btnUnderline">Mot de passe oublié ?</button>
           <div className="buttons">
-            <Button color={'Red'} functionOnClick={connect(mail, password)}>Connexion</Button>
+            <Button color={'Red'} functionOnClick={() => connect(mail, password)}>Connexion</Button>
             <Link href={"/signUp"}>
               <a>             
                 <Button color={'White'}>Inscription </Button>

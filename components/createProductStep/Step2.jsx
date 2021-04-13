@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Dropdown from "../dropdown";
+import Button from "../../elements/Button"
+
 
 const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
@@ -59,35 +61,36 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   return (
     <>
       <h3>Dites nous en plus :</h3>
-        <div className="checkboxContainer">
-          <p>Est ce l'intégral de la série ? &nbsp;</p>
-          <input type="checkbox" defaultValue={integrale} onChange={(e) => setIntegrale(!integrale)} />
+      <div className="checkboxContainer">
+        <p>Est ce l'intégral de la série ? &nbsp;</p>
+        <input type="checkbox" defaultValue={integrale} onChange={(e) => setIntegrale(!integrale)} />
+      </div>
+      <div className="tomeContainer">
+        <p>Du tome</p>
+        <input type="number" defaultValue={from} onChange={(e) => setFrom(e.target.value)} />
+        <p>au</p>
+        <input type="number" defaultValue={to} onChange={(e) => setTo(e.target.value)} />
+      </div>
+      <div className="languageContainer">
+        <p>Langue de la collection :&nbsp;</p>
+        <div className="select">
+          <Dropdown filters={languages} selectedItem={selectedLanguage} setSelectedItem={setSelectedLanguage} />
         </div>
-        <div className="tomeContainer">
-          <p>Du tome</p>
-          <input type="number" defaultValue={from} onChange={(e) => setFrom(e.target.value)} />
-          <p>au</p>
-          <input type="number" defaultValue={to} onChange={(e) => setTo(e.target.value)} />
+      </div>
+      <div className="languageContainer">
+        <p>Editeurs :&nbsp;</p>
+        <div className="select">
+          <Dropdown filters={editors} selectedItem={selectedEditor} setEditor={setSelectedLanguage} />
         </div>
-        <div className="languageContainer">
-          <p>Langue de la collection :&nbsp;</p>
-          <div className="select">
-            <Dropdown filters={languages} selectedItem={selectedLanguage} setSelectedItem={setSelectedLanguage} />
-          </div>
-        </div>
-        <div className="languageContainer">
-          <p>Editeurs :&nbsp;</p>
-          <div className="select">
-            <Dropdown filters={editors} selectedItem={selectedEditor} setEditor={setSelectedLanguage} />
-          </div>
-        </div>
-        <div className="tomeContainer">
-          <p>Etat : </p>
-          <input type="text" defaultValue={etat} onChange={(e) => setEtat(e.target.value)} />
-        </div>
-
-      <div onClick={previousStep}>back</div> 
-      <div onClick={nextStep}>continuer</div>
+      </div>
+      <div className="tomeContainer">
+        <p>Etat : </p>
+        <input type="text" defaultValue={etat} onChange={(e) => setEtat(e.target.value)} />
+      </div>
+      <div className="buttonsContainer">
+        <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
+        <Button color={'Red'} functionOnClick={nextStep}>Continuer</Button>
+      </div>
     </>
   );
 };

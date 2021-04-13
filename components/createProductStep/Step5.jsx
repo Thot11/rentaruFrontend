@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import Button from "../../elements/Button"
 
 const Step5 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
@@ -23,7 +24,10 @@ const Step5 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
      une ptite description? : <br />
       
       description : <input type="text" defaultValue={description} onChange={(e) => setDescription(e.target.value)} />
-      <div onClick={previousStep}>back</div> <div onClick={nextStep}>continuer</div>
+      <div className="buttonsContainer">
+        <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
+        <Button color={'Red'} functionOnClick={nextStep}>Continuer</Button>
+      </div>
     </div>
   );
 };
