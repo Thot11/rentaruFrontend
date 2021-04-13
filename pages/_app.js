@@ -19,6 +19,18 @@ const MyApp = ({ Component, pageProps }) => {
             href="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.css"
           />
           <script src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js" />
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-XM1RXZ6R6M"></script>
+          <script dangerouslySetInnerHTML={
+            { __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-XM1RXZ6R6M');
+            `}
+          }>
+            
+          </script>
         </Head>
         <Component {...pageProps} />
       </Layout>

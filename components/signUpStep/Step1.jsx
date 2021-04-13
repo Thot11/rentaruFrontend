@@ -1,8 +1,24 @@
 /* eslint-disable prettier/prettier */
 
-
+import { useState } from "react";
 
 const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfirmPassword, setStep }) => {
+
+  const [error, setError] = useState(null);
+
+  const goToNextStep = () => {
+    if(mail !== '' && password !== '' && confirmPassword !== '') {
+      if(password === confirmPassword) {
+        setStep(2);
+      }
+      else {
+        setError('Les mots de passe doivent correspondre');
+      }
+    }
+    else {
+      setError('Veuillez remplir tous les champs');
+    }
+  }
 
 
   return (
@@ -39,8 +55,9 @@ const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfi
           </div>
         </div>
         <div className="confirmContainer">
-          <button className="confirm" onClick={() => setStep(2)}>Continuer</button>
-        </div>        
+          <p className="error">{error}</p>
+          <button className="confirm" onClick={() => goToNextStep()}>Continuer</button>
+        </div>    
       </div>
       
     </div>
