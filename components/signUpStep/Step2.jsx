@@ -1,9 +1,19 @@
 /* eslint-disable prettier/prettier */
 
-
+import { useState } from "react";
 
 const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setUsername, setSelectedFile, setStep}) => {
 
+  const [error, setError] = useState(null);
+
+  const goToNextStep = () => {
+    if(nom !== '' && prenom !== '') {
+      setStep(3);
+    }
+    else {
+      setError('Veuillez remplir les champs obligatoires');
+    }
+  }
 
   return (
     <div className="stepContainer">
@@ -55,7 +65,8 @@ const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setU
           />
         </div>
         <div className="confirmContainer">
-          <button className="confirm" onClick={() => setStep(3)}>Continuer</button>
+          <p className="error">{error}</p>
+          <button className="confirm" onClick={() => goToNextStep()}>Continuer</button>
         </div>        
       </div>
       
