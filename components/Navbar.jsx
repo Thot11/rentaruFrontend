@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -90,12 +91,9 @@ const Navbar = () => {
         </div>        
       </div>
       <div className="secondaryHeader">
-        <a href="/" className="navElement">Top 10</a>
         <a href="/" className="navElement">Tendances</a>
-        <a href="/" className="navElement">Rechercher</a>
         <a href="/" className="navElement">Catégories</a>
-        <a href="/" className="navElement">Comment ça marche</a>
-        <a href="/" className="navElement">Le forum</a>
+        <a href="/landing" className="navElement">Comment ça marche ?</a>
         <a href="/" className="navElement">A propos</a>
       </div>
     </div>
