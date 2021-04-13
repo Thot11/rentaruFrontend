@@ -100,18 +100,6 @@
       justify-content: center;
       width: 100%;
       margin-top: 29px;
-
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 195px;
-        height: 34px;
-        font-size: 14px;
-        color: color(secondary);
-        background-color: color(red);
-        border-radius: 3px;
-      }
     }
   }
 
@@ -149,18 +137,8 @@
       width: 100%;
       margin-top: 54px;
 
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 195px;
-        height: 34px;
+      .button {
         margin-right: 5px;
-        font-size: 14px;
-        font-weight: 200;
-        color: color(secondary);
-        background-color: color(red);
-        border-radius: 3px;
       }
     }
   }

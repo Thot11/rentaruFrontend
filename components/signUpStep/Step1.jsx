@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import { useState } from "react";
+import Button from "../../elements/Button";
 
 const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfirmPassword, setStep }) => {
 
@@ -56,7 +57,7 @@ const Step1 = ({ mail, setMail, password, setPassword, confirmPassword, setConfi
         </div>
         <div className="confirmContainer">
           <p className="error">{error}</p>
-          <button className="confirm" onClick={() => goToNextStep()}>Continuer</button>
+          <Button color={'Red'} functionOnClick={goToNextStep}>Continuer</Button>
         </div>    
       </div>
       

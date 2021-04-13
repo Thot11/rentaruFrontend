@@ -3,9 +3,9 @@
 const Button = ({children, color, functionOnClick}) => {
 
   return (
-    <div className={`button button${color}`} onClick={functionOnClick}>
+    <button className={`button button${color}`} onClick={functionOnClick}>
       {children}
-    </div>
+    </button>
   );
 };
 
