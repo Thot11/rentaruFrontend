@@ -3,6 +3,7 @@ import slugify from 'slugify';
 import { useEffect, useState } from "react";
 import { getMangaCollection } from "../../utils/api";
 import Dropdown from "../dropdown";
+import Button from "../../elements/Button"
 
 
 const Step1 = ({ session, step, setStep, user, data, setData, preview, setPreview }) => {
@@ -53,16 +54,14 @@ const Step1 = ({ session, step, setStep, user, data, setData, preview, setPrevie
 
   return (
     <>
-       <h3>Quelle série mettez vous en location ?</h3>
-       <Dropdown filters={mangaCollection?.map(manga => {return manga.title})} selectedItem={selectedManga} setSelectedItem={setSelectedManga} />
-      <div
-        onClick={() => {
+      <h3>Quelle série mettez vous en location ?</h3>
+      <Dropdown filters={mangaCollection?.map(manga => {return manga.title})} selectedItem={selectedManga} setSelectedItem={setSelectedManga} />
+      <div className="buttonsContainer">
+        <div />
+        <Button color={'Red'} functionOnClick={() => {
           if (selectedManga !== -1) nextStep()
-        }}
-       className="nextStepBtn"
-       >
-         Submit
-        </div>
+        }}>Continuer</Button>
+      </div>
     </>
   );
 };
