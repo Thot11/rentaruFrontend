@@ -57,6 +57,69 @@
         }
       }
 
+      .checkboxContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 30px;
+
+        input {
+          width: 20px;
+          height: 15px;
+          margin: 0;
+          margin-right: 13px;
+        }
+
+        p {
+          color: color(secondary, 0.8);
+          font-size: 15px;
+        }
+      }
+
+      .tomeContainer {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 30px;
+
+        input[type=number] {
+          width: 39px;
+          height: 30px;
+          margin: 0 10px ;
+          background-color: color(dark);
+          text-align: center;
+        }
+
+        input[type=text] {
+          width: 120px;
+          height: 30px;
+          margin: 0 10px;
+          background-color: color(dark);
+          text-align: center;
+        }
+
+        p {
+          color: color(secondary, 0.8);
+          font-size: 15px;
+        }
+      }
+
+      .languageContainer {
+        display: inline-flex;
+        justify-content: flex-start;
+        margin-bottom: 30px;
+
+        .select {
+          min-width: 150px;
+        }
+
+        p {
+          margin-top: 8px;
+          color: color(secondary, 0.8);
+          font-size: 15px;
+        }
+      }
+
       .nextStepBtn {
         align-self: flex-end;
         justify-self: flex-end;

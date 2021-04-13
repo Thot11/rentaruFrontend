@@ -1,6 +1,5 @@
 .choiceBar {
   width: 100%;
-  margin-bottom: 20px;
   padding: 9px 16px;
   color: color(secondary);
   font-size: 12px;
@@ -33,6 +32,7 @@
     margin-top: 10px;
 
     .listElement {
+      margin-top: 5px;
       color: color(secondary,0.8);
       transition: color .2s ease;
 

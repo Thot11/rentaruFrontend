@@ -5,7 +5,6 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem }) => {
 
   // States
 
-  // const [selectedItem, setSelectedItem] = useState(-1);
   const [openDispositionDropdown, setOpenDispositionDropdown] = useState(false);
 
   return (
@@ -14,7 +13,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem }) => {
         {filters && selectedItem !== -1 && filters.filter((filter, index) => index === selectedItem).map(filter => {
            return filter ? (
             <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
-              <div>{filter.title}</div>
+              <div>{filter}</div>
               <svg className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9.65039 13.0852L0.581688 0.40994L18.5077 0.261351L9.65039 13.0852Z" fill="#F5F6F7"/>
               </svg>
@@ -44,7 +43,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem }) => {
                       setOpenDispositionDropdown(false);
                     }}
                   >
-                    <div className="toolBarText">{filter.title}</div>
+                    <div className="toolBarText">{filter}</div>
                   </div>
                 ) : null;
               })

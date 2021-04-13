@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Dropdown from "../dropdown";
 
 const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
@@ -9,6 +10,13 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   const [langue, setLangue] = useState('')
   const [edition, setEdition] = useState('')
   const [etat, setEtat] = useState('')
+  const [selectedLanguage, setSelectedLanguage] = useState(0)
+  const [selectedEditor, setEditor] = useState(0)
+
+  const languages = ['Français', 'Anglais', 'Japonais', 'Italie']
+  const editors = ['Glénat', 'Pika', 'Ki-oon', 'Kana', 'Delcourt']
+
+
 
   const nextStep = () => {
     setData({
@@ -23,6 +31,10 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
     setStep(step+1)
   }
 
+  const previousStep = () => {
+    setStep(step-1)
+  }
+
   useEffect(() => {
       setPreview({
         ...preview,
@@ -31,21 +43,52 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
       })
   }, [from, to])
 
-  const previousStep = () => {
-    setStep(step-1)
-  }
+  useEffect(() => {
+    if (selectedLanguage !== -1) {
+      setLangue(languages[selectedLanguage])
+    }
+  }, [selectedLanguage])
+
+  useEffect(() => {
+    if (selectedEditor !== -1) {
+      setEdition(languages[selectedLanguage])
+    }
+  }, [selectedEditor])
+
 
   return (
-    <div className="container flex flex-wrap mx-auto gap-2 mt-8">
-      Dites nous en plus : <br />
-      Intégral : <input type="checkbox" defaultValue={integrale} onChange={(e) => setIntegrale(!integrale)} />
-      From : <input type="number" defaultValue={from} onChange={(e) => setFrom(e.target.value)} />
-      to : <input type="number" defaultValue={to} onChange={(e) => setTo(e.target.value)} />
-      Langue : <input type="text" defaultValue={langue} onChange={(e) => setLangue(e.target.value)} />
-      Edition : <input type="text" defaultValue={edition} onChange={(e) => setEdition(e.target.value)} />
-      Etat : <input type="text" defaultValue={etat} onChange={(e) => setEtat(e.target.value)} />
-      <div onClick={previousStep}>back</div> <div onClick={nextStep}>continuer</div>
-    </div>
+    <>
+      <h3>Dites nous en plus :</h3>
+        <div className="checkboxContainer">
+          <p>Est ce l'intégral de la série ? &nbsp;</p>
+          <input type="checkbox" defaultValue={integrale} onChange={(e) => setIntegrale(!integrale)} />
+        </div>
+        <div className="tomeContainer">
+          <p>Du tome</p>
+          <input type="number" defaultValue={from} onChange={(e) => setFrom(e.target.value)} />
+          <p>au</p>
+          <input type="number" defaultValue={to} onChange={(e) => setTo(e.target.value)} />
+        </div>
+        <div className="languageContainer">
+          <p>Langue de la collection :&nbsp;</p>
+          <div className="select">
+            <Dropdown filters={languages} selectedItem={selectedLanguage} setSelectedItem={setSelectedLanguage} />
+          </div>
+        </div>
+        <div className="languageContainer">
+          <p>Editeurs :&nbsp;</p>
+          <div className="select">
+            <Dropdown filters={editors} selectedItem={selectedEditor} setEditor={setSelectedLanguage} />
+          </div>
+        </div>
+        <div className="tomeContainer">
+          <p>Etat : </p>
+          <input type="text" defaultValue={etat} onChange={(e) => setEtat(e.target.value)} />
+        </div>
+
+      <div onClick={previousStep}>back</div> 
+      <div onClick={nextStep}>continuer</div>
+    </>
   );
 };
 
