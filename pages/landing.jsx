@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
+import Link from "next/link";
 import { getLandingPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
@@ -14,7 +15,7 @@ const Landing = ({landing}) => {
       </Head>
       <div className="landingContainer">
         <div className="header">
-          <img src="/headerBackground.svg" alt="background" className='background'/>
+          <img src="/headerBackground.png" alt="background" className='background'/>
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
         </div>
@@ -23,7 +24,7 @@ const Landing = ({landing}) => {
           <p className="explanation">{landing.explanationCollector}</p>
           <p className="tips">{landing.tipsCollector}</p>
           <div className="cardsContainer">
-            {landing.CardsCollector.map((card, key) => {
+            {landing.cardsCollector.map((card, key) => {
               return (
                 <div className="card" key={key}>
                   <img src={getStrapiMedia(card.image[0].url)} alt="online"/>
@@ -34,7 +35,9 @@ const Landing = ({landing}) => {
             })}
           </div>
           <div className="buttonContainer">
-            <button>Déposer une annonce</button>   
+            <Link href="/create/product">
+              <button>Déposer une annonce</button>       
+            </Link>
           </div>
         </div>
         <div className="readerPart">
@@ -53,7 +56,9 @@ const Landing = ({landing}) => {
             })}
           </div>
           <div className="buttonContainer">
-            <button>Louer une collection</button>   
+            <Link href="/">
+              <button>Louer une collection</button>
+            </Link>
           </div>
         </div>
         <div className="insurancePart">
@@ -77,8 +82,8 @@ const Landing = ({landing}) => {
           <h1>{landing.footerTitle}</h1>
           <p>{landing.footerSubtitle}</p>
           <div className="buttons">
-            <button>{landing.footerCTA}</button>
-            <button>{landing.footerSecondCTA}</button>
+            <Link href="/create/product"><button>{landing.footerCTA}</button></Link>
+            <Link href="/"><button>{landing.footerSecondCTA}</button></Link>
           </div>
         </div>
       </div>
