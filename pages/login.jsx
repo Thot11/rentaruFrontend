@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { postConnect, logOut } from "../store";
+import Button from "../elements/Button";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,8 +53,12 @@ const Login = () => {
           </div>
           <button className="btnUnderline">Mot de passe oublié ?</button>
           <div className="buttons">
-            <button onClick={() => connect(mail, password)}>Connexion</button>
-            <button><Link href={"/signUp"}> Inscription </Link></button>
+            <Button color={'Red'} functionOnClick={connect(mail, password)}>Connexion</Button>
+            <Link href={"/signUp"}>
+              <a>             
+                <Button color={'White'}>Inscription </Button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,12 +1,11 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import Link from "next/link";
+import Button from "../elements/Button";
 import { getLandingPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
-const Landing = ({landing}) => {  
-
-  console.log(landing)
+const Landing = ({landing}) => {
 
   return (
     <div>
@@ -36,7 +35,9 @@ const Landing = ({landing}) => {
           </div>
           <div className="buttonContainer">
             <Link href="/create/product">
-              <button>Déposer une annonce</button>       
+              <a>
+                <Button color={'Red'}>Déposer une annonce</Button>
+              </a>   
             </Link>
           </div>
         </div>
@@ -57,7 +58,9 @@ const Landing = ({landing}) => {
           </div>
           <div className="buttonContainer">
             <Link href="/">
-              <button>Louer une collection</button>
+              <a>
+                <Button color={'Red'}>Louer une collection</Button>
+              </a>
             </Link>
           </div>
         </div>
@@ -82,8 +85,16 @@ const Landing = ({landing}) => {
           <h1>{landing.footerTitle}</h1>
           <p>{landing.footerSubtitle}</p>
           <div className="buttons">
-            <Link href="/create/product"><button>{landing.footerCTA}</button></Link>
-            <Link href="/"><button>{landing.footerSecondCTA}</button></Link>
+            <Link href="/create/product">
+              <a>
+                <Button color={'Red'}>{landing.footerCTA}</Button>
+              </a>            
+            </Link>
+            <Link href="/">
+              <a>
+                <Button color={'Red'}>{landing.footerSecondCTA}</Button> 
+              </a>
+            </Link>
           </div>
         </div>
       </div>

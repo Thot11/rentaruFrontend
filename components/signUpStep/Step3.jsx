@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 
+import Button from "../../elements/Button"
+
 
 
 const Step2 = ({ address, setAddress, ville, setVille, departement, setDepartement, signUp}) => {
@@ -47,7 +49,7 @@ const Step2 = ({ address, setAddress, ville, setVille, departement, setDeparteme
           </div>
         </div>
         <div className="confirmContainer">
-          <button className="confirm" onClick={() => signUp()}>Continuer</button>
+          <Button color={'Red'} functionOnClick={signUp}>Continuer</Button>
         </div>        
       </div>
       
