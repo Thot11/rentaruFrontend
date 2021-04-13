@@ -26,7 +26,7 @@ const ProductPage = ({ product }) => {
               alt={product.images[0].alternativeText}
             />
             <div className="otherImg">
-              {product.images.map((image, index) => {
+              {product.images && product.images.map((image, index) => {
                 if(index !== 0 && index < 3) {
                   return (
                     <img
