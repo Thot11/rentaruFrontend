@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 
 import slugify from 'slugify';
 import { useEffect, useState } from "react";

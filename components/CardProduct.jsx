@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useEffect } from "react";
 import Link from "next/link";
 import { getStrapiMedia } from "../utils/medias";

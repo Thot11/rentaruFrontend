@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { getProducts, getProduct } from "../../utils/api";
@@ -12,11 +13,12 @@ const ProductPage = ({ product }) => {
 
   return (
     <div className="productPage">
+      
       <Head>
         <title>{product.title} product</title>
       </Head>
       <div className="mainContent">
-        <div className="leftContent">
+        <div className="leftContent">          
           <div className="images">
             <img
               className='bigImage'
@@ -113,7 +115,7 @@ const ProductPage = ({ product }) => {
           <div className="collectorInfo">
             <div className="collector">
               <div className="profilPic">
-                <img src={getStrapiMedia(product.user.profilPic.url)} alt=""/>
+                <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/>
               </div>
               <div className="moreInfo">
                 <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
