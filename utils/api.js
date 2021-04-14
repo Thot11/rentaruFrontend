@@ -53,6 +53,16 @@ export async function getProduct(slug) {
   return products?.[0];
 }
 
+export async function getProductsByCategory(categories) {
+  const products = await fetchAPI(`/products?categories_contains=${categories.map((category, index) => category.id + '&categories_contains=')}`);
+  return products;
+}
+
+export async function getProductsByTitle(title) {
+  const products = await fetchAPI(`/products?title=${title}`);
+  return products;
+}
+
 export async function getCategories() {
   const categories = await fetchAPI("/categories");
   return categories;

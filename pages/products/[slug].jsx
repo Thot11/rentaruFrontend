@@ -1,15 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getProducts, getProduct } from "../../utils/api";
+import { useRef } from "react";
+import CardProduct from "../../components/CardProduct";
+import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 
-const ProductPage = ({ product }) => {
+const ProductPage = ({ product, productsCategory, productsTitle }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading category...</div>;
   }
 
+  const refCards = useRef(null);
 
   return (
     <div className="productPage">
@@ -163,12 +167,29 @@ const ProductPage = ({ product }) => {
               </div>
             </div>
             <button className={'button buttonWhite'}>Envoyer un message</button>
-          </div>
-        </div>
-        
+          </div>        
+          <img className='adImg' src="/pub.jpg" alt="pub"/>
+        </div>     
       </div>
       <div className="moreContent">
-        
+        <div className="sameManga">
+          <h2>Les autres collections {product.title}</h2>
+          <div className="cardsContainer" ref={refCards}>
+            {productsTitle.map((_product, key) => (
+              _product.slug !== product.slug && key < 4 &&
+              <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : null}/>              
+            ))}
+          </div>
+        </div>
+        <div className="sameManga">
+          <h2>Les lecteurs de {product.title} aiment aussi</h2>
+          <div className="cardsContainer">
+            {productsCategory.map((_product, key) => (
+              _product !== product &&  key < 4 &&
+              <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : null}/>              
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -178,7 +199,9 @@ export default ProductPage;
 
 export async function getStaticProps({ params }) {
   const product = await getProduct(params.slug);
-  return { props: { product } };
+  const productsCategory = await getProductsByCategory(product.categories);
+  const productsTitle = await getProductsByTitle(product.title);
+  return { props: { product, productsCategory, productsTitle } };
 }
 
 export async function getStaticPaths() {
