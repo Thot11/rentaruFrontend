@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import CardProduct from "../../components/CardProduct";
+import ProductsList from "../../components/ProductsList";
 import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 
@@ -24,6 +25,9 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
       <div className="mainContent">
         <div className="leftContent">          
           <div className="images">
+            {product.integrale && 
+              <img className='integrale' src="/integrale.png" alt=""/>
+            }
             {product.images &&
             <img
               className={product.images.length > 1 ? 'bigImage' : 'bigImage bigImageAlone'}
@@ -173,22 +177,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
       </div>
       <div className="moreContent">
         <div className="sameManga">
-          <h2>Les autres collections {product.title}</h2>
-          <div className="cardsContainer" ref={refCards}>
-            {productsTitle.map((_product, key) => (
-              _product.slug !== product.slug && key < 4 &&
-              <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : null}/>              
-            ))}
-          </div>
+          <h2>Les autres collections {product.title}</h2>          
+          <ProductsList products={productsTitle} maxLength={4} notWantedProductId={product.id} />
         </div>
         <div className="sameManga">
           <h2>Les lecteurs de {product.title} aiment aussi</h2>
-          <div className="cardsContainer">
-            {productsCategory.map((_product, key) => (
-              _product !== product &&  key < 4 &&
-              <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : null}/>              
-            ))}
-          </div>
+          <ProductsList products={productsCategory} maxLength={4} notWantedProductId={product.id} />
         </div>
       </div>
     </div>
