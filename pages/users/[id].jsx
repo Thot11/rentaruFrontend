@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
@@ -13,7 +14,8 @@ const UserPage = ({ user }) => {
     return <div>Loading user...</div>;
   }
 
-  const [memberSince, setMemberSince] = useState('')
+  const [memberSince, setMemberSince] = useState('');
+  const [ongletSelected, setOngletSelected] = useState('Collection');
 
 
   const calculDate = () => {
@@ -86,17 +88,52 @@ const UserPage = ({ user }) => {
                 <p className='title'>Série{user.products.length > 1 ? 's' : ''} de manga mise{user.products.length > 1 ? 'nt' : ''} en location</p>
               </div>
             </div>
+            <div className="cardReward">
+              <img src="/transaction.svg" alt="transaction"/>
+              <div className="infoReward">
+                <p className='number'>4</p>
+                <p className='title'>Transactions réalisés</p>
+              </div>
+            </div>
+            <div className="cardReward">
+              <img src="/transaction.svg" alt="transaction"/>
+              <div className="infoReward">
+                <p className='number'>{memberSince}</p>
+                <p className='title'>Jour{memberSince > 1 ? 's' : ''} d'ancienneté</p>
+              </div>
+            </div>
           </div>
-          <div className="description"></div>
-          <div className="top"></div>
+          <div className="description">
+            <p className='title'>Description</p>
+            <p className='descriptionContent'>{user.description}</p>
+          </div>
+          <div className="top">
+            <h3>Le top 5 de <span>{user.username}</span></h3>
+          </div>
+        </div>
+        <div className="rightContent">
+          <img src="/pub.jpg" alt="pub"/>
+          <div className="reviews">
+            <p className="title">Dernier avis</p>
+            <div className="review">
+            J’ai enfin pu me replonger dans One piece sans me ruiner ! La collection est en bon état, je l’ai reçue en 4 jours ! {user.username} est réactif aux questions et aux messages, je recommande !
+            </div>
+          </div>
         </div>
       </div>
+      <div className="library">
+        <div className="header">
+          <div className="onglets">
+            <h3 className={ongletSelected === 'Collection' ? 'selected' : ''} onClick={() => setOngletSelected('Collection')}>Collection</h3>
+            <h3 className={ongletSelected === 'Lues' ? 'selected' : ''} onClick={() => setOngletSelected('Lues')}>Séries lues</h3>
+          </div>
+          <div className="filters">
+            <p>Trier par</p>
+          </div>
+        </div>
+        <ProductsList products={user.products} user={user}/>
+      </div>
     </div>
-    <div>mail : {user.email} </div>
-    <div>note : {user.note} </div>
-    <div>nb annonces : {user.products.length} </div>
-    <div>Member since : {memberSince}</div>
-    <ProductsList products={user.products} user={user}/>
   </div>
   );
 };
