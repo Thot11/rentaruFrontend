@@ -14,7 +14,7 @@ import { postProduct } from '../../store'
 const CreateProduct = () => {
 
   const dispatch = useDispatch();
-  const { session, user, createdProduct } = useSelector((state) => state);
+  const { session, user, createdProduct, errorState } = useSelector((state) => state);
 
   const router = useRouter();
   if (router.isFallback) {
@@ -26,7 +26,7 @@ const CreateProduct = () => {
   const [preview, setPreview] = useState()
 
   useEffect(() => {
-    if (createdProduct && createdProduct.slug) {
+    if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
       router.push(`/products/${createdProduct.slug}`)
     }
   }, [createdProduct])
@@ -83,9 +83,9 @@ const CreateProduct = () => {
                   <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
                 )
               case 6:
-                return (
-                  <div>Annonce ajoutée, redirection vers la page produit !</div>
-                )
+                return errorState.type === "createProduct" ? (
+                  <div>{errorState.message}</div>
+                ) : (<div>Annonce ajoutée, redirection vers la page produit !</div>)
               default:
                 return (
                   <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />

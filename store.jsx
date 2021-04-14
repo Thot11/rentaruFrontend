@@ -2,6 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk'
 import * as GlobalAPI from './utils/api'
+import slugify from 'slugify';
 
 const initialState = {
   session: "",
@@ -12,7 +13,7 @@ const initialState = {
     products : [],
   },
   products : [],
-  createdProduct: null,
+  createdProduct: {},
   errorState: {},
 };
 
@@ -151,12 +152,17 @@ export const postProduct = (data, token) => {
     GlobalAPI.postProduct(data, token)
       .then((resp) => {
         if (resp) {
-          dispatch(createProductAction(resp.data));
+          console.log(resp);
+          console.log(slugify(resp.data.title + '-' + resp.data.id));
+          GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id)}, token).then((resp) => {
+            dispatch(createProductAction(resp.data));
+          })
         } else {
           console.log('error');
         }
       })
       .catch((e) => {
+        dispatch(setErrorAction({type: 'createProduct', message: 'Problème lors de l\'ajout de votre produit'}))
         console.log('error' +e);
       });
   };
