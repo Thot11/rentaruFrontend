@@ -70,12 +70,12 @@
 
               path {
                 fill: #F3C211;
-              }
-  
-              &.starEmpty {
-                path {
-                  fill: black;
-                }
+              }              
+            }
+            
+            .starEmpty {
+              path {
+                fill: color(darkGrey);
               }
             }
           }
@@ -331,12 +331,12 @@
 
                 path {
                   fill: #F3C211;
-                }
-    
-                &.starEmpty {
-                  path {
-                    fill: black;
-                  }
+                }               
+              }
+
+              .starEmpty {
+                path {
+                  fill: color(darkGrey);;
                 }
               }
             }

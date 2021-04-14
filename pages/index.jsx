@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
 import { useEffect } from "react";
 import {getProducts} from '../store'
+import Link from "next/link";
 
 const HomePage = ({ home }) => {
 
@@ -31,7 +32,7 @@ const HomePage = ({ home }) => {
         <div className='hero'>
           <h1>{home.heroTitle}</h1>
           <p>{home.heroDescription}</p>
-          <button>{home.heroCTA}</button>
+          <Link href="/landing"><button>{home.heroCTA}</button></Link>
         </div>
       </div>
       <h2>D'après vos dernières recherches</h2>

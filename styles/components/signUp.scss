@@ -1,9 +1,9 @@
 .signInContainer {
   position: relative;
   width: 100%;
-  height: calc(100vh - 136px);
+  height: auto;
   overflow: hidden;
-  padding: 98px 0 0 calc((100% - 1059px)/2);
+  padding: 98px 0 50px calc((100% - 1059px)/2);
   color: color(secondary);
 
   .background {
