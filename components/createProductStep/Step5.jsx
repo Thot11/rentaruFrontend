@@ -20,15 +20,16 @@ const Step5 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   }
 
   return (
-    <div className="container flex flex-wrap mx-auto gap-2 mt-8">
-     une ptite description? : <br />
-      
-      description : <input type="text" defaultValue={description} onChange={(e) => setDescription(e.target.value)} />
+    <>
+      <div>
+        <h3>Décris ton annonce pour attirer les lecteurs :</h3>
+        <textarea type="text" defaultValue={description} onChange={(e) => setDescription(e.target.value)} placeholder="Ajoutez ici une description courte ou non.....comme vous voulez" />
+      </div>
       <div className="buttonsContainer">
         <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
         <Button color={'Red'} functionOnClick={nextStep}>Continuer</Button>
       </div>
-    </div>
+    </>
   );
 };
 

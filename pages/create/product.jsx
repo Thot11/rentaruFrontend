@@ -21,19 +21,15 @@ const CreateProduct = () => {
     return <div>Loading category...</div>;
   }
 
-  console.log(user);
-
   const [step, setStep] = useState(1)
   const [data, setData] = useState()
   const [preview, setPreview] = useState()
 
-  console.log(data);
-
-  // useEffect(() => {
-  //   if (createdProduct && createdProduct.slug) {
-  //     router.push(`/products/${createdProduct.slug}`)
-  //   }
-  // }, [createdProduct])
+  useEffect(() => {
+    if (createdProduct && createdProduct.slug) {
+      router.push(`/products/${createdProduct.slug}`)
+    }
+  }, [createdProduct])
 
   useEffect(() => {
     if(step === 6) {
@@ -88,7 +84,7 @@ const CreateProduct = () => {
                 )
               case 6:
                 return (
-                  <div>Annonce ajoutée, merci bitch</div>
+                  <div>Annonce ajoutée, redirection vers la page produit !</div>
                 )
               default:
                 return (

@@ -5,6 +5,7 @@
   position: relative;
   overflow: hidden;
   margin: 88px 239px 88px 171px;
+  user-select: none;
 
   .topContainer {
     
@@ -40,6 +41,24 @@
         margin-bottom: 20px;
         font-size: 18px;
         font-weight: 400;
+      }
+
+      textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 70px;
+        max-height: 300px;
+        padding: 14px 10px;
+        color: color(primary);
+        background-color: color(secondary);
+        font-size: 14px;
+        font-weight: 300;
+        border-radius: 3px;
+
+        &::placeholder {
+          color: color(primary, 0.6);
+        }
       }
 
       .inputText {
