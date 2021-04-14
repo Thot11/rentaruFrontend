@@ -1,15 +1,20 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { getProducts, getProduct } from "../../utils/api";
+import { useRef } from "react";
+import CardProduct from "../../components/CardProduct";
+import ProductsList from "../../components/ProductsList";
+import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 
-const ProductPage = ({ product }) => {
+const ProductPage = ({ product, productsCategory, productsTitle }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading category...</div>;
   }
 
+  const refCards = useRef(null);
 
   return (
     <div className="productPage">
@@ -20,6 +25,9 @@ const ProductPage = ({ product }) => {
       <div className="mainContent">
         <div className="leftContent">          
           <div className="images">
+            {product.integrale && 
+              <img className='integrale' src="/integrale.png" alt=""/>
+            }
             {product.images &&
             <img
               className={product.images.length > 1 ? 'bigImage' : 'bigImage bigImageAlone'}
@@ -163,12 +171,19 @@ const ProductPage = ({ product }) => {
               </div>
             </div>
             <button className={'button buttonWhite'}>Envoyer un message</button>
-          </div>
-        </div>
-        
+          </div>        
+          <img className='adImg' src="/pub.jpg" alt="pub"/>
+        </div>     
       </div>
       <div className="moreContent">
-        
+        <div className="sameManga">
+          <h2>Les autres collections {product.title}</h2>          
+          <ProductsList products={productsTitle} maxLength={4} notWantedProductId={product.id} />
+        </div>
+        <div className="sameManga">
+          <h2>Les lecteurs de {product.title} aiment aussi</h2>
+          <ProductsList products={productsCategory} maxLength={4} notWantedProductId={product.id} />
+        </div>
       </div>
     </div>
   );
@@ -178,7 +193,9 @@ export default ProductPage;
 
 export async function getStaticProps({ params }) {
   const product = await getProduct(params.slug);
-  return { props: { product } };
+  const productsCategory = await getProductsByCategory(product.categories);
+  const productsTitle = await getProductsByTitle(product.title);
+  return { props: { product, productsCategory, productsTitle } };
 }
 
 export async function getStaticPaths() {
