@@ -148,4 +148,11 @@ export async function updateMe(data, token) {
   return resp;
 }
 
+export async function updateProduct(id, data, token) {
+  const resp = await axios
+  .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/products/${id}?token=${token}`, data)
+  
+  return resp;
+}
+
 

@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 
-import slugify from 'slugify';
 import { useEffect, useState } from "react";
 import { getMangaCollection } from "../../utils/api";
 import Dropdown from "../dropdown";
@@ -20,7 +19,6 @@ const Step1 = ({ session, step, setStep, user, data, setData, preview, setPrevie
       setData({
         user: user.id,
         title : name,
-        slug : slugify(name),
         imageCover: imageId,
         categories: categoriesId
       })
