@@ -30,8 +30,6 @@ const Step3 = ({ step, setStep, data, setData }) => {
     setPreviewImages(previewImage)
   }, [selectedFile])
 
-  console.log(selectedFile.length);
-
   return (
     <>
       <div>
