@@ -7,6 +7,7 @@ import CardProduct from "../../components/CardProduct";
 import ProductsList from "../../components/ProductsList";
 import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
+import Link from "next/link";
 
 const ProductPage = ({ product, productsCategory, productsTitle }) => {
   const router = useRouter();
@@ -154,10 +155,10 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
           <div className="collectorInfo">
             <div className="collector">
               <div className="profilPic">
-                <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/>
+              <Link href={`/users/${product.user.id}`}><img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/></Link>
               </div>
               <div className="moreInfo">
-                <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
+               <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
                 <div className="stars">
                   {
                   [1,2,3,4,5].map((el, index) => {

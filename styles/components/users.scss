@@ -1,0 +1,149 @@
+.userContainer {
+  padding: 42px calc((100% - 1059px)/2);
+
+  .contentTop {
+    display: flex;
+
+    .infoProfil {
+      position: relative;
+      width: 226px;
+      margin-right: 24px;
+      background-color: color(dark);
+      border-radius: 3px;
+      padding: 11px 8px;
+  
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+  
+        .editBtn {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+  
+          p {
+            margin-right: 5px;
+            color: color(secondary);
+            font-size: 7px;
+          }
+        }
+      }
+  
+      .infos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+  
+        .profilPic {
+          width: 99px;
+          height: 99px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+  
+        h2 {
+          margin-top: 14px;
+          font-size: 14px;
+          font-weight: 400;
+        }
+  
+        p {
+          margin-top: 10px;
+          font-size: 12px;
+          font-weight: 300;
+        }
+  
+        .reviews {
+          display: flex;
+          align-items: center;
+          margin-top: 15px;
+  
+          button {
+            text-decoration: underline;
+            font-size: 10px;
+            font-weight: 300;
+          }
+  
+          .stars {
+            margin-top: 0;
+            margin-right: 5px;
+          }
+        }
+  
+        .confirmed {
+          width: 100%;
+          margin-top: 32px;
+          margin-bottom: 50px;
+          padding: 0 21px;
+  
+          .confirmation {
+            display: flex;
+            align-items: center;
+            margin-bottom: 19px;
+  
+            img {
+              margin-right: 10px;
+            }
+  
+            .elementConfirmed {
+              color: color(secondary);
+              font-size: 12px;
+              font-weight: 300;
+              margin: 0;
+            }
+  
+          }
+        }
+      }
+  
+      .msgBtn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        left: 0;
+        bottom: -17px;
+        width: 100%;
+      }
+      
+    }
+  
+    .centerContent {
+      width: 485px;
+      margin-left: 25px;
+
+      .rewards {
+        display: flex;
+
+        .cardReward {
+          display: flex;
+          align-items: center;
+          width: 154px;
+          height: 64px;
+          background-color: color(dark);
+          border-radius: 3px;
+
+          img {
+            margin-right: 14px;
+            margin-left: 15px;
+          }
+
+          .infoReward {
+            .number {
+              font-weight: bold;
+              font-size: 18px;
+              line-height: 22px;
+            }
+
+            .title {
+              font-size: 10px;
+              font-weight: 300;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
