@@ -10,7 +10,7 @@ import Button from "../elements/Button";
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { session } = useSelector((state) => state);
+  const { session, errorState } = useSelector((state) => state);
 
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +20,10 @@ const Login = () => {
   }, [session]);
 
   const connect = (mail, password) => {
-    dispatch(postConnect(mail, password));
+     dispatch(postConnect(mail, password));
   };
+
+  console.log(errorState);
 
   return (
     <div>
@@ -47,6 +49,7 @@ const Login = () => {
             defaultValue={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {errorState.type === "connect" && (<p className="error">{errorState.message}</p>)}
           <div className="rememberMe">
             <p>Se souvenir de moi ?</p>
             <input type="checkbox"/>
@@ -55,7 +58,7 @@ const Login = () => {
           <div className="buttons">
             <Button color={'Red'} functionOnClick={() => connect(mail, password)}>Connexion</Button>
             <Link href={"/signUp"}>
-              <a>             
+              <a>
                 <Button color={'White'}>Inscription </Button>
               </a>
             </Link>

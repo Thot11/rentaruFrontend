@@ -80,7 +80,7 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
       <div className="languageContainer">
         <p>Editeurs :&nbsp;</p>
         <div className="select">
-          <Dropdown filters={editors} selectedItem={selectedEditor} setEditor={setSelectedLanguage} />
+          <Dropdown filters={editors} selectedItem={selectedEditor} setSelectedItem={setEditor} />
         </div>
       </div>
       <div className="tomeContainer">
