@@ -5,6 +5,8 @@ body {
   color: color(secondary);
   background-color: color(primary);
   font-family: 'GothamPro';
+  width: 100%;
+  overflow-x: hidden;
 }
 
 button {

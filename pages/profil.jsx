@@ -3,12 +3,14 @@ import ProductsList from "../components/ProductsList";
 // import { getHomePage, getProducts, getMe } from "../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from "react";
-import {getMe, updateMe} from '../store'
+import {getMe, updateMe, logOut} from '../store'
+import { useRouter } from "next/router";
 
 const Profil = () => {
 
   const dispatch = useDispatch();
   const { info, products, session, user } = useSelector((state) => state);
+  const router = useRouter()
 
   const [editMode, setEditMode] = useState(false)
 
@@ -17,6 +19,12 @@ const Profil = () => {
   useEffect(() => {
     dispatch(getMe(session))
   }, [])
+
+  const disconnect = () => {
+    router.push('/').then(() => {
+      dispatch(logOut())
+    })
+  }
   
   const updateInfo = () => {
     const data = {
@@ -30,6 +38,7 @@ const Profil = () => {
       <Head>
         <title>me</title>
       </Head>
+      <button className="btnLogIn" onClick={disconnect}>Log Out</button>
       <div className="edit" onClick={() => setEditMode(!editMode)}>Toggle edit mode</div>
       <div>me : {user.username}</div>
       <div>mail : {user.email} </div>
