@@ -5,7 +5,7 @@ import CardProduct from "./CardProduct";
 
 const ProductsList = ({ products, user, maxLength, notWantedProductId }) => {
 
-  console.log(notWantedProductId)
+  
   return (
     <div className="productsContainers">
       {products.map((_product, key) => (
