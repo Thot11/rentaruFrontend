@@ -12,6 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { session, user } = useSelector((state) => state);
   const router = useRouter()
+  // console.log(user);
 
   
   const [connected, setConnected] = useState(false)
@@ -95,6 +96,11 @@ const Navbar = () => {
         <a href="/" className="navElement">Catégories</a>
         <a href="/landing" className="navElement">Comment ça marche ?</a>
         <a href="/" className="navElement">A propos</a>
+        <Link href="/wishList">
+          <button className="navElement">
+            Mes favoris
+          </button>
+        </Link>
       </div>
     </div>
   );

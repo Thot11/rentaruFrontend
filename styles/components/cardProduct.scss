@@ -55,6 +55,12 @@
         }
 
         svg {
+          
+          &.liked {
+            path:last-child {
+              fill: white;
+            }
+          }
           path:last-child {
             fill: transparent;
             transition-duration: 0.3s;
@@ -63,6 +69,7 @@
               fill: white;
               transition-duration: 0.3s;
             }
+
           }
         }
         
