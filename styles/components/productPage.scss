@@ -74,7 +74,7 @@
   
               &.starEmpty {
                 path {
-                  fill: black;
+                  fill: color(darkGrey);
                 }
               }
             }
@@ -335,7 +335,7 @@
     
                 &.starEmpty {
                   path {
-                    fill: black;
+                    fill: color(darkGrey);;
                   }
                 }
               }
