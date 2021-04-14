@@ -12,7 +12,8 @@ const initialState = {
     products : [],
   },
   products : [],
-  createdProduct: null
+  createdProduct: null,
+  errorState: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +43,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           createdProduct: action.payload,
         };
+      case 'errorState':
+        return {
+          ...state,
+          errorState: action.payload,
+        };
     default:
       return state;
   }
@@ -59,6 +65,7 @@ const setProductsAction = makeAction('getProducts');
 const setMeAction = makeAction('saveUser');
 const setSessionAction = makeAction('saveSession');
 const createProductAction = makeAction('createProduct');
+const setErrorAction = makeAction('errorState');
 
 
 const deleteSessionAction = makeAction('deleteSession');
@@ -76,12 +83,10 @@ export const getProducts = () => {
           dispatch(setProductsAction(res));
         } else {
           console.log('error');
-          // toast.error(errorMsg('getting workspace data'));
         }
       })
       .catch((e) => {
         console.log('error');
-        // toast.error(errorMsg('getting workspace data') + '\nError: ' + e);
       });
   };
 };
@@ -115,6 +120,7 @@ export const updateMe = (data, token) => {
         }
       })
       .catch((e) => {
+        dispatch(setErrorAction({type: 'updateMe', message: 'Problème lors des changements sur votre compte, try again...'}))
         console.log('error' +e);
       });
   };
@@ -133,7 +139,8 @@ export const postConnect = (mail, password) => {
         }
       })
       .catch((e) => {
-        console.log('error' +e);
+        dispatch(setErrorAction({type: 'connect', message: 'Identifiant ou mdp incorrect'}))
+        console.log('error' + e);
       });
   };
 };
@@ -198,9 +205,11 @@ export const postSignUp = (
               }
             })
             .catch((e) => {
+              dispatch(setErrorAction({type: 'uploadProfilPic', message: 'Problème lors de l\'ajout de votre photo de profil'}))
               console.log('error while uploading profil picture' +e);
             })
           }).catch((e) => {
+            dispatch(setErrorAction({type: 'createToken', message: 'Problème lors de la création de votre token...'}))
             console.log('error while creating token' +e);
           })
           } else {
@@ -208,6 +217,7 @@ export const postSignUp = (
         }
       })
       .catch((e) => {
+        dispatch(setErrorAction({type: 'createAccount', message: 'Problème lors de la création de votre compte...'}))
         console.log('error' +e);
       });
   };
