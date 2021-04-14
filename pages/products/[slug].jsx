@@ -72,7 +72,7 @@ const ProductPage = ({ product }) => {
                 <img src="/likeBackground.png" alt="Search" className='backgroundLike'/>
               </div>
               <div className="share">
-                <img src="/share.png" alt="Search" className='backgroundLike'/>
+                <img src="/Share.png" alt="Search" className='backgroundLike'/>
               </div>
             </div>
           </div>
