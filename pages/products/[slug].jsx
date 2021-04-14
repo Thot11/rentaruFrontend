@@ -91,12 +91,18 @@ const ProductPage = ({ product }) => {
                 <h2><span>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price)}</span> TTC </h2>
                 <div className="calendar">
                   <div className="from">
-                    <p>DU</p>
-                    <p>16/03/21</p>
+                    <img src="/calendar.svg" alt=""/>
+                    <div className="date">
+                      <p>DU</p>
+                      <p>16/03/21</p>
+                    </div>
                   </div>
                   <div className="to">
-                    <p>AU</p>
-                    <p>16/04/21</p>
+                    <img src="/calendar.svg" alt=""/>
+                    <div className="date">
+                      <p>AU</p>
+                      <p>16/04/21</p>
+                    </div>
                   </div>
                 </div>
                 <button

@@ -157,10 +157,10 @@
           margin-right: 5px;
           background-color: color(dark);
           border-radius: 3px;
+          padding: 18px 16px 19px 16px;
   
           .pricing {
             width: 271px;
-            padding: 18px 16px 22px 16px;
             border-bottom: 0.2px solid rgba($color: #F5F6F7, $alpha: 0.4);
   
             h2 {
@@ -179,58 +179,70 @@
             .calendar {
               display: flex;
               margin-bottom: 22px;
+              background-color: color(lightDark);
+              padding: 9px 15px ;
+              border-radius: 3px;
   
               .from,
               .to {
-                width: 100%;
-                padding: 9px;
-                border: 0.2px solid rgba($color: #F5F6F7, $alpha: 0.4);
-                border-radius: 3px 0 0 3px;
+                display: flex;
                 cursor: pointer;
-  
-                p {
-                  font-size: 10px;
+
+                img {
+                  margin-left: 15px;
+                }
+
+                .date {
+                  margin-left: 14px;
+                  padding-right: 21px;
+                  border-right: 0.2px solid color(secondary,0.4);
+                  p {
+                  font-size: 12px;
                   font-weight: 200;
                   line-height: 12px;
   
-                  &:first-child {
-                    font-weight: 400;
+                    &:first-child {
+                      font-weight: 400;
+                    }
                   }
-                }
+                }                
               }
   
               .to {
-                border-left: 0;
-                border-radius: 0 3px 3px 0;
+                .date {
+                  border-right: 0;
+                  padding-right: 0;
+                }
               }
             }
   
             .btnRent {
               margin-left: calc((100% - 159px)/2);
               border-radius: 3px;
-              margin-bottom: 11px;
+              margin-bottom: 5px;
             }
   
             .btnInfo {
+              margin-bottom: 22px;
               color: rgba($color: #ffffff, $alpha: 0.5);
-              font-size: 7px;
+              font-size: 10px;
               text-align: center;
             }
           }
   
           .delivery {
-            padding: 15px 16px 20px 16px;
             width: 100%;
+            margin-top: 15px;
   
             .deliveryElement {
               display: flex;
               justify-content: space-between;
               width: 100%;
-              margin-bottom: 15px;
+              margin-bottom: 11px;
   
               p {
                 font-weight: 200;
-                font-size: 10px;
+                font-size: 11px;
   
                 &:first-child {
                   text-decoration: underline;
