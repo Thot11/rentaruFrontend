@@ -18,6 +18,8 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   const languages = ['Français', 'Anglais', 'Japonais', 'Italie']
   const editors = ['Glénat', 'Pika', 'Ki-oon', 'Kana', 'Delcourt']
 
+  const [error, setError] = useState(false)
+
 
 
   const nextStep = () => {
@@ -66,10 +68,11 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
         <input type="checkbox" defaultValue={integrale} onChange={(e) => setIntegrale(!integrale)} />
       </div>
       <div className="tomeContainer">
-        <p>Du tome</p>
+        <p>Du tome*</p>
         <input type="number" defaultValue={from} onChange={(e) => setFrom(e.target.value)} />
         <p>au</p>
         <input type="number" defaultValue={to} onChange={(e) => setTo(e.target.value)} />
+        {error && (<p className="error" >Veuillez renseigner ces champs svp</p>)}
       </div>
       <div className="languageContainer">
         <p>Langue de la collection :&nbsp;</p>
@@ -89,7 +92,7 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
       </div>
       <div className="buttonsContainer">
         <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
-        <Button color={'Red'} functionOnClick={nextStep}>Continuer</Button>
+        <Button color={'Red'} functionOnClick={() => {if (from && to) nextStep(); else setError(true) }}>Continuer</Button>
       </div>
     </>
   );

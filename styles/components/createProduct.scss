@@ -101,6 +101,12 @@
         justify-content: flex-start;
         margin-bottom: 30px;
 
+        .error {
+          font-size: 12px;
+          font-weight: 200;
+          color: color(red);
+        }
+
         input[type=number] {
           width: 39px;
           height: 30px;
@@ -260,5 +266,9 @@
 
   }
 
-
+  .error {
+    font-size: 12px;
+    font-weight: 200;
+    color: color(red);
+  }
 }
