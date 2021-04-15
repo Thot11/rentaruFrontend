@@ -20,12 +20,14 @@ const WishList = () => {
       <Head>
         <title>My wishlist</title>
       </Head>
-      <h1>Ma liste de souhaits</h1>
-      {user.likes ? (
-        <ProductsList products={user.likes} user={user}/>
-        ) : (
-          <p>Looks empty sry bb</p>
-        )}
+      <div className="container">
+        <h1 className="h1">Ma liste de souhaits</h1>
+        {user.likes ? (
+          <ProductsList products={user.likes} user={user}/>
+          ) : (
+            <p>Looks empty sry bb</p>
+          )}
+      </div>
     </div>
   );
 };
