@@ -53,6 +53,12 @@ const CardProduct = ({ product, key, user }) => {
 
   return (
     <div className="cardProduct" key={key}>
+      {product.integrale && (
+        <div className="badgeSilver">
+          <img src="/book2.svg" alt="book"/>
+          Intégrale
+        </div>
+      )}
       {product.status === 'draft' && 
         <div className="modalContainer">
           <div className="modalContent">

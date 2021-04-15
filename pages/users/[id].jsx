@@ -37,6 +37,12 @@ const UserPage = ({ user }) => {
     <div className="userContainer">
       <div className="contentTop">  
         <div className="infoProfil">
+          {true && (
+            <div className="badgePurple">
+              <img src="/certif.svg" alt="book"/>
+              <p>Grand Senseï</p> 
+            </div>
+          )}
           <div className="actions">
             <div className="editBtn">
               <p>Modifier</p>
