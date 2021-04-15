@@ -1,5 +1,5 @@
 .productPage {
-  padding: 34px calc((100% - 1059px)/2);
+  padding: 34px calc((100% - 1280px)/2);
 
   .mainContent {
     display: flex;
@@ -379,8 +379,8 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         row-gap: 30px;
-        padding-left: calc((100% - 1059px)/2);
-        padding-right: calc((100% - 1059px)/2);
+        padding-left: calc((100% - 1280px)/2);
+        padding-right: calc((100% - 1280px)/2);
       }
     }
   }

@@ -179,11 +179,11 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
       <div className="moreContent">
         <div className="sameManga">
           <h2>Les autres collections {product.title}</h2>          
-          <ProductsList products={productsTitle} maxLength={4} notWantedProductId={product.id} />
+          <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
         </div>
         <div className="sameManga">
           <h2>Les lecteurs de {product.title} aiment aussi</h2>
-          <ProductsList products={productsCategory} maxLength={4} notWantedProductId={product.id} />
+          <ProductsList products={productsCategory} maxLength={5} notWantedProductId={product.id} />
         </div>
       </div>
     </div>
