@@ -50,7 +50,7 @@ const Profil = () => {
       <Head>
         <title>me</title>
       </Head>
-      <div className="header">
+      <div className="headerProfil">
         <div className="onglets">
           <h3 className={tabs === 'params' ? 'selected' : ''} onClick={() => setTabs('params')}>Mes paramètres</h3>
           <h3 className={tabs === 'dashboard' ? 'selected' : ''} onClick={() => setTabs('dashboard')}>Tableau de bord</h3>
@@ -58,7 +58,7 @@ const Profil = () => {
       </div>
       <div className="container profilContainer">
         {tabs === 'params' ? (
-          <Params user={user} />
+          <Params user={user} logOut={disconnect}/>
           ) : (
           <Dashboard user={user} />
         )}

@@ -38,9 +38,14 @@
     }
 
     .arrow {
-      transform: rotate(-90deg);
+      transform: rotate(180deg);
       height: 15px;
       margin-right: 5px;
+      transition: .2s transform ease;
+
+      &.reverse {
+        transform: rotate(270deg);
+      }
     }
   }
 }

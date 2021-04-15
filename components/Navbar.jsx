@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const { session, user } = useSelector((state) => state);
-
+  const router = useRouter()
   
   const [connected, setConnected] = useState(false)
 
@@ -34,6 +34,12 @@ const Navbar = () => {
       localStorage.setItem('token', JSON.stringify(''));
     }
   }, [session])
+
+  const disconnect = () => {
+    router.push('/').then(() => {
+      dispatch(logOut())
+    })
+  }
 
   
   return (
@@ -89,7 +95,7 @@ const Navbar = () => {
                       <a className="navElement"><p>Paramètres</p></a>
                     </Link>
                     <a href="/landing" className="navElement"><p>Mes commandes</p></a>
-                    <a href="/" className="navElement"><p>Déconnexion</p></a>
+                    <a href="/" className="navElement" onClick={disconnect}><p>Déconnexion</p></a>
                   </div>
                 </div>
               </>

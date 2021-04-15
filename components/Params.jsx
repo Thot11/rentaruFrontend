@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import Button from "../elements/Button";
 import CheckBox from "../elements/CheckBox";
+import DropDown from "../elements/DropDown";
 import { getMangaCollection } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
 
-const Params = ({ user }) => {
+const Params = ({ user, logOut }) => {
 
   const [handToHand, setHandToHand] = useState(true)
   const [relaiColis, setRelaiColis] = useState(false)
@@ -96,6 +97,17 @@ const Params = ({ user }) => {
             <Verification checked={phoneChecked} checkedText={phoneChecked} notCheckedText={'Faire vérifier un numéro'} input={changeDocuments} changeInput={setPhoneChecked}/>
             <Verification checked={mailChecked} checkedText={mailChecked} notCheckedText={'Faire vérifier un mail'} input={changeDocuments} changeInput={setMailChecked}/>
             {changeDocuments && <Button color='Red' functionOnClick={() => setChangeDocuments(false)}>Enregistrer</Button>}
+          </div>
+          <div className="thirdSection">
+            <h4>Votre compte</h4>
+            <DropDown title="Mot de passe" color="Primary">blabla</DropDown>
+            <DropDown title="Adresse postale" color="dark">blabla</DropDown>
+            <h4>Détail du paiement</h4>
+            <DropDown title="Ajouter une carte" color="Primary">blabla</DropDown>
+            <h4>Méthode de versement</h4>
+            <DropDown title="Ajouter un compte" color="Primary">blabla</DropDown>
+            <div className="logOut" onClick={() => logOut()}>Deconnexion</div>
+            <div className="deleteAccount">Fermer mon compte</div>
           </div>
         </div>
       </div>

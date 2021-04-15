@@ -13,7 +13,7 @@ const DropDown = ({children, color, title, isImage}) => {
           {isImage && <img src="/creditCard.svg" alt="creditCard"/>}
           <h3>{title}</h3>
         </div>
-        <img src="/bigArrow.svg" alt="chevron" className='arrow' />
+        <img src="/bigArrow.svg" alt="chevron" className={`arrow ${open ? 'reverse' : ''}`}/>
       </div>
       {open ? children : null}
     </div>
