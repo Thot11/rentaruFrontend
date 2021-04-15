@@ -7,6 +7,7 @@ import { getProducts, getProduct } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
 import Link from "next/link";
+import DropDown from "../../elements/DropDown";
 
 const PaiementPage = ({ product }) => {
 
@@ -24,8 +25,6 @@ const PaiementPage = ({ product }) => {
       setDeliveryPrice(0);
     }
   },[delivery])
-
-  console.log(delivery)
 
   return (
     <div className="paiementPage">
@@ -76,6 +75,27 @@ const PaiementPage = ({ product }) => {
               </div>
               <p className="priceNumber">20,00 €</p>
             </div>
+          </div>
+          <div className="creditCard">
+            <div className="title">
+              <h2>Payer avec</h2>
+              <div className="imagesPayement">
+                <img src="/paypal.svg" alt="paypal"/>
+                <img src="/visa.png" alt="visa"/>
+              </div>
+            </div>
+            <DropDown title='Carte de crédit ou de débit' color={'dark'} isImage={true}>
+              <div className="card">
+                <input type="text" placeholder='Numéro de carte 🔒' className='cardNumber' />
+                <div className="cardMore">
+                  <input type="text" placeholder='Expiration' className='cardExpiration'/>
+                  <input type="text" placeholder='Cryptogramme' className='cardCrypto'/>
+                </div>
+              </div>
+              <input type="text" placeholder='Code Postal' className="postalCode"/>
+              <input type="text" placeholder='Pays/région' className="country"/>
+              <button className='button buttonWhite'>Enregistrer</button>
+            </DropDown>
           </div>
         </div>
       </div>
