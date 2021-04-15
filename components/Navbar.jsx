@@ -66,16 +66,32 @@ const Navbar = () => {
                 <Link href="/create/product">
                   <img src="/message.svg" alt=""/>
                 </Link>
-                <Link href="/create/product">
+                <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
                   <img src="/notif.svg" alt=""/>
                 </Link>
                 <Link href="/wishList">
                   <img src="/like2.svg" alt=""/>
                 </Link>
-                <Link href="/profil">
-                  <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
-
-                </Link>
+                <div className="containerContextMenu">
+                  <div className="openContext">
+                    <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+                      <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                    </Link>
+                    <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.93317 5.25C3.74072 5.58333 3.2596 5.58333 3.06715 5.25L0.902085 1.5C0.709635 1.16667 0.950198 0.75 1.3351 0.75H5.66522C6.05012 0.75 6.29069 1.16667 6.09824 1.5L3.93317 5.25Z" fill="#ECECEC" fill-opacity="0.6"/>
+                    </svg>
+                  </div>
+                  <div className={`contextMenu`}>
+                    <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+                      <a className="navElement"><p>Mon profil</p></a>
+                    </Link>
+                    <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
+                      <a className="navElement"><p>Paramètres</p></a>
+                    </Link>
+                    <a href="/landing" className="navElement"><p>Mes commandes</p></a>
+                    <a href="/" className="navElement"><p>Déconnexion</p></a>
+                  </div>
+                </div>
               </>
             ) : (
               <Link href="/login">

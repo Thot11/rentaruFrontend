@@ -1,0 +1,162 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 23px;
+  margin-top: 30px;
+  padding: 0 calc((100% - 1280px)/2);
+
+  .onglets {
+    display: flex;
+
+    h3 {
+      margin-right: 30px;
+      padding-bottom: 4px;
+      font-size: 22px;
+      color: color(secondary);
+      font-weight: 300;
+      line-height: 26px;
+      cursor: pointer;
+
+      &.selected {
+        font-weight: 400;
+        border-bottom: 3px solid white;
+      }
+    }
+  }
+} 
+
+.profilContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: color(dark);
+  border-radius: 3px;
+  padding: 15px 20px;
+
+  .topContainer {
+    display: inline-flex;
+    height: 120px;
+    padding-bottom: 20px;
+
+    .left {
+      width: 30%;
+      display: inline-flex;
+
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        margin-right: 13px;
+      }
+
+      .hello {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px 0;
+
+        .offSet {
+          height: 12px;
+        }
+
+        .mainText {
+          font-size: 16px;
+          color: color(secondary);
+        }
+
+        .subText {
+          font-size: 14px;
+          font-weight: 300;
+          text-decoration: underline;
+          color: color(secondary, .6);
+          cursor: pointer;
+        }
+
+      }
+    }
+
+    .right {
+      width: 70%;
+      padding-left: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .top {
+        display: inline-flex;
+        justify-content: space-between;
+
+        div {
+          font-size: 14px;
+          font-weight: 300;
+          color: color(secondary, .6)
+        }
+
+        a {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          font-weight: 300;
+          color: color(blue);
+          
+          p {
+            height: 10px;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .middle {
+        z-index: 1;
+        display: inline-flex;
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+
+        img {
+          transform: scale(1.2);
+        }
+
+        &:after {
+          z-index: -1;
+          height: 1px;
+          content:'';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          border-top: 0;
+          border-right: 0;
+          border-left: 0;
+          border-bottom: 1px color(someLine);
+          border-style: dashed solid;
+          width: 100%;
+        }
+      }
+
+      .bot {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .subLine {
+          margin-top: -1px;
+          position: absolute;
+          height: .5px;
+          width: 100%;
+          background-color: color(someLine);
+        }
+
+        .progression {
+          position: absolute;
+          height: 4px;
+          background-color: color(red);
+          border-radius: 10px;
+
+        }
+      }
+    }
+  }
+}
