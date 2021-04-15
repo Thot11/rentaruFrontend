@@ -114,20 +114,15 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                     </div>
                   </div>
                 </div>
-                <button
-                  className="buttonRed button btnRent"
-                  data-item-id={product.id}
-                  data-item-price={product.price}
-                  data-item-url={router.asPath}
-                  data-item-description={product.description}
-                  data-item-image={getStrapiMedia(
-                    product.imageCover.formats.thumbnail.url
-                  )}
-                  data-item-name={product.title}
-                  v-bind="customFields"
-                >
-                  Louer la série
-                </button>
+                <Link href={`/paiement/${product.slug}`}>
+                  <a>
+                    <button
+                      className="buttonRed button btnRent"
+                    >
+                      Louer la série
+                    </button>
+                  </a>
+                </Link>
                 <p className='btnInfo'>Vous ne serez pas encore débité</p>
               </div>
               <div className="delivery">
