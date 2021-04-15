@@ -59,4 +59,22 @@ input[type=number] {
 .container {
   width: 1280px;
   margin: auto;
+.stars {
+  display: flex;
+  height: 5px;
+  margin-top: 12px;
+
+  svg {
+    margin-right: 3px;
+
+    path {
+      fill: #F3C211;
+    }              
+  }
+  
+  .starEmpty {
+    path {
+      fill: color(darkGrey);
+    }
+  }
 }
