@@ -35,7 +35,7 @@ const UserPage = ({ user }) => {
       <title>{user.username}</title>
     </Head>
     <div className="userContainer">
-      <div className="contentTop">        
+      <div className="contentTop">  
         <div className="infoProfil">
           {true && (
             <div className="badgePurple">

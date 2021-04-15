@@ -1,0 +1,181 @@
+.paiementPage {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 52px calc((100% - 1280px)/2) 20px calc((100% - 1280px)/2);
+
+  .leftContent {
+    width: 579px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 49px;
+
+      img {
+        margin-right: 14px;
+      }
+
+      h2 {
+        color: color(secondary);
+        font-size: 22px;
+        font-weight: 400;
+      }
+    }
+
+    .rentInfo {
+      h3 {
+        color: color(secondary);
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 33px;
+      }
+
+      .date {
+        margin-bottom: 37px;
+
+        .headerDate {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 9px;
+
+          .label {
+            font-size: 14px;
+            font-weight: 325;
+            line-height: 17px;
+            color: color(secondary, 0.6);
+          }
+
+          .editBtn {
+            text-decoration: underline;
+            font-size: 14px;
+            font-weight: 325;
+            line-height: 17px;
+            color: color(secondary, 0.6);
+          }
+        }
+
+        .dateNumber {
+          font-size: 16px;
+          font-weight: 325;
+          line-height: 17px;
+          color: color(secondary);
+        }
+      }
+
+      .prices {
+        width: 100%;
+        padding-bottom: 20px;
+        border-bottom: 0.2px solid color(darkGrey);
+
+        .price {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 9px;
+
+          .leftPart {
+            display: flex;
+            align-items: center;
+
+            .checkBox {
+              margin-right: 11px;
+            }
+
+            .label {
+              font-size: 16px;
+              font-weight: 325;
+              line-height: 19px;
+              color: color(secondary);
+            }
+          }
+
+          .priceNumber {
+            font-size: 16px;
+            font-weight: 325;
+            line-height: 19px;
+            color: color(secondary);
+          }
+        }
+      }
+    }
+  }
+
+  .rightContent {
+    position: fixed;
+    top: 188px;
+    right: calc((100% - 1280px)/2);
+    width: 501px;
+
+    .card {
+      display: flex;
+      width: 100%;
+      height: 291px;
+      padding: 35px 37px 27px 25px;
+      background-color: color(dark);
+      border-radius: 3px;
+
+      img {
+        width: 148px;
+        margin-right: 11px;
+      }
+
+      .productInfo {
+        h2 {
+          margin-bottom: 29px;
+          color: color(secondary);
+          font-size: 20px;
+          font-weight: 325;
+          line-height: 24px;
+
+          span {
+            font-weight: 400;
+          }
+        }
+
+        .subtitle {
+          margin-bottom: 23px;
+          color: color(secondary,0.6);
+          font-size: 14px;
+          font-weight: 325;
+          line-height: 17px;
+        }
+
+        .price, .priceTotal {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 9px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          p {
+            color: color(secondary);
+            font-size: 14px;
+            font-weight: 325;
+            line-height: 17px;
+
+            &:first-child {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .priceTotal {
+          margin-top: 19px;
+          p {
+            font-weight: 400;
+            
+            &:first-child {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
