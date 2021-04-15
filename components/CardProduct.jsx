@@ -53,6 +53,17 @@ const CardProduct = ({ product, key, user }) => {
 
   return (
     <div className="cardProduct" key={key}>
+      {product.status === 'draft' && 
+        <div className="modalContainer">
+          <div className="modalContent">
+            <div className="text">
+              <p><span>Cette série n’est pas disponible</span> pour le moment. </p>
+              <p>Elle revient bientôt, souhaites-tu être alerté quand elle sera de nouveau disponnible ?</p>
+            </div>
+            <button className='button buttonTransparent'>Recevoir une alerte</button>
+          </div>
+        </div>
+      }
       <Link href={`/products/${product.slug}`}>
         <a>
           <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
