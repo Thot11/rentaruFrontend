@@ -37,6 +37,7 @@
     display: inline-flex;
     height: 120px;
     padding-bottom: 20px;
+    border-bottom: .5px solid color(someLine, 0.4);
 
     .left {
       width: 30%;
@@ -98,6 +99,7 @@
           font-size: 12px;
           font-weight: 300;
           color: color(blue);
+          cursor: pointer;
           
           p {
             height: 10px;
@@ -156,6 +158,170 @@
           border-radius: 10px;
 
         }
+      }
+    }
+  }
+
+  .middleContainer {
+    display: inline-flex;
+    width: 100%;
+    padding-top: 20px;
+
+    .left {
+      width: 30%;
+      padding-right: 20px;
+      border-right: .2px solid color(someLine, 0.4);
+      
+      .title {
+        font-size: 18px;
+        margin-bottom: 25px;
+      }
+
+      .top {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 30px;
+        border-bottom: .2px solid color(someLine, 0.4);
+
+        .prefLivraison {
+          display: inline-flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 70%;
+          font-size: 13px;
+          margin-bottom: 20px;
+
+          button {
+            background-color: color(backgroundCheckboxSometimes);
+
+            &.checkBoxChecked {
+              background-color: color(red);
+            }
+          }
+
+          div {
+            display: inline-flex;
+            align-items: center;
+
+            img {
+              margin-right: 11px;
+            }
+
+            p {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      .middle {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        padding-bottom: 30px;
+        border-bottom: .2px solid color(someLine, 0.4);
+
+        .link {
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+          font-size: 12px;
+          font-weight: 300;
+          color: color(blue);
+          cursor: pointer;
+
+          img {
+            margin-left: 10px;
+          }
+        }
+
+      }
+
+      .bot {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+      }
+    }
+
+    .right {
+      width: 70%;
+      padding-left: 30px;
+
+      .top {
+        align-self: flex-end;
+        font-size: 13px;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+
+      .firstSection {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 40px;
+        border-bottom: .2px solid color(someLine, 0.4);
+
+
+        textarea {
+          background-color: color(primary);
+          padding: 15px 10px;
+          color: color(seconday);
+          border-radius: 3px;
+          min-width: 100%;
+          max-width: 100%;
+          min-height: 95px;
+
+          &::placeholder {
+            color: color(secondary, .6)
+          }
+
+          &.change {
+            background-color: color(backgroundCheckboxSometimes);
+          }
+        }
+      }
+
+      .secondSection {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+        padding-bottom: 40px;
+        border-bottom: .2px solid color(someLine, 0.4);
+      }
+
+      button.button {
+        align-self: flex-end;
+        margin-top: 10px;
+      }
+    }
+
+    .verif {
+      display: inline-flex;
+      align-items: center;
+      color: color(secondary, 0.9);
+      margin-bottom: 15px;
+
+      img {
+        margin-right: 10px;
+      }
+
+      input {
+        background-color: color(backgroundCheckboxSometimes);
+        border-radius: 3px;
+        padding: 5px 10px;
+      }
+
+      .checkedText {
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      .notCheckedText {
+        font-size: 15px;
+        font-weight: 400;
       }
     }
   }
