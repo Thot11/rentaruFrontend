@@ -5,6 +5,7 @@
   height: 20px;
   border-radius: 3px;
   background-color: color(dark);
+  border: 0.2px solid color(secondary, 0.2);
 
   &.checkBoxChecked {
     background-color: color(red);

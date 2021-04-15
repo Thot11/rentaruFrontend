@@ -13,6 +13,7 @@ const PaiementPage = ({ product }) => {
 
   const [delivery, setDelivery] = useState('Remise en main propre');
   const [deliveryPrice, setDeliveryPrice] = useState(0);
+  const [cglAccepted, setCglAccepted] = useState(false);
 
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
@@ -103,7 +104,8 @@ const PaiementPage = ({ product }) => {
         <div className="card">
           <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
           <div className="productInfo">
-            <h2><span>{product.title}</span> | Tome {product.tomeInitial} à {product.tomeFinal}</h2>
+            <h2>{product.title}</h2>
+            <p className='tomes'> Tome {product.tomeInitial} à {product.tomeFinal}</p>
             <p className="subtitle">Détails du prix</p>
             <div className="price">
               <p>Comission collectionneur</p>
@@ -112,10 +114,6 @@ const PaiementPage = ({ product }) => {
             <div className="price">
               <p>Frais de service</p>
               <p>2,00€</p>
-            </div>
-            <div className="price">
-              <p>Assurance</p>
-              <p>1,00€</p>
             </div>
             <div className="price">
               <p>{delivery}</p>
@@ -127,6 +125,21 @@ const PaiementPage = ({ product }) => {
             </div>
           </div>
         </div>
+        <div className="bullshit">
+          <div className="condition">
+            <h3>Condition d’annulation :</h3>
+            <p>Si vous devez annuler, merci de prévenir dans les temps, en respectant les délais d'annulation. Pour plus d’informations merci de consulter les CGL</p>
+          </div>
+          <div className="caution">
+            <h3>Caution</h3>
+            <p>La caution s'engage à la demande du débiteur avec lequel elle est liée par un contrat de garantie. Elle garantit au collectionneur qu'il sera remboursé en cas de défaut. Le cautionnement bancaire est fourni par des sociétés spécialisées sécurisées.</p>
+          </div>
+        </div>
+        <div className="acceptCGL">
+          <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
+          <p>En cochant cette case vous acceptez les CGL</p>
+        </div>
+        <button className='button buttonRed btnPay'>Valider et payer</button>
       </div>
     </div>
   );
