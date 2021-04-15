@@ -1,7 +1,7 @@
 .productsContainers {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 30px;
-  padding-left: calc((100% - 1059px)/2);
-  padding-right: calc((100% - 1059px)/2);
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 40px;
+  padding-left: calc((100% - 1280px)/2);
+  padding-right: calc((100% - 1280px)/2);
 }

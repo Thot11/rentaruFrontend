@@ -24,3 +24,39 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.h1 {
+  position: relative;
+  width: fit-content;
+  font-size: 37px;
+  font-weight: 600;
+  color: color(secondary);
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: 15px;
+    left: 0;
+    content: '';
+    width: 102%;
+    height: 30px;
+    background-color: color(red);
+  }
+}
+
+.h2 {
+  color: color(secondary);
+  font-weight: 200;
+  font-size: 26px;
+}
+
+.h3 {
+  color: color(secondary);
+  font-weight: 200;
+  font-size: 22px;
+}
+
+.container {
+  width: 1280px;
+  margin: auto;
+}

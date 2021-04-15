@@ -35,8 +35,11 @@ const HomePage = ({ home }) => {
           <Link href="/landing"><button>{home.heroCTA}</button></Link>
         </div>
       </div>
-      <h2>D'après vos dernières recherches</h2>
-      <ProductsList products={products} />
+      <div className="container">
+        <h2 className="h1">Lis les meilleurs mangas pas cher !</h2>
+        <h3 className="h3">D'après vos dernières recherches</h3>
+        <ProductsList products={products} />
+      </div>
     </div>
   );
 };
