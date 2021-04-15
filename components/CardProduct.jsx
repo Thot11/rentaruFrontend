@@ -53,6 +53,12 @@ const CardProduct = ({ product, key, user }) => {
 
   return (
     <div className="cardProduct" key={key}>
+      {product.integrale && (
+        <div className="badgeSilver">
+          <img src="/book2.svg" alt="book"/>
+          Intégrale
+        </div>
+      )}
       <Link href={`/products/${product.slug}`}>
         <a>
           <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>

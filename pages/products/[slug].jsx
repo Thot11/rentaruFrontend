@@ -27,7 +27,10 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
         <div className="leftContent">          
           <div className="images">
             {product.integrale && 
-              <img className='integrale' src="/integrale.png" alt=""/>
+               <div className="badgeSilver">
+                <img src="/book2.svg" alt="book"/>
+                Intégrale
+              </div>
             }
             {product.images &&
             <img

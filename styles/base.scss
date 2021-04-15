@@ -80,3 +80,47 @@ input[type=number] {
     }
   }
 }
+
+.badgeSilver {
+  position: absolute;
+  top: 11px;
+  left: -7px;
+  display: inline-flex;
+  align-items: center;
+  // color: color(primary);
+  color: #4F4D50;
+  background: linear-gradient(266.5deg, #B5B5B5 2.81%, #FFFFFF 46.91%, #8E8E8E 93.8%);
+  border-radius: 3px;
+  filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.45));
+  font-size: 12px;
+  padding: 5px;
+
+  img {
+    margin-right: 3px;
+  }
+}
+
+.badgePurple {
+  position: absolute;
+  top: 27px;
+  left: -25px;
+  display: inline-flex;
+  align-items: center;
+  // color: color(dark);
+  color: #2F1642;
+  font-size: 10px;
+  background: linear-gradient(266.21deg, #771CBF 3.83%, #E9BFFD 47.15%, #771CBF 93.28%);
+  box-shadow: 0px 4px 31px rgba(0, 0, 0, 0.37);
+  border-radius: 3px;
+  padding: 2px 20px;
+  transform: rotate(-45deg);
+
+  img {
+    margin-right: 3px;
+    margin-bottom: 1px;
+  }
+
+  p {
+    padding-top: 2px;
+  }
+}
