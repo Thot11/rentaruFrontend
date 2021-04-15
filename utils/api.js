@@ -24,9 +24,6 @@ export async function getCategory(slug) {
   return categories?.[0];
 }
 
-export const getProducts = async () => {
-  return await fetchAPI("/products");
-}
 
 export async function getUsers() {
   const users = await fetchAPI("/users");
@@ -51,6 +48,15 @@ export async function getLandingPage() {
 export async function getProduct(slug) {
   const products = await fetchAPI(`/products?slug=${slug}`);
   return products?.[0];
+}
+
+export const getProducts = async () => {
+  return await fetchAPI("/products");
+}
+
+export async function getProductsPublished() {
+  const products = await fetchAPI(`/products?status=published`);
+  return products;
 }
 
 export async function getProductsByCategory(categories) {

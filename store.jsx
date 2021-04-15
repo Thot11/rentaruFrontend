@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk'
@@ -78,7 +79,7 @@ export const getToken = () => {
 
 export const getProducts = () => {
   return (dispatch) => {
-    GlobalAPI.getProducts()
+    GlobalAPI.getProductsPublished()
       .then((res) => {
         if (res) {
           dispatch(setProductsAction(res));
