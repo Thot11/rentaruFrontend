@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getStrapiMedia } from "../utils/medias";
 import CardProduct from "./CardProduct";
 
-const ProductsList = ({ products, user, maxLength, notWantedProductId, filterBy}) => {
+const ProductsList = ({ products, user, maxLength, notWantedProductId, filterBy, elementFiltered}) => {
   
   return (
     <div className="productsContainers">
@@ -12,7 +12,7 @@ const ProductsList = ({ products, user, maxLength, notWantedProductId, filterBy}
         <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : user}/>
       ))}
       {filterBy && filterBy !== '' && products.map((_product, key) => (
-        (_product.title.toLowerCase().includes(filterBy.toLowerCase()) || _product.user.username.toLowerCase().includes(filterBy.toLowerCase()))  &&  
+        ((elementFiltered === 'manga' &&_product.title.toLowerCase().includes(filterBy.toLowerCase())) || (elementFiltered === 'member' &&_product.user.username.toLowerCase().includes(filterBy.toLowerCase())))  &&  
         <CardProduct product={_product} key={key} user={_product.user.username ? _product.user : user}/>
       ))}
     </div>
