@@ -128,6 +128,25 @@ export const updateMe = (data, token) => {
   };
 };
 
+export const updatePP = (img, user, token) => {
+
+  return (dispatch) => {
+    GlobalAPI.postUploadImg(img, token)
+      .then((res) => {
+        console.log(res);
+        if (res) {
+          dispatch(setMeAction({...user, profilPic: res.data[0]}));
+        } else {
+          console.log('error');
+        }
+      })
+      .catch((e) => {
+        dispatch(setErrorAction({type: 'updatePP', message: 'Problème lors des changements sur votre pp, try again...'}))
+        console.log('error' +e);
+      });
+  };
+};
+
 export const postConnect = (mail, password) => {
 
   return (dispatch) => {

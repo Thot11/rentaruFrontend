@@ -14,11 +14,9 @@ const Profil = () => {
   const dispatch = useDispatch();
   const { info, products, session, user } = useSelector((state) => state);
   const router = useRouter()
-  console.log(user);
 
-  const [editMode, setEditMode] = useState(false)
+
   const [tabs, setTabs] = useState()
-  const [username, setUsername] = useState(user.username);
 
   useEffect(() => {
     dispatch(getMe(session))
@@ -37,18 +35,11 @@ const Profil = () => {
       dispatch(logOut())
     })
   }
-  
-  const updateInfo = () => {
-    const data = {
-      username
-    }
-    dispatch(updateMe(data, session))
-  }
 
   return (
     <div>
       <Head>
-        <title>me</title>
+        <title>Mon profil</title>
       </Head>
       <div className="headerProfil">
         <div className="onglets">
@@ -62,21 +53,6 @@ const Profil = () => {
           ) : (
           <Dashboard user={user} />
         )}
-        {/* <button className="btnLogIn" onClick={disconnect}>Log Out</button>
-        <div className="edit" onClick={() => setEditMode(!editMode)}>Toggle edit mode</div>
-        <div>me : {user.username}</div>
-        <div>mail : {user.email} </div>
-        <div>note : {user.note} </div>
-        <div>nb annonces : {user.products.length} </div>
-        {editMode && (
-          <div className="signInContainer">
-          <div>Edit mode : </div>
-          change username
-          <input type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)} />
-          <div onClick={updateInfo}>Submit</div>
-        </div>
-        )}
-        <ProductsList products={user.products} user={user}/> */}
       </div>
     </div>
   );
