@@ -23,7 +23,7 @@ const WishList = () => {
       <div className="container">
         <h1 className="h1">Ma liste de souhaits</h1>
         {user.likes ? (
-          <ProductsList products={user.likes} user={user}/>
+          <ProductsList products={user.likes}/>
           ) : (
             <p>Looks empty sry bb</p>
           )}
