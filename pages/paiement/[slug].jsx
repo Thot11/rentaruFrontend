@@ -13,7 +13,7 @@ const PaiementPage = ({ product }) => {
 
   const router = useRouter();
   if (router.isFallback) {
-    return <div>Loading category...</div>;
+    return <div>Loading product...</div>;
   }
 
   const [delivery, setDelivery] = useState('Remise en main propre');
