@@ -52,8 +52,6 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   return blocked;
   };
 
-  console.log(startDate, endDate);
-
 const goToPaiement = () => {
   if (startDate && endDate) {
     setBookings([...bookings, {startDate, endDate}])
