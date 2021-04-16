@@ -52,10 +52,8 @@ const Navbar = () => {
 
   const handleKeyDown = (e) => {    
     console.log(e.keyCode)
-    console.log(searchElement !== '')
-    if(e.keyCode === 13 && searchElement !== '') {
+    if(e.keyCode === 13) {
       setKeyDown(13);
-      console.log("it change")
     }
   }
 
