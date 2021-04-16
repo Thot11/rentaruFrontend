@@ -51,7 +51,7 @@ const Profil = () => {
         {tabs === 'params' ? (
           <Params user={user} logOut={disconnect}/>
           ) : (
-          <Dashboard user={user} />
+          <Dashboard user={user} setTabs={setTabs}/>
         )}
       </div>
     </div>

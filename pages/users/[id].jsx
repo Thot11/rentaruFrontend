@@ -24,7 +24,6 @@ const UserPage = ({ user }) => {
     setMemberSince(Math.trunc(currentDate/1000/60/60/24))
   }
 
-  console.log(memberSince);
   useEffect(() => {
     calculDate()
   }, [])
@@ -102,7 +101,7 @@ const UserPage = ({ user }) => {
               </div>
             </div>
             <div className="cardReward">
-              <img src="/transaction.svg" alt="transaction"/>
+              <img src="/clock.svg" alt="transaction"/>
               <div className="infoReward">
                 <p className='number'>{memberSince}</p>
                 <p className='title'>Jour{memberSince > 1 ? 's' : ''} d'ancienneté</p>

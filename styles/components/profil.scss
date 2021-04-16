@@ -33,6 +33,23 @@
   border-radius: 3px;
   padding: 15px 20px;
 
+  .link {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 300;
+    color: color(blue);
+    cursor: pointer;
+    width: 100%;
+
+    img {
+      width: auto !important;
+      max-height: 14px;
+      margin-left: 10px;
+    }
+  }
+
   .topContainer {
     display: inline-flex;
     height: 120px;
@@ -227,26 +244,50 @@
         padding-bottom: 30px;
         border-bottom: .2px solid color(someLine, 0.4);
 
-        .link {
-          display: flex;
-          align-items: center;
-          margin-top: 5px;
-          font-size: 12px;
-          font-weight: 300;
-          color: color(blue);
-          cursor: pointer;
-
-          img {
-            margin-left: 10px;
-          }
-        }
-
       }
 
       .bot {
         display: flex;
         flex-direction: column;
         margin-top: 20px;
+
+        .rewards {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+  
+          .cardReward {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 184px;
+            height: 80px;
+            margin-bottom: 15px;
+            padding: 0 15px;
+            background-color: color(backgroundCheckboxSometimes);
+            border-radius: 3px;
+
+  
+            img {
+              margin-right: 14px;
+            }
+  
+            .infoReward {
+              .number {
+                margin-bottom: 8px;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 22px;
+              }
+  
+              .title {
+                margin-bottom: 0;
+                font-size: 11px;
+                font-weight: 300;
+              }
+            }
+          }
+        }
       }
     }
 

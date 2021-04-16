@@ -17,8 +17,8 @@ const Params = ({ user, logOut }) => {
   const dispatch = useDispatch();
   const { session } = useSelector((state) => state);
 
-  const [handToHand, setHandToHand] = useState(false)
-  const [relaiColis, setRelaiColis] = useState(false)
+  const [handToHand, setHandToHand] = useState()
+  const [relaiColis, setRelaiColis] = useState()
   const [phoneChecked, setPhoneChecked] = useState()
   const [mailChecked, setMailChecked] = useState()
   const [idChecked, setIdChecked] = useState()
@@ -48,10 +48,16 @@ const Params = ({ user, logOut }) => {
   }
   
   useEffect(() => {
-    if (handToHand !== user.handToHand || relaiColis !== user.relaiColis) {
-      updateInfo({handToHand, relaiColis})
+    if (handToHand !== user.handToHand) {
+      updateInfo({handToHand})
     }
-  }, [handToHand, relaiColis])
+  }, [handToHand])
+
+  useEffect(() => {
+    if (relaiColis !== user.relaiColis) {
+      updateInfo({relaiColis})
+    }
+  }, [relaiColis])
 
   const updateProfilPic = (selectedFile) => {
     const img = new FormData();
