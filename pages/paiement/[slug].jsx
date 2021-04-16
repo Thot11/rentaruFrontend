@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import CardProduct from "../../components/CardProduct";
 import { getProducts, getProduct } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
@@ -10,6 +10,11 @@ import Link from "next/link";
 import DropDown from "../../elements/DropDown";
 
 const PaiementPage = ({ product }) => {
+
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading category...</div>;
+  }
 
   const [delivery, setDelivery] = useState('Remise en main propre');
   const [deliveryPrice, setDeliveryPrice] = useState(0);
@@ -31,7 +36,7 @@ const PaiementPage = ({ product }) => {
     <div className="paiementPage">
       
       <Head>
-        <title>Rent {product.title} </title>
+        <title>Rent Page paiement </title>
       </Head>
       <div className="leftContent">
         <div className="title">
