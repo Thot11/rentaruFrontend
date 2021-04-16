@@ -79,7 +79,7 @@ const Params = ({ user, logOut }) => {
             <Verification checked={idChecked} checkedText={'Id vérifié'} notCheckedText={'Faire vérifier un id'} input={false} />
             <Verification checked={phoneChecked} checkedText={phoneChecked} notCheckedText={'Faire vérifier un numéro'} input={false} />
             <Verification checked={mailChecked} checkedText={mailChecked} notCheckedText={'Faire vérifier un mail'} input={false} />
-            <p className="link">Compléter les vérifications <img src="/chevronLink.svg" /></p>
+            <p className="link" onClick={() => setChangeDocuments(true)}>Compléter les vérifications <img src="/chevronLink.svg" /></p>
           </div>
           <div className="bot">
           <div className="title">Mon top 5</div>
