@@ -52,13 +52,15 @@ const Navbar = () => {
 
   const handleKeyDown = (e) => {    
     console.log(e.keyCode)
+    console.log(searchElement !== '')
     if(e.keyCode === 13 && searchElement !== '') {
       setKeyDown(13);
+      console.log("it change")
     }
   }
 
   useEffect(() => {
-    console.log(keyDown === 13)
+    console.log(keyDown)
     console.log(searchElement !== '')
     console.log(router.route !== "/search")
     if(keyDown === 13 && searchElement !== '' && router.route !== "/search") {
