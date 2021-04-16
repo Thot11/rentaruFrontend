@@ -15,6 +15,8 @@ const Navbar = () => {
   const router = useRouter()
   
   const [connected, setConnected] = useState(false)
+  const [searchElement, setSearchElement] = useState('');
+  const [keyDown, setKeyDown] = useState(0);
 
   useEffect(() => {
     let token = localStorage.getItem('token')
@@ -23,6 +25,13 @@ const Navbar = () => {
       dispatch({type: 'saveSession', payload: token})
       dispatch(getMe(token))
     }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+    
   }, [])
   
   useEffect(() => {
@@ -41,6 +50,18 @@ const Navbar = () => {
     })
   }
 
+  const handleKeyDown = (e) => { 
+    if(e.keyCode === 13) {
+      setKeyDown(13);
+    }
+  }
+
+  useEffect(() => {
+    if(keyDown === 13 && searchElement !== '' && router.route !== "/search") {
+      setKeyDown(0);
+      router.push({ pathname: "/search", query: { title: searchElement } })
+    }
+  }, [keyDown, searchElement, router])
   
   return (
     <div className="navbarContainer">
@@ -55,10 +76,11 @@ const Navbar = () => {
               />
             </a>
           </Link>
+          {router.route !== "/search" &&
           <div className='search'>
             <img src="/search.png" alt="Search" />
-            <input placeholder="Rechercher un manga, un auteur, un genre" />
-          </div>
+            <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
+          </div>}
           <div className="right">
             {connected ? (
               <>
