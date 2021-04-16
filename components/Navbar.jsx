@@ -50,17 +50,13 @@ const Navbar = () => {
     })
   }
 
-  const handleKeyDown = (e) => {    
-    console.log(e.keyCode)
+  const handleKeyDown = (e) => { 
     if(e.keyCode === 13) {
       setKeyDown(13);
     }
   }
 
   useEffect(() => {
-    console.log(keyDown)
-    console.log(searchElement !== '')
-    console.log(router.route !== "/search")
     if(keyDown === 13 && searchElement !== '' && router.route !== "/search") {
       setKeyDown(0);
       router.push({ pathname: "/search", query: { title: searchElement } })
