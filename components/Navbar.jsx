@@ -57,6 +57,9 @@ const Navbar = () => {
   }
 
   useEffect(() => {
+    console.log(keyDown === 13)
+    console.log(searchElement !== '')
+    console.log(router.route !== "/search")
     if(keyDown === 13 && searchElement !== '' && router.route !== "/search") {
       setKeyDown(0);
       router.push({ pathname: "/search", query: { title: searchElement } })
