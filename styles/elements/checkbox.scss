@@ -1,12 +1,12 @@
 @import './../color.scss';
 
 .checkBox {
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
   background-color: color(dark);
   border: 0.2px solid color(secondary, 0.2);
 
