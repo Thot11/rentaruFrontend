@@ -18,6 +18,7 @@ const SearchPage = ({ products }) => {
   }
 
   const [elementSearched, setElementSearched] = useState('');
+  const [elementFiltered, setElementFiltered] = useState('manga');
 
   useEffect(() => {
     const {
@@ -34,15 +35,28 @@ const SearchPage = ({ products }) => {
       </Head>
       <div className="searchContainer">
         <h1 className='h1'>Recherche un manga par catégorie</h1>
-        <div className="searchWrapper">          
-          <div className='search'>
-            <img src="/search.png" alt="Search" />
-            <input placeholder="Rechercher un manga, un auteur, un genre" value={elementSearched} onChange={(e) => setElementSearched(e.target.value)} />
-          </div>
+        <div className="searchWrapper">
+          <div className="searchHeader">    
+            <div className='search'>
+              <img src="/search.png" alt="Search" />
+              <input placeholder="Rechercher un manga, un auteur, un genre" value={elementSearched} onChange={(e) => setElementSearched(e.target.value)} />
+            </div>
+            <div className="filterBy">
+              <button className={elementFiltered === 'manga' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('manga')}>
+                Manga
+              </button>
+              <button className={elementFiltered === 'author' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('author')}>
+                Auteur
+              </button>
+              <button className={elementFiltered === 'member' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('member')}>
+                Membre
+              </button>
+            </div>
+          </div>  
         </div>
         <div className="results">
           <p className='labelResult'>Résultats d’annonces "{elementSearched}"</p>
-          <ProductsList products={products} filterBy={elementSearched}/>
+          <ProductsList products={products} filterBy={elementSearched} elementFiltered={elementFiltered} />
         </div>
       </div>
     </div>
