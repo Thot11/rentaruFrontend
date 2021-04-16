@@ -2,8 +2,17 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useRef } from "react";
-import CardProduct from "../../components/CardProduct";
+import { useEffect, useRef, useState } from "react";
+
+// Date
+import { DateRangePicker } from 'react-dates';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+import 'moment/locale/fr'
+import 'react-dates/lib/css/_datepicker.css';
+
+import { useDispatch, useSelector } from "react-redux";
+import { paiementData } from "../../store";
 import ProductsList from "../../components/ProductsList";
 import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
@@ -15,7 +24,63 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     return <div>Loading category...</div>;
   }
 
+  const moment = extendMoment(Moment);
+  const dispatch = useDispatch();
+
+  const { rent } = useSelector((state) => state);
+
   const refCards = useRef(null);
+
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
+  const [focusedInput, setFocusedInput] = useState()
+  const [bookings, setBookings] = useState(product.booked ?? [])
+  const [price, setPrice] = useState(product.price*1.1+0.2)
+  const [time, setTime] = useState('/2 semaines')
+  const [error, setError] = useState(false)
+
+  const isBlocked = date => {
+    let bookedRanges = [];
+    let blocked;
+    
+    bookings.map(booking => {
+      bookedRanges = [...bookedRanges, 
+      moment.range(booking.startDate, booking.endDate)]
+     }
+    );
+  blocked = bookedRanges.find(range => range.contains(date));
+  return blocked;
+  };
+
+  console.log(startDate, endDate);
+
+const goToPaiement = () => {
+  if (startDate && endDate) {
+    setBookings([...bookings, {startDate, endDate}])
+    const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
+    dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
+    router.push(`/paiement/${product.slug}`)
+  } else {
+    setError('Veuillez renseigner des dates svp')
+  }
+}
+
+useEffect(() => {
+  if (startDate && endDate) {
+    const range =  moment.range(startDate, endDate)
+    const days = range.diff('days')+1;
+    if (days > 14) {
+      setPrice(((days-14)*0.05+1)*product.price*1.1+0.2)
+    } else if (days < 14) {
+      setPrice((1-((14-days)*0.05))*product.price*1.1+0.2)
+    } else {
+      setPrice(product.price*1.1+0.2)
+    }
+    setTime(`/${days} jours`)
+  }
+}, [startDate, endDate])
+
+
 
   return (
     <div className="productPage">
@@ -51,7 +116,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                 }
                 else {
                   return null;
-                }               
+                }
               })}
             </div>
           </div>
@@ -100,33 +165,36 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
           <div className="prices">
             <div className="mainContent">
               <div className="pricing">
-                <h2><span>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price)}</span> TTC </h2>
-                <div className="calendar">
-                  <div className="from">
-                    <img src="/calendar.svg" alt=""/>
-                    <div className="date">
-                      <p>DU</p>
-                      <p>16/03/21</p>
-                    </div>
-                  </div>
-                  <div className="to">
-                    <img src="/calendar.svg" alt=""/>
-                    <div className="date">
-                      <p>AU</p>
-                      <p>16/04/21</p>
-                    </div>
-                  </div>
-                </div>
-                <Link href={`/paiement/${product.slug}`}>
-                  <a>
-                    <button
-                      className="buttonRed button btnRent"
-                    >
-                      Louer la série
-                    </button>
-                  </a>
-                </Link>
-                <p className='btnInfo'>Vous ne serez pas encore débité</p>
+                <h2><span>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(price)}</span> TTC {time}</h2>
+                <DateRangePicker
+                  hideKeyboardShortcutsPanel
+                  navPrev={<img src="/chevronLeftS.svg" alt="" style={{left: "10px"}} />}
+                  navNext={<img src="/chevronRightS.svg" alt="" style={{right: "10px"}}/>}
+                  firstDayOfWeek={1}
+                  noBorder
+                  customInputIcon={<img src="/calendar.svg" alt=""/>}
+                  customArrowIcon={<img src="/lineSpace.svg" alt=""/>}
+                  startDatePlaceholderText={'Du'}
+                  endDatePlaceholderText={'au'}
+                  startDate={startDate} // momentPropTypes.momentObj or null,
+                  startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                  endDate={endDate} // momentPropTypes.momentObj or null,
+                  endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                  onDatesChange={({ startDate, endDate }) => {setStartDate(startDate); setEndDate(endDate);}} // PropTypes.func.isRequired,
+                  focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                  onFocusChange={focusedInput => setFocusedInput(focusedInput)} // PropTypes.func.isRequired,
+                  isDayBlocked={isBlocked}
+                  minimumNights={3}
+                  numberOfMonths={2}
+                />
+                <a onClick={() => goToPaiement()}>
+                  <button
+                    className="buttonRed button btnRent"
+                  >
+                    Louer la série
+                  </button>
+                </a>
+                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>Vous ne serez pas encore débité</p>)}
               </div>
               <div className="delivery">
                 <div className="deliveryElement">

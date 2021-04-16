@@ -10,9 +10,14 @@ import DropDown from "../elements/DropDown";
 import { getMangaCollection } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
+import Moment from 'moment';
+import 'moment/locale/fr'
+import { extendMoment } from 'moment-range';
+
 
 const Dashboard = ({ user, setTabs }) => {
 
+  const moment = extendMoment(Moment);
   
   const dispatch = useDispatch();
   const { session } = useSelector((state) => state);
@@ -143,7 +148,27 @@ const Dashboard = ({ user, setTabs }) => {
           </div>
         </div>
         <div className="right">
-          blabla
+          mes lectures : 
+          {user && user.commandes && user.commandes.map((commande) => {
+            return (
+              <div>
+                <p>Product id : {commande.product}</p>
+                <p>Prix total : {commande.priceTot}€</p>
+                <p>Dates : {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+              </div>
+            )
+          })}
+
+          mes trucs livrés : 
+          {user && user.ownerCommandes && user.ownerCommandes.map((commande) => {
+            return (
+              <div>
+                <p>Product id : {commande.product}</p>
+                <p>Prix total : {commande.priceTot}€</p>
+                <p>Dates : {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </>

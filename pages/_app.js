@@ -1,5 +1,6 @@
 import App from "next/app";
 import Head from "next/head";
+import 'react-dates/initialize';
 import Layout from "../components/Layout";
 import { getCategories } from "../utils/api";
 import "../styles/index.scss";

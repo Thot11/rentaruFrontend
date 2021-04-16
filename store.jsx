@@ -16,6 +16,11 @@ const initialState = {
   products : [],
   createdProduct: {},
   errorState: {},
+  rent: {
+    bookings: [],
+    startDate: '',
+    endDate: '',
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +55,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           errorState: action.payload,
         };
+      case 'paiementInfo':
+        return {
+          ...state,
+          rent: action.payload,
+        };
     default:
       return state;
   }
@@ -71,9 +81,12 @@ const setErrorAction = makeAction('errorState');
 
 
 const deleteSessionAction = makeAction('deleteSession');
+const paiementDataAction = makeAction('paiementInfo')
 
-export const getToken = () => {
-
+export const paiementData = (bookings, startDate, endDate) => {
+  return (dispatch) => {
+    dispatch(paiementDataAction({bookings, startDate, endDate}));
+  }
 }
 
 

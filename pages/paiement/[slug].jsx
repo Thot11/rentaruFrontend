@@ -3,7 +3,11 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { getProducts, getProduct } from "../../utils/api";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, getProduct, postCommande, updateProduct } from "../../utils/api";
+import Moment from 'moment';
+import 'moment/locale/fr'
+import { extendMoment } from 'moment-range';
 import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
 import Link from "next/link";
@@ -16,9 +20,14 @@ const PaiementPage = ({ product }) => {
     return <div>Loading product...</div>;
   }
 
+  const moment = extendMoment(Moment);
+
+  const { rent, user, session } = useSelector((state) => state);
+
   const [delivery, setDelivery] = useState('Remise en main propre');
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cglAccepted, setCglAccepted] = useState(false);
+  const [price, setPrice] = useState(product.price)
 
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
@@ -32,6 +41,31 @@ const PaiementPage = ({ product }) => {
     }
   },[delivery])
 
+  const go = () => {
+    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, product.price, product.price*1.1+0.2, deliveryPrice, 'handToHand', session).then((resp) => {
+      updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
+    })
+  }
+
+  const goBack = () => {
+    router.push(`/products/${product.slug}`)
+  }
+
+  useEffect(() => {
+    if (rent.startDate && rent.endDate) {
+      const range =  moment.range(rent.startDate, rent.endDate)
+      const days = range.diff('days')+1;
+      if (days > 14) {
+        setPrice(((days-14)*0.05+1)*product.price)
+      } else if (days < 14) {
+        setPrice((1-((14-days)*0.05))*product.price)
+      } else {
+        setPrice(product.price*1.1+0.2)
+      }
+    }
+  }, [rent.startDate, rent.endDate])
+
+
   return (
     <div className="paiementPage">
       
@@ -40,7 +74,7 @@ const PaiementPage = ({ product }) => {
       </Head>
       <div className="leftContent">
         <div className="title">
-          <img src="/bigArrow.svg" alt="arrow"/>
+          <img src="/bigArrow.svg" alt="arrow" onClick={goBack}/>
           <h2>Confirmez et payez</h2>
         </div>
         <div className="rentInfo">
@@ -48,9 +82,9 @@ const PaiementPage = ({ product }) => {
           <div className="date">
             <div className="headerDate">
               <p className="label">Dates</p>
-              <button className="editBtn">Modifier</button>
+              <button className="editBtn" onClick={goBack}>Modifier</button>
             </div>
-            <p className="dateNumber">15-30 mars</p>
+            <p className="dateNumber">{moment(rent.startDate).format('Do MMMM')}-{moment(rent.endDate).format('Do MMMM')}</p>
           </div>
           <div className="prices">
             <div className="price">
@@ -114,11 +148,11 @@ const PaiementPage = ({ product }) => {
             <p className="subtitle">Détails du prix</p>
             <div className="price">
               <p>Comission collectionneur</p>
-              <p>{product.price - 2},00€</p>
+              <p>{price}€</p>
             </div>
             <div className="price">
               <p>Frais de service</p>
-              <p>2,00€</p>
+              <p>{price*0.1+0.2}€</p>
             </div>
             <div className="price">
               <p>{delivery}</p>
@@ -126,7 +160,7 @@ const PaiementPage = ({ product }) => {
             </div>
             <div className="priceTotal">
               <p>Total (EUR)</p>
-              <p>{product.price + deliveryPrice},00€</p>
+              <p>{price*1.1+0.2 + deliveryPrice}€</p>
             </div>
           </div>
         </div>
@@ -144,7 +178,7 @@ const PaiementPage = ({ product }) => {
           <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
           <p>En cochant cette case vous acceptez les CGL</p>
         </div>
-        <button className='button buttonRed btnPay'>Valider et payer</button>
+        <button className='button buttonRed btnPay' onClick={go}>Valider et payer</button>
       </div>
     </div>
   );
