@@ -6,9 +6,9 @@ import {updateMe, updatePP} from '../store'
 
 import Button from "../elements/Button";
 import CheckBox from "../elements/CheckBox";
-import DropDown from "../elements/DropDown";
-import { getMangaCollection } from "../utils/api";
+import { getCommandesById } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
+import Dropdown from "./dropdown"
 
 import Moment from 'moment';
 import 'moment/locale/fr'
@@ -27,6 +27,9 @@ const Dashboard = ({ user, setTabs }) => {
   const [phoneChecked, setPhoneChecked] = useState()
   const [mailChecked, setMailChecked] = useState()
   const [idChecked, setIdChecked] = useState()
+  const [selectedCommandes, setSelectedCommandes] = useState(0)
+  const [lastCommandes, setLastCommandes] =  useState([])
+  const [myLastCommandes, setMyLastCommandes] =  useState([])
 
   const [memberSince, setMemberSince] = useState('');
 
@@ -63,6 +66,32 @@ const Dashboard = ({ user, setTabs }) => {
       updateInfo({relaiColis})
     }
   }, [relaiColis])
+
+  useEffect(() => {
+    if (user.commandes) {
+      let commandesId = []
+      user.commandes.reverse().slice(0,2).forEach((commande, index) => {
+        if (index === 0 ) commandesId.push('id_in=' + commande.id)
+        else commandesId.push('&id_in=' + commande.id)
+      })
+      getCommandesById(commandesId, session).then((resp) => {
+        setLastCommandes(resp)
+      })
+    }
+  }, [user.commandes])
+
+  useEffect(() => {
+    if (user.ownerCommandes) {
+      let commandesId = []
+      user.ownerCommandes.reverse().slice(0,2).forEach((commande, index) => {
+        if (index === 0 ) commandesId.push('id_in=' + commande.id)
+        else commandesId.push('&id_in=' + commande.id)
+      })
+      getCommandesById(commandesId, session).then((resp) => {
+        setMyLastCommandes(resp)
+      })
+    }
+  }, [user.ownerCommandes])
 
 
   return (
@@ -148,27 +177,52 @@ const Dashboard = ({ user, setTabs }) => {
           </div>
         </div>
         <div className="right">
-          mes lectures : 
-          {user && user.commandes && user.commandes.map((commande) => {
-            return (
-              <div>
-                <p>Product id : {commande.product}</p>
-                <p>Prix total : {commande.priceTot}€</p>
-                <p>Dates : {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
-              </div>
-            )
-          })}
-
-          mes trucs livrés : 
-          {user && user.ownerCommandes && user.ownerCommandes.map((commande) => {
-            return (
-              <div>
-                <p>Product id : {commande.product}</p>
-                <p>Prix total : {commande.priceTot}€</p>
-                <p>Dates : {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
-              </div>
-            )
-          })}
+          <div className="topBox">
+            <div className="title">
+              Dernières commandes effectuées
+            </div>
+            <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} />
+          </div>
+          <div className="commandesContainer">
+            {selectedCommandes === 0 && lastCommandes.map((commande) => {
+              const range =  moment.range(commande.startDate, commande.endDate)
+              const now = range.contains(moment())
+              return (
+                <div className="commande">
+                  <img src={commande.product.imageCover.formats.thumbnail.url} alt=""/>
+                  <div className="middle">
+                    <div className="up">
+                      <div>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div>{commande.owner.username} | {commande.owner.ville}  ({commande.owner.departement})</div>
+                    </div>
+                    <div className="down">
+                      <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
+                      <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+            {selectedCommandes === 1 && myLastCommandes.map((commande) => {
+              const range =  moment.range(commande.startDate, commande.endDate)
+              const now = range.contains(moment())
+              return (
+                <div className="commande">
+                  <img src={commande.product.imageCover.formats.thumbnail.url} alt=""/>
+                  <div className="middle">
+                    <div className="up">
+                      <div>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div>{commande.owner.username} | {commande.owner.ville}  ({commande.owner.departement})</div>
+                    </div>
+                    <div className="down">
+                      <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
+                      <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </>

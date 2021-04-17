@@ -64,6 +64,13 @@ export async function getProductsByCategory(categories) {
   return products;
 }
 
+export async function getCommandesById(commandes, token) {
+  const query = commandes.join('')
+  const commandesFiltered = await fetchAPI(`/commandes?${query}&token=${token}`);
+  return commandesFiltered;
+}
+
+
 export async function getProductsByTitle(title) {
   const products = await fetchAPI(`/products?title=${title}`);
   return products;

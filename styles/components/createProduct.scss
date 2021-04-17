@@ -3,8 +3,10 @@
 
 .createProductContainer {
   position: relative;
-  overflow: hidden;
-  margin: 88px 239px 88px 171px;
+  // overflow: hidden;
+  width: 1280px;
+  margin: 88px auto;
+  // margin: 88px 239px 88px 171px;
   user-select: none;
 
   .topContainer {

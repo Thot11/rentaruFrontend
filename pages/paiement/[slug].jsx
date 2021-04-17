@@ -148,19 +148,19 @@ const PaiementPage = ({ product }) => {
             <p className="subtitle">Détails du prix</p>
             <div className="price">
               <p>Comission collectionneur</p>
-              <p>{price}€</p>
+              <p>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(price)}</p>
             </div>
             <div className="price">
               <p>Frais de service</p>
-              <p>{price*0.1+0.2}€</p>
+              <p>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(price*0.1+0.2)}</p>
             </div>
             <div className="price">
               <p>{delivery}</p>
-              <p>{deliveryPrice},00€</p>
+              <p>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(deliveryPrice)}</p>
             </div>
             <div className="priceTotal">
               <p>Total (EUR)</p>
-              <p>{price*1.1+0.2 + deliveryPrice}€</p>
+              <p>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(price*1.1+0.2 + deliveryPrice)}</p>
             </div>
           </div>
         </div>
