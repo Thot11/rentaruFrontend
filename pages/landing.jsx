@@ -14,10 +14,11 @@ const Landing = ({landing}) => {
       </Head>
       <div className="landingContainer">
         <div className="header">
-          <img src="/headerBackground.png" alt="background" className='background'/>
+          <img src="/headerBackground2.png" alt="background" className='background'/>
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
         </div>
+        <h2 className="h1">Comment marche la location de manga?</h2>
         <div className="collectorPart">
           <h2>{landing.titleCollector} </h2>
           <p className="explanation">{landing.explanationCollector}</p>
