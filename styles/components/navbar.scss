@@ -84,6 +84,7 @@
       }
 
       .profilPic {
+        object-fit: cover;
         margin-right: 0;
         width: 34px;
         max-width: 33px;
@@ -166,47 +167,9 @@
           }
         }
 
-
       }
 
     }
-  
-    // .btnLogIn {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   width: 159px;
-    //   height: 28px;
-    //   margin-right: 6px;
-    //   color: #F5F6F7;
-    //   font-size: 12px;
-    //   border: 1px solid #F5F6F7;
-    //   border-radius: 3px;
-    // }
-  
-    // .btnAd {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   width: 191px;
-    //   height: 28px;
-    //   color: black;
-    //   font-size: 12px;
-    //   background-color: #F5F6F7;
-    //   border-radius: 3px;
-    //   margin-right: 7px;
-    // }
-
-    // .help {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   width: 25px;
-    //   height: 25px;
-    //   color: white;
-    //   border: 1px solid white;
-    //   border-radius: 50%;
-    // }
   }
 
   .secondaryHeader {
