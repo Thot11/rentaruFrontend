@@ -70,7 +70,7 @@ const Dashboard = ({ user, setTabs }) => {
   useEffect(() => {
     if (user.commandes) {
       let commandesId = []
-      user.commandes.reverse().slice(0,2).forEach((commande, index) => {
+      user.commandes.reverse().slice(0,3).forEach((commande, index) => {
         if (index === 0 ) commandesId.push('id_in=' + commande.id)
         else commandesId.push('&id_in=' + commande.id)
       })
@@ -193,7 +193,7 @@ const Dashboard = ({ user, setTabs }) => {
                   <div className="middle">
                     <div className="up">
                       <div>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
-                      <div>{commande.owner.username} | {commande.owner.ville}  ({commande.owner.departement})</div>
+                      <div><span>{commande.owner.username}</span>&nbsp; | {commande.owner.ville}  ({commande.owner.departement})</div>
                     </div>
                     <div className="down">
                       <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
@@ -212,7 +212,7 @@ const Dashboard = ({ user, setTabs }) => {
                   <div className="middle">
                     <div className="up">
                       <div>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
-                      <div>{commande.not_owner.username} | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
+                      <div><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
                     </div>
                     <div className="down">
                       <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
