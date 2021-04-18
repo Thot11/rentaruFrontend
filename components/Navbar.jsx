@@ -70,7 +70,7 @@ const Navbar = () => {
           <Link href="/">
             <a>
               <img
-                src="/logo.png"
+                src="/logo.svg"
                 alt="home"
                 className="logo"
               />
@@ -78,7 +78,7 @@ const Navbar = () => {
           </Link>
           {router.route !== "/search" &&
           <div className='search'>
-            <img src="/search.png" alt="Search" />
+            <img src="/search.svg" alt="Search" />
             <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
           </div>}
           <div className="right">

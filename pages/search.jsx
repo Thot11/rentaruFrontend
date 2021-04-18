@@ -58,7 +58,7 @@ const SearchPage = ({ products }) => {
         <div className="searchWrapper">
           <div className="searchHeader">
             <div className='search'>
-              <img src="/search.png" alt="Search" />
+              <img src="/search.svg" alt="Search" />
               <input placeholder="Rechercher un manga, un auteur, un genre" value={elementSearched} onChange={(e) => setElementSearched(e.target.value)} />
             </div>
             <div className="filterBy">
