@@ -1,37 +1,101 @@
 .landingContainer {
   .header {
     position: relative;
-    padding: 67px 0 0 calc((100% - 1280px)/2);
+    // padding: 67px 0 0 calc((100% - 1280px)/2);
     height: 472px;
     overflow: hidden;
 
-    .background {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      z-index: -1;
-      width: 100%;
-      object-fit: contain;
+    @media only screen and (min-width: 1900px) {
+      height: 500px;
     }
 
+    @media only screen and (min-width: 2000px) {
+      height: 650px;
+    }
+
+    .back {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      z-index: -1;
+      overflow:hidden;
+
+      .background {
+        top: 0;
+        right: 0;
+        z-index: 0;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .substract {
+        margin-top: -50px;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      
+            @media only screen and (min-width: 1370px) {
+              .background {
+                height: 370px;
+              }
+      
+              .substract {
+                margin-top: -50px;
+              }
+            }
+            
+            @media only screen and (min-width: 1500px) {
+              .background {
+                height: 400px;
+              }
+              
+              .substract {
+                margin-top: -70px;
+              }
+            }
+
+            @media only screen and (min-width: 2000px) {
+              .background {
+                height: 520px;
+              }
+      
+              .substract {
+                margin-top: -90px;
+              }
+            }
+          }
+
+
     h1 {
-      width: 579px;
-      margin-bottom: 22px;
+      position: absolute;
+      top: 70px;
+      width: 650px;
+      left: calc((100% - 1280px)/2);
       color: color(primary);
-      font-size: 40px;
+      font-size: 45px;
       font-weight: 400;
+
     }
 
     .subtitle {
-      width: 401px;
+      position: absolute;
+      top: 230px;
+      left: calc((100% - 1280px)/2);
+      width: 770px;
       font-weight: 300;
-      font-size: 22px;
+      font-size: 31px;
       color: color(primary);
     }
   }
 
   .h1 {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-left: calc((100% - 1280px)/2);
   }
 
@@ -104,12 +168,39 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      margin-top: 29px;
+      margin-top: 50px;
+
+      button {
+        width: 220px;
+        font-size: 16px;
+      }
     }
   }
 
   .collectorPart {
     margin-top: 30px;
+  }
+
+  .readerPart {
+    position: relative;
+    margin-top: 115px;
+    padding-bottom: 50px;
+    background-color: color(primary-300);
+
+    .separation {
+      position: absolute;
+      width: 100%;
+    }
+
+    .separation1 {
+      top: -50px;
+      left: 0;
+    }
+
+    .separation2 {
+      bottom: -50px;
+      left: 0;
+    }
   }
 
   .footer {
