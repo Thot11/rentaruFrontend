@@ -4,7 +4,6 @@
   .mainContent {
     display: flex;
     justify-content: space-between;
-    padding-right: 10px;
 
     .leftContent {
       width: 100%;
@@ -22,7 +21,7 @@
         }
         
         .bigImage {
-          width: 420px;
+          width: 70%;
           height: 269px;
           object-fit: cover;
           margin-right: 9px;
@@ -36,7 +35,7 @@
           display: flex;
           flex-direction: column;
           img {
-            width: 199px;
+            width: 100%;
             height: 127px;
             object-fit: cover;
   
@@ -127,30 +126,6 @@
               }
             }            
           }
-        }
-      }
-
-      .descriptionContainer {
-        width: 100%;
-        margin-top: 34px;
-        padding-right: 10px;
-
-        .title {
-          color: color(secondary, 0.4);
-          font-size: 10px;
-          line-height: 143.5%;
-          margin-bottom: 6px;
-        }
-
-        .description {
-          width: 100%;
-          height: 233px;
-          padding: 9px;
-          font-weight: 200;
-          font-size: 12px;
-          line-height: 14px;
-          background-color: color(dark);
-          border-radius: 3px;
         }
       }
     }
@@ -309,7 +284,6 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 27px;
         padding: 10px 13px 15px 14px;
         background-color: color(dark);
 
@@ -364,12 +338,43 @@
         }
         
       }
+    }
+  }
 
-      .adImg {
+  .descriptionContent {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 27px;
+
+    .descriptionContainer {
+      width: 831px;
+      padding-right: 10px;
+
+      .title {
+        color: color(secondary, 0.4);
+        font-size: 10px;
+        line-height: 143.5%;
+        margin-bottom: 6px;
+      }
+
+      .description {
         width: 100%;
-        height: 246px;
+        height: 233px;
+        padding: 9px;
+        font-weight: 200;
+        font-size: 12px;
+        line-height: 14px;
+        background-color: color(dark);
+        border-radius: 3px;
       }
     }
+
+    .adImg {
+      width: 439px;
+      height: 252px;
+    }
+
+
   }
 
   .moreContent {
@@ -389,6 +394,166 @@
         row-gap: 30px;
         padding-left: calc((100% - 1280px)/2);
         padding-right: calc((100% - 1280px)/2);
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .productPage {
+    padding: 0 20px;
+
+    .mainContent {
+      flex-direction: column;
+
+      .leftContent {
+        margin-bottom: 14px;
+
+        .images {
+          width: 100%;
+          height: auto;
+          display: block;
+
+          .mobileImages {
+            position: relative;
+            width: 100vw;
+            height: 269px;
+            margin-left: -20px;
+            overflow: hidden;
+  
+            .mobileImage {
+              position: absolute;
+              top: 0;
+              left: -100%;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition-duration: 0.3s;
+            }
+
+            .mobileImageFirst {
+              left: 0;
+            }
+
+            .leftArrow,
+            .rightArrow {
+              position: absolute;
+              top: 120px;
+              z-index: 50;
+              width: 7px;
+              height: 14px;
+            }
+
+            .rightArrow {
+              left: calc(100% - 21px);
+            }
+
+            .leftArrow {
+              transform: rotate(180deg);
+              left: 21px;
+            }
+          }
+
+        }
+
+        .info {
+          .titleInfo {
+            .title {
+              margin-bottom: 7px; 
+              font-size: 15px;
+              font-weight: 350;
+            }
+
+            .tome {
+              font-size: 12px;
+              font-weight: 350;
+            }
+
+            .stars {
+              margin-top: 4px;
+            }
+          }
+        }
+      }
+
+      .rightContent {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+
+        .collectorInfo {
+          margin-bottom: 5px;
+
+          .imgMessage {
+            transform: rotate(180deg);
+          }
+        }
+
+        .prices {
+          margin-bottom: 0;
+
+          .mainContent {
+            width: 65%;
+
+            .pricing {
+              width: 100%;
+              h2 {
+                font-size: 12px;
+                span {
+                  font-size: 22px;
+                  margin-right: 3px;
+                }
+              }
+
+              .DateRangePicker {
+                width: 100%;
+                height: fit-content;
+
+                .DateRangePickerInput {
+                  background: #364E5F !important;
+                  .DateInput {
+                    width: 80px!important;
+
+                    .DateInput_input {
+                      font-size: 10px!important;
+                      width: 80px!important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .otherPrice {
+            width: calc(35% - 5px);
+
+            .priceContainer {
+              width: 100%;
+            }
+          }
+
+        }
+      }
+    }
+
+    .descriptionContent {
+      width: 100%;
+
+      .descriptionContainer {
+        width: 100%;
+        padding-right: 0;
+
+        .description {
+          height: 147px;
+        }
+      }
+    }
+
+    .moreContent {
+      .sameManga {
+        h2 {
+          font-size: 14px;
+        }
       }
     }
   }
