@@ -31,6 +31,10 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
 
   const refCards = useRef(null);
 
+  const refSliderImgVisible = useRef(null);
+
+  const [windowWidth, setWindowWidth] = useState(1281);
+
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [focusedInput, setFocusedInput] = useState()
@@ -38,6 +42,8 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   const [price, setPrice] = useState(product.price*1.1+0.2)
   const [time, setTime] = useState('/2 semaines')
   const [error, setError] = useState(false)
+
+  const [sliderImageVisible, setSliderImageVisible] = useState(0);
 
   const isBlocked = date => {
     let bookedRanges = [];
@@ -52,32 +58,57 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   return blocked;
   };
 
-const goToPaiement = () => {
-  if (startDate && endDate) {
-    setBookings([...bookings, {startDate, endDate}])
-    const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
-    dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
-    router.push(`/paiement/${product.slug}`)
-  } else {
-    setError('Veuillez renseigner des dates svp')
-  }
-}
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
 
-useEffect(() => {
-  if (startDate && endDate) {
-    const range =  moment.range(startDate, endDate)
-    const days = range.diff('days')+1;
-    if (days > 14) {
-      setPrice(((days-14)*0.05+1)*product.price*1.1+0.2)
-    } else if (days < 14) {
-      setPrice((1-((14-days)*0.05))*product.price*1.1+0.2)
-    } else {
-      setPrice(product.price*1.1+0.2)
+  useEffect(() => {
+    if (startDate && endDate) {
+      const range =  moment.range(startDate, endDate)
+      const days = range.diff('days')+1;
+      if (days > 14) {
+        setPrice(((days-14)*0.05+1)*product.price*1.1+0.2)
+      } else if (days < 14) {
+        setPrice((1-((14-days)*0.05))*product.price*1.1+0.2)
+      } else {
+        setPrice(product.price*1.1+0.2)
+      }
+      setTime(`/${days} jours`)
     }
-    setTime(`/${days} jours`)
-  }
-}, [startDate, endDate])
+  }, [startDate, endDate])
 
+  useEffect(() => {
+    if(refSliderImgVisible.current) {
+      refSliderImgVisible.current.style.left = "0px";
+    }
+  }, [sliderImageVisible])
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+  const goToPaiement = () => {
+    if (startDate && endDate) {
+      setBookings([...bookings, {startDate, endDate}])
+      const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
+      dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
+      router.push(`/paiement/${product.slug}`)
+    } else {
+      setError('Veuillez renseigner des dates svp')
+    }
+  }
+
+  const handleSliderMovement = (sens) => {
+    if(sens === 'left' && refSliderImgVisible.current) {
+      refSliderImgVisible.current.style.left = "-100%";
+      setSliderImageVisible(sliderImageVisible - 1);
+    }
+    if(sens === 'right' && refSliderImgVisible.current) {
+      refSliderImgVisible.current.style.left = "100%";
+      setSliderImageVisible(sliderImageVisible + 1);
+    }
+  }
 
 
   return (
@@ -95,13 +126,35 @@ useEffect(() => {
                 Intégrale
               </div>
             }
-            {product.images &&
+            {windowWidth < 600 &&
+              <div className="mobileImages">
+                {sliderImageVisible !== 0 && <img onClick={() => handleSliderMovement('left')} src="/sliderArrow.svg" alt="arrow" className="leftArrow"/>}
+                {product.images && product.images.map((image, index) => {
+                  if(index < 3) {
+                    return (
+                      <img
+                        ref={sliderImageVisible === index ? refSliderImgVisible : null}
+                        className={index === 0 ? 'mobileImage mobileImageFirst' : 'mobileImage'}
+                        src={getStrapiMedia(image.url)}
+                        alt={image.alternativeText}
+                      />
+                    )
+                  }
+                  else {
+                    return null;
+                  }
+                })}
+                {sliderImageVisible < product.images.length - 1 && <img onClick={() => handleSliderMovement('right')} src="/sliderArrow.svg" alt="arrow" className="rightArrow"/>}
+              </div>
+            } 
+            {product.images && windowWidth >= 600 &&
             <img
               className={product.images.length > 1 ? 'bigImage' : 'bigImage bigImageAlone'}
               src={getStrapiMedia(product.images[0].url)}
               alt={product.images[0].alternativeText}
             />
             }
+            {windowWidth >= 600 &&
             <div className={product.images.length > 2 ? "otherImg" : "otherImg otherImgAlone"}>
               {product.images && product.images.map((image, index) => {
                 if(index !== 0 && index < 3) {
@@ -117,6 +170,7 @@ useEffect(() => {
                 }
               })}
             </div>
+            }
           </div>
           <div className="info">
             <div className="titleInfo">
@@ -136,7 +190,7 @@ useEffect(() => {
                   )                    
                 })}
               </div>
-              <button>Voir tous les avis</button>
+              {windowWidth >= 600 && <button>Voir tous les avis</button> }
             </div>
             <div className="actions">
               <div className="like">
@@ -149,12 +203,6 @@ useEffect(() => {
               <div className="share">
                 <img src="/Share.png" alt="Search" className='backgroundLike'/>
               </div>
-            </div>
-          </div>
-          <div className="descriptionContainer">
-            <p className='title'>Description</p>
-            <div className="description">
-              {product.description}
             </div>
           </div>
         </div>
@@ -235,11 +283,22 @@ useEffect(() => {
                 </div>
               </div>
             </div>
-            <button className={'button buttonWhite'}>Envoyer un message</button>
-          </div>        
-          <img className='adImg' src="/pub.jpg" alt="pub"/>
+            {windowWidth >= 600 && <button className={'button buttonWhite'}>Envoyer un message</button>}
+            {windowWidth < 600 && <img className='imgMessage' src='/bigArrow.svg' alt='arrow'/>}
+          </div>    
         </div>     
       </div>
+
+      <div className="descriptionContent">
+        <div className="descriptionContainer">
+          <p className='title'>Description</p>
+          <div className="description">
+            {product.description}
+          </div>
+        </div>    
+        {windowWidth >= 600 && <img className='adImg' src="/pub.jpg" alt="pub"/> }
+      </div>
+
       <div className="moreContent">
         <div className="sameManga">
           <h2>Les autres collections {product.title}</h2>          
