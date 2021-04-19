@@ -138,7 +138,7 @@ const Navbar = () => {
         <a href="/" className="navElement">Catégories</a>
         <a href="/landing" className="navElement">Comment ça marche ?</a>
         <a href="/" className="navElement">FAQ</a>
-        <a href="/" className="navElement">A propos</a>
+        <a href="/about" className="navElement">A propos</a>
       </div>
     </div>
   );

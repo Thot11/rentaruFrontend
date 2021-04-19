@@ -45,6 +45,11 @@ export async function getLandingPage() {
   return landing;
 }
 
+export async function getAboutPage() {
+  const about = await fetchAPI("/about");
+  return about;
+}
+
 export async function getProduct(slug) {
   const products = await fetchAPI(`/products?slug=${slug}`);
   return products?.[0];
