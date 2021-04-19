@@ -14,7 +14,10 @@ const Landing = ({landing}) => {
       </Head>
       <div className="landingContainer">
         <div className="header">
-          <img src="/headerBackground2.png" alt="background" className='background'/>
+          <div className="back">
+            <img src="/headerBackground3.png" alt="background" className='background'/>
+            <img src="/substract.png" alt="background" className='substract'/>
+          </div>
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
         </div>
@@ -43,6 +46,8 @@ const Landing = ({landing}) => {
           </div>
         </div>
         <div className="readerPart">
+          <img src="separation1.png" alt="" className="separation separation1" />
+          <img src="separation2.png" alt="" className="separation separation2" />
           <h2>{landing.titleReader} </h2>
           <p className="explanation">{landing.explanationReader}</p>
           <p className="tips">{landing.tipsReader}</p>
