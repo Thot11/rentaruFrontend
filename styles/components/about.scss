@@ -17,7 +17,7 @@
         background: linear-gradient(#c4c4c4 5%, #000 );
         opacity: 0.5;
       }
-      
+
       .background {
         width: 100%;
         background-color: linear-gradient;
@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 60px;
+    margin-top: 80px;
 
     .story {
       width: 725px;
@@ -99,7 +99,9 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 146px;
-    padding-left: calc((100% - 1280px)/2);
+    margin-left: calc((100% - 1280px)/2);
+    margin-right:calc((100% - 1280px)/2);
+    overflow: hidden;
 
 
     .text {
@@ -128,8 +130,6 @@
 
   
   .engagementBullshitContainer {
-    padding-left: 0;
-    padding-right: calc((100% - 1280px)/2);
 
     .text {
       width: 593px;
