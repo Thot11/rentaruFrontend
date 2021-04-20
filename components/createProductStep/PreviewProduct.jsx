@@ -20,7 +20,7 @@ const PreviewProduct = ({ data, user }) => {
               <div className="picture">
                 <img src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
               </div>
-              <div>
+              <div className="collectorInfo">
                 <p className="name">{user.username}</p>
                 <div className="stars">
                   {
@@ -37,7 +37,8 @@ const PreviewProduct = ({ data, user }) => {
             </a>
             {data.price && (
                <div className="price">
-              {data.price}€
+              {data.price}€ 
+              <span>/2 semaines</span>
             </div>
             )}
           </div>

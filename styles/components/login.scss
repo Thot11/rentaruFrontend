@@ -100,3 +100,25 @@
     }
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .loginContainer {
+
+    .background {
+      top: -84px;
+      right: -107px;
+    }
+
+    h2 {
+      color: color(primary);
+      font-size: 16px;
+      margin-left: 20px;
+      margin-bottom: 25px;
+    }
+
+    .loginWrapper{
+      margin: auto 20px;
+      border: 0px;
+    }
+  }
+}
