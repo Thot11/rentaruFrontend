@@ -119,7 +119,7 @@ const Footer = () => {
           <a href="https://www.instagram.com/rentaru.france/?hl=fr" className="linkElement">
             <img src="/insta.svg" alt="insta"/> 
           </a>
-          <a href="https://discord.gg/VJmCrVPNA4" className="linkElement">
+          <a href="https://twitter.com/FranceRentaru" className="linkElement">
             <img src="/twitter2.svg" alt="twitter"/> 
           </a>
         </div>
