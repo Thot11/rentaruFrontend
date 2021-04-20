@@ -181,6 +181,10 @@
     }
   }
 
+  .subHeaderMobile {
+    display: none;
+  }
+
   .secondaryHeader {
     display: flex;
     align-items: center;
@@ -200,8 +204,15 @@
   }
 
   @media only screen and (max-width: 700px) {
+
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    width: 100%;
+  
     .mainHeader {
       height: 65px;
+      background-color: color(primary);
 
       .searchMobile {
         display: block;
@@ -301,16 +312,26 @@
     }
 
     .subHeaderMobile {
+      position: fixed;
+      z-index: -1;
       display: flex;
       flex-direction: column;
       padding-left: 20px;
       padding-right: 20px;
       padding-top: 20px;
       width: 100%;
-      height: calc(100vh - 65px);
+      top: -110vh;
+      height: 100vh;
+      transition: all .7s ease-in;
+      background-color: color(dark);
+
+      &.open {
+        top: 65px;
+      }
 
       button {
         width: 100%;
+        margin-bottom:10px;
       }
 
       .searchBar {
@@ -345,12 +366,89 @@
       .subTitle {
         color: color(A1A7AC);
         font-size: 10px;
-        margin-top: 18px;
+        margin-top: 8px;
+        margin-bottom: 10px;
       }
 
-      img {
-        width: 20px;
+      .subTitle2 {
+        margin-top: 30px;
+        margin-bottom: 0px;
       }
+
+      .openContext {
+        width: calc(100% + 40px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        border-bottom: .5px solid color(secondary, 0.3);
+
+        .dropdown {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          width: 30%;
+          height: 30px;
+
+          svg {
+            transition: .3s all ease;
+          }
+
+          &.open {
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+        
+        a {
+          display: inline-flex;
+          align-items: center;
+        }
+
+        img {
+          width: 30px;
+          height: 30px;
+          margin-right: 20px;
+          border-radius: 50px;
+          object-fit: cover;
+        }
+      }
+
+      .contextMenu {
+        display: none;
+        
+        a {
+          padding-left: 40px;
+        }
+
+        &.open {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .elementMobile {
+        width: calc(100% + 40px);
+        display: inline-flex;
+        align-items: center;
+        margin-left: -20px;
+        margin-top: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        border-bottom: .5px solid color(secondary, 0.3);
+
+        img {
+          max-width: 30px;
+          max-height: 30px;
+          margin-right: 20px;
+        }
+      }
+
     }
 
 
