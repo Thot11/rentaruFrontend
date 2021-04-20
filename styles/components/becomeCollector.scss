@@ -1,6 +1,6 @@
 .becomeCollectorContainer {
-
   padding-bottom: 100px;
+
   .banner {
     position: relative;
     width: 100%;
@@ -118,7 +118,7 @@
     width: 100%;
     height: 364px;
     padding: 0 calc((100% - 1280px)/2);
-    background-color: color(dark);
+    background-color: color(primary-300);
 
     .citation {
       display: flex;
@@ -163,5 +163,203 @@
         }
       }
     }
+  }
+
+  .simulator {
+    margin-top: 95px;
+    padding: 0 calc((100% - 1280px)/2);
+
+    h3 {
+      font-size: 26px;
+    }
+
+    .simulatorWarning {
+      margin-top: 11px;
+      font-size: 16px;
+      font-weight: 325;
+    }
+
+    .simulatorWrapper {
+      width: 100%;
+      margin-top: 54px;
+      padding: 33px 41px 60px 41px;
+      background-color: color(primary-300);
+
+      h4 {
+        margin-bottom: 57px;
+        font-size: 18px;
+        font-weight: 350;
+      }
+
+      .inputContainer {
+        display: flex;
+        align-items: center;
+        margin-bottom: 43px;
+
+        &:first-child {
+          margin-bottom: 50px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .label {
+          color: color(secondaryText);
+          font-size: 16px;
+          font-weight: 325;
+          margin-right: 31px;
+
+          &.labelBis {
+            width: 275px;
+          }
+        }
+
+        input {
+          width: 50px;
+          height: 30px;
+          padding: 5px 10px;
+          background-color: color(dark);
+          border-radius: 3px;
+        }
+      }
+
+      .teasing {
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      .price {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .becomeCollectorContainer {
+    margin-top: 67px;
+    padding-bottom: 50px;
+
+    .banner {
+      height: 270px;
+
+      .substract {
+        bottom: -1px;
+      }
+
+      .hero {
+        width: 317px;
+        height: 200px;
+        top: 27px;
+        left: 20px;
+
+        h1 {
+          font-size: 22px;
+          line-height: normal;
+        }
+
+        p {
+          font-size: 14px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+
+    .container {
+
+      .h1 {
+        margin-bottom: 40px;
+      }
+
+      .arguments {
+        margin-bottom: 40px;
+        padding: 0 20px;
+        .argument {
+          flex-direction: column;
+          margin-bottom: 40px;
+  
+          .argumentText {
+            width: 100%;
+            height: auto;
+            padding: 20px;
+
+            h3 {
+              font-size: 18px;
+              margin-bottom: 20px;
+            }
+
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+
+    .citations {
+      height: auto;
+      padding: 20px 0;
+      .citation {
+        flex-direction: column;
+        padding: 0 20px;
+
+        img {
+          margin-bottom: 20px;
+          margin-right: 0;
+        }
+
+        .text {
+          width: 100%;
+
+          .quote {
+            font-size: 70px;
+          }
+
+          .citationText {
+            font-size: 20px;
+            line-height: 25px;
+          }
+
+          p {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .simulator {
+      padding: 0 20px;
+
+      h3 {
+        font-size: 20px;
+        line-height: 25px;
+        margin-bottom: 30px;
+      }
+
+      .simulatorWarning {
+        line-height: 23px;
+      }
+
+      .simulatorWrapper {
+        padding: 30px 20px;
+
+        h4 {
+          margin-bottom: 30px;
+        }
+
+        .inputContainer {
+          .label {
+            font-size: 12px;
+          }
+        }
+
+        .teasing {
+          font-size: 14px;
+        }
+      }
+    }
+
+
   }
 }
