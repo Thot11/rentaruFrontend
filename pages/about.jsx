@@ -6,7 +6,6 @@ import { getAboutPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
 const About = ({about}) => {
-  console.log(about)
   return (
     <div>
       <Head>

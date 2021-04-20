@@ -110,8 +110,6 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     }
   }
 
-  console.log(productsTitle)
-
   return (
     <div className="productPage">
       
