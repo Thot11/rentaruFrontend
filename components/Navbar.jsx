@@ -73,7 +73,7 @@ const Navbar = () => {
         <div className="mainWrapper">
           <img src="/searchMobile.svg" alt="search mobile" className="searchMobile" onClick={() => setOpenBurger(true)}/>
           <Link href="/">
-            <a onClick={() => setOpenBurger(!openBurger)}>
+            <a onClick={() => setOpenBurger(false)}>
               <img
                 src="/logo.svg"
                 alt="home"
@@ -225,17 +225,17 @@ const Navbar = () => {
               Catégories
             </a>
           </Link>
-          <Link href="/wishList">
+          <Link href="/landing">
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               Comment ça marche ? 
             </a>
           </Link>
-          <Link href="/wishList">
+          <Link href="/">
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               FAQ
             </a>
           </Link>
-          <Link href="/wishList">
+          <Link href="/about">
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               À propos
             </a>

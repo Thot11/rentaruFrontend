@@ -8,10 +8,17 @@
     overflow: hidden;
     margin-bottom: 40px;
 
-    img {
+    img.cover {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .substract {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: -24px;
     }
 
     .hero {
