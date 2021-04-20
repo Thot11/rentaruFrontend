@@ -110,6 +110,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     }
   }
 
+  console.log(productsTitle)
 
   return (
     <div className="productPage">
@@ -300,10 +301,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
       </div>
 
       <div className="moreContent">
-        <div className="sameManga">
-          <h2>Les autres collections {product.title}</h2>          
-          <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
-        </div>
+        {productsTitle.length > 1 && 
+          <div className="sameManga">
+            <h2>Les autres collections {product.title}</h2>          
+            <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
+          </div>
+        }
         <div className="sameManga">
           <h2>Les lecteurs de {product.title} aiment aussi</h2>
           <ProductsList products={productsCategory} maxLength={5} notWantedProductId={product.id} />
