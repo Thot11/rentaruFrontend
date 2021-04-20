@@ -463,6 +463,8 @@
         }
 
         .info {
+          padding-right: 0;
+          
           .titleInfo {
             .title {
               margin-bottom: 7px; 
@@ -518,11 +520,11 @@
                 .DateRangePickerInput {
                   background: #364E5F !important;
                   .DateInput {
-                    width: 80px!important;
+                    width: 50%!important;
 
                     .DateInput_input {
                       font-size: 10px!important;
-                      width: 80px!important;
+                      width: 50%!important;
                     }
                   }
                 }
@@ -550,7 +552,10 @@
         padding-right: 0;
 
         .description {
-          height: 147px;
+          height: auto;
+          line-height: 18px;
+          max-height: 500px;
+          overflow: auto;
         }
       }
     }
