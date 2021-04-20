@@ -42,13 +42,13 @@ input[type=number] {
     height: 30px;
     background-color: color(red);
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       top: 10px;
       height: 10px;
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     font-size: 18px;
   }
 }
@@ -68,6 +68,7 @@ input[type=number] {
 .container {
   width: 1280px;
   margin: auto;
+
 }
 
 
@@ -175,6 +176,12 @@ input[type=number] {
 @media only screen and (max-width: 700px) {
   .container {
     width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .h3 {
+    font-size: 14px;
   }
 
   .div404 {
