@@ -5,3 +5,14 @@
         margin-bottom: 40px;
     }
 }
+
+@media (max-width: 600px) {
+  .wishListContainer {
+    padding: 20px;
+    margin-top: 65px;
+
+    .h1 {
+      margin-top: 20px;
+    }
+  }
+}
