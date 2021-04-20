@@ -50,6 +50,11 @@ export async function getAboutPage() {
   return about;
 }
 
+export async function getBecomeCollectorPage() {
+  const becomeCollector = await fetchAPI("/become-collector");
+  return becomeCollector;
+}
+
 export async function getProduct(slug) {
   const products = await fetchAPI(`/products?slug=${slug}`);
   return products?.[0];

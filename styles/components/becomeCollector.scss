@@ -1,0 +1,167 @@
+.becomeCollectorContainer {
+
+  padding-bottom: 100px;
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 462px;
+    overflow: hidden;
+    margin-bottom: 40px;
+
+    img.cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .substract {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: -24px;
+    }
+
+    .hero {
+      position: absolute;
+      top: 102px;
+      left: calc((100% - 1280px)/2);
+      width: 670px;
+      height: 268px;
+      padding: 22px 18px 23px 25px;
+      background-color: #F5F6F7;
+      border-radius: 5px;
+
+      h1 {
+        color: color(primary);
+        font-weight: 900;
+        font-size: 45px;
+        margin-bottom: 15px;
+        line-height: 54px;
+      }
+
+      p {
+        color: color(primary);
+        font-size: 26px;
+        margin-bottom: 19px;
+        font-weight: 400;
+      }
+
+      button {
+        padding: 10px 20px;
+        color: #F5F6F7;
+        font-size: 12px;
+        background-color: #DD0C18;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .container {
+    .h1 {
+      margin-bottom: 101px;
+    }
+
+    .arguments {
+      width: 100%;
+      margin-bottom: 129px;
+
+      .argument {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 95px;
+
+        img {
+          margin-right: 99px;
+          margin-left: 76px;
+        }
+
+        .argumentText {
+          width: 647px;
+          height: 232px;
+          padding: 30px 18px 35px 32px;
+          background-color: color(dark);
+          border-radius: 10px;
+
+          h3 {
+            font-size: 22px;
+            margin-bottom: 47px;
+          }
+
+          p {
+            font-size: 16px;
+            font-weight: 325;
+          }
+        }
+
+        &:nth-child(2) {
+          flex-direction: row-reverse;
+
+          img {
+            margin-right: 78px;
+            margin-left: 96px;
+          }
+        }
+      }
+
+      .buttonContainer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .citations {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 364px;
+    padding: 0 calc((100% - 1280px)/2);
+    background-color: color(dark);
+
+    .citation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      img {
+        width: 240px;
+        height: 240px;
+        margin-right: 71px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .text {
+        width: 747px;
+        .quote {
+          color: color(red);
+          font-size: 100px;
+          line-height: 20px;
+
+          &.lastQuote {
+            transform: rotate(180deg);
+            margin-bottom: 37px;
+          }
+        }
+
+        .citationText {
+          font-size: 28px;
+        }
+
+        p {
+          text-decoration: underline;
+          font-size: 16px;
+          font-weight: 325;
+          margin-bottom: 15px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

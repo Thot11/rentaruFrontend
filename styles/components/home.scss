@@ -25,24 +25,25 @@
       position: absolute;
       top: 102px;
       left: calc((100% - 1280px)/2);
-      width: 384px;
+      width: 670px;
       height: 268px;
-      color: #171F25;
       padding: 22px 18px 23px 25px;
       background-color: #F5F6F7;
       border-radius: 5px;
 
       h1 {
-        font-weight: 600;
-        font-size: 32px;
-        margin-bottom: 17px;
-        line-height: 38px;
+        color: color(primary);
+        font-weight: 900;
+        font-size: 45px;
+        margin-bottom: 15px;
+        line-height: 54px;
       }
 
       p {
-        font-size: 15px;
-        margin-bottom: 23px;
-        font-weight: 200;
+        color: color(primary);
+        font-size: 26px;
+        margin-bottom: 19px;
+        font-weight: 400;
       }
 
       button {
