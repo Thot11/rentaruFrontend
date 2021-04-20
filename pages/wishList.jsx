@@ -20,7 +20,7 @@ const WishList = () => {
       <Head>
         <title>My wishlist</title>
       </Head>
-      <div className="container">
+      <div className="container wishListContainer">
         <h1 className="h1">Ma liste de souhaits</h1>
         {user.likes ? (
           <ProductsList products={user.likes}/>
