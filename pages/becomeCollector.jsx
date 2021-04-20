@@ -14,6 +14,12 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
   const { session } = useSelector((state) => state);
 
   const [connected, setConnected] = useState(false)
+  const [numberOfSeries, setNumberOfSeries] = useState(0);
+  const [mangaInSerie, setMangaInSerie] = useState([]);
+  const [price, setPrice] = useState(0);
+  const [changes, setChanges] = useState(false);
+  
+  const [windowWidth, setWindowWidth] = useState(1281);
 
   useEffect(() => {
     if (session) {
@@ -24,6 +30,30 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
       localStorage.setItem('token', JSON.stringify(''));
     }
   }, [session])
+
+  useEffect(() => {
+    let newPrice = 0;
+    mangaInSerie.forEach((element) => {
+      newPrice += element * 2;
+    })
+    setPrice(newPrice)
+  }, [changes])
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+  const onMangaInSerieChange = (value, index) => {
+    const array = mangaInSerie;
+    array[index] = value;
+    setMangaInSerie(array)
+    setChanges(!changes)
+  }
   
 
   return (
@@ -45,7 +75,7 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
           {becomeCollector.arguments.map((argument, index) => {
             return (
               <div className="argument" key={index}>
-                <img src={getStrapiMedia(argument.argumentImage.url)} alt="chat"/>
+                {windowWidth >= 700 && <img src={getStrapiMedia(argument.argumentImage.url)} alt="chat"/>}
                 <div className="argumentText">
                   <h3>{argument.argumentTitle}</h3>
                   <p>{argument.argumentText}</p>
@@ -73,6 +103,27 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
             </div>
           )
         })}
+      </div>
+      <div className="simulator">
+        <h3>{becomeCollector.simulatorTitle}</h3>
+        <p className='simulatorWarning'>{becomeCollector.simulatorWarning}</p>
+        <div className="simulatorWrapper">
+          <h4>Dites nous en plus</h4>
+          <div className="inputContainer">
+            <p className="label">Combien de “séries” voulez-vous mettre en location ?</p>
+            <input type="number" value={numberOfSeries} onChange={(e) => setNumberOfSeries(e.target.value)} />
+          </div>
+          {!isNaN(parseInt(numberOfSeries) + 1) && [...Array(parseInt(numberOfSeries))].map((element,i) => {
+            return (
+              <div className="inputContainer">
+                <p className="label labelBis">Nombre de manga dans la série {i + 1} </p>
+                <input type="number" value={mangaInSerie[i]} onChange={(e) => onMangaInSerieChange(e.target.value, i)} />
+              </div>
+            )
+          })}
+          <p className="teasing">Si vous mettez vos mangas en location vos revenus seront au maximum de :</p>
+          <p className="price">{price}€/mois</p>
+        </div>
       </div>
     </div>
   );
