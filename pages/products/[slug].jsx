@@ -24,6 +24,9 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     return <div>Loading category...</div>;
   }
 
+  const widthPage = window.innerWidth;
+  console.log(widthPage);
+
   const moment = extendMoment(Moment);
   const dispatch = useDispatch();
 
@@ -230,7 +233,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                   onFocusChange={focusedInput => setFocusedInput(focusedInput)} // PropTypes.func.isRequired,
                   isDayBlocked={isBlocked}
                   minimumNights={3}
-                  numberOfMonths={2}
+                  numberOfMonths={widthPage > 700 ? 2 : 1}
                 />
                 <a onClick={() => goToPaiement()}>
                   <button
