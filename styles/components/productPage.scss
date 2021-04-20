@@ -14,7 +14,7 @@
         height: 269px;
         padding-right: 10px;
 
-        .integrale {
+        .badgeSilver {
           position: absolute;
           top: 18px;
           left: -30px;
@@ -413,6 +413,10 @@
           width: 100%;
           height: auto;
           display: block;
+
+          .badgeSilver {
+            z-index: 100;
+          }
 
           .mobileImages {
             position: relative;
