@@ -14,6 +14,8 @@ const UserPage = ({ user }) => {
     return <div>Loading user...</div>;
   }
 
+
+  const [windowWidth, setWindowWidth] = useState(1281);
   const [memberSince, setMemberSince] = useState('');
   const [ongletSelected, setOngletSelected] = useState('Collection');
 
@@ -25,8 +27,19 @@ const UserPage = ({ user }) => {
   }
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  useEffect(() => {
     calculDate()
   }, [])
+
+  
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
 
   return (
     <div>
@@ -42,12 +55,6 @@ const UserPage = ({ user }) => {
               <p>Grand Senseï</p> 
             </div>
           )}
-          <div className="actions">
-            <div className="editBtn">
-              <p>Modifier</p>
-              <img src="/edit.svg" alt="edit"/>
-            </div>
-          </div>
           <div className="infos">
             <img className='profilPic' src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
             <h2>{user.username}</h2>
@@ -112,12 +119,14 @@ const UserPage = ({ user }) => {
             <p className='title'>Description</p>
             <p className='descriptionContent'>{user.description}</p>
           </div>
-          <div className="top">
-            <h3>Le top 5 de <span>{user.username}</span></h3>
-          </div>
+          {windowWidth >= 600 &&
+            <div className="top">
+              <h3>Le top 5 de <span>{user.username}</span></h3>
+            </div>
+          }
         </div>
         <div className="rightContent">
-          <img src="/pub.jpg" alt="pub"/>
+          {windowWidth >= 600 && <img src="/pub.jpg" alt="pub"/>}
           <div className="reviews">
             <p className="title">Dernier avis</p>
             <div className="review">
@@ -132,9 +141,9 @@ const UserPage = ({ user }) => {
             <h3 className={ongletSelected === 'Collection' ? 'selected' : ''} onClick={() => setOngletSelected('Collection')}>Collection</h3>
             <h3 className={ongletSelected === 'Lues' ? 'selected' : ''} onClick={() => setOngletSelected('Lues')}>Séries lues</h3>
           </div>
-          <div className="filters">
+          {/* <div className="filters">
             <p>Trier par</p>
-          </div>
+          </div> */}
         </div>
         <ProductsList products={user.products} user={user}/>
       </div>

@@ -255,3 +255,56 @@
   }
 
 }
+
+@media (max-width: 600px) {
+  .userContainer {
+    margin-top: 65px;
+    padding: 20px;
+
+    .contentTop {
+      flex-direction: column;
+      align-items: center;
+
+      .infoProfil {
+        // width: 100%;
+        margin-bottom: 40px;
+        margin-right: 0;  
+      }
+
+      .centerContent {
+        width: 100%;
+        margin-right: 0;
+
+        .rewards {
+          flex-direction: column;
+          align-items: center;
+          
+          .cardReward {
+            margin-bottom: 30px;
+            margin-right: 0;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+
+      .rightContent {
+        width: 100%;
+      }
+    }
+
+    .library {
+      .header {
+        padding: 0;
+
+        .onglets {
+          h3 {
+            width: 170px;
+          }
+        }
+      }
+    }
+  }
+}
