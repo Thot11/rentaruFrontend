@@ -25,7 +25,6 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   }
 
   const widthPage = window.innerWidth;
-  console.log(widthPage);
 
   const moment = extendMoment(Moment);
   const dispatch = useDispatch();
