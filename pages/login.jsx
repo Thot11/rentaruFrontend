@@ -23,8 +23,6 @@ const Login = () => {
      dispatch(postConnect(mail, password));
   };
 
-  console.log(errorState);
-
   return (
     <div>
       <Head>

@@ -35,7 +35,7 @@ const UserPage = ({ user }) => {
     calculDate()
   }, [])
 
-  
+  console.log(user);
 
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
@@ -103,7 +103,7 @@ const UserPage = ({ user }) => {
             <div className="cardReward">
               <img src="/transaction.svg" alt="transaction"/>
               <div className="infoReward">
-                <p className='number'>4</p>
+                <p className='number'>{user.commandes && user.ownerCommandes ? user.commandes?.length + user.ownerCommandes?.length : "..."}</p>
                 <p className='title'>Transactions réalisés</p>
               </div>
             </div>

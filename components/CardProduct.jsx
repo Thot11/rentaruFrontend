@@ -104,7 +104,7 @@ const CardProduct = ({ product, key, user }) => {
                   <div className="picture">
                     <img src={getStrapiMedia(ownerUser.profilPic?.url)} alt="profil picture"/>
                   </div>
-                  <div>
+                  <div className="collectorInfo">
                     <p className="name">{ownerUser.username}</p>
                     <div className="stars">
                       {
@@ -121,7 +121,8 @@ const CardProduct = ({ product, key, user }) => {
                 </a>
               </Link>
               <div className="price">
-                {product.price}€
+                {product.price}€ 
+                <span>/2 semaines</span>
               </div>
             </div>
           </div>

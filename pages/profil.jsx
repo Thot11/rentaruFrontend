@@ -15,8 +15,6 @@ const Profil = () => {
   const { info, products, session, user } = useSelector((state) => state);
   const router = useRouter()
 
-  console.log(user);
-
   const [tabs, setTabs] = useState()
 
   useEffect(() => {
