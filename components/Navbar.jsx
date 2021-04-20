@@ -18,6 +18,10 @@ const Navbar = () => {
   const [searchElement, setSearchElement] = useState('');
   const [keyDown, setKeyDown] = useState(0);
 
+  const [contextOpenMobile, setContextOpenMobile] = useState(false)
+
+  const [openBurger, setOpenBurger] = useState(false)
+
   useEffect(() => {
     let token = localStorage.getItem('token')
     token = JSON.parse(token)
@@ -67,6 +71,7 @@ const Navbar = () => {
     <div className="navbarContainer">
       <div className="mainHeader">
         <div className="mainWrapper">
+          <img src="/searchMobile.svg" alt="search mobile" className="searchMobile" onClick={() => setOpenBurger(true)}/>
           <Link href="/">
             <a>
               <img
@@ -125,13 +130,108 @@ const Navbar = () => {
               <Link href="/login">
                 <a>
                   <Button color="Red">
-                    S'inscrire / Se connecter
+                    Inscription | Connexion
                   </Button>
                 </a>
               </Link>
             )}
           </div>
+          <div className={`burger ${openBurger ? 'open' : 'close'}`} onClick={() => setOpenBurger(!openBurger)}>
+            <span />
+            <span />
+            <span />
+          </div>
         </div>
+      </div>
+      <div className={`subHeaderMobile ${openBurger ? 'open' : 'close'}`}>
+        <div className="searchBar">
+          <img src="/search.svg" alt="Search" />
+          <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
+        </div>
+        {connected ? (
+          <>
+          <Link href="/create/product">
+            <a>
+              <Button color="Red">
+                  Déposer une annonce
+              </Button>
+            </a>
+          </Link>
+          <div className="subTitle">Profil</div>
+          <div className="containerContextMenu">
+            <div className="openContext">
+              <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+                <a>
+                  <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                  Mon profil
+                </a>
+              </Link>
+              <div className={`dropdown ${contextOpenMobile ? 'open' : ''}`} onClick={() => setContextOpenMobile(!contextOpenMobile)} >
+                <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.93317 5.25C3.74072 5.58333 3.2596 5.58333 3.06715 5.25L0.902085 1.5C0.709635 1.16667 0.950198 0.75 1.3351 0.75H5.66522C6.05012 0.75 6.29069 1.16667 6.09824 1.5L3.93317 5.25Z" fill="#ECECEC" fill-opacity="0.6"/>
+                </svg>
+              </div>
+            </div>
+            <div className={`contextMenu ${contextOpenMobile ? 'open' : ''}`}>
+              <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+                <a className="elementMobile"><p>Mon profil</p></a>
+              </Link>
+              <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
+                <a className="elementMobile"><p>Paramètres</p></a>
+              </Link>
+              <a href="/landing" className="elementMobile"><p>Mes commandes</p></a>
+              <a href="/" className="elementMobile" onClick={disconnect}><p>Déconnexion</p></a>
+            </div>
+          </div>
+          <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
+            <a className="elementMobile">
+              <img src="/notif.svg" alt=""/>
+              Notifications
+            </a>
+          </Link>
+          <Link href="/wishList">
+            <a className="elementMobile">
+             <img src="/like2.svg" alt=""/>
+             Page favoris
+            </a>
+          </Link>
+        </>
+        ) : (
+          <>
+            <Button color="Red">
+              Inscription | Connexion
+            </Button>
+            <Button color="White">
+              Comment ça marche ?
+            </Button>
+          </>
+        )}
+        <div className="subTitle subTitle2">Menu</div>
+          <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+            <a className="elementMobile" >
+              Tendances
+            </a>
+          </Link>
+          <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
+            <a className="elementMobile">
+              Catégories
+            </a>
+          </Link>
+          <Link href="/wishList">
+            <a className="elementMobile">
+              Comment ça marche ? 
+            </a>
+          </Link>
+          <Link href="/wishList">
+            <a className="elementMobile">
+              FAQ
+            </a>
+          </Link>
+          <Link href="/wishList">
+            <a className="elementMobile">
+              À propos
+            </a>
+          </Link>
       </div>
       <div className="secondaryHeader">
         <a href="/" className="navElement">Tendances</a>
