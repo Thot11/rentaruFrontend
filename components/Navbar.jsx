@@ -73,7 +73,7 @@ const Navbar = () => {
         <div className="mainWrapper">
           <img src="/searchMobile.svg" alt="search mobile" className="searchMobile" onClick={() => setOpenBurger(true)}/>
           <Link href="/">
-            <a>
+            <a onClick={() => setOpenBurger(!openBurger)}>
               <img
                 src="/logo.svg"
                 alt="home"
@@ -151,7 +151,7 @@ const Navbar = () => {
         {connected ? (
           <>
           <Link href="/create/product">
-            <a>
+            <a onClick={() => setOpenBurger(!openBurger)}>
               <Button color="Red">
                   Déposer une annonce
               </Button>
@@ -161,7 +161,7 @@ const Navbar = () => {
           <div className="containerContextMenu">
             <div className="openContext">
               <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
-                <a>
+                <a onClick={() => setOpenBurger(!openBurger)}>
                   <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
                   Mon profil
                 </a>
@@ -174,23 +174,23 @@ const Navbar = () => {
             </div>
             <div className={`contextMenu ${contextOpenMobile ? 'open' : ''}`}>
               <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
-                <a className="elementMobile"><p>Mon profil</p></a>
+                <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}><p>Mon profil</p></a>
               </Link>
               <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
-                <a className="elementMobile"><p>Paramètres</p></a>
+                <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}><p>Paramètres</p></a>
               </Link>
               <a href="/landing" className="elementMobile"><p>Mes commandes</p></a>
-              <a href="/" className="elementMobile" onClick={disconnect}><p>Déconnexion</p></a>
+              <a href="/" className="elementMobile" onClick={() => {disconnect(); setOpenBurger(!openBurger);}}><p>Déconnexion</p></a>
             </div>
           </div>
-          <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
-            <a className="elementMobile">
+          <Link href={"/"}>
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)} >
               <img src="/notif.svg" alt=""/>
               Notifications
             </a>
           </Link>
           <Link href="/wishList">
-            <a className="elementMobile">
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
              <img src="/like2.svg" alt=""/>
              Page favoris
             </a>
@@ -198,37 +198,45 @@ const Navbar = () => {
         </>
         ) : (
           <>
-            <Button color="Red">
-              Inscription | Connexion
-            </Button>
-            <Button color="White">
-              Comment ça marche ?
-            </Button>
+            <Link href="/login">
+              <a onClick={() => setOpenBurger(!openBurger)}>
+                <Button color="Red">
+                  Inscription | Connexion
+                </Button>
+              </a>
+            </Link>
+            <Link href="/landing">
+              <a onClick={() => setOpenBurger(!openBurger)}>
+                <Button color="White">
+                  Comment ça marche ?
+                </Button>
+              </a>
+            </Link>
           </>
         )}
         <div className="subTitle subTitle2">Menu</div>
-          <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
-            <a className="elementMobile" >
+          <Link href={"/"}>
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)} >
               Tendances
             </a>
           </Link>
-          <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
-            <a className="elementMobile">
+          <Link href={"/"}>
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               Catégories
             </a>
           </Link>
           <Link href="/wishList">
-            <a className="elementMobile">
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               Comment ça marche ? 
             </a>
           </Link>
           <Link href="/wishList">
-            <a className="elementMobile">
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               FAQ
             </a>
           </Link>
           <Link href="/wishList">
-            <a className="elementMobile">
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               À propos
             </a>
           </Link>
