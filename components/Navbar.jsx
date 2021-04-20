@@ -230,9 +230,9 @@ const Navbar = () => {
               Comment ça marche ? 
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/becomeCollector">
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
-              FAQ
+              Deviens collectionneur
             </a>
           </Link>
           <Link href="/about">
@@ -245,7 +245,7 @@ const Navbar = () => {
         <a href="/" className="navElement">Tendances</a>
         <a href="/" className="navElement">Catégories</a>
         <a href="/landing" className="navElement">Comment ça marche ?</a>
-        <a href="/" className="navElement">FAQ</a>
+        <a href="/becomeCollector" className="navElement">Deviens Collectionneur</a>
         <a href="/about" className="navElement">A propos</a>
       </div>
     </div>
