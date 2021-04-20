@@ -20,6 +20,8 @@
 
       .background {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         background-color: linear-gradient;
       }
     }
@@ -184,4 +186,82 @@
 
   }
   
+}
+
+@media (max-width: 600px) {
+  .aboutContainer {
+    margin-top: 65px;
+    .header {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+
+      h1 {
+        left: 20px;
+        bottom: 20px;
+      }
+
+      .backgroundContainer {
+        height: 100%;
+
+        .background {
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .storyContainer {
+      margin-top: 40px;
+      .story {
+        width: 80%;
+      }
+    }
+
+    .cardsContainer {
+      flex-direction: column;
+      padding: 0 20px;
+
+      .card {
+        width: 100%;
+        margin-top: 140px;
+
+        &:first-child {
+          margin-top: 40px;
+        }
+      }
+    }
+
+    .ecoloBullshitContainer,
+    .engagementBullshitContainer {
+      flex-direction: column;
+      align-items: center;
+      margin-left: 20px;
+      margin-right: 20px;
+
+      .text {
+        width: 100%;
+      }
+
+      img {
+        width: 80%;
+        height: auto;
+        margin-right: 0;
+        margin-left: 0;
+      }
+    }
+
+    .engagementBullshitContainer {
+      flex-direction: column-reverse;
+    }
+
+    .crewContainer {
+      padding: 0 20px;
+      margin-top: 100px;
+
+      .membersContainer {
+        grid-template-columns: repeat(1, 1fr)
+      }
+    }
+  }
 }

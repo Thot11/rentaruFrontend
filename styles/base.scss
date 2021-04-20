@@ -41,6 +41,15 @@ input[type=number] {
     width: 102%;
     height: 30px;
     background-color: color(red);
+
+    @media (max-width: 600px) {
+      top: 10px;
+      height: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    font-size: 18px;
   }
 }
 
