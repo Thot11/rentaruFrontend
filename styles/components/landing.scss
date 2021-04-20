@@ -144,8 +144,10 @@
         border-radius: 6px;
 
         img {
-          height: 125px;
-          margin-top: -100px;
+          margin-top: -80px;
+          width: 125px;
+          height: auto;
+          max-height: 125px;
         }
 
         h3 {

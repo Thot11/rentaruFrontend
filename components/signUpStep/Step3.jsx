@@ -15,11 +15,11 @@ const Step2 = ({ address, setAddress, ville, setVille, departement, setDeparteme
         <h3>Préférences</h3>
         <div className="inputContainer">
           
-          <label>Durée de location </label>
+          {/* <label>Durée de location </label>
           <input
             type="text"
             placeholder='15 jours'
-          />
+          /> */}
           <label>Adresse </label>
           <input
             type="text"
