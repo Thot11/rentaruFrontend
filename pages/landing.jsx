@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import Link from "next/link";
+
 import Button from "../elements/Button";
 import { getLandingPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
@@ -17,6 +18,10 @@ const Landing = ({landing}) => {
           <div className="back">
             <img src="/headerBackground3.png" alt="background" className='background'/>
             <img src="/substract.png" alt="background" className='substract'/>
+          </div>
+          <div className="backMobile">
+            <img src="/headerBackground3.png" alt="background" className='background'/>
+            <img src="/separation4.png" alt="background" className='substract'/>
           </div>
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
@@ -86,7 +91,7 @@ const Landing = ({landing}) => {
             })}
           </div>
         </div>
-        <div className="footer">
+        {/* <div className="footer">
           <img src="/footerBackground.png" alt="footerBackground"/>
           <h1>{landing.footerTitle}</h1>
           <p>{landing.footerSubtitle}</p>
@@ -102,7 +107,7 @@ const Landing = ({landing}) => {
               </a>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

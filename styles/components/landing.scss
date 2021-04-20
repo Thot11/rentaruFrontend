@@ -40,36 +40,40 @@
       }
 
       
-            @media only screen and (min-width: 1370px) {
-              .background {
-                height: 370px;
-              }
-      
-              .substract {
-                margin-top: -50px;
-              }
-            }
-            
-            @media only screen and (min-width: 1500px) {
-              .background {
-                height: 400px;
-              }
-              
-              .substract {
-                margin-top: -70px;
-              }
-            }
+      @media only screen and (min-width: 1370px) {
+        .background {
+          height: 370px;
+        }
 
-            @media only screen and (min-width: 2000px) {
-              .background {
-                height: 520px;
-              }
+        .substract {
+          margin-top: -50px;
+        }
+      }
       
-              .substract {
-                margin-top: -90px;
-              }
-            }
-          }
+      @media only screen and (min-width: 1500px) {
+        .background {
+          height: 400px;
+        }
+        
+        .substract {
+          margin-top: -70px;
+        }
+      }
+
+      @media only screen and (min-width: 2000px) {
+        .background {
+          height: 520px;
+        }
+
+        .substract {
+          margin-top: -90px;
+        }
+      }
+    }
+
+    .backMobile {
+      display: none;
+    }
 
 
     h1 {
@@ -203,42 +207,121 @@
     }
   }
 
-  .footer {
-    position: relative;
-    height: 410px;
-    margin-top: 100px;
-    padding: 142px calc((100% - 1280px)/2) 0 calc((100% - 1280px)/2);
-    overflow: hidden;
-
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
+  @media only screen and (max-width: 700px) {
+    .cardsContainer {
+      flex-direction: column !important;
+      align-items: center;
     }
 
-    h1 {
-      font-weight: 400;
-      color: color(primary);
-      font-size: 40px;
-      line-height: 48px;
+    .header {
+      margin-top: 65px;
+      height: 250px;
+
+      .back {
+        display: none;
+      }
+
+      .backMobile {
+        display: block;
+        height: 250px;
+        position: relative;
+        margin-top: -30px;
+
+        img.background {
+          height: 250px;
+          position: absolute;
+          top: 0;
+          right: -80px;
+          object-fit: contain;
+        }
+        .substract {
+          position: absolute;
+          bottom:25px;
+          width: 100%;
+        }
+      }
+
+      h1 {
+        font-size: 18px;
+        z-index: 1;
+        top: 33px;
+        left: 20px;
+        width: 270px;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        z-index: 1;
+        left: 20px;
+        top: 120px;
+        width: 250px;
+      }
+    }
+    .h1 {
+      margin-top: 0;
+      margin-left: 20px;
+      width: fit-content;
+
+      &::before {
+        width: 84%;
+      }
+    }
+    .collectorPart,
+    .readerPart,
+    .insurancePart {
+      margin-top: 0;
+      padding: 30px 20px 30px 20px;
+
+      h2 {
+        font-size: 14px;
+      }
+
+      .explanation, .tips {
+        font-size: 12px;
+      }
+
+      .cardsContainer {
+        margin-top: 104px;
+
+        .card {
+          margin-bottom: 90px;
+
+          img {
+            width: 145px;
+            height: auto;
+            max-height: 100px;
+            margin-top: -60px;
+          }
+
+          h3 {
+            margin-top: 30px;
+            font-size: 14px;
+            text-align: center;
+          }
+
+          p {
+            text-align: center;
+            font-size: 12px;
+          }
+
+        }
+      }
+
+      .buttonContainer {
+        margin-top: -40px;
+      }
     }
 
-    p {
-      margin-top: 16px;
-      color: color(primary);
-      font-size: 22px;
-      line-height: 26px;
-    }
+    .readerPart {
 
-    .buttons {
-      display: flex;
-      width: 100%;
-      margin-top: 54px;
-
-      .button {
-        margin-right: 5px;
+  
+      .separation1 {
+        top: -16px;
+      }
+  
+      .separation2 {
+        bottom: -16px;
       }
     }
   }
