@@ -68,7 +68,7 @@ const Dashboard = ({ user, setTabs }) => {
   }, [relaiColis])
 
   useEffect(() => {
-    if (user.commande && user.commandes.length > 0) {
+    if (user.commandes && user.commandes.length > 0) {
       let commandesId = []
       user.commandes.reverse().slice(0,3).forEach((commande, index) => {
         if (index === 0 ) commandesId.push('id_in=' + commande.id)

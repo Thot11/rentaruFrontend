@@ -40,6 +40,16 @@
       width: 55%;
       min-height: 300px;
 
+      .finalStep {
+        display: inline-flex;
+        align-items: center;
+
+        .btnContainer {
+          margin-left: 10px;
+        }
+
+      }
+
       h3 {
         margin-bottom: 20px;
         font-size: 18px;
