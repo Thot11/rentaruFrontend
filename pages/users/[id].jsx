@@ -35,8 +35,6 @@ const UserPage = ({ user }) => {
     calculDate()
   }, [])
 
-  console.log(user);
-
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
   }
