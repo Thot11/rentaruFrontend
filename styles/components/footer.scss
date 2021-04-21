@@ -1,8 +1,17 @@
 .footer {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 260px;
   padding: 40px calc((100% - 1280px)/2) 25px calc((100% - 1280px)/2);
   background-color: color(dark);
+  position: relative;
+
+  .wave {
+    position: absolute;
+    left: -200px;
+    top: -235px;
+    width: calc(100vw + 300px);
+    z-index: -1;
+  }
 
   .top {
     display: flex;
@@ -56,8 +65,26 @@
   }
 
   @media only screen and (max-width: 700px) {
-    margin-top: 20px;
+    margin-top: 120px;
     padding:40px 20px 20px;
+
+    .imgContainer {
+      top: -100px;
+      left: -20px;
+      right: -20px;
+      position: absolute;
+      width: calc(100vw + 20px);
+      height: 300px;
+      overflow:hidden ;
+    }
+
+    .wave {
+      position: absolute;
+      left: -50vw;
+      top: 0;
+      width: 200vw;
+      z-index: -1;
+    }
 
     .top {
       flex-direction: column;

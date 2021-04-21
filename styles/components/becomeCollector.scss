@@ -74,23 +74,34 @@
         img {
           margin-right: 99px;
           margin-left: 76px;
+          max-width: 280px;
+          max-height: 280px;
         }
 
         .argumentText {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
           width: 647px;
           height: 232px;
-          padding: 30px 18px 35px 32px;
+          padding: 30px 32px 30px 32px;
           background-color: color(dark);
           border-radius: 10px;
+          
 
           h3 {
             font-size: 22px;
-            margin-bottom: 47px;
+            // margin-bottom: 47px;
           }
 
           p {
             font-size: 16px;
             font-weight: 325;
+            line-height: 19px;
+          }
+
+          .link {
+            height: 22px;
           }
         }
 

@@ -79,6 +79,7 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
                 <div className="argumentText">
                   <h3>{argument.argumentTitle}</h3>
                   <p>{argument.argumentText}</p>
+                  <div className="link" />
                 </div>
               </div>
             )

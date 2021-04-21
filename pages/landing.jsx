@@ -26,7 +26,7 @@ const Landing = ({landing}) => {
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
         </div>
-        <h2 className="h1">Comment marche la location de manga?</h2>
+        <h2 className="h1">Comment marche la location de mangas ?</h2>
         <div className="collectorPart">
           <h2>{landing.titleCollector} </h2>
           <p className="explanation">{landing.explanationCollector}</p>
