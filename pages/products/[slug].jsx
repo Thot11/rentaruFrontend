@@ -306,7 +306,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
           <div className="collectorInfo">
             <div className="collector">
               <div className="profilPic">
-              <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : null}</Link>
+              <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : <img src='/bigArrow.svg' alt='profilPic'/>}</Link>
               </div>
               <div className="moreInfo">
                <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
