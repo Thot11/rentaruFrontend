@@ -21,7 +21,7 @@ import Link from "next/link";
 const ProductPage = ({ product, productsCategory, productsTitle }) => {
   const router = useRouter();
   if (router.isFallback) {
-    return <div>Loading category...</div>;
+    return <div>Loading...</div>;
   }
 
   const moment = extendMoment(Moment);
@@ -183,18 +183,18 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                     return null;
                   }
                 })}
-                {sliderImageVisible < product.images.length - 1 && <img onClick={() => handleSliderMovement('right')} src="/sliderArrow.svg" alt="arrow" className="rightArrow"/>}
+                {product.images && sliderImageVisible < product.images.length - 1 && <img onClick={() => handleSliderMovement('right')} src="/sliderArrow.svg" alt="arrow" className="rightArrow"/>}
               </div>
             } 
             {product.images && windowWidth >= 600 &&
             <img
-              className={product.images.length > 1 ? 'bigImage' : 'bigImage bigImageAlone'}
-              src={getStrapiMedia(product.images[0].url)}
-              alt={product.images[0].alternativeText}
+              className={product.images && product.images.length > 1 ? 'bigImage' : 'bigImage bigImageAlone'}
+              src={getStrapiMedia(product.images[0] ? product.images[0].url : null)}
+              alt={product.images[0] ? product.images[0].alternativeText : 'Ajoutez une photo svp'}
             />
             }
             {windowWidth >= 600 &&
-            <div className={product.images.length > 2 ? "otherImg" : "otherImg otherImgAlone"}>
+            <div className={product.images && product.images.length > 2 ? "otherImg" : "otherImg otherImgAlone"}>
               {product.images && product.images.map((image, index) => {
                 if(index !== 0 && index < 3) {
                   return (
