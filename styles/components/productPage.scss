@@ -115,6 +115,14 @@
             }
     
             svg {
+
+              cursor: pointer;
+
+              &.liked {
+                path:last-child {
+                  fill: white;
+                }
+              }
               path:last-child {
                 fill: transparent;
                 transition-duration: 0.3s;

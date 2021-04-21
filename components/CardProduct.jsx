@@ -121,7 +121,7 @@ const CardProduct = ({ product, key, user }) => {
                 </a>
               </Link>
               <div className="price">
-                {product.price}€ 
+                {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price*1.1+0.2)}
                 <span>/2 semaines</span>
               </div>
             </div>
