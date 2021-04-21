@@ -9,6 +9,8 @@ import Step4 from "../../components/createProductStep/Step4"
 import Step5 from "../../components/createProductStep/Step5"
 import PreviewProduct from "../../components/createProductStep/PreviewProduct"
 import { postProduct } from '../../store'
+import Button from "../../elements/Button";
+import Link from "next/link";
 
 
 const CreateProduct = () => {
@@ -25,11 +27,11 @@ const CreateProduct = () => {
   const [data, setData] = useState()
   const [preview, setPreview] = useState()
 
-  useEffect(() => {
-    if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
-      router.push(`/products/${createdProduct.slug}`)
-    }
-  }, [createdProduct])
+  // useEffect(() => {
+  //   if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
+  //     router.push(`/products/${createdProduct.slug}`)
+  //   }
+  // }, [createdProduct])
 
   useEffect(() => {
     if(step === 6) {
@@ -85,7 +87,18 @@ const CreateProduct = () => {
               case 6:
                 return errorState.type === "createProduct" ? (
                   <div>{errorState.message}</div>
-                ) : (<div>Annonce ajoutée, redirection vers la page produit !</div>)
+                ) : (<div className="finalStep">
+                    Annonce ajoutée, Merci... 
+                    {createdProduct.slug && (
+                      <div className="btnContainer">
+                        <Link href={`/products/${createdProduct.slug}`} >
+                          <a>
+                            <Button color="White">Voir mon annonce</Button>
+                          </a>
+                        </Link>
+                    </div>
+                    )}
+                  </div>)
               default:
                 return (
                   <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} />

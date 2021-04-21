@@ -184,9 +184,7 @@ export const postProduct = (data, token) => {
   return (dispatch) => {
     GlobalAPI.postProduct(data, token)
       .then((resp) => {
-        if (resp) {
-          console.log(resp);
-          console.log(slugify(resp.data.title + '-' + resp.data.id));
+        if (resp) {     
           GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id)}, token).then((resp) => {
             dispatch(createProductAction(resp.data));
           })
