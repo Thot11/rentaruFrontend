@@ -1,12 +1,28 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import Link from "next/link";
-
+import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 import Button from "../elements/Button";
 import { getLandingPage } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 
 const Landing = ({landing}) => {
+
+  const { session } = useSelector((state) => state);
+
+  const [connected, setConnected] = useState(false)
+
+  
+  useEffect(() => {
+    if (session) {
+      setConnected(true)
+      localStorage.setItem('token', JSON.stringify(session));
+    } else {
+      setConnected(false)
+      localStorage.setItem('token', JSON.stringify(''));
+    }
+  }, [session])
 
   return (
     <div>
@@ -43,7 +59,7 @@ const Landing = ({landing}) => {
             })}
           </div>
           <div className="buttonContainer">
-            <Link href="/create/product">
+            <Link href={connected ? "/create/product" : "/login"}>
               <a>
                 <Button color={'Red'}>Déposer une annonce</Button>
               </a>   
