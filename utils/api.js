@@ -50,6 +50,16 @@ export async function getAboutPage() {
   return about;
 }
 
+export async function getCguPage() {
+  const cgu = await fetchAPI("/cgu");
+  return cgu;
+}
+
+export async function getCglPage() {
+  const cgl = await fetchAPI("/cgl");
+  return cgl;
+}
+
 export async function getBecomeCollectorPage() {
   const becomeCollector = await fetchAPI("/become-collector");
   return becomeCollector;

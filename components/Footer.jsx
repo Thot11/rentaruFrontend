@@ -82,17 +82,17 @@ const Footer = () => {
               Confiance et Sécurité
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/CGU">
             <a className="linkElement">
               Politique et Confidentialité
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/CGL">
             <a className="linkElement">
               Termes et Conditions
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/CGU">
             <a className="linkElement">
               Politique de cookies
             </a>

@@ -176,7 +176,9 @@ const PaiementPage = ({ product }) => {
         </div>
         <div className="acceptCGL">
           <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
-          <p>En cochant cette case vous acceptez les CGL</p>
+          <Link href="/CGL">
+            <p>En cochant cette case vous acceptez les CGL</p>
+          </Link>
         </div>
         <button className='button buttonRed btnPay' onClick={go}>Valider et payer</button>
       </div>
