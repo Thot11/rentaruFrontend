@@ -115,11 +115,11 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
 
   const handleSliderMovement = (sens) => {
     if(sens === 'left' && refSliderImgVisible.current) {
-      refSliderImgVisible.current.style.left = "-100%";
+      refSliderImgVisible.current.style.left = "100%";
       setSliderImageVisible(sliderImageVisible - 1);
     }
     if(sens === 'right' && refSliderImgVisible.current) {
-      refSliderImgVisible.current.style.left = "100%";
+      refSliderImgVisible.current.style.left = "-100%";
       setSliderImageVisible(sliderImageVisible + 1);
     }
   }
