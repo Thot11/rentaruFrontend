@@ -60,6 +60,11 @@ export async function getCglPage() {
   return cgl;
 }
 
+export async function getFaqPage() {
+  const faq = await fetchAPI("/faq");
+  return faq;
+}
+
 export async function getBecomeCollectorPage() {
   const becomeCollector = await fetchAPI("/become-collector");
   return becomeCollector;

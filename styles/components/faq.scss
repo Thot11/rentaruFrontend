@@ -1,0 +1,68 @@
+.container {
+  
+  .row {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+      width: 28%;
+
+      .theme {
+        font-size: 16px;
+        font-weight: 300;
+        color: color(titleFooter);
+        margin: 17px 0;
+        transition: all .2s ease;
+        cursor: pointer;
+
+        &.selected {
+          color: color(secondary);
+        }
+
+        &:hover {
+          color: color(secondary);
+        }
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .right {
+      width: 68%;
+      background-color: color(dark);
+      user-select: none;
+      border-radius: 10px;
+      overflow: hidden;
+
+      .dropDown {
+        color: color(secondary);
+        padding: 17px 21px;
+        border-bottom: color(secondary, 0.4) solid .2px;
+        font-size: 12px;
+        font-weight: 300;
+
+        .header {
+          padding-left: 0;
+          
+          .leftPart {
+            h3 {
+              font-size: 14px;
+              font-weight: 400;
+              text-transform: capitalize;
+              color: color(secondary);
+            }
+          }
+        }
+      }
+    }
+  }
+}
