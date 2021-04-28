@@ -215,7 +215,7 @@ const Navbar = () => {
           </>
         )}
         <div className="subTitle subTitle2">Menu</div>
-          <Link href={"/"}>
+          <Link href={"/trending"}>
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)} >
               Tendances
             </a>
