@@ -1,75 +1,113 @@
-.footer {
+.allFooter {
   width: 100%;
-  margin-top: 260px;
-  padding: 40px calc((100% - 1280px)/2) 25px calc((100% - 1280px)/2);
-  background-color: color(dark);
   position: relative;
+  margin-top: 30px;
+  padding-top: 260px;
+  overflow: hidden;
 
   .wave {
     position: absolute;
     left: -200px;
-    top: -235px;
+    top: 0;
     width: calc(100vw + 300px);
     z-index: -1;
   }
 
-  .top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 37px;
-    border-bottom: .2px solid color(secondary, .2);
-
-    .linkContainer {
+  .footer {
+    width: 100%;
+    padding: 40px calc((100% - 1280px)/2) 25px calc((100% - 1280px)/2);
+    background-color: color(dark);
+    position: relative;
+  
+  
+    .top {
       display: flex;
-      flex-direction: column;
-
-      .title {
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: 37px;
+      border-bottom: .2px solid color(secondary, .2);
+  
+      .linkContainer {
+        display: flex;
+        flex-direction: column;
+  
+        .title {
+          color: color(titleFooter);
+          font-size: 14px;
+          font-weight: 300;
+          margin-bottom: 5px;
+        }
+  
+        .linkElement {
+          color: color(secondary);
+          font-size: 14px;
+          font-weight: 300;
+          margin: 5px 0;
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  
+    .bottom {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+  
+      .left {
+        width: 150px;
+        display: inline-flex;
+        justify-content: space-between;
+      }
+  
+      .right {
         color: color(titleFooter);
         font-size: 14px;
         font-weight: 300;
-        margin-bottom: 5px;
       }
-
-      .linkElement {
-        color: color(secondary);
-        font-size: 14px;
-        font-weight: 300;
-        margin: 5px 0;
-
-        &:last-child {
-          margin-bottom: 0;
+    }
+  
+    @media only screen and (max-width: 700px) {
+      padding:40px 20px 20px;
+  
+  
+      .top {
+        flex-direction: column;
+  
+        .linkContainer {
+          margin-bottom: 20px;
+  
+          &:nth-child(2n) {
+            align-self: flex-end;
+            align-items: flex-end;
+          }
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+  
+      .bottom {
+        flex-direction: column;
+  
+        .left {
+          width: 60%;
+          margin-bottom: 20px;
         }
       }
     }
   }
 
-  .bottom {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 28px;
-
-    .left {
-      width: 150px;
-      display: inline-flex;
-      justify-content: space-between;
-    }
-
-    .right {
-      color: color(titleFooter);
-      font-size: 14px;
-      font-weight: 300;
-    }
-  }
-
   @media only screen and (max-width: 700px) {
-    margin-top: 120px;
-    padding:40px 20px 20px;
+    padding-top: 130px;
 
     .imgContainer {
-      top: -100px;
+      top: 0;
       left: -20px;
       right: -20px;
       position: absolute;
@@ -77,39 +115,13 @@
       height: 300px;
       overflow:hidden ;
     }
-
+  
     .wave {
       position: absolute;
       left: -50vw;
       top: 0;
       width: 200vw;
       z-index: -1;
-    }
-
-    .top {
-      flex-direction: column;
-
-      .linkContainer {
-        margin-bottom: 20px;
-
-        &:nth-child(2n) {
-          align-self: flex-end;
-          align-items: flex-end;
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    .bottom {
-      flex-direction: column;
-
-      .left {
-        width: 60%;
-        margin-bottom: 20px;
-      }
     }
   }
 }
