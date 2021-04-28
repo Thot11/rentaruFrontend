@@ -235,6 +235,11 @@ const Navbar = () => {
               Deviens collectionneur
             </a>
           </Link>
+          <Link href="/FAQ">
+            <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
+              FAQ
+            </a>
+          </Link>
           <Link href="/about">
             <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}>
               À propos
@@ -242,10 +247,11 @@ const Navbar = () => {
           </Link>
       </div>
       <div className="secondaryHeader">
-        <a href="/" className="navElement">Tendances</a>
+        <a href="/trending" className="navElement">Tendances</a>
         <a href="/" className="navElement">Catégories</a>
         <a href="/landing" className="navElement">Comment ça marche ?</a>
         <a href="/becomeCollector" className="navElement">Deviens Collectionneur</a>
+        <a href="/FAQ" className="navElement">FAQ</a>
         <a href="/about" className="navElement">A propos</a>
       </div>
     </div>
