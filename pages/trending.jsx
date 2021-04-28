@@ -7,6 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { getProductsPublished, getMangaCollection } from "../utils/api";
 import CardProductTrending from "../components/CardProductTrending";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Mousewheel, Pagination, Scrollbar, A11y } from 'swiper';
+
+SwiperCore.use([Navigation, Mousewheel])
+
+
 const TrendingPage = ({ products }) => {
 
 
@@ -36,13 +42,25 @@ const TrendingPage = ({ products }) => {
       <h1 className="h1">Les tops de nos lecteurs</h1>
       <div className="top">
         <h3>Top des lecteurs</h3>
-        <div className="slider">
+        {/* <div className="slider"> */}
+        <Swiper
+          freeMode={true}
+          mousewheel={{invert:true, forceToAxis: true}}
+          navigation
+          spaceBetween={50}
+          slidesPerView={4}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
           {mangaCollection.map((manga, key) => {
             return (
-              <CardProductTrending mangaCollection={manga} key={key} position={key + 1} />
+              <SwiperSlide>
+                <CardProductTrending mangaCollection={manga} key={key} position={key + 1} />
+              </SwiperSlide>
             )
           })}
-        </div>
+        </Swiper>
+        {/* </div> */}
       </div>
       
     </div>

@@ -4,6 +4,7 @@ import 'react-dates/initialize';
 import Layout from "../components/Layout";
 import { getCategories } from "../utils/api";
 import "../styles/index.scss";
+import 'swiper/swiper.scss';
 // import { withRedux } from '../lib/redux';
 import { Provider } from 'react-redux';
 import store from '../store';
