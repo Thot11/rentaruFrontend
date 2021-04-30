@@ -83,36 +83,43 @@ const Navbar = () => {
           </Link>
           {router.route !== "/search" &&
           <div className='search'>
-            <img src="/search.svg" alt="Search" />
             <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
+            <div className="enter" onClick={() => {if (searchElement) setKeyDown(0); router.push({ pathname: "/search", query: { title: searchElement } }) }}>
+              <img src="/search.svg" alt="Search"/>
+            </div>
           </div>}
           <div className="right">
             {connected ? (
               <>
                 <Link href="/create/product">
                   <a>
-                    <Button color="Red">
-                        Déposer une annonce
-                    </Button>
+                    <img src="/message.svg" alt=""/>
+                    <div className="subTitle">Messages</div>
                   </a>
                 </Link>
-                <Link href="/create/product">
-                  <img src="/message.svg" alt=""/>
-                </Link>
                 <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
-                  <img src="/notif.svg" alt=""/>
+                  <a>
+                    <img src="/notif.svg" alt=""/>
+                    <div className="subTitle">Notifs</div>
+                  </a>
                 </Link>
                 <Link href="/wishList">
-                  <img src="/like2.svg" alt=""/>
+                  <a>
+                    <img src="/like2.svg" alt=""/>
+                    <div className="subTitle">Favoris</div>
+                  </a>
                 </Link>
                 <div className="containerContextMenu">
-                  <div className="openContext">
-                    <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
-                      <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
-                    </Link>
-                    <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3.93317 5.25C3.74072 5.58333 3.2596 5.58333 3.06715 5.25L0.902085 1.5C0.709635 1.16667 0.950198 0.75 1.3351 0.75H5.66522C6.05012 0.75 6.29069 1.16667 6.09824 1.5L3.93317 5.25Z" fill="#ECECEC" fill-opacity="0.6"/>
-                    </svg>
+                  <div className="profilContainer2">
+                    <div className="openContext">
+                      <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
+                        <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                      </Link>
+                      <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.93317 5.25C3.74072 5.58333 3.2596 5.58333 3.06715 5.25L0.902085 1.5C0.709635 1.16667 0.950198 0.75 1.3351 0.75H5.66522C6.05012 0.75 6.29069 1.16667 6.09824 1.5L3.93317 5.25Z" fill="#ECECEC" fill-opacity="0.6"/>
+                      </svg>
+                    </div>
+                    {/* <div className="subTitle">Profil</div> */}
                   </div>
                   <div className={`contextMenu`}>
                     <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
@@ -247,12 +254,23 @@ const Navbar = () => {
           </Link>
       </div>
       <div className="secondaryHeader">
-        <a href="/trending" className="navElement">Tendances</a>
-        <a href="/" className="navElement">Catégories</a>
-        <a href="/landing" className="navElement">Comment ça marche ?</a>
-        <a href="/becomeCollector" className="navElement">Deviens Collectionneur</a>
-        <a href="/FAQ" className="navElement">FAQ</a>
-        <a href="/about" className="navElement">A propos</a>
+        <div className="left">
+          <a href="/trending" className="navElement">Tendances</a>
+          <a href="/" className="navElement">Catégories</a>
+          <a href="/landing" className="navElement">Comment ça marche ?</a>
+          <a href="/becomeCollector" className="navElement">Deviens Collectionneur</a>
+          <a href="/FAQ" className="navElement">FAQ</a>
+          <a href="/about" className="navElement">À propos</a>
+        </div>
+        {connected && (
+        <Link href="/create/product">
+          <a>
+            <Button color="Red">
+              Déposer une annonce
+            </Button>
+          </a>
+        </Link>
+        )}
       </div>
     </div>
   );
