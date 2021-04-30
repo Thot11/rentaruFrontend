@@ -42,9 +42,9 @@ const Landing = ({landing}) => {
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>
         </div>
-        <h2 className="h1">Comment marche la location de mangas ?</h2>
+        {/* <h2 className="h1">Comment marche la location de mangas ?</h2> */}
         <div className="collectorPart">
-          <h2>{landing.titleCollector} </h2>
+          <h2 className="h1">{landing.titleCollector} </h2>
           <p className="explanation">{landing.explanationCollector}</p>
           <p className="tips">{landing.tipsCollector}</p>
           <div className="cardsContainer">
@@ -64,12 +64,18 @@ const Landing = ({landing}) => {
                 <Button color={'Red'}>Déposer une annonce</Button>
               </a>   
             </Link>
+            <Link href={{pathname: "/becomeCollector", query: { scroll: "simulateur" }}}>
+            {/* <Link href={"/becomeCollector#simulateur"}> */}
+              <a>
+                <Button color={'White'}>Simuler mes revenus</Button>
+              </a>   
+            </Link>
           </div>
         </div>
         <div className="readerPart">
           <img src="separation1.png" alt="" className="separation separation1" />
           <img src="separation2.png" alt="" className="separation separation2" />
-          <h2>{landing.titleReader} </h2>
+          <h2 className="h1">{landing.titleReader} </h2>
           <p className="explanation">{landing.explanationReader}</p>
           <p className="tips">{landing.tipsReader}</p>
           <div className="cardsContainer">
@@ -92,7 +98,7 @@ const Landing = ({landing}) => {
           </div>
         </div>
         <div className="insurancePart">
-          <h2>{landing.titleInsurance} </h2>
+          <h2 className="h1">{landing.titleInsurance} </h2>
           <p className="explanation">{landing.explanationInsurance}</p>
           <p className="tips">{landing.tipsInsurance}</p>
           <div className="cardsContainer">
