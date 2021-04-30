@@ -87,6 +87,10 @@
       justify-content: space-between;
       align-items: center;
 
+      &.notConnected {
+        min-width: auto;
+      }
+
       a {
         display: flex;
         flex-direction: column;
@@ -230,12 +234,46 @@
     height: 65px;
 
     .left {
+      height: 100%;
+      display: inline-flex;
 
       .navElement {
-        color: #F5F6F7;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        color: color(secondary);
         font-size: 16px;
         font-weight: 300;
         margin-right: 30px;
+        position: relative;
+
+        &.active {
+          font-weight: 400;
+          &:after {
+            width: 100%; 
+            left: 0; 
+          }
+        }
+
+        &:after {
+          background: none repeat scroll 0 0 transparent;
+          bottom: 0;
+          content: "";
+          display: block;
+          height: 4px;
+          left: 50%;
+          position: absolute;
+          background: color(secondary);
+          transition: width 0.3s ease 0s, left 0.3s ease 0s;
+          width: 0;
+        }
+
+        &:hover {
+          &:after {
+            width: 100%; 
+            left: 0; 
+          }
+        }
   
         &:last-child {
           margin-right: 0;
@@ -264,7 +302,6 @@
 
         .logo {
           width: 140px;
-          margin-top: -17px;
         }
       }
 
@@ -383,13 +420,14 @@
         background-color: color(secondary);
         width: 100%;
         height: 34px;
-        padding-left: 20px;
+        padding-left: 10px;
         padding-right: 20px;
         border-radius: 3px;
         margin-bottom: 20px;
 
         img {
-          margin-right: 12px;
+          height: 15px;
+          margin-right: 5px;
         }
     
         input {

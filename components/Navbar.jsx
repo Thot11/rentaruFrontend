@@ -13,6 +13,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { session, user } = useSelector((state) => state);
   const router = useRouter()
+
+  const path = router.pathname;
   
   const [connected, setConnected] = useState(false)
   const [searchElement, setSearchElement] = useState('');
@@ -84,11 +86,11 @@ const Navbar = () => {
           {router.route !== "/search" &&
           <div className='search'>
             <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
-            <div className="enter" onClick={() => {if (searchElement) setKeyDown(0); router.push({ pathname: "/search", query: { title: searchElement } }) }}>
+            <div className="enter" onClick={() => {if (searchElement) {setKeyDown(0); router.push({ pathname: "/search", query: { title: searchElement } })} }}>
               <img src="/search.svg" alt="Search"/>
             </div>
           </div>}
-          <div className="right">
+          <div className={`right ${connected ? '' : 'notConnected'}`}>
             {connected ? (
               <>
                 <Link href="/create/product">
@@ -152,7 +154,7 @@ const Navbar = () => {
       </div>
       <div className={`subHeaderMobile ${openBurger ? 'open' : 'close'}`}>
         <div className="searchBar">
-          <img src="/search.svg" alt="Search" />
+          <img src="/search2.svg" alt="Search" />
           <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
         </div>
         {connected ? (
@@ -255,12 +257,12 @@ const Navbar = () => {
       </div>
       <div className="secondaryHeader">
         <div className="left">
-          <a href="/trending" className="navElement">Tendances</a>
-          <a href="/" className="navElement">Catégories</a>
-          <a href="/landing" className="navElement">Comment ça marche ?</a>
-          <a href="/becomeCollector" className="navElement">Deviens Collectionneur</a>
-          <a href="/FAQ" className="navElement">FAQ</a>
-          <a href="/about" className="navElement">À propos</a>
+          <a href="/trending" className={`navElement ${path === '/trending' ? 'active':''}`}>Tendances</a>
+          <a href="/search" className={`navElement ${path === '/search' ? 'active':''}`}>Catégories</a>
+          <a href="/landing" className={`navElement ${path === '/landing' ? 'active':''}`}>Comment ça marche ?</a>
+          <a href="/becomeCollector" className={`navElement ${path === '/becomeCollector' ? 'active':''}`}>Deviens Collectionneur</a>
+          <a href="/FAQ" className={`navElement ${path === '/FAQ' ? 'active':''}`}>FAQ</a>
+          <a href="/about" className={`navElement ${path === '/about' ? 'active':''}`}>À propos</a>
         </div>
         {connected && (
         <Link href="/create/product">
