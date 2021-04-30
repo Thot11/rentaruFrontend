@@ -89,22 +89,6 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
           </div>
         </div>        
       </div>
-      <div className="citations">
-        {becomeCollector.citations.map((citation, key) => {
-          return (
-            <div className="citation" key={key}>
-              <img src={getStrapiMedia(citation.citationImage.url)} alt="person"/>
-              <div className="text">
-                <h2 className='quote'>“</h2>
-                <h2 className='citationText'>{citation.citationText}</h2>
-                <h2 className='quote lastQuote'>“</h2>
-                <p className="person">{citation.citationPerson}</p>
-                <p className="personJob">{citation.citationPersonJob}</p>
-              </div>
-            </div>
-          )
-        })}
-      </div>
       <div className="simulator">
         <h3>{becomeCollector.simulatorTitle}</h3>
         <p className='simulatorWarning'>{becomeCollector.simulatorWarning}</p>
@@ -125,6 +109,22 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
           <p className="teasing">Si vous mettez vos mangas en location vos revenus seront au maximum de :</p>
           <p className="price">{price}€/mois</p>
         </div>
+      </div>
+      <div className="citations">
+        {becomeCollector.citations.map((citation, key) => {
+          return (
+            <div className="citation" key={key}>
+              <img src={getStrapiMedia(citation.citationImage.url)} alt="person"/>
+              <div className="text">
+                <h2 className='quote'>“</h2>
+                <h2 className='citationText'>{citation.citationText}</h2>
+                <h2 className='quote lastQuote'>“</h2>
+                <p className="person">{citation.citationPerson}</p>
+                <p className="personJob">{citation.citationPersonJob}</p>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   );

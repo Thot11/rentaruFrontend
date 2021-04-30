@@ -28,25 +28,30 @@ input[type=number] {
 .h1 {
   position: relative;
   width: fit-content;
+  padding: 7px 10px;
+  font-family: $title;
   font-size: 37px;
-  font-weight: 600;
+  line-height: 37px;
+  font-weight: 400;
   color: color(secondary);
+  background-color: color(dark);
+  
 
-  &::before {
-    position: absolute;
-    z-index: -1;
-    top: 15px;
-    left: 0;
-    content: '';
-    width: 102%;
-    height: 30px;
-    background-color: color(red);
+  // &::before {
+  //   position: absolute;
+  //   z-index: -1;
+  //   top: 15px;
+  //   left: 0;
+  //   content: '';
+  //   width: 102%;
+  //   height: 30px;
+  //   background-color: color(red);
 
-    @media (max-width: 700px) {
-      top: 10px;
-      height: 10px;
-    }
-  }
+  //   @media (max-width: 700px) {
+  //     top: 10px;
+  //     height: 10px;
+  //   }
+  // }
 
   @media (max-width: 700px) {
     font-size: 18px;
