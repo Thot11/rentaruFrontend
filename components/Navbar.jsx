@@ -83,13 +83,14 @@ const Navbar = () => {
               />
             </a>
           </Link>
-          {router.route !== "/search" &&
+          {/* {router.route !== "/search" && */}
           <div className='search'>
             <input placeholder="Rechercher un manga, un auteur, un genre" value={searchElement} onChange={(e) => setSearchElement(e.target.value)} />
             <div className="enter" onClick={() => {if (searchElement) {setKeyDown(0); router.push({ pathname: "/search", query: { title: searchElement } })} }}>
               <img src="/search.svg" alt="Search"/>
             </div>
-          </div>}
+          </div>
+          {/* } */}
           <div className={`right ${connected ? '' : 'notConnected'}`}>
             {connected ? (
               <>
