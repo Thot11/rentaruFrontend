@@ -58,7 +58,7 @@ const SignUp = () => {
       <div className="signInContainer">
         <img className="background" src="/japBckg.svg" alt="background"/>
         {step === 1 && <Step1 setStep={setStep} mail={mail} setMail={setMail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} /> }
-        {step === 2 && <Step2 setStep={setStep} nom={nom} setNom={setNom} prenom={prenom} setPrenom={setPrenom} phone={phone} setPhone={setPhone} username={username} setUsername={setUsername} setSelectedFile={setSelectedFile} />}
+        {step === 2 && <Step2 setStep={setStep} nom={nom} setNom={setNom} prenom={prenom} setPrenom={setPrenom} phone={phone} setPhone={setPhone} username={username} setUsername={setUsername} selectedFile={selectedFile} setSelectedFile={setSelectedFile} />}
         {step === 3 && <Step3 signUp={signUp} adresse={address} setAddress={setAddress} ville={ville} setVille={setVille} departement={departement} setDepartement={setDepartement} />}
         {/* <Link href={"/login"}> Connexion </Link> */}
       </div>
