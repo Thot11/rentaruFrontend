@@ -1,0 +1,167 @@
+.container {
+  .ordersRow {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 40px;
+    border-bottom: .2px solid color(someLine, 0.4);
+
+    h3 {
+      width: fit-content;
+      margin-right: 30px;
+      padding-bottom: 4px;
+      font-size: 22px;
+      color: color(secondary);
+      font-weight: 300;
+      line-height: 26px;
+      cursor: pointer;
+
+      &.selected {
+        font-weight: 400;
+        border-bottom: 3px solid white;
+      }
+    }
+
+    .choiceBar {
+      width: 150px;
+    }
+  }
+}
+
+.commandesContainer {
+  display: flex;
+  flex-direction: column;
+  // margin-top: 20px;
+
+  .commande {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 250px;
+    // align-items: center;
+    padding: 20px 0;
+    border-bottom: .2px solid color(someLine, 0.4);
+
+    .left {
+      display: inline-flex;
+    }
+
+    .productImg {
+      min-width: 150px;
+      object-fit: cover;
+    }
+
+    .middleRight {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 300;
+
+      .underlineLink {
+        text-decoration: underline;
+        cursor: not-allowed;
+      }
+
+      .buttonsContainer {
+        display: inline-flex;
+        a {
+          margin-right: 15px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+          button {
+            cursor: not-allowed !important;
+          }
+        }
+      }
+    }
+
+    .middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      margin-left: 20px;
+
+      .up {
+        display: flex;
+        flex-direction: column;
+
+        img {
+          width: 40px;
+          height: 40px;
+          margin-right: 12px;
+          border-radius: 16px;
+          object-fit: cover;
+        }
+
+        div {
+          display: inline-flex;
+          
+          &.ownerContainer {
+            align-items: center;
+          }
+
+          &:first-child {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 2px;
+          }
+
+          font-size: 12px;
+          font-weight: 300;
+
+          span {
+            font-weight: 600;
+          }
+
+        }
+
+        .statut {
+          border-radius: 100px;
+          color: color(primary, 0.6);
+          margin-left: 15px;
+          padding: 4px 7px 2px;
+          line-height: 16px;
+
+
+          &.now {
+            background-color: color(green3);
+          }
+
+          &.later {
+            background-color: color(orange);
+          }
+
+          &.done {
+            background-color: color(blue);
+          }
+        }
+      }
+
+      .down {
+        font-size: 16px;
+        font-weight: 300;
+        color: color(secondary);
+
+          p {
+            margin-bottom: 10px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+
+        span {
+          font-size: 14px;
+          color: color(secondary, .7);
+        }
+      }
+      
+    }
+  }
+}

@@ -77,7 +77,7 @@ const Navbar = () => {
           <Link href="/">
             <a onClick={() => setOpenBurger(false)}>
               <img
-                src="/logo2.png"
+                src="/logo.svg"
                 alt="home"
                 className="logo"
               />

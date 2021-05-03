@@ -95,6 +95,16 @@ export async function getCommandesById(commandes, token) {
   return commandesFiltered;
 }
 
+export async function getMyCollectionsOrders(user, token) {
+  const ownerOrders = await fetchAPI(`/commandes?owner=${user}&token=${token}`);
+  return ownerOrders;
+}
+
+export async function getMyReadings(user, token) {
+  const notOwnerOrders = await fetchAPI(`/commandes?not_owner=${user}&token=${token}`);
+  return notOwnerOrders;
+}
+
 
 export async function getProductsByTitle(title) {
   const products = await fetchAPI(`/products?title=${title}`);
