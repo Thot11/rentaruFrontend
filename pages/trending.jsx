@@ -47,8 +47,8 @@ const TrendingPage = ({ products }) => {
           freeMode={true}
           mousewheel={{invert:true, forceToAxis: true}}
           navigation
-          spaceBetween={50}
-          slidesPerView={4}
+          spaceBetween={20}
+          slidesPerView={5}
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
         >
@@ -60,6 +60,7 @@ const TrendingPage = ({ products }) => {
             )
           })}
         </Swiper>
+
         {/* </div> */}
       </div>
       

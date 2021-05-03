@@ -111,9 +111,14 @@ export async function getMe(token) {
   return me;
 }
 
-export async function getMangaCollection(token) {
-  const mangaCollection = await fetchAPI(`/manga-apis?token=${token}`);
+export async function getMangaCollection() {
+  const mangaCollection = await fetchAPI(`/manga-apis`);
   return mangaCollection;
+}
+
+export async function getManga(id) {
+  const mangaCollection = await fetchAPI(`/manga-apis?id=${id}`);
+  return mangaCollection?.[0];
 }
 
 // POST Request

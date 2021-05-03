@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
-import {getUser} from "../utils/api";
-import {updateMe} from '../store'
 
 const CardProductTrending = ({ mangaCollection, key, position }) => {
 
@@ -18,7 +16,7 @@ const CardProductTrending = ({ mangaCollection, key, position }) => {
 
   return (
     <div className="cardProductTrending" key={key}>
-      <Link href={`/`}>
+      <Link href={`/manga/${mangaCollection.id}`}>
         <a>
           <img src={getStrapiMedia(mangaCollection.cover.url)} alt="cover"/>
           <div className="info">
