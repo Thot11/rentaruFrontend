@@ -3,11 +3,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getManga, getMangaCollection } from "../../utils/api";
+import ProductsList from "../../components/ProductsList";
+import { getManga, getMangaCollection, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 
 
-const MangaPage = ({ manga }) => {
+const MangaPage = ({ manga, products }) => {
 
 
   const router = useRouter();
@@ -80,6 +81,10 @@ const MangaPage = ({ manga }) => {
           </div>
         </div>
       </div>
+      <div className="filterBar">
+
+      </div>
+      <ProductsList products={products} />
     </div>
   );
 };
@@ -87,8 +92,9 @@ const MangaPage = ({ manga }) => {
 export default MangaPage;
 
 export async function getStaticProps({ params }) {
-  const manga = await getManga(params.id);
-  return { props: { manga } };
+  const manga = await getManga(params.id);  
+  const products = await getProductsByTitle(manga.title);
+  return { props: { manga, products } };
 }
 
 export async function getStaticPaths() {

@@ -6,6 +6,7 @@
     padding: 49px 45px 51px 35px;
     border-radius: 3px;
     background-color: color(dark);
+    margin-bottom: 23px;
 
     .cover {
       width: 264px;
@@ -125,5 +126,13 @@
       }
     }
 
+  }
+
+  .filterBar {
+    width: 100%;
+    margin-bottom: 23px;
+    padding: 25px 13px 26px 20px;
+    background-color: color(dark);
+    border-radius: 3px;
   }
 }
