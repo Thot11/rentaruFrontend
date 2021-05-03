@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
+import { useRouter } from "next/router";
 import ProductsList from "../components/ProductsList";
 import { getBecomeCollectorPage, getConnect } from "../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {getProducts} from '../store'
 import Link from "next/link";
 
@@ -12,6 +13,7 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
 
   const dispatch = useDispatch();
   const { session } = useSelector((state) => state);
+  const router = useRouter()
 
   const [connected, setConnected] = useState(false)
   const [numberOfSeries, setNumberOfSeries] = useState(0);
@@ -20,6 +22,8 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
   const [changes, setChanges] = useState(false);
   
   const [windowWidth, setWindowWidth] = useState(1281);
+
+const simulatorRef = useRef();
 
   useEffect(() => {
     if (session) {
@@ -30,6 +34,14 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
       localStorage.setItem('token', JSON.stringify(''));
     }
   }, [session])
+
+  useEffect(() => {
+    console.log('init', router.query.scroll, simulatorRef.current);
+    if (router.query.scroll === "simulateur" && simulatorRef.current) {
+      setTimeout(() => simulatorRef.current.scrollIntoView({behavior: 'smooth'}), 300);
+      // simulatorRef.current.scrollIntoView({behavior: 'smooth'})
+    }
+  }, [simulatorRef, router])
 
   useEffect(() => {
     let newPrice = 0;
@@ -89,6 +101,27 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
           </div>
         </div>        
       </div>
+      <div className="simulator" id="simulateur" ref={simulatorRef}>
+        <h3>{becomeCollector.simulatorTitle}</h3>
+        <p className='simulatorWarning'>{becomeCollector.simulatorWarning}</p>
+        <div className="simulatorWrapper">
+          <h4>Dites nous en plus</h4>
+          <div className="inputContainer">
+            <p className="label">Combien de “séries” voulez-vous mettre en location ?</p>
+            <input type="number" max="30" value={numberOfSeries} onChange={(e) => setNumberOfSeries(e.target.value > 30 ? 30 : e.target.value)} />
+          </div>
+          {!isNaN(parseInt(numberOfSeries) + 1) && [...Array(parseInt(numberOfSeries))].map((element,i) => {
+            return (
+              <div className="inputContainer">
+                <p className="label labelBis">Nombre de manga dans la série {i + 1} </p>
+                <input type="number" value={mangaInSerie[i]} onChange={(e) => onMangaInSerieChange(e.target.value, i)} />
+              </div>
+            )
+          })}
+          <p className="teasing">Si vous mettez vos mangas en location vos revenus seront au maximum de :</p>
+          <p className="price">{price}€/mois</p>
+        </div>
+      </div>
       <div className="citations">
         {becomeCollector.citations.map((citation, key) => {
           return (
@@ -104,27 +137,6 @@ const BecomeCollectorPage = ({ becomeCollector }) => {
             </div>
           )
         })}
-      </div>
-      <div className="simulator">
-        <h3>{becomeCollector.simulatorTitle}</h3>
-        <p className='simulatorWarning'>{becomeCollector.simulatorWarning}</p>
-        <div className="simulatorWrapper">
-          <h4>Dites nous en plus</h4>
-          <div className="inputContainer">
-            <p className="label">Combien de “séries” voulez-vous mettre en location ?</p>
-            <input type="number" value={numberOfSeries} onChange={(e) => setNumberOfSeries(e.target.value)} />
-          </div>
-          {!isNaN(parseInt(numberOfSeries) + 1) && [...Array(parseInt(numberOfSeries))].map((element,i) => {
-            return (
-              <div className="inputContainer">
-                <p className="label labelBis">Nombre de manga dans la série {i + 1} </p>
-                <input type="number" value={mangaInSerie[i]} onChange={(e) => onMangaInSerieChange(e.target.value, i)} />
-              </div>
-            )
-          })}
-          <p className="teasing">Si vous mettez vos mangas en location vos revenus seront au maximum de :</p>
-          <p className="price">{price}€/mois</p>
-        </div>
       </div>
     </div>
   );

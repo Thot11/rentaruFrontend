@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Button from "../../elements/Button";
 
-const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setUsername, setSelectedFile, setStep}) => {
+const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setUsername, selectedFile, setSelectedFile, setStep}) => {
 
   const [error, setError] = useState(null);
 
@@ -59,11 +59,19 @@ const Step2 = ({ nom, setNom, prenom, setPrenom, phone, setPhone, username, setU
             defaultValue={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label>Ajouter une photo de profil </label>
           <input
+            className="hide"
             type="file"
+            id="file-upload"
             onChange={(e) => setSelectedFile(e.target.files[0])}
           />
+          <label for="file-upload" className="addImages">
+          <img src="/plusSignUp.svg" alt=""/>
+          <p>Ajouter une photo de profil</p>
+        </label>
+        <div className="previewContainer">
+          {selectedFile && (<img src={URL.createObjectURL(selectedFile)} alt="preview image" />)}
+        </div>
         </div>
         <div className="confirmContainer">
           <p className="error">{error}</p>
