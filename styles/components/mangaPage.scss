@@ -1,0 +1,138 @@
+.mangaPage {  
+  padding: 47px calc((100% - 1280px)/2);
+
+  .mangaInfo {
+    display: flex;
+    padding: 49px 45px 51px 35px;
+    border-radius: 3px;
+    background-color: color(dark);
+    margin-bottom: 23px;
+
+    .cover {
+      width: 264px;
+      height: 421px;
+      object-fit: cover;
+      margin-right: 31px;
+    }
+
+    .rightContainer {
+      width: 100%;
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: 37px;
+          font-weight: 350;
+          color: color(secondary);
+        }
+
+        .ranking {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+
+          h3 {
+            color: color(secondary);
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 37px;
+          }
+
+          .label {
+            font-size: 14px;
+            font-weight: 350;
+            color: color(secondary, 0.6);
+          }
+        }
+      }
+
+      .info {
+        display: flex;
+        margin-bottom: 15px;
+
+        .label {
+          width: 150px;
+          margin-right: 32px;
+          font-size: 14px;
+          font-weight: 350;
+          color: color(secondary, 0.6);
+        }
+
+        .answer {
+          font-size: 14px;
+          font-weight: 350;
+          color: color(secondary);
+          line-height: 17px;
+        }
+
+        .frenchVolumes,
+        .japVolumes {
+          p {
+            display: flex;
+            align-items: center;
+
+            img {
+              width: 12px;
+              margin: 0 6px;
+            }
+          }
+        }
+      }
+
+      .infoSynopsis {
+        flex-direction: column;
+
+        .label {
+          margin-right: 0;
+          margin-bottom: 12px;
+        }
+
+        .answer {
+          white-space: pre-wrap;
+          height: 101px;
+          overflow: hidden;
+          margin-bottom: 20px;
+
+          &.answerOpen {
+            height: auto;
+          }
+        }
+
+        .seemore {
+          display: flex;
+          align-self: flex-end;
+          cursor: pointer;
+          font-size: 14px;
+          text-decoration: underline;
+        }
+      }
+
+      .links {
+        display: flex;
+        .link {
+          margin-right: 33px;
+          text-decoration: underline;
+          font-weight: 325;
+          font-size: 14px;
+          color: color(blue);
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+  }
+
+  .filterBar {
+    width: 100%;
+    margin-bottom: 23px;
+    padding: 25px 13px 26px 20px;
+    background-color: color(dark);
+    border-radius: 3px;
+  }
+}
