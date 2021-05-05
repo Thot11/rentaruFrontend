@@ -30,7 +30,28 @@ const TrendingPage = ({ products }) => {
 
   const getMangaList = () => {
     getMangaCollection(session).then(resp => {
-      if (!resp.error) setMangaCollection(resp)
+      if (!resp.error) {
+        const arrayBooked = [];
+        resp.forEach((manga) => {
+          let booked = 0;
+          manga.products.forEach((product) => {
+            booked += product.booked ? product.booked.length : 0;
+          })
+          arrayBooked.push({booked: booked, manga: manga.title})
+        })
+        arrayBooked.sort(function(a, b) {
+          return b.booked - a.booked;
+        });
+        const newMangaCollection = [];
+        arrayBooked.forEach((item) => {
+          resp.forEach((manga, index) => {
+            if(item.manga === manga.title) {
+              newMangaCollection.push(manga)
+            }
+          })
+        })
+        setMangaCollection(newMangaCollection)
+      }
     }).catch(()=> console.log('error'))
   }
 
@@ -42,26 +63,32 @@ const TrendingPage = ({ products }) => {
       <h1 className="h1">Les tops de nos lecteurs</h1>
       <div className="top">
         <h3>Top des lecteurs</h3>
-        {/* <div className="slider"> */}
-        <Swiper
-          freeMode={true}
-          mousewheel={{invert:true, forceToAxis: true}}
-          navigation
-          spaceBetween={20}
-          slidesPerView={5}
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
-        >
-          {mangaCollection.map((manga, key) => {
-            return (
-              <SwiperSlide>
-                <CardProductTrending mangaCollection={manga} key={key} position={key + 1} />
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
-
-        {/* </div> */}
+        <div className="slider">
+          <Swiper
+            freeMode={true}
+            mousewheel={{invert:true, forceToAxis: true}}
+            navigation={{              
+              nextEl: '.rightArrow',
+              prevEl: '.leftArrow',
+            }}
+            hiddenClass
+            disabledClass
+            spaceBetween={20}
+            slidesPerView={5}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+          >
+            {mangaCollection.map((manga, key) => {
+              return (
+                <SwiperSlide>
+                  <CardProductTrending mangaCollection={manga} key={key} position={key + 1} />
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+          <img src="/trendingArrow.svg" alt="leftArrow" className="arrow leftArrow" />
+          <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow"/>
+        </div>
       </div>
       
     </div>
