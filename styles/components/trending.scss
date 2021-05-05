@@ -14,10 +14,32 @@
     }
 
     .slider {
+      position: relative;
       display: flex;
       width: 100%;
       height: fit-content;
       overflow: auto hidden;
+
+      .arrow {
+        position: absolute;
+        top: calc(50% - 28px);
+        z-index: 50;
+        cursor: pointer;
+
+        &.leftArrow {
+          left: 16px;
+        }
+
+        &.rightArrow {
+          right: 16px;
+          transform: rotate(180deg);
+        }
+
+        &.swiper-button-disabled,
+        .swiper-button-hidden {
+          display: none;
+        }
+      }
     }
 
   }
