@@ -131,7 +131,7 @@ const Navbar = () => {
                     <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
                       <a className="navElement"><p>Paramètres</p></a>
                     </Link>
-                    <a href="/landing" className="navElement"><p>Mes commandes</p></a>
+                    <a href="/orders" className="navElement"><p>Mes commandes</p></a>
                     <a href="/" className="navElement" onClick={disconnect}><p>Déconnexion</p></a>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ const Navbar = () => {
               <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
                 <a className="elementMobile" onClick={() => setOpenBurger(!openBurger)}><p>Paramètres</p></a>
               </Link>
-              <a href="/landing" className="elementMobile"><p>Mes commandes</p></a>
+              <a href="/orders" className="elementMobile"><p>Mes commandes</p></a>
               <a href="/" className="elementMobile" onClick={() => {disconnect(); setOpenBurger(!openBurger);}}><p>Déconnexion</p></a>
             </div>
           </div>

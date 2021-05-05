@@ -117,13 +117,13 @@ const Footer = () => {
         </div>
         <div className="bottom">
           <div className="left">
-            <a href="https://discord.gg/VJmCrVPNA4" className="linkElement">
+            <a href="https://discord.gg/VJmCrVPNA4" className="linkElement" target="_blank">
               <img src="/discord.svg" alt="discord"/> 
             </a>
-            <a href="https://www.instagram.com/rentaru.france/?hl=fr" className="linkElement">
+            <a href="https://www.instagram.com/rentaru.france/?hl=fr" className="linkElement" target="_blank">
               <img src="/insta.svg" alt="insta"/> 
             </a>
-            <a href="https://twitter.com/FranceRentaru" className="linkElement">
+            <a href="https://twitter.com/FranceRentaru" className="linkElement" target="_blank">
               <img src="/twitter2.svg" alt="twitter"/> 
             </a>
           </div>

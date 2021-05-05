@@ -45,6 +45,7 @@
 
     .left {
       display: inline-flex;
+      width: 50%;
     }
 
     .productImg {
@@ -165,3 +166,17 @@
     }
   }
 }
+
+  @media only screen and (max-width: 700px) {
+    .commandesContainer {
+      .commande {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+
+        // .left {
+        //   width: 100%;
+        // }
+      }
+    }
+  }
