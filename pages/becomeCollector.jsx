@@ -102,7 +102,7 @@ const simulatorRef = useRef();
         </div>        
       </div>
       <div className="simulator" id="simulateur" ref={simulatorRef}>
-        <h3>{becomeCollector.simulatorTitle}</h3>
+        <h3 className="h1">{becomeCollector.simulatorTitle}</h3>
         <p className='simulatorWarning'>{becomeCollector.simulatorWarning}</p>
         <div className="simulatorWrapper">
           <h4>Dites nous en plus</h4>

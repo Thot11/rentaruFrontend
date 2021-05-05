@@ -28,7 +28,7 @@ const Faq = ({faq}) => {
             {faq.theme[selectedIndex].question.map((soloQuestion, index) => {
               return (
                 <Dropdown key={`${soloQuestion.titleQuestion}-${index}`} title={soloQuestion.titleQuestion} color="Dark">
-                  {soloQuestion.answerQuestion}
+                  <p dangerouslySetInnerHTML={{__html: soloQuestion.answerQuestion}}></p>
                 </Dropdown>
               )
             })}

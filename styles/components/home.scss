@@ -39,7 +39,7 @@
         line-height: 54px;
       }
 
-      p {
+      &> p {
         color: color(primary);
         font-size: 26px;
         margin-bottom: 19px;

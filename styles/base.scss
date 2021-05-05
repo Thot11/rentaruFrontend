@@ -181,6 +181,53 @@ input[type=number] {
   }
 } 
 
+span.bold {
+  font-weight: 600;
+  opacity: 1;
+}
+
+a.link {
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.mentionsText {
+  h2 {
+    margin: 20px 0;
+    color: color(secondary);
+    font-weight: 200;
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  h3 {
+    margin: 10px 0;
+    color: color(secondary);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  font-weight: 300;
+
+  p {
+    margin: 5px 0;
+  }
+  a {
+    color: color(blue);
+    text-decoration: underline;
+    word-break: break-all;
+  }
+
+  ul {
+    list-style-type: disc;
+
+    li {
+      margin-left: 20px;
+    }
+  }
+}
+
 
 @media only screen and (max-width: 700px) {
   .container {

@@ -13,7 +13,7 @@ const Cgl = ({cgu}) => {
       </Head>
       <div className="container">
           <h1 className="h1">{cgu.title}</h1>
-          <p className="mentionsText">{cgu.content}</p>
+          <p className="mentionsText" dangerouslySetInnerHTML={{__html: cgu.content}}></p>
     </div>
     </div>
   );
