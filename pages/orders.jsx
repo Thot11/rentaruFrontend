@@ -85,12 +85,12 @@ const Orders = ({}) => {
                   <div className="buttonsContainer">
                     <Link href={"/"}>
                       <a>
-                        <Button color={'Transparent'}>Annuler la commande</Button>
+                        <Button color={'Transparent'}>{now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
                       </a>
                     </Link>
                     <Link href="/">
                       <a>
-                        <Button color={'White'}>Envoyer un message</Button>
+                        <Button color={'White'}>{now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
                       </a>   
                     </Link>
                   </div>
