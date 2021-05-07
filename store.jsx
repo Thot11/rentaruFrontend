@@ -83,6 +83,12 @@ const setErrorAction = makeAction('errorState');
 const deleteSessionAction = makeAction('deleteSession');
 const paiementDataAction = makeAction('paiementInfo')
 
+export const updateLocalme = (newUser) => {
+  return (dispatch) => {
+    dispatch(setMeAction(newUser))
+  }
+}
+
 export const paiementData = (bookings, startDate, endDate) => {
   return (dispatch) => {
     dispatch(paiementDataAction({bookings, startDate, endDate}));

@@ -1,17 +1,9 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable prettier/prettier */
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
-import {getUser} from "../utils/api";
-import {updateMe} from '../store'
 
-const CardProduct = ({ product, key, user }) => {
-
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  const { session } = state;
+const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
 
   return (
     <div className="cardProduct" key={key}>
@@ -42,7 +34,10 @@ const CardProduct = ({ product, key, user }) => {
             </div>
             <div className="downerInfo">
               <div className="update">
-                <div className="delete">
+                <div className="delete" onClick={() => {
+                  setOpenModal(true);
+                  setInfoModal({name: product.title, id: product.id, tomeInitial: product.tomeInitial, tomeFinal: product.tomeFinal});
+                }}>
                   <img src="/trash.svg" alt=""/>
                 </div>
                 <Link href={`/update/${product.slug}`}>
@@ -52,7 +47,7 @@ const CardProduct = ({ product, key, user }) => {
                 </Link>
               </div>
               <div className="price">
-                {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price*1.1+0.2)}
+                {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price)}
                 <span>/2 semaines</span>
               </div>
             </div>
