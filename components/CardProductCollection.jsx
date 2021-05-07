@@ -45,9 +45,11 @@ const CardProduct = ({ product, key, user }) => {
                 <div className="delete">
                   <img src="/trash.svg" alt=""/>
                 </div>
-                <div className="modify">
-                  <img src="/edit.svg" alt=""/>
-                </div>
+                <Link href={`/update/${product.slug}`}>
+                  <div className="modify">
+                    <img src="/edit.svg" alt=""/>
+                  </div>
+                </Link>
               </div>
               <div className="price">
                 {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(product.price*1.1+0.2)}

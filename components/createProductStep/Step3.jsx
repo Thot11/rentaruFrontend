@@ -4,9 +4,12 @@ import Button from "../../elements/Button"
 
 const Step3 = ({ step, setStep, data, setData }) => {
 
-  const [selectedFile, setSelectedFile] = useState([])
+  const [selectedFile, setSelectedFile] = useState(data.images ?? [])
   const [previewImages, setPreviewImages] = useState([])
+  const [bool, setBool] = useState(false)
   const [error, setError] = useState(false)
+
+  console.log(selectedFile, previewImages);
 
   const nextStep = () => {
     setData({
@@ -21,10 +24,12 @@ const Step3 = ({ step, setStep, data, setData }) => {
   }
 
   useEffect(() => {
+    
     let previewImage = []
     if (selectedFile) {
       selectedFile.forEach(file => {
-        previewImage.push(URL.createObjectURL(file))
+        if (file.url) previewImage.push(file.url)
+        else previewImage.push(URL.createObjectURL(file))
       });
     }
     setPreviewImages(previewImage)
@@ -57,7 +62,19 @@ const Step3 = ({ step, setStep, data, setData }) => {
         <div className="previewContainer">
           {previewImages.map((image, index) => {
             return (
-              <img src={image} alt="preview image" key={index} />
+              <div className="img">
+                <div className="delete" onClick={() => {
+                  setBool(!bool);
+                  const temp1 = previewImages;
+                  const temp2 = selectedFile
+                  temp1.splice(index, 1)
+                  temp2.splice(index, 1)
+                  console.log(temp1, temp2);
+                  setPreviewImages(temp1)
+                  setSelectedFile(temp2)
+                  }}>blabla</div>
+                <img src={image} alt="preview image" key={index} />
+              </div>
             )
           })}
         </div>

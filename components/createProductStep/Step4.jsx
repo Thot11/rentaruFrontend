@@ -28,9 +28,12 @@ const Step4 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   }
 
   useEffect(() => {
-    if (data.tomeFinal && data.tomeInitial) {
+    if (data.tomeFinal && data.tomeInitial && !data.price) {
       setEstimatedPrice(data.tomeFinal - data.tomeInitial + 1)
       setPrice(data.tomeFinal - data.tomeInitial + 1)
+    } else if (data.price) {
+      setPrice(data.price)
+      setEstimatedPrice(data.tomeFinal - data.tomeInitial + 1)
     }
   }, [data.tomeInitial, data.tomeFinal])
 
