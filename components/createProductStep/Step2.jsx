@@ -56,7 +56,7 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
   useEffect(() => {
     if (selectedEditor !== -1) {
-      setEdition(languages[selectedLanguage])
+      setEdition(editors[selectedEditor])
     }
   }, [selectedEditor])
 

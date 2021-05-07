@@ -199,13 +199,12 @@ export const postProduct = (data, token) => {
   };
 };
 
-export const putProduct = (data, token) => {
+export const putProduct = (id, data, token) => {
 
   return (dispatch) => {
-    GlobalAPI.updateProduct(data, token)
+    GlobalAPI.updateProduct(id, data, token)
       .then((resp) => {
         if (resp) {
-          console.log(resp);
           dispatch(createProductAction(resp.data));
         } else {
           console.log('error');

@@ -40,10 +40,6 @@ const Orders = ({}) => {
     }
   }, [user])
 
-  console.log(myCollectionOrders);
-
-
-
   return (
     <div>
       <Head>

@@ -36,7 +36,6 @@ const simulatorRef = useRef();
   }, [session])
 
   useEffect(() => {
-    console.log('init', router.query.scroll, simulatorRef.current);
     if (router.query.scroll === "simulateur" && simulatorRef.current) {
       setTimeout(() => simulatorRef.current.scrollIntoView({behavior: 'smooth'}), 300);
       // simulatorRef.current.scrollIntoView({behavior: 'smooth'})

@@ -9,8 +9,6 @@ const Step3 = ({ step, setStep, data, setData }) => {
   const [bool, setBool] = useState(false)
   const [error, setError] = useState(false)
 
-  console.log(selectedFile, previewImages);
-
   const nextStep = () => {
     setData({
       ...data,
@@ -69,7 +67,6 @@ const Step3 = ({ step, setStep, data, setData }) => {
                   const temp2 = selectedFile
                   temp1.splice(index, 1)
                   temp2.splice(index, 1)
-                  console.log(temp1, temp2);
                   setPreviewImages(temp1)
                   setSelectedFile(temp2)
                   }}>blabla</div>
