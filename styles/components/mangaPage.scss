@@ -134,5 +134,158 @@
     padding: 25px 13px 26px 20px;
     background-color: color(dark);
     border-radius: 3px;
+
+    h3 {
+      color: color(secondary);
+      font-size: 12px;
+      font-weight: 350;
+    }
+
+    .filters {
+      display: flex;
+      align-items: flex-end;
+
+      .filter {
+        margin-right: 58px;
+
+        .label {
+          margin-bottom: 6px;
+          color: color(secondary, 0.6);
+          font-size: 12px;
+          font-weight: 325;
+        }
+
+        .inputs {
+          display: flex;
+          align-items: center;
+          color: color(secondary, 0.6);
+          font-size: 12px;
+          font-weight: 325;
+
+          input {
+            width: 40px;
+            height: 25px;
+            padding: 6px;
+            background-color: color(primary);
+            border-radius: 3px;
+          }
+
+          p {
+            margin: 0 7px;
+          }
+        }
+
+        .select {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 25px;
+          padding: 6px;
+          padding-right: 9px;
+          color: color(secondary, 0.6);
+          font-size: 12px;
+          font-weight: 325;
+          background-color: color(primary);
+          border-radius: 3px;
+
+          &.selectGeo {
+            width: 169px;
+          }
+
+          &.selectDelivery {
+            width: 170px;
+          }
+
+          &.selectFilter {
+            width: 134px;
+
+            .options {
+              width: 154px;
+            }
+          }
+
+          p {
+            color: color(secondary, 0.6);
+            font-size: 12px;
+            font-weight: 325;
+          }
+
+          img {
+            transform: rotate(-90deg);
+            transition-duration: 0.3s;
+            cursor: pointer;
+
+            &.imageOpen {
+              transform: rotate(90deg);
+              transition-duration: 0.3s;
+            }
+          }
+
+          .options, .autocompletion {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            z-index: 10;
+            width: 184px;
+            background-color: color(lightDark);
+            border-radius: 3px;
+
+            .cityList {
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              padding: 10px 6px 8px 6px;
+              border-bottom: 0.5px solid color(secondary, 0.1);
+
+              .cityLabel {
+                display: flex;
+                align-items: center;
+                margin-right: 5px;
+                margin-bottom: 5px;
+                padding: 5px 3px;
+                color: color(secondary);
+                font-size: 12px;
+                font-weight: 325;
+                background-color: color(primary);
+                border-radius: 3px;
+
+                img {
+                  margin-left: 5px;
+                }
+              }
+            }
+
+            .rayon {
+              width: 100%;
+              border-bottom: 0.5px solid color(secondary, 0.1);
+            }
+
+            button {
+              display: flex;
+              justify-content: center;
+              width: 100%;
+              border-bottom: 0.5px solid color(secondary, 0.1);
+              padding: 10px 0;
+
+            }
+
+            .option {
+              padding: 9px;
+              padding-right: 5px;
+              border-bottom: 0.5px solid color(secondary, 0.12);
+              cursor: pointer;
+
+
+
+              &:last-child {
+                border-bottom: 0;
+              }
+            }
+          }
+        }
+
+      }
+    }
   }
 }

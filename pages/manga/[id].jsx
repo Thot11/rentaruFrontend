@@ -7,6 +7,29 @@ import ProductsList from "../../components/ProductsList";
 import { getManga, getMangaCollection, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
 
+// Date
+import { DateRangePicker } from 'react-dates';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+import 'moment/locale/fr'
+import 'react-dates/lib/css/_datepicker.css';
+
+// Data
+import dataCities from '../../utils/dataCities'
+
+const delivery = [
+  'Point relais',
+  'Remise en main propre',
+  'Indifférent'
+]
+
+const filters = [
+  'Les plus récents',
+  'Les plus anciens',
+  'Les moins chers',
+  'Les plus loués'
+]
+
 
 const MangaPage = ({ manga, products }) => {
 
@@ -16,8 +39,46 @@ const MangaPage = ({ manga, products }) => {
     return <div>Loading products...</div>;
   }
 
+  const [windowWidth, setWindowWidth] = useState(1281);
+
+  // mangaInfo
   const [synopsisOpen, setSynopsisOpen] = useState(false);
 
+  //FilterBar
+  const [selectGeoOpen, setSelectGeoOpen] = useState(false)
+  const [inputCity, setInputCity] = useState('');
+  const [cityList, setCityList] = useState([]);
+  const [rayon, setRayon] = useState(25);
+
+  const [selectDeliveryOpen, setSelectDeliveryOpen] = useState(false);
+  const [deliverySelected, setDeliverySelected] = useState(0);
+
+  const [selectFilterOpen, setSelectFilterOpen] = useState(false);
+  const [filterSelected, setFilterSelected] = useState(0);
+
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [focusedInput, setFocusedInput] = useState();
+
+  const [changes, setChanges] = useState(false);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+  const removeCity = (index) => {
+    const newArray = cityList;
+    newArray.splice(index, 1);
+    setCityList(newArray);
+    setChanges(!changes)
+  }
+
+  
   return (
     <div className="mangaPage">
       <Head>
@@ -82,7 +143,103 @@ const MangaPage = ({ manga, products }) => {
         </div>
       </div>
       <div className="filterBar">
-
+        <h3>Recherche avancée</h3>
+        <div className="filters">
+          <div className="filter">
+            <p className="label">Tomes</p>
+            <div className="inputs">
+              <input type="number" min="1" max="200"/>
+              <p>au</p>
+              <input type="number" min="1" max="200"/>
+            </div>
+          </div>
+          <div className="filter">
+            <p className="label">Zone géographique</p>
+            <div className="select selectGeo">
+              <input type="text" placeholder='Saisissez une ville' autocomplete="off" value={inputCity} onChange={(e) => setInputCity(e.target.value)} />
+              {selectGeoOpen && inputCity.length < 3 && cityList.length > 0 &&
+                <div className="options">
+                  <div className="cityList">
+                    {cityList.map((city, key) => {
+                      return <p key={key} className='cityLabel'>{city} <img src="/exitCross.svg" alt="exit" onClick={() => removeCity(key)} /></p>
+                    })}
+                  </div>
+                  <div className="rayon">
+                    <p>Rayon</p>
+                  </div>
+                  <button onClick={() => setSelectGeoOpen(false)}>Valider</button>
+                </div>
+              }
+              {inputCity.length > 2 && 
+                <div className="autocompletion">
+                  {dataCities.map((city, key) => {         
+                    if(city.name.toLowerCase().startsWith(inputCity.toLowerCase())) {
+                      return (
+                        <p className="option" key={key} onClick={() => {setCityList([...cityList, `${city.name} (${city.departement})`]); setInputCity(''); setSelectGeoOpen(true)}}>{city.name} ({city.departement})</p>
+                      )
+                    }
+                  })}
+                </div>
+              }
+            </div>
+          </div>
+          <div className="filter">
+            <p className="label">Mode de livraison</p>
+            <div className="select selectDelivery">
+              <p>{delivery[deliverySelected]}</p>
+              <img src="/chevronLeftS.svg" alt="arrow" className={selectDeliveryOpen ? 'imageOpen' : ''} onClick={() => setSelectDeliveryOpen(!selectDeliveryOpen)} />
+              {selectDeliveryOpen && 
+                <div className="options">
+                  {delivery.map((option, key) => {
+                    if(option !== delivery[deliverySelected])
+                    return (
+                      <p className="option" key={key} onClick={() => {setDeliverySelected(key);setSelectDeliveryOpen(false)}}>{option}</p>
+                    )
+                  })}
+                </div>
+              }
+            </div>
+          </div>
+          <div className="filter">
+            <p className="label">Trier par</p>
+            <div className="select selectFilter">
+              <p>{filters[filterSelected]}</p>
+              <img src="/chevronLeftS.svg" alt="arrow" className={selectFilterOpen ? 'imageOpen' : ''} onClick={() => setSelectFilterOpen(!selectFilterOpen)}/>
+              {selectFilterOpen && 
+                <div className="options">
+                  {filters.map((option, key) => {
+                    if(option !== filters[filterSelected])
+                    return (
+                      <p className="option" key={key} onClick={() => {setFilterSelected(key);setSelectFilterOpen(false)}}>{option}</p>
+                    )
+                  })}
+                </div>
+              }
+            </div>
+          </div>
+          <div className="filter">
+            <DateRangePicker
+              hideKeyboardShortcutsPanel
+              navPrev={<img src="/chevronLeftS.svg" alt="" style={{left: "10px"}} />}
+              navNext={<img src="/chevronRightS.svg" alt="" style={{right: "10px"}}/>}
+              firstDayOfWeek={1}
+              noBorder
+              customInputIcon={<img src="/calendar.svg" alt=""/>}
+              customArrowIcon={<img src="/lineSpace.svg" alt=""/>}
+              startDatePlaceholderText={'Du'}
+              endDatePlaceholderText={'au'}
+              startDate={startDate} // momentPropTypes.momentObj or null,
+              startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+              endDate={endDate} // momentPropTypes.momentObj or null,
+              endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+              onDatesChange={({ startDate, endDate }) => {setStartDate(startDate); setEndDate(endDate);}} // PropTypes.func.isRequired,
+              focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+              onFocusChange={focusedInput => setFocusedInput(focusedInput)} // PropTypes.func.isRequired,
+              minimumNights={3}
+              numberOfMonths={windowWidth > 700 ? 2 : 1}
+            />
+          </div>
+        </div>
       </div>
       <ProductsList products={products} />
     </div>
