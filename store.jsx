@@ -199,6 +199,25 @@ export const postProduct = (data, token) => {
   };
 };
 
+export const putProduct = (data, token) => {
+
+  return (dispatch) => {
+    GlobalAPI.updateProduct(data, token)
+      .then((resp) => {
+        if (resp) {
+          console.log(resp);
+          dispatch(createProductAction(resp.data));
+        } else {
+          console.log('error');
+        }
+      })
+      .catch((e) => {
+        dispatch(setErrorAction({type: 'createProduct', message: 'Problème lors de l\'ajout de votre produit'}))
+        console.log('error' +e);
+      });
+  };
+};
+
 export const postSignUp = (
   mail,
   password,

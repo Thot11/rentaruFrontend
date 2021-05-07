@@ -129,7 +129,7 @@ const MangaPage = ({ manga, products }) => {
           </div>
           <div className="info infoSynopsis">
             <p className="label">Synopsis</p>
-            <p className={synopsisOpen ? "answer answerOpen" : "answer"}>{manga.synopsis}</p>
+            <p className={synopsisOpen ? "answer answerOpen" : "answer"} dangerouslySetInnerHTML={{__html: manga.synopsis}}></p>
             <p className="seemore" onClick={() => setSynopsisOpen(!synopsisOpen)}>{synopsisOpen ? 'Voir moins...' : 'Voir plus...'}</p>
           </div>
           <div className="links">

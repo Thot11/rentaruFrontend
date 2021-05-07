@@ -69,6 +69,10 @@
             }
           }
         }
+
+        &:last-child {
+          border-bottom: transparent solid 0.2px;
+        }
       }
     }
   }

@@ -45,15 +45,15 @@ const Landing = ({landing}) => {
         {/* <h2 className="h1">Comment marche la location de mangas ?</h2> */}
         <div className="collectorPart">
           <h2 className="h1">{landing.titleCollector} </h2>
-          <p className="explanation">{landing.explanationCollector}</p>
-          <p className="tips">{landing.tipsCollector}</p>
+          <p className="explanation" dangerouslySetInnerHTML={{__html: landing.explanationCollector}}></p>
+          <p className="tips" dangerouslySetInnerHTML={{__html: landing.tipsCollector}}></p>
           <div className="cardsContainer">
             {landing.cardsCollector.map((card, key) => {
               return (
                 <div className="card" key={key}>
                   <img src={getStrapiMedia(card.image[0].url)} alt="online"/>
-                  <h3>{card.titleCard}</h3>
-                  <p>{card.descriptionCard}</p>             
+                  <h3 dangerouslySetInnerHTML={{__html: card.titleCard}}></h3>
+                  <p dangerouslySetInnerHTML={{__html: card.descriptionCard}}></p>
                 </div>
               )
             })}
@@ -76,15 +76,15 @@ const Landing = ({landing}) => {
           <img src="separation1.png" alt="" className="separation separation1" />
           <img src="separation2.png" alt="" className="separation separation2" />
           <h2 className="h1">{landing.titleReader} </h2>
-          <p className="explanation">{landing.explanationReader}</p>
-          <p className="tips">{landing.tipsReader}</p>
+          <p className="explanation" dangerouslySetInnerHTML={{__html: landing.explanationReader}}></p>
+          <p className="tips" dangerouslySetInnerHTML={{__html: landing.tipsReader}}></p>
           <div className="cardsContainer">
             {landing.cardsReader.map((card, key) => {
               return (
                 <div className="card" key={key}>
                   <img src={getStrapiMedia(card.image[0].url)} alt="online"/>
-                  <h3>{card.titleCard}</h3>
-                  <p>{card.descriptionCard}</p>                  
+                  <h3 dangerouslySetInnerHTML={{__html: card.titleCard}}></h3>
+                  <p dangerouslySetInnerHTML={{__html: card.descriptionCard}}></p>
                 </div>
               )
             })}
@@ -99,37 +99,20 @@ const Landing = ({landing}) => {
         </div>
         <div className="insurancePart">
           <h2 className="h1">{landing.titleInsurance} </h2>
-          <p className="explanation">{landing.explanationInsurance}</p>
-          <p className="tips">{landing.tipsInsurance}</p>
+          <p className="explanation" dangerouslySetInnerHTML={{__html: landing.explanationInsurance}}></p>
+          <p className="tips" dangerouslySetInnerHTML={{__html: landing.tipsInsurance}}></p>
           <div className="cardsContainer">
             {landing.cardsInsurance.map((card, key) => {
               return (
                 <div className="card" key={key}>
                   <img src={getStrapiMedia(card.image[0].url)} alt="online"/>
-                  <h3>{card.titleCard}</h3>
-                  <p>{card.descriptionCard}</p>                  
+                  <h3 dangerouslySetInnerHTML={{__html: card.titleCard}}></h3>
+                  <p dangerouslySetInnerHTML={{__html: card.descriptionCard}}></p>
                 </div>
               )
             })}
           </div>
         </div>
-        {/* <div className="footer">
-          <img src="/footerBackground.png" alt="footerBackground"/>
-          <h1>{landing.footerTitle}</h1>
-          <p>{landing.footerSubtitle}</p>
-          <div className="buttons">
-            <Link href="/create/product">
-              <a>
-                <Button color={'Red'}>{landing.footerCTA}</Button>
-              </a>            
-            </Link>
-            <Link href="/">
-              <a>
-                <Button color={'Red'}>{landing.footerSecondCTA}</Button> 
-              </a>
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   );

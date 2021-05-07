@@ -68,6 +68,8 @@ const Navbar = () => {
       router.push({ pathname: "/search", query: { title: searchElement } })
     }
   }, [keyDown, searchElement, router])
+
+  console.log(user);
   
   return (
     <div className="navbarContainer">

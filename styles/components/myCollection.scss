@@ -1,0 +1,78 @@
+.container {
+
+  .h1 {
+      margin-top: 50px;
+      margin-bottom: 40px;
+  }
+
+  .collectionProductsContainer {
+
+    .createAnnonce {
+      width: 245px;
+      height: 400px;
+      background-color: color(dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 142px;
+      font-weight: 200;
+      cursor: pointer;
+
+      span {
+        transition: all .2s ease-in-out;
+      }
+
+      &:hover {
+        span {
+          transform: scale(1.1);
+        }
+      }
+
+    }
+    .cardProduct {
+      .info {
+        .downerInfo {
+          .update {
+            display: inline-flex;
+
+            .delete, .modify {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #1f2b33;
+              width: 33px;
+              height: 33px;
+              border-radius: 3px 3px 0 0;
+              margin-bottom: -11px;
+              cursor: pointer;
+
+              img {
+                max-width: 20px;
+                max-height: 20px;
+                width: auto;
+                height: auto;
+              }
+
+              &:first-child {
+                margin-right: 11px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
+
+@media (max-width: 700px) {
+.collectionContainer {
+  padding: 20px;
+  margin-top: 65px;
+
+  .h1 {
+    margin-top: 20px;
+  }
+}
+}

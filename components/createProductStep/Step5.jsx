@@ -4,7 +4,7 @@ import Button from "../../elements/Button"
 
 const Step5 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(data.description ?? '')
   const [error, setError] = useState(false)
 
 

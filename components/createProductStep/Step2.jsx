@@ -6,18 +6,19 @@ import Button from "../../elements/Button"
 
 const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
 
-  const [integrale, setIntegrale] = useState(false)
-  const [from, setFrom] = useState()
-  const [to, setTo] = useState()
-  const [langue, setLangue] = useState('')
-  const [edition, setEdition] = useState('')
-  const [etat, setEtat] = useState('')
-  const [selectedLanguage, setSelectedLanguage] = useState(0)
-  const [selectedEditor, setEditor] = useState(0)
-
+  const [integrale, setIntegrale] = useState(data.integrale ?? false)
+  const [from, setFrom] = useState(data.tomeInitial ?? undefined)
+  const [to, setTo] = useState(data.tomeFinal ?? undefined)
+  const [langue, setLangue] = useState(data.langue ?? '')
+  const [edition, setEdition] = useState(data.edition ?? '')
+  const [etat, setEtat] = useState(data.etat ?? '')
+  
   const languages = ['Français', 'Anglais', 'Japonais', 'Italie']
   const editors = ['Glénat', 'Pika', 'Ki-oon', 'Kana', 'Delcourt']
 
+  const [selectedLanguage, setSelectedLanguage] = useState(data.langue ? languages.findIndex(language => language === data.langue) : 0)
+  const [selectedEditor, setEditor] = useState(data.edition ? editors.findIndex(editor => editor === data.edition) : 0)
+  
   const [error, setError] = useState(false)
 
 

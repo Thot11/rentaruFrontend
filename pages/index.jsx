@@ -31,7 +31,7 @@ const HomePage = ({ home }) => {
         <img src={getStrapiMedia(home.slider[0].url)} alt="cover" className="cover" />
         <img src="/Separation3.png" alt="background" className='substract'/>
         <div className='hero'>
-          <h1>{home.heroTitle}</h1>
+          <h1 dangerouslySetInnerHTML={{__html: home.heroTitle}}></h1>
           <p>{home.heroDescription}</p>
           <Link href="/landing"><button>{home.heroCTA}</button></Link>
         </div>
