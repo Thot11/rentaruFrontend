@@ -252,3 +252,9 @@ export async function deleteProduct(id, token) {
   return resp;
 }
 
+export async function deleteOrder(id, token) {
+  const resp = await axios
+  .delete(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes/${id}?token=${token}`)
+  return resp;
+}
+

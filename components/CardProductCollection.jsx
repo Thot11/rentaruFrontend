@@ -2,11 +2,11 @@
 /* eslint-disable prettier/prettier */
 import Link from "next/link";
 import { getStrapiMedia } from "../utils/medias";
+import Button from "../elements/Button";
 
 const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
-
   return (
-    <div className="cardProduct" key={key}>
+    <div className={`cardProduct ${product.status === 'draft' ? 'draft' : ''}`} key={key}>
       {product.integrale && (
         <div className="badgeSilver">
           <img src="/book2.svg" alt="book"/>
@@ -17,8 +17,8 @@ const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
         <div className="modalContainer">
           <div className="modalContent">
             <div className="text">
-              <p><span>Cette série est actuellement en mode brouillon</span></p>
-              <p>Modifier la pour la rendre visible</p>
+              <p><span>Cette série est actuellement en mode brouillon et non visible pour les utilisateurs</span></p>
+              <Button color="Transparent" functionOnClick={() => setInfoModal({published: true, id: product.id})}>La rendre visible</Button>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@ const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
               <div className="update">
                 <div className="delete" onClick={() => {
                   setOpenModal(true);
-                  setInfoModal({name: product.title, id: product.id, tomeInitial: product.tomeInitial, tomeFinal: product.tomeFinal});
+                  setInfoModal({name: product.title, id: product.id, tomeInitial: product.tomeInitial, tomeFinal: product.tomeFinal, booked: product.booked, commandes: product.commandes});
                 }}>
                   <img src="/trash.svg" alt=""/>
                 </div>

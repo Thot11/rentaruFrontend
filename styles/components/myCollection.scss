@@ -1,7 +1,12 @@
-.modalContainer {
+.modalContainerFullscreen {
 
   .cuteCat {
-    margin-top: 40px;
+    margin-top: 20px;
+  }
+
+  .care {
+    text-align: center;
+    color: color(secondary, .5);
   }
 
   .sure {
@@ -59,6 +64,42 @@
 
     }
     .cardProduct {
+      position: relative;
+
+      .modalContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        background-color: color(dark, .4);
+        box-shadow: 0 4px 34px rgba(0, 0, 0, .8);
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          
+          span {
+            color: color(secondary, 0.7);
+            font-size: 14px;
+            font-weight: 300;
+          }
+
+          button {
+            width: 100%;
+            margin-top: 20px;
+          }
+        }
+        }
+
+
+      &.draft {
+        a {
+          opacity: .5;
+        }
+      }
+
       .info {
         .downerInfo {
           .update {

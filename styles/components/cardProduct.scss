@@ -16,9 +16,13 @@
       align-items: center;
       justify-content: space-between;
       height: 218px;
-      padding: 20px 18px 12px 20px;
-      background-color: color(primary);
+      padding: 20px;
+      background-color: color(dark);
       border-radius: 3px;
+
+      button {
+        width: 100%;
+      }
 
       .text {
         p {
