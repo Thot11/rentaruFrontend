@@ -103,6 +103,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   }
 
   const goToPaiement = () => {
+    if (product.user.username === me.username) return;
     if (startDate && endDate) {
       setBookings([...bookings, {startDate, endDate}])
       const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
@@ -274,12 +275,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                 />
                 <a onClick={() => goToPaiement()}>
                   <button
-                    className="buttonRed button btnRent"
+                    className={`buttonRed button btnRent ${product.user.username === me.username ? 'disable' : ''}`}
                   >
                     Louer la série
                   </button>
                 </a>
-                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>Vous ne serez pas encore débité</p>)}
+                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>Voyons... ceci est votre collection</p>)}
               </div>
               <div className="delivery">
                 <div className="deliveryElement">
