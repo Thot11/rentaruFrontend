@@ -99,7 +99,11 @@ const Dashboard = ({ user, setTabs }) => {
     <>
       <div className="topContainer">
         <div className="left">
-          <img src={getStrapiMedia(user.profilPic?.url)} alt="profilPic"/>
+          {user.profilPic ? (
+            <img src={getStrapiMedia(user.profilPic?.url)} alt="profilPic"/>
+          ) : (
+            <div className="emptyProfilPic">{user.username?.charAt(0)}</div>
+          )}
           <div className="hello">
               <div className="mainText"> Bonjour {user.username}</div>
               <p className="link" onClick={() => setTabs('params')}>Modifier votre profil <img src="/chevronLink.svg" /></p>
