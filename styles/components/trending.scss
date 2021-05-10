@@ -5,6 +5,7 @@
     margin-bottom: 88px;
   }
   .top {
+    margin-top: 73px;
 
     h3 {
       margin-bottom: 28px;
@@ -20,25 +21,43 @@
       height: fit-content;
       overflow: auto hidden;
 
-      .arrow {
+      .swiper-container {
+        width: 100%;
+      }
+
+      .arrowContainer {
         position: absolute;
-        top: calc(50% - 28px);
+        top: 0;
         z-index: 50;
-        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        width: 175px;
 
-        &.leftArrow {
-          left: 16px;
-        }
-
-        &.rightArrow {
-          right: 16px;
+        &.leftArrowContainer {
+          left: 0;
           transform: rotate(180deg);
+          background: linear-gradient(271.15deg, #151C21 8.72%, rgba(21, 28, 33, 0) 106.56%);
         }
 
-        &.swiper-button-disabled,
-        .swiper-button-hidden {
-          display: none;
+        &.rightArrowContainer {
+          right: 0;
+          background: linear-gradient(271.15deg, #151C21 8.72%, rgba(21, 28, 33, 0) 106.56%);
         }
+
+        .arrow {
+          z-index: 50;
+          cursor: pointer;
+          transform: rotate(180deg);
+          margin-right: 16px;
+  
+          &.swiper-button-disabled,
+          .swiper-button-hidden {
+            display: none;
+          }
+        }
+
       }
     }
 
