@@ -40,10 +40,6 @@ const Orders = ({}) => {
     }
   }, [user])
 
-  console.log(myCollectionOrders);
-
-
-
   return (
     <div>
       <Head>
@@ -109,7 +105,9 @@ const Orders = ({}) => {
                     <div className="up">
                       <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
                       <div className="ownerContainer">
-                        <img src={commande.not_owner.profilPic.formats.thumbnail.url} alt="profil picture collectionneur"/> 
+                        {commande.not_owner.profilPic && (
+                          <img src={commande.not_owner.profilPic.formats ? commande.not_owner.profilPic.formats.thumbnail.url : commande.not_owner.profilPic.url} alt="profil picture collectionneur"/> 
+                        )}
                         <div><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
                       </div>
                     </div>

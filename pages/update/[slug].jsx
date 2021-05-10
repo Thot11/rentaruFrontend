@@ -2,21 +2,18 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { paiementData, updateMe } from "../../store";
-import ProductsList from "../../components/ProductsList";
-import Step1 from "../../components/createProductStep/Step1"
 import Step2 from "../../components/createProductStep/Step2"
 import Step3 from "../../components/createProductStep/Step3"
 import Step4 from "../../components/createProductStep/Step4"
 import Step5 from "../../components/createProductStep/Step5"
 import PreviewProduct from "../../components/createProductStep/PreviewProduct"
-import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } from "../../utils/api";
+import { getProducts, getProduct } from "../../utils/api";
 import { putProduct } from '../../store'
-import { getStrapiMedia } from "../../utils/medias";
 import Link from "next/link";
+import Button from "../../elements/Button";
 
 const ProductPage = ({ product }) => {
   const router = useRouter();
@@ -28,8 +25,6 @@ const ProductPage = ({ product }) => {
   
   const state = useSelector((state) => state);
   const { session, user, errorState, createdProduct } = state;
-
-  console.log(user, product);
   
   const [step, setStep] = useState(2)
   const [data, setData] = useState({
@@ -60,12 +55,17 @@ const ProductPage = ({ product }) => {
       
       if (data.images?.length > 0) {
         data.images.forEach((file) => {
-          formData.append(`files.images`, file, file.name)
+          if (!file.id) {
+            formData.append('ref', 'products')
+            formData.append('refId', product.id)
+            formData.append('field', 'images')
+            formData.append(`files.images`, file)
+          }
         })
-        delete data.images
+        data.images = data.images.filter(image => image.id).map(image => image.id)
       }
       formData.append('data', JSON.stringify(data))
-      dispatch(putProduct(formData, session))
+      dispatch(putProduct(product.id, formData, session))
     }
   }, [step])
 
@@ -110,7 +110,7 @@ const ProductPage = ({ product }) => {
                 return errorState.type === "createProduct" ? (
                   <div>{errorState.message}</div>
                 ) : (<div className="finalStep">
-                    Annonce modifié, Merci... 
+                    Annonce modifiée, Merci... 
                     {createdProduct.slug && (
                       <div className="btnContainer">
                         <Link href={`/products/${createdProduct.slug}`} >

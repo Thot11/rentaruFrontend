@@ -42,7 +42,7 @@ const PaiementPage = ({ product }) => {
   },[delivery])
 
   const go = () => {
-    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, product.price, product.price*1.1+0.2, deliveryPrice, 'handToHand', session).then((resp) => {
+    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', session).then((resp) => {
       updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
     })
   }

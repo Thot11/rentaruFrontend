@@ -1,9 +1,43 @@
+.modalContainerFullscreen {
+
+  .cuteCat {
+    margin-top: 20px;
+  }
+
+  .care {
+    text-align: center;
+    color: color(secondary, .5);
+  }
+
+  .sure {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 22px;
+    line-height: 22px;
+    color: color(secondary, .6);
+  }
+
+  .buttonsContainer {
+    display: inline-flex;
+    button {
+      margin-right:10px;
+
+      &:last-child {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
 .container {
 
   .h1 {
       margin-top: 50px;
       margin-bottom: 40px;
   }
+
 
   .collectionProductsContainer {
 
@@ -30,6 +64,42 @@
 
     }
     .cardProduct {
+      position: relative;
+
+      .modalContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        background-color: color(dark, .4);
+        box-shadow: 0 4px 34px rgba(0, 0, 0, .8);
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          
+          span {
+            color: color(secondary, 0.7);
+            font-size: 14px;
+            font-weight: 300;
+          }
+
+          button {
+            width: 100%;
+            margin-top: 20px;
+          }
+        }
+        }
+
+
+      &.draft {
+        a {
+          opacity: .5;
+        }
+      }
+
       .info {
         .downerInfo {
           .update {

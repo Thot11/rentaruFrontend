@@ -13,6 +13,7 @@ import Dropdown from "./dropdown"
 import Moment from 'moment';
 import 'moment/locale/fr'
 import { extendMoment } from 'moment-range';
+import Link from "next/link";
 
 
 const Dashboard = ({ user, setTabs }) => {
@@ -102,7 +103,9 @@ const Dashboard = ({ user, setTabs }) => {
           <div className="hello">
               <div className="mainText"> Bonjour {user.username}</div>
               <p className="link" onClick={() => setTabs('params')}>Modifier votre profil <img src="/chevronLink.svg" /></p>
-              <p className="link" >Voir ma collection <img src="/chevronLink.svg" /></p>
+              <Link href="/myCollection">
+                <p className="link" >Voir ma collection <img src="/chevronLink.svg" /></p>
+              </Link>
           </div>
         </div>
         <div className="right">

@@ -240,8 +240,21 @@ export async function updateMe(data, token) {
 export async function updateProduct(id, data, token) {
   const resp = await axios
   .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/products/${id}?token=${token}`, data)
-  
   return resp;
 }
 
+
+// Delete request
+
+export async function deleteProduct(id, token) {
+  const resp = await axios
+  .delete(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/products/${id}?token=${token}`)
+  return resp;
+}
+
+export async function deleteOrder(id, token) {
+  const resp = await axios
+  .delete(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes/${id}?token=${token}`)
+  return resp;
+}
 
