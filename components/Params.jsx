@@ -73,7 +73,11 @@ const Params = ({ user, logOut }) => {
     <>
       <div className="topContainer">
         <div className="left">
-          <img src={getStrapiMedia(user.profilPic?.url)} alt="profilPic"/>
+          {user.profilPic ? (
+              <img src={getStrapiMedia(user.profilPic?.url)} alt="profilPic"/>
+            ) : (
+              <div className="emptyProfilPic">{user.username?.charAt(0)}</div>
+            )}
           <div className="hello">
               <input
                 type="file"

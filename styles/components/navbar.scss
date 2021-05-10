@@ -131,6 +131,19 @@
         border: 2px solid color(secondary);
       }
 
+      .emptyProfilPic {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        font-weight: 300;
+        text-transform: uppercase;
+        border-radius: 50px;
+        border: 2px solid color(secondary);
+      }
+
       .containerContextMenu {
         position: relative;
         height: 40px;

@@ -27,11 +27,11 @@ const CreateProduct = () => {
   const [data, setData] = useState()
   const [preview, setPreview] = useState()
 
-  // useEffect(() => {
-  //   if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
-  //     router.push(`/products/${createdProduct.slug}`)
-  //   }
-  // }, [createdProduct])
+  useEffect(() => {
+    if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
+      router.push({ pathname: "/"})
+    }
+  }, [createdProduct])
 
   useEffect(() => {
     if(step === 6) {
@@ -88,16 +88,7 @@ const CreateProduct = () => {
                 return errorState.type === "createProduct" ? (
                   <div>{errorState.message}</div>
                 ) : (<div className="finalStep">
-                    Annonce ajoutée, Merci... 
-                    {createdProduct.slug && (
-                      <div className="btnContainer">
-                        <Link href={`/products/${createdProduct.slug}`} >
-                          <a>
-                            <Button color="White">Voir mon annonce</Button>
-                          </a>
-                        </Link>
-                    </div>
-                    )}
+                    Ajout de votre annonce en cours... 
                   </div>)
               default:
                 return (

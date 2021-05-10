@@ -4,14 +4,31 @@ import ProductsList from "../components/ProductsList";
 import { getHomePage, getConnect } from "../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
-import { useEffect } from "react";
-import {getProducts} from '../store'
+import { useEffect, useState } from "react";
+import {getProducts, resetCreateProduct} from '../store'
 import Link from "next/link";
+import Modal from "../components/Modal"
+import { useRouter } from "next/router";
+import Button from "../elements/Button"
 
 const HomePage = ({ home }) => {
 
+  const router = useRouter();
+
   const dispatch = useDispatch();
-  const { info, products, session } = useSelector((state) => state);
+  const { info, products, session, createdProduct } = useSelector((state) => state);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    if (createdProduct.slug) {
+      setOpenModal(true);
+    }
+  }, [createdProduct])
+
+  const resetProduct = () => {
+    dispatch(resetCreateProduct())
+  }
 
 
   useEffect(() => {
@@ -27,6 +44,23 @@ const HomePage = ({ home }) => {
       <Head>
         <title>{home.title}</title>
       </Head>
+      {openModal && (<Modal open={openModal} setOpen={setOpenModal} onClick={() => resetProduct()}>
+        <img src="/cuteCat.svg" alt="cute cat" className="cuteCat"/>
+        <div className="sure">Votre annonce est en ligne. <br />
+          À très bento !</div>
+        <div className="buttonsContainer">
+          <Link href={`/products/${createdProduct.slug}`}>
+            <a onClick={() => resetProduct()}>
+              <Button color="Transparent" >Voir mon produit</Button>
+            </a>
+          </Link>
+          <Link href={`/create/product`}>
+            <a onClick={() => resetProduct()}>
+              <Button color="White" >Déposer une annonce</Button>
+            </a>
+          </Link>
+        </div>
+      </Modal>)}
       <div className='banner'>
         <img src={getStrapiMedia(home.slider[0].url)} alt="cover" className="cover" />
         <img src="/Separation3.png" alt="background" className='substract'/>

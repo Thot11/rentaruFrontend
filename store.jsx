@@ -95,6 +95,12 @@ export const paiementData = (bookings, startDate, endDate) => {
   }
 }
 
+export const resetCreateProduct = () => {
+  return (dispatch) => {
+    dispatch(createProductAction({}));
+  }
+}
+
 
 export const getProducts = () => {
   return (dispatch) => {

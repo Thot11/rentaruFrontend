@@ -116,7 +116,11 @@ const Navbar = () => {
                   <div className="profilContainer2">
                     <div className="openContext">
                       <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
-                        <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                        {user.profilPic ? (
+                          <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                        ) : (
+                          <div className="emptyProfilPic">{user.username?.charAt(0)}</div>
+                        )}
                       </Link>
                       <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.93317 5.25C3.74072 5.58333 3.2596 5.58333 3.06715 5.25L0.902085 1.5C0.709635 1.16667 0.950198 0.75 1.3351 0.75H5.66522C6.05012 0.75 6.29069 1.16667 6.09824 1.5L3.93317 5.25Z" fill="#ECECEC" fill-opacity="0.6"/>
@@ -173,7 +177,11 @@ const Navbar = () => {
             <div className="openContext">
               <Link href={{ pathname: "/profil", query: { tab: "dashboard" } }}>
                 <a onClick={() => setOpenBurger(!openBurger)}>
+                {user.profilPic ? (
                   <img className="profilPic" src={getStrapiMedia(user.profilPic?.url)} alt="profil picture"/>
+                ) : (
+                  <div className="emptyProfilPic">{user.username?.charAt(0)}</div>
+                )}
                   Mon profil
                 </a>
               </Link>

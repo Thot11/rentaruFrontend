@@ -102,7 +102,11 @@ const CardProduct = ({ product, key, user }) => {
               <Link href={`/users/${ownerUser.id}`}>
                 <a className="collector">
                   <div className="picture">
-                    <img src={getStrapiMedia(ownerUser.profilPic?.url)} alt="profil picture"/>
+                    {ownerUser.profilPic ? (
+                      <img src={getStrapiMedia(ownerUser.profilPic?.url)} alt="profilPic"/>
+                    ) : (
+                      <div className="emptyProfilPic">{ownerUser.username?.charAt(0)}</div>
+                    )}
                   </div>
                   <div className="collectorInfo">
                     <p className="name">{ownerUser.username}</p>

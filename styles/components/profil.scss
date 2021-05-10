@@ -68,6 +68,20 @@
         object-fit: cover;
       }
 
+      .emptyProfilPic {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        margin-right: 13px;
+        font-size: 22px;
+        font-weight: 300;
+        text-transform: uppercase;
+        border-radius: 50px;
+        border: 2px solid color(secondary);
+      }
+
       .hello {
         display: flex;
         flex-direction: column;

@@ -103,6 +103,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   }
 
   const goToPaiement = () => {
+    if (product.user.username === me.username) return;
     if (startDate && endDate) {
       setBookings([...bookings, {startDate, endDate}])
       const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
@@ -274,12 +275,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                 />
                 <a onClick={() => goToPaiement()}>
                   <button
-                    className="buttonRed button btnRent"
+                    className={`buttonRed button btnRent ${product.user.username === me.username ? 'disable' : ''}`}
                   >
                     Louer la série
                   </button>
                 </a>
-                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>Vous ne serez pas encore débité</p>)}
+                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>{product.user.username === me.username ? 'Voyons... ceci est votre collection' : 'Vous ne serez pas encore débité'}</p>)}
               </div>
               <div className="delivery">
                 <div className="deliveryElement">
@@ -306,7 +307,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
           <div className="collectorInfo">
             <div className="collector">
               <div className="profilPic">
-              <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : <img src='/bigArrow.svg' alt='profilPic'/>}</Link>
+              <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : <div className="emptyProfilPic">{product.user.username?.charAt(0)}</div>}</Link>
               </div>
               <div className="moreInfo">
                <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>

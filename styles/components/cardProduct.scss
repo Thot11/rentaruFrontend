@@ -133,7 +133,20 @@
           overflow: hidden;
           background-color: black;
           border-radius: 50%;
+          
+          .emptyProfilPic {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            font-weight: 300;
+            text-transform: uppercase;
+          }
         }
+
+        
 
         .collectorInfo {
           display: flex;
@@ -275,6 +288,12 @@
           .picture {
             width: 24px;
             height: 24px;
+
+            .emptyProfilPic {
+              width: 24px;
+              height: 24px;
+              font-size: 18px;
+            }
           }
 
           .collectorInfo{
