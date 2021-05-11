@@ -69,7 +69,9 @@ const Step3 = ({ step, setStep, data, setData }) => {
                   temp2.splice(index, 1)
                   setPreviewImages(temp1)
                   setSelectedFile(temp2)
-                  }}>blabla</div>
+                  }}>
+                    <img src="/trash.svg" alt="poubelle" />
+                  </div>
                 <img src={image} alt="preview image" key={index} />
               </div>
             )
