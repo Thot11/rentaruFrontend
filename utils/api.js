@@ -154,6 +154,7 @@ export async function postCommande(
   priceTot,
   deliveryPrice,
   delivery,
+  stripeToken,
   token
 ) {
   const {data} = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes?token=${token}`, {
@@ -165,7 +166,8 @@ export async function postCommande(
     priceOwner,
     priceTot,
     deliveryPrice,
-    delivery
+    delivery,
+    stripeToken
   })
   return data;
 }

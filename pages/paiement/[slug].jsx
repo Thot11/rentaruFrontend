@@ -12,6 +12,11 @@ import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
 import Link from "next/link";
 import DropDown from "../../elements/DropDown";
+import PaiementStripe from "../../components/paiementStripe"
+
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
 
 const PaiementPage = ({ product }) => {
 
@@ -19,6 +24,8 @@ const PaiementPage = ({ product }) => {
   if (router.isFallback) {
     return <div>Loading product...</div>;
   }
+
+  const stripePromise = loadStripe("pk_test_51IpzA4EKrDs5zvUVvyP5br07y7Cd8ug6bRwZSnJf1bv7tubTq8V00CxeDa9UlUOBnLFjNutnAAyqFaWKe2qHXMCN00FLvPqaAc");
 
   const moment = extendMoment(Moment);
 
@@ -28,6 +35,7 @@ const PaiementPage = ({ product }) => {
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cglAccepted, setCglAccepted] = useState(false);
   const [price, setPrice] = useState(product.price)
+  const [stripeToken, setStripeToken] = useState('')
 
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
@@ -40,16 +48,6 @@ const PaiementPage = ({ product }) => {
       setDeliveryPrice(0);
     }
   },[delivery])
-
-  const go = () => {
-    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', session).then((resp) => {
-      updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
-    })
-  }
-
-  const goBack = () => {
-    router.push(`/products/${product.slug}`)
-  }
 
   useEffect(() => {
     if (rent.startDate && rent.endDate) {
@@ -65,6 +63,18 @@ const PaiementPage = ({ product }) => {
     }
   }, [rent.startDate, rent.endDate])
 
+  const go = () => {
+    // const cardElement = elements.getElement(CardElement);
+    // const tokenStripe = await stripe.createToken(cardElement);
+    // console.log(tokenStripe);
+    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
+      updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
+    })
+  }
+
+  const goBack = () => {
+    router.push(`/products/${product.slug}`)
+  }
 
   return (
     <div className="paiementPage">
@@ -136,6 +146,10 @@ const PaiementPage = ({ product }) => {
               <input type="text" placeholder='Pays/région' className="country"/>
               <button className='button buttonWhite'>Enregistrer</button>
             </DropDown>
+            <Elements stripe={stripePromise}>
+              <PaiementStripe delivery={delivery} setStripeToken={setStripeToken}></PaiementStripe>
+            </Elements>
+            
           </div>
         </div>
       </div>
