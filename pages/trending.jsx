@@ -27,6 +27,17 @@ const TrendingPage = ({ products }) => {
   const [topShonen, setTopShonen] = useState([]);
   const [topSeinen, setTopSeinen] = useState([]);
 
+  const [windowWidth, setWindowWidth] = useState(1281);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
   useEffect(() => {
     getMangaList()
   }, [session])
@@ -119,8 +130,8 @@ const TrendingPage = ({ products }) => {
             }}
             hiddenClass
             disabledClass
-            spaceBetween={20}
-            slidesPerView={5}
+            spaceBetween={windowWidth > 700 ? 30 : 10}
+            slidesPerView={windowWidth > 700 ? 5 : 2.4}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
@@ -132,12 +143,12 @@ const TrendingPage = ({ products }) => {
               )
             })}
           </Swiper>
-          <div className="arrowContainer leftArrowContainer">
+          {windowWidth > 700 &&
             <img src="/trendingArrow.svg" alt="leftArrow" className="arrow leftArrow leftArrowTop" />
-          </div>
-          <div className="arrowContainer rightArrowContainer">
-            <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow rightArrowTop"/>
-          </div>
+          }
+          {windowWidth > 700 &&
+            <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow rightArrowTop" />
+          }
         </div>
       </div>
 
@@ -153,8 +164,8 @@ const TrendingPage = ({ products }) => {
             }}
             hiddenClass
             disabledClass
-            spaceBetween={20}
-            slidesPerView={5}
+            spaceBetween={windowWidth > 700 ? 30 : 10}
+            slidesPerView={windowWidth > 700 ? 5 : 2.4}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
@@ -166,12 +177,12 @@ const TrendingPage = ({ products }) => {
               )
             })}
           </Swiper>
-          <div className="arrowContainer leftArrowContainer">
+          {windowWidth > 700 &&
             <img src="/trendingArrow.svg" alt="leftArrow" className="arrow leftArrow leftArrowShonen" />
-          </div>
-          <div className="arrowContainer rightArrowContainer">
-            <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow rightArrowShonen"/>
-          </div>
+          }
+          {windowWidth > 700 &&
+            <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow rightArrowShonen" />
+          }
         </div>
       </div>
 
@@ -187,8 +198,8 @@ const TrendingPage = ({ products }) => {
             }}
             hiddenClass
             disabledClass
-            spaceBetween={30}
-            slidesPerView={topSeinen.length > 4 ? 5 : topSeinen.length}
+            spaceBetween={windowWidth > 700 ? 30 : 10}
+            slidesPerView={windowWidth > 700 ? 5 : 2.4}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
@@ -200,12 +211,12 @@ const TrendingPage = ({ products }) => {
               )
             })}
           </Swiper>
-          <div className="arrowContainer leftArrowContainer">
+          {windowWidth > 700 &&
             <img src="/trendingArrow.svg" alt="leftArrow" className="arrow leftArrow leftArrowSeinen" />
-          </div>
-          <div className="arrowContainer rightArrowContainer">
+          }
+          {windowWidth > 700 &&
             <img src="/trendingArrow.svg" alt="rightArrow" className="arrow rightArrow rightArrowSeinen" />
-          </div>
+          }
         </div>
       </div>
       

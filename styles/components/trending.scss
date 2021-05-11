@@ -25,41 +25,42 @@
         width: 100%;
       }
 
-      .arrowContainer {
+      .arrow {
         position: absolute;
-        top: 0;
+        top: calc(50% - 15px);
         z-index: 50;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        height: 100%;
-        width: 175px;
-
-        &.leftArrowContainer {
-          left: 0;
-          transform: rotate(180deg);
-          background: linear-gradient(271.15deg, #151C21 8.72%, rgba(21, 28, 33, 0) 106.56%);
+        cursor: pointer;
+        transform: rotate(180deg);
+        
+        &.leftArrow {
+          left: 16px;
+          transform: rotate(0);
         }
 
-        &.rightArrowContainer {
-          right: 0;
-          background: linear-gradient(271.15deg, #151C21 8.72%, rgba(21, 28, 33, 0) 106.56%);
+        &.rightArrow {
+          right: 16px;
         }
 
-        .arrow {
-          z-index: 50;
-          cursor: pointer;
-          transform: rotate(180deg);
-          margin-right: 16px;
-  
-          &.swiper-button-disabled,
-          .swiper-button-hidden {
-            display: none;
-          }
+        &.swiper-button-disabled,
+        .swiper-button-hidden {
+          display: none;
         }
-
       }
     }
 
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .trendingPage {  
+    padding: 80px calc((100% - 320px)/2);
+
+    .top {
+      margin-top: 40px;
+
+      h3 {
+        font-size: 14px;
+      }
+    }
   }
 }
