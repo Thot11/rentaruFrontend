@@ -137,12 +137,47 @@
 }
 
 @media (max-width: 700px) {
-.collectionContainer {
-  padding: 20px;
-  margin-top: 65px;
+  .modalContainerFullscreen {
+  
+    .buttonsContainer {
 
-  .h1 {
-    margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin:5px auto !important;
+      }
+    }
   }
-}
+
+  .collectionContainer {
+    padding: 20px;
+    margin-top: 65px;
+
+    .h1 {
+      margin-top: 20px;
+    }
+  }
+
+  .container {
+
+    .collectionProductsContainer {
+    
+      .createAnnonce {
+        width: 100%;
+        height: auto;
+    
+        span {
+          transition: all .2s ease-in-out;
+        }
+    
+        &:hover {
+          span {
+            transform: scale(1.1);
+          }
+        }
+    
+      }
+    }
+  }
 }

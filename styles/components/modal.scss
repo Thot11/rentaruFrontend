@@ -10,10 +10,10 @@
 
 .modalContainerFullscreen {
   position: fixed;
-  left: 25vw;
+  left: calc((100% - 800px)/2);
   top: 25vh;
-  width: 50vw;
-  height: 50vh;
+  width: 800px;
+  height: 400px;
   background-color: color(primary);
   box-shadow: 0 4px 34px rgba(0, 0, 0, .8);
   z-index: 150;
@@ -31,5 +31,15 @@
     font-size: 12px;
     font-weight: 300;
     cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .modalContainerFullscreen {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    z-index: 1500;
   }
 }

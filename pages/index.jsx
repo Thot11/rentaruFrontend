@@ -72,7 +72,7 @@ const HomePage = ({ home }) => {
       </div>
       <div className="container">
         <h2 className="h1">Lis les meilleurs mangas à moindre prix !</h2>
-        <h3 className="h3">D'après vos dernières recherches</h3>
+        {session && (<h3 className="h3">D'après vos dernières recherches</h3>)}
         <ProductsList products={products} />
       </div>
     </div>
