@@ -75,6 +75,11 @@ const Orders = ({}) => {
                   </div>
                 </div>
                 <div className="middleRight">
+                  <div className="down">
+                    <p><span>Livraison :</span> {commande.delivery}</p>
+                    <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
+                    <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+                  </div>
                   <div className="underlineLink">Suivre ma commande</div>
                   <div className="">N° de location : {commande.id}</div>
                   <div className="">N° de suivi : {commande.id}</div>
@@ -119,6 +124,11 @@ const Orders = ({}) => {
                   </div>
                 </div>
                 <div className="middleRight">
+                  <div className="down">
+                    <p><span>Livraison :</span> {commande.delivery}</p>
+                    <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
+                    <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
+                  </div>
                   <div className="underlineLink">Suivre ma commande</div>
                   <div className="">N° de location : {commande.id}</div>
                   <div className="">N° de suivi : {commande.id}</div>
