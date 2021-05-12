@@ -41,10 +41,16 @@ const MangaPage = ({ manga, products }) => {
 
   const [windowWidth, setWindowWidth] = useState(1281);
 
+  const [allProducts, setAllProducts] = useState(products)
+  const [productList, setProductList] = useState([]);
+
   // mangaInfo
   const [synopsisOpen, setSynopsisOpen] = useState(false);
 
   //FilterBar
+  const [tomeInitial, setTomeInitial] = useState();
+  const [tomeFinal, setTomeFinal] = useState();
+
   const [selectGeoOpen, setSelectGeoOpen] = useState(false)
   const [inputCity, setInputCity] = useState('');
   const [cityList, setCityList] = useState([]);
@@ -67,6 +73,32 @@ const MangaPage = ({ manga, products }) => {
     window.addEventListener('resize', updateSize);
   }, []);
 
+  useEffect(() => {
+    const newProductList = [];
+    if(tomeInitial !== undefined && tomeFinal !== undefined && tomeInitial < tomeFinal) {
+      allProducts.forEach((_product) => {
+        if(_product.tomeInitial === parseInt(tomeInitial) && _product.tomeFinal === parseInt(tomeFinal)) {
+          newProductList.push(_product);
+          console.log(newProductList)
+        }
+        else if(_product.tomeFinal < parseInt(tomeFinal) && _product.tomeInitial > parseInt(tomeInitial)) {
+          newProductList.push(_product);
+          console.log(newProductList)
+        }
+        else if(_product.tomeFinal > parseInt(tomeInitial) && _product.tomeInitial < parseInt(tomeFinal)) {
+          newProductList.push(_product);
+          console.log(newProductList)
+        }
+      })
+    }
+    else {
+      allProducts.forEach((_product) => {
+        newProductList.push(_product);
+      })
+    }
+    setProductList(newProductList)
+  }, [tomeInitial, tomeFinal]);
+
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
   }
@@ -77,6 +109,8 @@ const MangaPage = ({ manga, products }) => {
     setCityList(newArray);
     setChanges(!changes)
   }
+
+
 
   
   return (
@@ -148,9 +182,9 @@ const MangaPage = ({ manga, products }) => {
           <div className="filter">
             <p className="label">Tomes</p>
             <div className="inputs">
-              <input type="number" min="1" max="200"/>
+              <input type="number" min="1" max="200" value={tomeInitial} onChange={(e) => setTomeInitial(e.target.value)} placeholder='1' />
               <p>au</p>
-              <input type="number" min="1" max="200"/>
+              <input type="number" min="1" max="200" value={tomeFinal} onChange={(e) => setTomeFinal(e.target.value)} placeholder='10' />
             </div>
           </div>
           <div className="filter">
@@ -217,7 +251,8 @@ const MangaPage = ({ manga, products }) => {
               }
             </div>
           </div>
-          <div className="filter">
+          <div className="filter filterDate">            
+            <p className="label">Date de location</p>
             <DateRangePicker
               hideKeyboardShortcutsPanel
               navPrev={<img src="/chevronLeftS.svg" alt="" style={{left: "10px"}} />}
@@ -241,7 +276,7 @@ const MangaPage = ({ manga, products }) => {
           </div>
         </div>
       </div>
-      <ProductsList products={products} />
+      <ProductsList products={productList} />
     </div>
   );
 };

@@ -55,11 +55,13 @@ const TrendingPage = ({ products }) => {
   const setupTopManga = (data) => {
     const arrayBooked = [];
     data.forEach((manga) => {
-      let booked = 0;
-      manga.products.forEach((product) => {
-        booked += product.booked ? product.booked.length : 0;
-      })
-      arrayBooked.push({booked: booked, manga: manga.title})
+      if(manga.products.length > 0) {
+        let booked = 0;
+        manga.products.forEach((product) => {
+          booked += product.booked ? product.booked.length : 0;
+        })
+        arrayBooked.push({booked: booked, manga: manga.title})
+      }
     })
     arrayBooked.sort(function(a, b) {
       return b.booked - a.booked;
@@ -78,20 +80,22 @@ const TrendingPage = ({ products }) => {
   const setupCategory = (data, category) => {
     const arrayBooked = [];
     data.forEach((manga) => {
-      let goodCategory = false;
-      manga.categories.forEach((_category) => {
-        console.log(_category)
-        if(_category.slug === category) {
-          goodCategory = true;
-        }
-      })
-      if(goodCategory) {
-        let booked = 0;
-        manga.products.forEach((product) => {
-          booked += product.booked ? product.booked.length : 0;
+      if(manga.products.length > 0) {
+        let goodCategory = false;
+        manga.categories.forEach((_category) => {
+          console.log(_category)
+          if(_category.slug === category) {
+            goodCategory = true;
+          }
         })
-        arrayBooked.push({booked: booked, manga: manga.title});
-      }
+        if(goodCategory) {
+          let booked = 0;
+          manga.products.forEach((product) => {
+            booked += product.booked ? product.booked.length : 0;
+          })
+          arrayBooked.push({booked: booked, manga: manga.title});
+        }
+      }      
     })
     arrayBooked.sort(function(a, b) {
       return b.booked - a.booked;
