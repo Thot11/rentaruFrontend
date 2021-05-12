@@ -67,7 +67,7 @@ const PaiementPage = ({ product }) => {
     // const cardElement = elements.getElement(CardElement);
     // const tokenStripe = await stripe.createToken(cardElement);
     // console.log(tokenStripe);
-    postCommande(product.id, user.id, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
+    postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
       updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
     })
   }

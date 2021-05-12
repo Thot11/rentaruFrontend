@@ -147,6 +147,7 @@ export async function postConnect(mail, password) {
 export async function postCommande(
   productId,
   userId,
+  userIdStripe,
   ownerId,
   startDate,
   endDate,
@@ -161,6 +162,7 @@ export async function postCommande(
     product: productId,
     not_owner: userId,
     owner: ownerId,
+    userIdStripe,
     startDate,
     endDate,
     priceOwner,
