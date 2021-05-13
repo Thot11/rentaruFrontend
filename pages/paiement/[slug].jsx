@@ -11,21 +11,20 @@ import { extendMoment } from 'moment-range';
 import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
 import Link from "next/link";
-import DropDown from "../../elements/DropDown";
 import PaiementStripe from "../../components/paiementStripe"
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 
-const PaiementPage = ({ product }) => {
+const PaiementPage = ({ product, stripeKey }) => {
 
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading product...</div>;
   }
 
-  const stripePromise = loadStripe("pk_test_51IpzA4EKrDs5zvUVvyP5br07y7Cd8ug6bRwZSnJf1bv7tubTq8V00CxeDa9UlUOBnLFjNutnAAyqFaWKe2qHXMCN00FLvPqaAc");
+  const stripePromise = loadStripe(stripeKey);
 
   const moment = extendMoment(Moment);
 
@@ -35,7 +34,6 @@ const PaiementPage = ({ product }) => {
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cglAccepted, setCglAccepted] = useState(false);
   const [price, setPrice] = useState(product.price)
-  const [stripeToken, setStripeToken] = useState('')
 
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
@@ -63,13 +61,13 @@ const PaiementPage = ({ product }) => {
     }
   }, [rent.startDate, rent.endDate])
 
-  const go = () => {
-    // const cardElement = elements.getElement(CardElement);
-    // const tokenStripe = await stripe.createToken(cardElement);
-    // console.log(tokenStripe);
-    postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
-      updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
-    })
+  const go = (stripeToken) => {
+
+    if (stripeToken && cglAccepted) {
+      postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
+        updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
+      })
+    }
   }
 
   const goBack = () => {
@@ -126,31 +124,24 @@ const PaiementPage = ({ product }) => {
               <p className="priceNumber">20,00 €</p>
             </div>
           </div>
-          <div className="creditCard">
-            <div className="title">
-              <h2>Payer avec</h2>
-              <div className="imagesPayement">
-                <img src="/paypal.svg" alt="paypal"/>
-                <img src="/visa.png" alt="visa"/>
-              </div>
-            </div>
-            <DropDown title='Carte de crédit ou de débit' color={'dark'} isImage={true}>
-              <div className="card">
-                <input type="text" placeholder='Numéro de carte 🔒' className='cardNumber' />
-                <div className="cardMore">
-                  <input type="text" placeholder='Expiration' className='cardExpiration'/>
-                  <input type="text" placeholder='Cryptogramme' className='cardCrypto'/>
+          {rent.startDate && rent.endDate && (
+            <div className="creditCard">
+              <div className="title">
+                <h2>Paiement sécurisé avec :</h2>
+                <div className="imagesPayement">
+                  <img src="/stripe-logo-blue.png" alt="stripe"/>
                 </div>
               </div>
-              <input type="text" placeholder='Code Postal' className="postalCode"/>
-              <input type="text" placeholder='Pays/région' className="country"/>
-              <button className='button buttonWhite'>Enregistrer</button>
-            </DropDown>
-            <Elements stripe={stripePromise}>
-              <PaiementStripe delivery={delivery} setStripeToken={setStripeToken}></PaiementStripe>
-            </Elements>
-            
-          </div>
+              <Elements stripe={stripePromise}>
+                <PaiementStripe cglAccepted={cglAccepted} go={go}>
+                  <div className="acceptCGL">
+                    <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
+                      <p onClick={() => setCglAccepted(!cglAccepted)}>En cochant cette case vous acceptez les <span className="underline" onClick={e => e.stopPropagation()}><Link href="/CGL" >CGL</Link></span></p>
+                  </div>
+                </PaiementStripe>
+              </Elements>
+            </div>
+          )}
         </div>
       </div>
       <div className="rightContent">
@@ -188,13 +179,6 @@ const PaiementPage = ({ product }) => {
             <p>La caution s'engage à la demande du débiteur avec lequel elle est liée par un contrat de garantie. Elle garantit au collectionneur qu'il sera remboursé en cas de défaut. Le cautionnement bancaire est fourni par des sociétés spécialisées sécurisées.</p>
           </div>
         </div>
-        <div className="acceptCGL">
-          <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
-          <Link href="/CGL">
-            <p>En cochant cette case vous acceptez les CGL</p>
-          </Link>
-        </div>
-        <button className='button buttonRed btnPay' onClick={go}>Valider et payer</button>
       </div>
     </div>
   );
@@ -204,7 +188,8 @@ export default PaiementPage;
 
 export async function getStaticProps({ params }) {
   const product = await getProduct(params.slug);
-  return { props: { product } };
+  const stripeKey = process.env.STRIPE_PK
+  return { props: { product, stripeKey } };
 }
 
 export async function getStaticPaths() {

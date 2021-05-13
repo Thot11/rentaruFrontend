@@ -122,6 +122,7 @@
             display: flex;
 
             img {
+              max-height: 26px;
               margin-right: 14px;
 
               &:last-child {
@@ -190,8 +191,12 @@
 
   .rightContent {
     width: 501px;
-    height: 730px;
+    height: fit-content;
+    position: sticky;
+    top: 52px;
     background-color: color(dark);
+    border-radius: 3px;
+    overflow: hidden;
 
     .card {
       display: flex;
@@ -296,26 +301,43 @@
 
     }
 
-    .acceptCGL {
-      display: flex;
-      align-items: center;
-      margin-top: 25px;
-      margin-left: 27px;
+  }
+  .acceptCGL {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    // margin-left: 27px;
 
-      .checkBox {
-        margin-right: 18px;
-      }
-
-      p {
-        font-size: 16px;
-        font-weight: 325;
-        text-decoration: underline;
-      }
+    .checkBox {
+      margin-top: 0 !important;
+      margin-right: 18px;
     }
 
-    .btnPay {
-      margin-top: 37px;
-      margin-left: 27px;
+    p {
+      font-size: 16px;
+      font-weight: 325;
+      
+      .underline {
+        text-decoration: underline;
+        color: color(blue)
+      }
+    }
+  }
+
+  .error {
+    width: fit-content;
+    margin: 10px auto;
+    font-size: 12px;
+    font-weight: 325;
+    color: color(red);
+  }
+
+  .btnPay {
+    margin: 20px auto;
+
+    &.disable {
+      cursor: not-allowed;
+      background-color: color(grey);
     }
   }
 }
