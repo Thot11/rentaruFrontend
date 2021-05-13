@@ -145,6 +145,18 @@
       display: flex;
       align-items: flex-end;
 
+      .DateRangePickerInput, .DateInput_input, .DateInput, .DayPicker__horizontal, .DateRangePicker_picker, .CalendarMonthGrid, .CalendarMonth, .CalendarDay__default  {
+        background-color: color(primary)!important;
+      }
+
+      .CalendarDay__selected {
+        background: color(dark) !important;
+      }
+
+      .DateRangePickerInput {
+        margin-bottom: 0!important;
+      }
+
       .filter {
         margin-right: 58px;
 

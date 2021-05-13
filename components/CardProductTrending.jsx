@@ -16,25 +16,24 @@ const CardProductTrending = ({ mangaCollection, key, position }) => {
 
   return (
     <div className="cardProductTrending" key={key}>
-      <Link href={`/manga/${mangaCollection.id}`}>
-        <a>
-          <img src={getStrapiMedia(mangaCollection.cover.url)} alt="cover"/>
-          <div className="info">
-            <div className="position">
-              {position}
-            </div>
-            <div className="upperInfo">
-              <div className="titles">
-                <h3>{mangaCollection.title}</h3>
-                <p>{mangaCollection.author} </p>
-              </div>
-            </div>
-            <div className="downerInfo">
-              
-            </div>
+      <img src={getStrapiMedia(mangaCollection.cover.url)} alt="cover"/>
+      <div className="info">
+        <div className="position">
+          {position}
+        </div>
+        <div className="upperInfo">
+          <div className="titles">
+            <h3>{mangaCollection.title}</h3>
           </div>
-        </a>
-      </Link>
+        </div>
+        <Link href={`/manga/${mangaCollection.id}`}>
+          <a>
+            <div className="downerInfo">
+              Voir les annonces ({mangaCollection.products.length})
+            </div>
+          </a>
+        </Link>
+      </div>
     </div>
   );
 };
