@@ -39,6 +39,8 @@ const MangaPage = ({ manga, products }) => {
     return <div>Loading products...</div>;
   }
 
+  const moment = extendMoment(Moment);
+
   const [windowWidth, setWindowWidth] = useState(1281);
 
   const [allProducts, setAllProducts] = useState(products)
@@ -74,20 +76,17 @@ const MangaPage = ({ manga, products }) => {
   }, []);
 
   useEffect(() => {
-    const newProductList = [];
+    let newProductList = [];
     if(tomeInitial !== undefined && tomeFinal !== undefined && tomeInitial < tomeFinal) {
       allProducts.forEach((_product) => {
         if(_product.tomeInitial === parseInt(tomeInitial) && _product.tomeFinal === parseInt(tomeFinal)) {
           newProductList.push(_product);
-          console.log(newProductList)
         }
         else if(_product.tomeFinal < parseInt(tomeFinal) && _product.tomeInitial > parseInt(tomeInitial)) {
           newProductList.push(_product);
-          console.log(newProductList)
         }
         else if(_product.tomeFinal > parseInt(tomeInitial) && _product.tomeInitial < parseInt(tomeFinal)) {
           newProductList.push(_product);
-          console.log(newProductList)
         }
       })
     }
@@ -96,8 +95,34 @@ const MangaPage = ({ manga, products }) => {
         newProductList.push(_product);
       })
     }
+    const newProductListCityFilter = [];
+    if(cityList.length > 0) {
+      newProductList.forEach((_product) => {
+        cityList.forEach((_city) => {
+          if(_city.toLowerCase().includes(_product.user.ville.toLowerCase())) {
+            newProductListCityFilter.push(_product);
+          }
+        })
+      })
+      newProductList = newProductListCityFilter;
+    }
+   
+    if(startDate && endDate) { 
+      newProductList.forEach((_product) => {
+        console.log(_product.booked)
+        if(_product.booked) {
+          console.log(moment.range(_product.booked[0].startDate,_product.booked[0].endDate))
+          console.log(moment.range(_product.booked[0].startDate,_product.booked[0].endDate).contains(moment.range(startDate, endDate)))
+
+        }
+      })
+      let startDateArray = startDate._d.toString().split(' ',3);
+      let endDateArray = endDate._d.toString().split(' ',3);
+      console.log(startDate.toDate());
+      console.log(moment.range(startDate, endDate));
+    }
     setProductList(newProductList)
-  }, [tomeInitial, tomeFinal]);
+  }, [tomeInitial, tomeFinal, cityList, startDate, endDate]);
 
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
@@ -190,7 +215,7 @@ const MangaPage = ({ manga, products }) => {
           <div className="filter">
             <p className="label">Zone géographique</p>
             <div className="select selectGeo">
-              <input type="text" placeholder='Saisissez une ville' autocomplete="off" value={inputCity} onChange={(e) => setInputCity(e.target.value)} />
+              <input type="text" placeholder='Saisissez une ville' autoComplete="off" value={inputCity} onChange={(e) => setInputCity(e.target.value)} />
               {selectGeoOpen && inputCity.length < 3 && cityList.length > 0 &&
                 <div className="options">
                   <div className="cityList">

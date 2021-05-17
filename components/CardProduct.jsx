@@ -110,7 +110,7 @@ const CardProduct = ({ product, key, user }) => {
                   </div>
                   <div className="collectorInfo">
                     <p className="name">{ownerUser.username}</p>
-                    <div className="stars">
+                    {/* <div className="stars">
                       {
                       [1,2,3,4,5].map((el, index) => {
                         return (
@@ -120,7 +120,8 @@ const CardProduct = ({ product, key, user }) => {
                         )
                         
                       })}
-                    </div>
+                    </div> */}
+                    <p className="city">{ownerUser.ville.toLowerCase()} ({ownerUser.departement.substring(0, 2)})</p>
                   </div>
                 </a>
               </Link>
