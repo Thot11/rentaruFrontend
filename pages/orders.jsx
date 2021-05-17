@@ -8,7 +8,7 @@ import { getStrapiMedia } from "../utils/medias";
 
 import Dropdown from "../components/dropdown"
 
-import { getMyCollectionsOrders, getMyReadings } from "../utils/api";
+import { getMyCollectionsOrders, getMyReadings, updateCommande, deleteCommande } from "../utils/api";
 import { useEffect, useState } from "react";
 
 import Moment from 'moment';
@@ -29,16 +29,46 @@ const Orders = ({}) => {
     if (session) {
       getMyCollectionsOrders(user.id, session).then(resp => {
         if (resp) {
+          resp.sort((a,b) => {
+            if(b.status === 'draft') return 1;
+            else return -1;
+          })
           setMyCollectionOrders(resp);
         }
       });
       getMyReadings(user.id, session).then(resp => {
         if (resp) {
+          resp.sort((a,b) => {
+            if(b.status === 'draft') return 1;
+            else return -1;
+          })
           setMyReadingsOrders(resp);
         }
       });
     }
   }, [user])
+
+  const validate = (commandeId) => {
+    updateCommande(commandeId, {status : 'published'}, session).then(() => {
+      const temp = myCollectionOrders.filter((order) => order.id === commandeId)
+      temp[0].status = 'published'
+      setMyCollectionOrders([...myCollectionOrders, temp[0]])
+    })
+  }
+
+  const cancel = (commandeId, type) => {
+    deleteCommande(commandeId, session).then(() => {
+      if (type === 'lecteur') {
+        const temp = myReadingsOrders.filter((order) => order.id !== commandeId)
+        setMyReadingsOrders(temp)
+      } else {
+        const temp = myCollectionOrders.filter((order) => order.id !== commandeId)
+        setMyCollectionOrders(temp)
+      }
+    })
+  }
+
+
 
   return (
     <div>
@@ -61,7 +91,7 @@ const Orders = ({}) => {
                   <img src={commande.product.imageCover.url} alt="" className="productImg"/>
                   <div className="middle">
                     <div className="up">
-                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${commande.status === 'draft' ? 'draft' : now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{commande.status === 'draft' ? 'En attente de validation' : now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
                       <div className="ownerContainer">
                         <img src={commande.owner.profilPic.formats.thumbnail.url} alt="profil picture collectionneur"/> 
                         <div><span>{commande.owner.username}</span>&nbsp; | {commande.owner.ville}  ({commande.owner.departement})</div>
@@ -84,16 +114,12 @@ const Orders = ({}) => {
                   <div className="">N° de location : {commande.id}</div>
                   <div className="">N° de suivi : {commande.id}</div>
                   <div className="buttonsContainer">
-                    <Link href={"/"}>
-                      <a>
-                        <Button color={'Transparent'}>{now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
-                      </a>
-                    </Link>
-                    <Link href="/">
-                      <a>
-                        <Button color={'White'}>{now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
-                      </a>   
-                    </Link>
+                    <a>
+                      <Button color={'Transparent'} functionOnClick={() => {commande.status === 'draft' ? cancel(commande.id, 'lecteur') : null}}>{commande.status === 'draft' ? 'Annuler la commande' : now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
+                    </a>
+                    <a>
+                      <Button color={'White'} >{commande.status === 'draft' ? 'Attente de validation...' : now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -108,7 +134,7 @@ const Orders = ({}) => {
                   <img src={commande.product.imageCover.url} alt="" className="productImg"/>
                   <div className="middle">
                     <div className="up">
-                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${commande.status === 'draft' ? 'draft' : now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{commande.status === 'draft' ? 'En attente de validation' : now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
                       <div className="ownerContainer">
                         {commande.not_owner.profilPic && (
                           <img src={commande.not_owner.profilPic.formats ? commande.not_owner.profilPic.formats.thumbnail.url : commande.not_owner.profilPic.url} alt="profil picture collectionneur"/> 
@@ -133,16 +159,12 @@ const Orders = ({}) => {
                   <div className="">N° de location : {commande.id}</div>
                   <div className="">N° de suivi : {commande.id}</div>
                   <div className="buttonsContainer">
-                    <Link href={"/"}>
-                      <a>
-                        <Button color={'Transparent'}>Annuler la commande</Button>
-                      </a>
-                    </Link>
-                    <Link href="/">
-                      <a>
-                        <Button color={'White'}>Envoyer un message</Button>
-                      </a>   
-                    </Link>
+                    <a>
+                      <Button color={'Transparent'} functionOnClick={() => {commande.status === 'draft' ? cancel(commande.id, 'collectionneur') : null}}>{commande.status === 'draft' ? 'Annuler la commande' : now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
+                    </a>
+                    <a>
+                      <Button color={'White'} functionOnClick={() => {commande.status === 'draft' ? validate(commande.id) : null}}>{commande.status === 'draft' ? 'Valider la commande' : now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
+                    </a>   
                   </div>
                 </div>
               </div>

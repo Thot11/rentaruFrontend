@@ -140,7 +140,7 @@
             background-color: color(green3);
           }
 
-          &.later {
+          &.later, &.draft {
             background-color: color(orange);
           }
 

@@ -96,12 +96,12 @@ export async function getCommandesById(commandes, token) {
 }
 
 export async function getMyCollectionsOrders(user, token) {
-  const ownerOrders = await fetchAPI(`/commandes?owner=${user}&token=${token}`);
+  const ownerOrders = await fetchAPI(`/commandes?_sort=startDate:asc&owner=${user}&token=${token}`);
   return ownerOrders;
 }
 
 export async function getMyReadings(user, token) {
-  const notOwnerOrders = await fetchAPI(`/commandes?not_owner=${user}&token=${token}`);
+  const notOwnerOrders = await fetchAPI(`/commandes?_sort=startDate:asc&not_owner=${user}&token=${token}`);
   return notOwnerOrders;
 }
 
@@ -159,6 +159,7 @@ export async function postCommande(
   token
 ) {
   const {data} = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes?token=${token}`, {
+    status: 'draft',
     product: productId,
     not_owner: userId,
     owner: ownerId,
@@ -247,6 +248,12 @@ export async function updateProduct(id, data, token) {
   return resp;
 }
 
+export async function updateCommande(id, data, token) {
+  const resp = await axios
+  .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes/${id}?token=${token}`, data)
+  return resp;
+}
+
 
 // Delete request
 
@@ -257,6 +264,12 @@ export async function deleteProduct(id, token) {
 }
 
 export async function deleteOrder(id, token) {
+  const resp = await axios
+  .delete(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes/${id}?token=${token}`)
+  return resp;
+}
+
+export async function deleteCommande(id, token) {
   const resp = await axios
   .delete(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes/${id}?token=${token}`)
   return resp;
