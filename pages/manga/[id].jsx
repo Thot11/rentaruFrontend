@@ -106,20 +106,14 @@ const MangaPage = ({ manga, products }) => {
       })
       newProductList = newProductListCityFilter;
     }
-   
+    const newProductListDateFilter = [];
     if(startDate && endDate) { 
       newProductList.forEach((_product) => {
-        console.log(_product.booked)
-        if(_product.booked) {
-          console.log(moment.range(_product.booked[0].startDate,_product.booked[0].endDate))
-          console.log(moment.range(_product.booked[0].startDate,_product.booked[0].endDate).contains(moment.range(startDate, endDate)))
-
+        if(_product.booked && moment.range(_product.booked[0].startDate,_product.booked[0].endDate).contains(moment.range(startDate, endDate))) {
+          newProductListDateFilter.push(_product);
         }
       })
-      let startDateArray = startDate._d.toString().split(' ',3);
-      let endDateArray = endDate._d.toString().split(' ',3);
-      console.log(startDate.toDate());
-      console.log(moment.range(startDate, endDate));
+      newProductList = newProductListDateFilter;
     }
     setProductList(newProductList)
   }, [tomeInitial, tomeFinal, cityList, startDate, endDate]);
