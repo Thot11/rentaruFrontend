@@ -131,7 +131,7 @@
   .filterBar {
     width: 100%;
     margin-bottom: 23px;
-    padding: 25px 13px 26px 20px;
+    padding: 25px 45px 26px 20px;
     background-color: color(dark);
     border-radius: 3px;
 
@@ -144,6 +144,7 @@
     .filters {
       display: flex;
       align-items: flex-end;
+      justify-content: space-between;
 
       .DateRangePickerInput, .DateInput_input, .DateInput, .DayPicker__horizontal, .DateRangePicker_picker, .CalendarMonthGrid, .CalendarMonth, .CalendarDay__default  {
         background-color: color(primary)!important;
@@ -159,6 +160,10 @@
 
       .filter {
         margin-right: 58px;
+
+        &:last-child {
+          margin-right: 0;
+        }
 
         .label {
           margin-bottom: 6px;
