@@ -147,6 +147,7 @@ export async function postConnect(mail, password) {
 export async function postCommande(
   productId,
   userId,
+  userIdStripe,
   ownerId,
   startDate,
   endDate,
@@ -154,18 +155,21 @@ export async function postCommande(
   priceTot,
   deliveryPrice,
   delivery,
+  stripeToken,
   token
 ) {
   const {data} = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes?token=${token}`, {
     product: productId,
     not_owner: userId,
     owner: ownerId,
+    userIdStripe,
     startDate,
     endDate,
     priceOwner,
     priceTot,
     deliveryPrice,
-    delivery
+    delivery,
+    stripeToken
   })
   return data;
 }
