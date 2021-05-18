@@ -509,8 +509,12 @@
 
         .choiceBar {
           width: 200px;
-          background-color: color(primary);
+          // background-color: color(primary);
           font-weight: 300;
+
+          .selectDropdownList  {
+            background-color: color(primary);
+          }
 
           .listContainer {
             background-color: color(primary);

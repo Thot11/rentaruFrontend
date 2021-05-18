@@ -14,18 +14,14 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem }) => {
            return filter ? (
             <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
               <div>{filter}</div>
-              <svg className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.65039 13.0852L0.581688 0.40994L18.5077 0.261351L9.65039 13.0852Z" fill="#F5F6F7"/>
-              </svg>
+              <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
             </div>
           ) : null;
         })}
         {selectedItem === -1 && (
           <div className="selectedElement" key={'select'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
-            <div className="placeholder">Selectionner votre manga...</div>
-            <svg className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.65039 13.0852L0.581688 0.40994L18.5077 0.261351L9.65039 13.0852Z" fill="#F5F6F7"/>
-            </svg>
+            <div className="placeholder">Selectionner...</div>
+            <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
           </div>
         )}
 
