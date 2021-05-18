@@ -9,6 +9,10 @@
   // margin: 88px 239px 88px 171px;
   user-select: none;
 
+  .selectDropdownList {
+    background-color: color(dark);
+  }
+
   .topContainer {
     
     h2 {
@@ -157,6 +161,20 @@
           font-size: 15px;
         }
       }
+
+      .deliveryContainer {
+        .label {
+          margin-top: 30px;
+          font-size: 12px;
+          font-weight: 300;
+          color: color(secondary);
+          margin-bottom: 6px;
+        }
+        .choiceBar {
+          max-width: 200px;
+        }
+      }
+
 
       input[type="file"] { 
         opacity: 0; /* make transparent */

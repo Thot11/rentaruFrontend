@@ -4,7 +4,7 @@
   padding: 9px 16px;
   color: color(secondary);
   font-size: 14px;
-  background-color: color(dark);
+  // background-color: color(dark);
   border-radius: 3px 3px 0 0;
   cursor: pointer;
 
@@ -16,16 +16,6 @@
     .placeholder {
       color: color(secondary, 0.6)
     }
-
-    .arrow {
-      transform: rotate(0deg);
-      transition: transform .3s ease;
-
-      &.reverse {
-        transform: rotate(180deg);
-      }
-    }
-
     
   }
 
@@ -37,9 +27,7 @@
     width: 100%;
     max-height: 200px;
     overflow: auto;
-    // margin-top: 10px;
     background-color: color(dark);
-    padding: 9px 16px;
     border-radius: 0 0 3px 3px;
 
     .listElement {
@@ -54,3 +42,41 @@
   }
 
 }
+
+
+  .selectDropdownList {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    padding: 6px 9px;
+    color: color(secondary, 0.6);
+    background-color: color(dark);
+    font-size: 12px;
+    font-weight: 325;
+    border-radius: 3px;
+
+    .listElement {
+      color: color(secondary, 0.6);
+      font-size: 12px;
+      font-weight: 325;
+      padding: 9px;
+      padding-right: 5px;
+      border-bottom: 0.5px solid color(secondary, 0.12);
+      cursor: pointer;
+      
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    .arrow {
+      transform: rotate(-90deg);
+      transition: transform .3s ease;
+
+      &.reverse {
+        transform: rotate(90deg);
+      }
+    }
+  }

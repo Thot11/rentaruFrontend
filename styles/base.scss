@@ -25,6 +25,45 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a3a5a9;
+  -webkit-border-radius: 100px;
+  opacity: 1;
+  -webkit-transition: background-color 3000ms linear;
+  -ms-transition: background-color 3000ms linear;
+  transition: background-color 3000ms linear;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.61);
+  -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar-corner {
+  opacity: 0;
+  background: rgba(0, 0, 0, 0);
+}
+
+div:not(.focus):not(:hover)::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  -webkit-transition: background-color 3000ms linear;
+  -ms-transition: background-color 3000ms linear;
+  transition: background-color 3000ms linear;
+}
+
+
 .h1 {
   position: relative;
   width: fit-content;

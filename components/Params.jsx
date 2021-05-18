@@ -121,7 +121,7 @@ const Params = ({ user, logOut }) => {
             <div className="prefLivraison">
               <div>
                 <img src="/cardboard.svg" alt=""/>
-                <p>Déposer en relai colis</p>
+                <p>Envoi postal</p>
               </div>
               <CheckBox checked={relaiColis} setChecked={setRelaiColis} info={true} resetInfo={false}/>
             </div>

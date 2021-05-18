@@ -36,7 +36,8 @@ const ProductPage = ({ product }) => {
     integrale: product.integrale,
     images: product.images,
     price: product.price,
-    description: product.description
+    description: product.description,
+    delivery: product.delivery
   })
   const [preview, setPreview] = useState({
     title: product.title,
