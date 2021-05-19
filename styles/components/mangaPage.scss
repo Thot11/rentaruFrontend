@@ -331,6 +331,23 @@
           }
         }
       }
+
+      .resetFilters {
+        display: flex;
+        align-items: center;
+        height: 25px;
+        padding: 0 13px;
+        color: color(secondary);
+        font-size: 12px;
+        font-weight: 325;
+        background-color: color(lightDark);
+        border-radius: 3px;
+
+        svg {
+          height: 20px;
+          margin-right: 7px;
+        }
+      }
     }
   }
 
