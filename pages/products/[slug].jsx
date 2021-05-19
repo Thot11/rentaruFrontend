@@ -158,7 +158,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
         <title>{product.title} product</title>
       </Head>
       <div className="mainContent">
-        <div className="leftContent">          
+        <div className="leftContent">
           <div className="images">
             {product.integrale && 
               <div className="badgeSilver">
@@ -283,14 +283,19 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                 {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>{product.user.username === me.username ? 'Voyons... ceci est votre collection' : 'Vous ne serez pas encore débité'}</p>)}
               </div>
               <div className="delivery">
-                <div className="deliveryElement">
-                  <p>Remise en main propre</p>
-                  <p>0,00 €</p>
-                </div>
-                <div className="deliveryElement">
-                  <p>Relais colis</p>
-                  <p>3,31 €</p>
-                </div>
+                {(product.delivery === 'Indifférent' || product.delivery === 'Remise en main propre' || !product.delivery) && (
+                  <div className="deliveryElement">
+                    <p>Remise en main propre</p>
+                    <p>0,00 €</p>
+                  </div>
+                )}
+                {(product.delivery === 'Indifférent' || product.delivery === 'Envoi postal' || !product.delivery) && (
+
+                  <div className="deliveryElement">
+                    <p>Relais colis</p>
+                    <p>3,31 €</p>
+                  </div>
+                )}
               </div>
             </div>
             <div className="otherPrice">
