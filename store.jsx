@@ -20,7 +20,7 @@ const initialState = {
     bookings: [],
     startDate: '',
     endDate: '',
-  }
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,31 +35,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         session: '',
       };
-      case 'saveUser':
-        return {
-          ...state,
-          user: action.payload,
-        };
-      case 'getProducts':
-        return {
-          ...state,
-          products: action.payload,
-        };
-      case 'createProduct':
-        return {
-          ...state,
-          createdProduct: action.payload,
-        };
-      case 'errorState':
-        return {
-          ...state,
-          errorState: action.payload,
-        };
-      case 'paiementInfo':
-        return {
-          ...state,
-          rent: action.payload,
-        };
+    case 'saveUser':
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case 'getProducts':
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case 'createProduct':
+      return {
+        ...state,
+        createdProduct: action.payload,
+      };
+    case 'errorState':
+      return {
+        ...state,
+        errorState: action.payload,
+      };
+    case 'paiementInfo':
+      return {
+        ...state,
+        rent: action.payload,
+      };
     default:
       return state;
   }
@@ -81,7 +81,7 @@ const setErrorAction = makeAction('errorState');
 
 
 const deleteSessionAction = makeAction('deleteSession');
-const paiementDataAction = makeAction('paiementInfo')
+const paiementDataAction = makeAction('paiementInfo');
 
 export const updateLocalme = (newUser) => {
   return (dispatch) => {

@@ -7,7 +7,7 @@ import { getStrapiMedia } from "../utils/medias";
 import {getUser} from "../utils/api";
 import {updateMe} from '../store'
 
-const CardProduct = ({ product, key, user }) => {
+const CardProduct = ({ product, key, user, saveDate }) => {
 
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -81,8 +81,8 @@ const CardProduct = ({ product, key, user }) => {
           </div>
         </div>
       }
-      <Link href={`/products/${product.slug}`}>
-        <a>
+      <Link href={`/products/${product.slug}`} >
+        <a onClick={() => saveDate()}>
           <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
           <div className="info">
             <div className="upperInfo">

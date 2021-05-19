@@ -14,6 +14,10 @@ import { extendMoment } from 'moment-range';
 import 'moment/locale/fr'
 import 'react-dates/lib/css/_datepicker.css';
 
+
+import { useDispatch, useSelector } from "react-redux";
+import { paiementData, updateMe } from "../../store";
+
 // Data
 import dataCities from '../../utils/dataCities'
 
@@ -39,6 +43,8 @@ const MangaPage = ({ manga, products }) => {
     return <div>Loading products...</div>;
   }
 
+  const dispatch = useDispatch();
+  const { session } = useSelector((state) => state);
   const moment = extendMoment(Moment);
 
   const [windowWidth, setWindowWidth] = useState(1281);
@@ -48,6 +54,7 @@ const MangaPage = ({ manga, products }) => {
 
   // mangaInfo
   const [synopsisOpen, setSynopsisOpen] = useState(false);
+  const [rank, setRank] = useState(0);
 
   //FilterBar
   const [tomeInitial, setTomeInitial] = useState();
@@ -74,6 +81,44 @@ const MangaPage = ({ manga, products }) => {
     setWindowWidth(window.innerWidth);
     window.addEventListener('resize', updateSize);
   }, []);
+
+  useEffect(() => {
+    getMangaList()
+  }, [session])
+
+  const getMangaList = () => {
+    getMangaCollection(session).then(resp => {
+      if (!resp.error) {
+        setupTopManga(resp);
+      }
+    }).catch(()=> console.log('error'))
+  }
+
+  const setupTopManga = (data) => {
+    const arrayBooked = [];
+    data.forEach((manga) => {
+      if(manga.products.length > 0) {
+        let booked = 0;
+        manga.products.forEach((product) => {
+          booked += product.booked ? product.booked.length : 0;
+        })
+        arrayBooked.push({booked: booked, manga: manga.title})
+      }
+    })
+    arrayBooked.sort(function(a, b) {
+      return b.booked - a.booked;
+    });
+    const newMangaCollection = [];
+    arrayBooked.forEach((item) => {
+      data.forEach((manga, index) => {
+        if(item.manga === manga.title) {
+          newMangaCollection.push(manga)
+        }
+      })
+    })
+    setRank(newMangaCollection.findIndex(val => val.title === manga.title ))
+    setTopManga(newMangaCollection)
+  }
 
   useEffect(() => {
     let newProductList = [];
@@ -118,6 +163,36 @@ const MangaPage = ({ manga, products }) => {
     setProductList(newProductList)
   }, [tomeInitial, tomeFinal, cityList, startDate, endDate]);
 
+  useEffect(() => {
+    if(productList.length > 0) {
+      const newProductList = productList;
+      if(filterSelected === 0) {
+        newProductList.sort(function(a, b) {
+          return new Date(a.created_at) - new Date(b.created_at);
+        })
+      }
+      else if(filterSelected === 1) {
+        newProductList.sort(function(a, b) {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+      }
+      else if(filterSelected === 2) {
+        newProductList.sort(function(a, b) {
+          return a.price - b.price;
+        });
+      }
+      
+      else if(filterSelected === 3) {
+        newProductList.sort(function(a, b) {
+          return a.booked.length - b.booked.length;
+        });
+      }
+      console.log(productList)
+      setChanges(!changes)
+      setProductList(newProductList)
+    }
+  }, [productList, filterSelected]);
+
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
   }
@@ -127,6 +202,13 @@ const MangaPage = ({ manga, products }) => {
     newArray.splice(index, 1);
     setCityList(newArray);
     setChanges(!changes)
+  }
+ 
+  const saveDate = () => {
+    if(startDate && endDate) {
+      console.log('here')
+      dispatch(paiementData([], startDate, endDate));
+    }
   }
 
 
@@ -143,7 +225,7 @@ const MangaPage = ({ manga, products }) => {
           <div className="header">
             <h2>{manga.title}</h2>
             <div className="ranking">
-              <h3>n°3</h3>
+              <h3>n°{rank + 1}</h3>
               <p className="label">Classement top des lecteurs</p>
             </div>
           </div>
@@ -295,7 +377,7 @@ const MangaPage = ({ manga, products }) => {
           </div>
         </div>
       </div>
-      <ProductsList products={productList} />
+      <ProductsList products={productList} saveDate={saveDate}/>
     </div>
   );
 };
