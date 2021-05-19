@@ -304,5 +304,35 @@
 
       }
     }
+
+    .activeFilters {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+  
+      .labels {
+        display: flex;
+  
+        .label {
+          display: flex;
+          align-items: center;
+          margin-right: 12px;
+          padding: 5px 5px;
+          font-size: 12px;
+          font-weight: 325;
+          color: color(secondary);
+          background-color: color(primary);
+          border-radius: 3px;
+
+          img {
+            margin-left: 12px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
+
+  
 }

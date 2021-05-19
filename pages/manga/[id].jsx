@@ -210,9 +210,6 @@ const MangaPage = ({ manga, products }) => {
       dispatch(paiementData([], startDate, endDate));
     }
   }
-
-
-
   
   return (
     <div className="mangaPage">
@@ -375,6 +372,31 @@ const MangaPage = ({ manga, products }) => {
               numberOfMonths={windowWidth > 700 ? 2 : 1}
             />
           </div>
+        </div>
+        <div className="activeFilters">
+          <div className="labels">
+            {tomeInitial && tomeFinal && 
+              <div className="label">
+                Tomes {tomeInitial} à {tomeFinal} <img src="/exitCross.svg" alt="exit" onClick={() => {setTomeInitial(); setTomeFinal()}} />
+              </div>
+            }
+            {cityList.map((city, key) => {
+              return (
+                <div className="label" key={key}>
+                  {city} <img src="/exitCross.svg" alt="exit" onClick={() => removeCity(key)} />
+                </div>
+              )
+            })               
+            }
+            {startDate && endDate && 
+              <div className="label">
+                {moment.format(startDate)} - {new Date(endDate).toString()} <img src="/exitCross.svg" alt="exit" onClick={() => {setTomeInitial(); setTomeFinal()}} />
+              </div>
+            }
+          </div>
+          <button className="resetFilters">
+            Supprimer les filtres
+          </button>
         </div>
       </div>
       <ProductsList products={productList} saveDate={saveDate}/>
