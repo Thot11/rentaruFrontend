@@ -3,7 +3,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { getProductsPublished } from "../utils/api";
+import { getProductsPublished, getCategories, getMangaCollection } from "../utils/api";
 import ProductsList from "../components/ProductsList";
 import { getStrapiMedia } from "../utils/medias";
 import CheckBox from "../elements/CheckBox";
@@ -28,17 +28,15 @@ const SearchPage = ({ products }) => {
     return <div>Loading products...</div>;
   }
 
+  const [productsFiltered, setProductFiltered] = useState(products);
+
   const [elementSearched, setElementSearched] = useState('');
   const [elementFiltered, setElementFiltered] = useState('manga');
-  const [advanceFiltersOpen, setAdvanceFiltersOpen] = useState(false);
-  const [isTomesFiltered, setIsTomeFiltered] = useState(false);
-  const [isCityFiltered, setIsCityFiltered] = useState(false);
-  const [isDeliveryFiltered, setIsDeliveryFiltered] = useState(false);  
-  const [deliveryMode, setDeliveryMode] = useState(0);
-  const [isDeliverySelectOpen, setIsDeliverySelectOpen] = useState(false);
-  const [isFilteredBy, setIsFilteredBy] = useState(false);
-  const [isFilersSelectOpen, setIsFiltersSelectOpen] = useState(false);
-  const [filterSelected, setFilterSelected] = useState(0);
+
+  const [categories, setCategories] = useState([]);
+  const [categoriesSelected, setCategoriesSelected] = useState([]);
+
+  const [changes, setChanges] = useState(false);
 
   useEffect(() => {
     const {
@@ -48,115 +46,64 @@ const SearchPage = ({ products }) => {
     else setElementSearched('');
   }, [router])
 
+  useEffect(() => {
+    getCategories().then((res) => {
+      setCategories(res);
+      console.log(res[0].slug);
+    })
+  }, [])
+
+  const changeSelectedCategories = (slug) => {
+    const newArray = categoriesSelected;
+    if(categoriesSelected.includes(slug)) {
+      let index = -1;
+      categoriesSelected.forEach((_category, key) => {
+        if(_category.slug === slug) {
+          index = key;
+        }
+      })
+      newArray.splice(index, 1)
+    }
+    else {
+      newArray.push(slug);
+    }
+    setCategoriesSelected(newArray)
+    setChanges(!changes);
+  }
+
+  useEffect(() => {
+    const newProductList = [];
+    if(categoriesSelected.length > 0) {
+      products.forEach((_product) => {
+        let index = _product.categories.findIndex(e => categoriesSelected.includes(e.slug));
+        if(index !== -1) {
+          newProductList.push(_product);
+        }
+      })
+      console.log(newProductList)
+      setProductFiltered(newProductList);
+    }
+  }, [categoriesSelected, changes])
+
   return (
     <div className="searchPage">      
       <Head>
-        <title>Rent Page paiement </title>
+        <title>Recherche</title>
       </Head>
       <div className="searchContainer">
-        <h1 className='h1'>Recherche un manga par catégorie</h1>
         <div className="searchWrapper">
-          <div className="searchHeader">
-            <div className='search'>
-              <img src="/search2.svg" alt="Search" />
-              <input placeholder="Rechercher un manga, un auteur, un genre" value={elementSearched} onChange={(e) => setElementSearched(e.target.value)} />
-            </div>
-            <div className="filterBy">
-              <button className={elementFiltered === 'manga' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('manga')}>
-                Manga
-              </button>
-              <button className={elementFiltered === 'author' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('author')}>
-                Auteur
-              </button>
-              <button className={elementFiltered === 'member' ? 'buttonSelected' : ''} onClick={() => setElementFiltered('member')}>
-                Membre
-              </button>
-            </div>
-          </div>
-          <div className="advanceParam">
-            <div className="titleAdvance" onClick={() => setAdvanceFiltersOpen(!advanceFiltersOpen)}>
-              <p>Recherche avancée</p>
-              <img src="/bigArrow.svg" alt="arrow"/>
-            </div>
-            {advanceFiltersOpen &&
-              <div className="advanceFilters">
-                <div className="advanceFilter">
-                  <div className="label">
-                    <CheckBox checked={isTomesFiltered} setChecked={setIsTomeFiltered} info={true} resetInfo={false} />
-                    <p className="labelText">A partir du tome</p>
-                  </div>
-                  <div className="tomes">
-                    <input type="number" defaultValue={1} />
-                    <p>à</p>
-                    <input type="number" defaultValue={10} />
-                  </div>
-                </div>
-                <div className="advanceFilter">
-                  <div className="label">
-                    <CheckBox checked={isCityFiltered} setChecked={setIsCityFiltered} info={true} resetInfo={false} />
-                    <p className="labelText">Zone Geographique</p>
-                  </div>
-                  <input type="text" placeholder='Paris' />
-                </div>
-                <div className="advanceFilter">
-                  <div className="label">
-                    <CheckBox checked={isDeliveryFiltered} setChecked={setIsDeliveryFiltered} info={true} resetInfo={false} />
-                    <p className="labelText">Mode de livraison</p>
-                  </div>
-                  <div className="select">
-                    <div className="selectedOption">
-                      <p className="optionSelected">{deliveryModes[deliveryMode]}</p>
-                      <img src="/bigArrow.svg" alt="arrow" onClick={() => setIsDeliverySelectOpen(!isDeliverySelectOpen)} />
-                    </div>
-                    {isDeliverySelectOpen && 
-                      <div className="options">
-                        {deliveryModes.map((option, key) => {
-                          if(key !== deliveryMode) {
-                            return (
-                              <p className="option" key={key} onClick={() => {setDeliveryMode(key); setIsDeliverySelectOpen(false)}}>{option}</p>
-                            )
-                          }
-                          else {
-                            return null;
-                          }                        
-                        })}
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div className="advanceFilter">
-                  <div className="label">
-                    <CheckBox checked={isFilteredBy} setChecked={setIsFilteredBy} info={true} resetInfo={false} />
-                    <p className="labelText">Trier par</p>
-                  </div>                  
-                  <div className="select">
-                    <div className="selectedOption">
-                      <p className="optionSelected">{filters[filterSelected]}</p>
-                      <img src="/bigArrow.svg" alt="arrow" onClick={() => setIsFiltersSelectOpen(!isFilersSelectOpen)} />
-                    </div>
-                    {isFilersSelectOpen && 
-                      <div className="options">
-                        {filters.map((option, key) => {
-                          if(key !== filterSelected) {
-                            return (
-                              <p className="option" key={key} onClick={() => {setFilterSelected(key); setIsFiltersSelectOpen(false)}}>{option}</p>
-                            )
-                          }
-                          else {
-                            return null;
-                          }                        
-                        })}
-                      </div>
-                    }
-                  </div>
-                </div>
+          {categories.map((_category, key) => {
+            return (
+              <div className="categoryContainer">
+                <CheckBox checked={categoriesSelected.includes(_category.slug)} click={() => changeSelectedCategories(_category.slug)}/>
+                {_category.name}
               </div>
-            }
-          </div>
+            )
+          })}
         </div>
         <div className="results">
           <p className='labelResult'>Résultats d’annonces "{elementSearched}"</p>
-          <ProductsList products={products} filterBy={elementSearched} elementFiltered={elementFiltered} />
+          <div className="productList"></div>
         </div>
       </div>
     </div>
@@ -166,6 +113,6 @@ const SearchPage = ({ products }) => {
 export default SearchPage;
 
 export async function getStaticProps() {
-  const products = await getProductsPublished();
+  const products = await getMangaCollection();
   return { props: { products } };
 }
