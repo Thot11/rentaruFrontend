@@ -23,6 +23,9 @@ const CardProductSearch = ({ mangaCollection, key, position }) => {
             <h3>{mangaCollection.title}</h3>
           </div>
         </div>
+        <div className="categories">
+          
+        </div>
         <Link href={`/manga/${mangaCollection.id}`}>
           <a>
             <div className="downerInfo">
