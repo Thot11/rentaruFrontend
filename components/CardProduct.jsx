@@ -82,7 +82,7 @@ const CardProduct = ({ product, key, user, saveDate }) => {
         </div>
       }
       <Link href={`/products/${product.slug}`} >
-        <a onClick={() => saveDate()}>
+        <a onClick={saveDate}>
           <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
           <div className="info">
             <div className="upperInfo">

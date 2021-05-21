@@ -38,8 +38,8 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   
   const [windowWidth, setWindowWidth] = useState(1281);
   
-  const [startDate, setStartDate] = useState(state.rent.startDate ?? undefined)
-  const [endDate, setEndDate] = useState(state.rent.endDate ?? undefined)
+  const [startDate, setStartDate] = useState(state.rent.startDate ?? '')
+  const [endDate, setEndDate] = useState(state.rent.endDate ?? '')
   const [focusedInput, setFocusedInput] = useState()
   const [bookings, setBookings] = useState(product.booked ?? [])
   const [price, setPrice] = useState(product.price*1.1+0.2)

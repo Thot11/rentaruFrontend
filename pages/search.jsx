@@ -103,7 +103,9 @@ const SearchPage = ({ products }) => {
         </div>
         <div className="results">
           <p className='labelResult'>Résultats d’annonces "{elementSearched}"</p>
-          <div className="productList"></div>
+          <div className="productList">
+            
+          </div>
         </div>
       </div>
     </div>
