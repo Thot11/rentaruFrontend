@@ -30,22 +30,31 @@ const PaiementPage = ({ product, stripeKey }) => {
 
   const { rent, user, session } = useSelector((state) => state);
 
-  const [delivery, setDelivery] = useState('Remise en main propre');
+  const [delivery, setDelivery] = useState(product.delivery === 'Remise en main propre' || product.delivery === 'Indifférent' ? 'Remise en main propre' : 'Livraison Mondial Relay');
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cglAccepted, setCglAccepted] = useState(false);
   const [price, setPrice] = useState(product.price)
-
+  const [deliveryWording, setDeliveryWording] = useState()
+  
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
       setDeliveryPrice(13);
+      setDeliveryWording('mondialRelay')
     }
     else if(delivery === 'Livraison Colissimo') {
       setDeliveryPrice(20);
+      setDeliveryWording('colissimo')
     }
     else {
       setDeliveryPrice(0);
+      setDeliveryWording('handToHand');
     }
   },[delivery])
+
+  useEffect(() => {
+    if (product.delivery === 'Remise en main propre' || product.delivery === 'Indifférent') setDelivery('Remise en main propre')
+    else setDelivery('Livraison Mondial Relay')
+  }, [product.user.handToHand])
 
   useEffect(() => {
     if (rent.startDate && rent.endDate) {
@@ -64,7 +73,7 @@ const PaiementPage = ({ product, stripeKey }) => {
   const go = (stripeToken) => {
 
     if (stripeToken && cglAccepted) {
-      postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, 'handToHand', stripeToken.token.id, session).then((resp) => {
+      postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, deliveryWording, stripeToken.token.id, session).then((resp) => {
         updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
       })
     }
@@ -95,34 +104,40 @@ const PaiementPage = ({ product, stripeKey }) => {
             <p className="dateNumber">{moment(rent.startDate).format('Do MMMM')}-{moment(rent.endDate).format('Do MMMM')}</p>
           </div>
           <div className="prices">
-            <div className="price">
-              <div className="leftPart">
-                <CheckBox checked={delivery === 'Remise en main propre'} setChecked={setDelivery} info={'Remise en main propre'} resetInfo={''} />                
-                <p className="label">Remise en main propre</p>
+            {product.delivery !== 'Envoi postal' && (
+              <div className="price">
+                <div className="leftPart">
+                  <CheckBox checked={delivery === 'Remise en main propre'} setChecked={setDelivery} info={'Remise en main propre'} resetInfo={''} />                
+                  <p className="label">Remise en main propre</p>
+                </div>
+                <p className="priceNumber">0,00 €</p>
               </div>
-              <p className="priceNumber">0,00 €</p>
-            </div>
-            <div className="price">
+            )}
+            {/* <div className="price">
               <div className="leftPart">
                 <CheckBox checked={delivery === 'Relais colis'} setChecked={setDelivery} info={'Relais colis'} resetInfo={''} />  
                 <p className="label">Relais colis</p>
               </div>
               <p className="priceNumber">0,00 €</p>
-            </div>
-            <div className="price">
-              <div className="leftPart">
-                <CheckBox checked={delivery === 'Livraison Mondial Relay'} setChecked={setDelivery} info={'Livraison Mondial Relay'} resetInfo={''} />  
-                <p className="label">Livraison Mondial Relay</p>
-              </div>
-              <p className="priceNumber">13,00 €</p>
-            </div>
-            <div className="price">
-              <div className="leftPart">
-                <CheckBox checked={delivery === 'Livraison Colissimo'} setChecked={setDelivery} info={'Livraison Colissimo'} resetInfo={''} /> 
-                <p className="label">Livraison Colissimo</p>
-              </div>
-              <p className="priceNumber">20,00 €</p>
-            </div>
+            </div> */}
+            {product.delivery !== 'Remise en main propre' && (
+              <>
+                <div className="price">
+                  <div className="leftPart">
+                    <CheckBox checked={delivery === 'Livraison Mondial Relay'} setChecked={setDelivery} info={'Livraison Mondial Relay'} resetInfo={''} />  
+                    <p className="label">Livraison Mondial Relay</p>
+                  </div>
+                  <p className="priceNumber">13,00 €</p>
+                </div>
+                <div className="price">
+                  <div className="leftPart">
+                    <CheckBox checked={delivery === 'Livraison Colissimo'} setChecked={setDelivery} info={'Livraison Colissimo'} resetInfo={''} /> 
+                    <p className="label">Livraison Colissimo</p>
+                  </div>
+                  <p className="priceNumber">20,00 €</p>
+                </div>
+              </>
+            )}
           </div>
           {rent.startDate && rent.endDate && (
             <div className="creditCard">
