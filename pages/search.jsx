@@ -9,6 +9,7 @@ import { getStrapiMedia } from "../utils/medias";
 import CheckBox from "../elements/CheckBox";
 import Link from "next/link";
 import DropDown from "../elements/DropDown";
+import CardProductSearch from "../components/CardProductSearch";
 
 const deliveryModes = [
   'Main propre',
@@ -72,17 +73,19 @@ const SearchPage = ({ products }) => {
   }
 
   useEffect(() => {
-    const newProductList = [];
+    let newProductList = products;
     if(categoriesSelected.length > 0) {
+      newProductList = []
       products.forEach((_product) => {
         let index = _product.categories.findIndex(e => categoriesSelected.includes(e.slug));
+        console.log(index)
         if(index !== -1) {
           newProductList.push(_product);
         }
       })
       console.log(newProductList)
-      setProductFiltered(newProductList);
     }
+    setProductFiltered(newProductList);
   }, [categoriesSelected, changes])
 
   return (
@@ -102,9 +105,13 @@ const SearchPage = ({ products }) => {
           })}
         </div>
         <div className="results">
-          <p className='labelResult'>Résultats d’annonces "{elementSearched}"</p>
           <div className="productList">
-            
+            {productsFiltered.map((_product, key) => {
+              // {console.log(_product)}
+              return (
+                <CardProductSearch mangaCollection={_product} key={key} />
+              )
+            })}
           </div>
         </div>
       </div>

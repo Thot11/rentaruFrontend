@@ -31,5 +31,12 @@
       font-size: 22px;
       color: color(secondary);
     }
+
+    .productList {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);      
+      grid-gap: 10px;
+      
+    }
   }
 }
