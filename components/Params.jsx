@@ -30,6 +30,17 @@ const Params = ({ user, logOut }) => {
   const [description, setDescription] = useState()
   const [changeDescription, setChangeDescription] = useState(false)
   const [changeDocuments, setChangeDocuments] = useState(false)
+  
+  const [windowWidth, setWindowWidth] = useState(1281);  
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
 
   useEffect(() => {
     setPhoneChecked(user.phone)
@@ -139,12 +150,26 @@ const Params = ({ user, logOut }) => {
         </div>
         <div className="right">
           <div className="firstSection">
-            <div className="top" onClick={() => setChangeDescription(true)}>Modifier ma description</div>
+            {windowWidth < 700 ? 
+              <div className="top"> 
+                <div className="title">Description</div>
+                <div className="editBtn" onClick={() => setChangeDescription(true)}>Modifier ma description</div>
+              </div>
+            :
+              <div className="top" onClick={() => setChangeDescription(true)}>Modifier ma description</div>
+            }
             <textarea className={changeDescription ? 'change' : ''} name="" id=""  readOnly={changeDescription ? false : true} defaultValue={description} onChange={(e) => setDescription(e.target.value)} placeholder={"Présente toi en quelques mots..."} />
             {changeDescription && <Button color='Red' functionOnClick={() => {updateInfo({description}); setChangeDescription(false)}}>Enregistrer</Button>}
           </div>
           <div className="secondSection">
+            {windowWidth < 700 ? 
+              <div className="top">
+                <div className="title">Vérification</div>
+                <div className="editBtn" onClick={() => setChangeDocuments(true)}>Modifier mes documents</div>
+              </div>
+            :
             <div className="top" onClick={() => setChangeDocuments(true)}>Modifier mes documents</div>
+            }
             <Verification checked={idChecked} checkedText={idChecked} notCheckedText={'Faire vérifier un id'} input={changeDocuments} changeInput={setIdChecked}/>
             <Verification checked={phoneChecked} checkedText={phoneChecked} notCheckedText={'Faire vérifier un numéro'} input={changeDocuments} changeInput={setPhoneChecked}/>
             <Verification checked={mailChecked} checkedText={mailChecked} notCheckedText={'Faire vérifier un mail'} input={changeDocuments} changeInput={setMailChecked}/>
