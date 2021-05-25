@@ -179,7 +179,9 @@ const Orders = ({}) => {
                         </div>
                       </div>
                       <div className="ownerContainer">
-                        <img src={getStrapiMedia(commande.owner.profilPic.formats.thumbnail.url)} alt="profil picture collectionneur"/> 
+                      {commande.owner.profilPic && (
+                        <img src={commande.owner.profilPic.formats ? getStrapiMedia(commande.owner.profilPic.formats.thumbnail.url) : getStrapiMedia(commande.owner.profilPic.url)} alt="profil picture collectionneur"/> 
+                      )}
                         <div><span>{commande.owner.username}</span>&nbsp; | {commande.owner.ville}  ({commande.owner.departement})</div>
                       </div>
                     </div>
@@ -233,7 +235,7 @@ const Orders = ({}) => {
                         {commande.not_owner.profilPic && (
                           <img src={commande.not_owner.profilPic.formats ? getStrapiMedia(commande.not_owner.profilPic.formats.thumbnail.url) : getStrapiMedia(commande.not_owner.profilPic.url)} alt="profil picture collectionneur"/> 
                         )}
-                        <div><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
+                        <div className="fontSize12"><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
                       </div>
                     </div>
                     <div className="down">
