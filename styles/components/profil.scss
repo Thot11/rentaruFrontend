@@ -104,6 +104,7 @@
         }
 
         .subText {
+          margin-top: 10px;
           font-size: 14px;
           font-weight: 300;
           text-decoration: underline;
@@ -762,12 +763,20 @@
         }
       }
 
+      .buttonRed {
+        width: 120px;
+        height: 30px;
+        margin-right: 20px;
+        font-size: 14px;
+      }
+
       .right {
         width: 100%;
         padding-left: 0;
 
         .firstSection, .secondSection {
           border-bottom: 0;
+
           .top {
             display: flex;
             align-items: center;
@@ -800,14 +809,109 @@
             padding-bottom: 15px;
             background-color: color(dark);
 
-            &:first-child {
+            &.verif1 {
               padding-top: 26px;
             }
           }
+
+
         }
 
         .thirdSection {
           padding: 0 20px;
+
+          h4 {
+            color: color(A1A7AC);
+            font-size: 12px;
+            font-weight: 325;
+          }
+
+          .dropDown {
+            .row {
+              display: block;
+              padding-left: 9px;
+
+              .inputContainer {
+                margin-right: 0;
+              }
+            }
+
+            .buttonRed {
+              margin-right: 0;
+            }
+
+            .card {
+              .cardMore {
+                .cardCrypto {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .middleContainerDashboard {
+      margin-top: 0;
+
+      .right {
+        .topBox {
+          .title {
+            font-size: 16px;
+            padding-left: 20px;
+          }
+
+          .choiceBar {
+            width: 165px;
+          }
+        }
+        .commandesContainer {
+          .commande {
+            display: flex;
+            flex-direction: row;
+            height: auto;
+            padding-left: 16px;
+
+            img {
+              width: 77px;
+              height: 124px;
+              object-fit: cover;
+            }
+
+            .middle {
+              width: 60%;
+              justify-content: flex-start;
+
+              .up {
+                margin-bottom: 13px;
+
+                div:first-child {
+                  font-size: 14px;
+                  margin-bottom: 10px;
+                }
+                .header {
+                  display: flex;
+                  flex-direction: column-reverse;
+                  margin-bottom: 10px;
+                  font-size: 14px;
+
+                  .statut {
+                    width: fit-content;
+                    margin-left: 0;
+                    margin-bottom: 15px;
+                    font-size: 12px;
+                  }
+                }
+              }
+
+              .down {
+                p {
+                  font-size: 14px;
+                }
+              }
+            }
+          }
         }
       }
     }
