@@ -50,7 +50,6 @@ const SearchPage = ({ products }) => {
   useEffect(() => {
     getCategories().then((res) => {
       setCategories(res);
-      console.log(res[0].slug);
     })
   }, [])
 
@@ -74,19 +73,17 @@ const SearchPage = ({ products }) => {
 
   useEffect(() => {
     let newProductList = products;
-    if(categoriesSelected.length > 0) {
+    if(categoriesSelected.length > 0 || elementSearched !== '') {
       newProductList = []
       products.forEach((_product) => {
         let index = _product.categories.findIndex(e => categoriesSelected.includes(e.slug));
-        console.log(index)
-        if(index !== -1) {
+        if((index !== -1 || elementSearched !== '') && _product.title.toLowerCase().includes(elementSearched.toLowerCase())) {
           newProductList.push(_product);
         }
       })
-      console.log(newProductList)
     }
     setProductFiltered(newProductList);
-  }, [categoriesSelected, changes])
+  }, [categoriesSelected, changes, elementSearched])
 
   return (
     <div className="searchPage">      
@@ -107,7 +104,6 @@ const SearchPage = ({ products }) => {
         <div className="results">
           <div className="productList">
             {productsFiltered.map((_product, key) => {
-              // {console.log(_product)}
               return (
                 <CardProductSearch mangaCollection={_product} key={key} />
               )
