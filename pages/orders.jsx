@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import Moment from 'moment';
 import 'moment/locale/fr'
 import { extendMoment } from 'moment-range';
+import Modal from "../components/Modal";
 
 const Orders = ({}) => {
 
@@ -24,6 +25,9 @@ const Orders = ({}) => {
   const [selectedCommandes, setSelectedCommandes] = useState(0)
   const [myCollectionOrders, setMyCollectionOrders] = useState([])
   const [myReadingsOrders, setMyReadingsOrders] = useState([])
+  const [openModal, setOpenModal] = useState(false)
+  const [load, setLoad] = useState(false)
+  const [openModalFunction, setOpenModalFunction] = useState({function: () => null})
 
   useEffect(() => {
     if (session) {
@@ -49,23 +53,87 @@ const Orders = ({}) => {
   }, [user])
 
   const validate = (commandeId) => {
-    updateCommande(commandeId, {status : 'published'}, session).then(() => {
-      const temp = myCollectionOrders.filter((order) => order.id === commandeId)
-      temp[0].status = 'published'
-      setMyCollectionOrders([...myCollectionOrders, temp[0]])
-    })
+    setOpenModal(true)
+    setOpenModalFunction({function: () => {
+      updateCommande(commandeId, {status : 'published'}, session).then(() => {
+        const temp = myCollectionOrders.findIndex((order) => order.id === commandeId)
+        myCollectionOrders[temp].status = 'published'
+        setMyCollectionOrders([...myCollectionOrders])
+        setOpenModal(false)
+        setLoad(false)
+      })
+    }})
+  }
+
+  const sent = (commandeId, type) => {
+    if (type === 'collectionneur') {
+      setOpenModal(true)
+      setOpenModalFunction({function: () => {
+        updateCommande(commandeId, {sendCollector : true}, session).then(() => {
+          const temp = myCollectionOrders.findIndex((order) => order.id === commandeId)
+          myCollectionOrders[temp].sendCollector = true
+          setMyCollectionOrders([...myCollectionOrders])
+          setOpenModal(false)
+          setLoad(false)
+        })
+      }})
+    } else {
+      setOpenModal(true)
+      setOpenModalFunction({function: () => {
+        updateCommande(commandeId, {sendReader : true}, session).then(() => {
+          const temp = myReadingsOrders.findIndex((order) => order.id === commandeId)
+          myReadingsOrders[temp].sendReader = true
+          setMyReadingsOrders([...myReadingsOrders])
+          setOpenModal(false)
+          setLoad(false)
+        })
+      }})
+    }
+  }
+
+  const receive = (commandeId, type) => {
+    if (type === 'collectionneur') {
+      setOpenModal(true)
+      setOpenModalFunction({function: () => {
+        updateCommande(commandeId, {receiveCollector : true}, session).then(() => {
+          const temp = myCollectionOrders.findIndex((order) => order.id === commandeId)
+          myCollectionOrders[temp].receiveCollector = true
+          setMyCollectionOrders([...myCollectionOrders])
+          setOpenModal(false)
+          setLoad(false)
+        })
+      }})
+    } else {
+      setOpenModal(true)
+      setOpenModalFunction({function: () => {
+        updateCommande(commandeId, {receiveReader : true}, session).then(() => {
+          const temp = myReadingsOrders.findIndex((order) => order.id === commandeId)
+          myReadingsOrders[temp].receiveReader = true
+          setMyReadingsOrders([...myReadingsOrders])
+          setOpenModal(false)
+          setLoad(false)
+        })
+      }})
+    }
   }
 
   const cancel = (commandeId, type) => {
-    deleteCommande(commandeId, session).then(() => {
-      if (type === 'lecteur') {
-        const temp = myReadingsOrders.filter((order) => order.id !== commandeId)
-        setMyReadingsOrders(temp)
-      } else {
-        const temp = myCollectionOrders.filter((order) => order.id !== commandeId)
-        setMyCollectionOrders(temp)
-      }
-    })
+    setOpenModal(true)
+    setOpenModalFunction({function: () => {
+      deleteCommande(commandeId, session).then(() => {
+        if (type === 'lecteur') {
+          const temp = myReadingsOrders.filter((order) => order.id !== commandeId)
+          setMyReadingsOrders(temp)
+          setOpenModal(false)
+          setLoad(false)
+        } else {
+          const temp = myCollectionOrders.filter((order) => order.id !== commandeId)
+          setMyCollectionOrders(temp)
+          setOpenModal(false)
+          setLoad(false)
+        }
+      })
+    }})
   }
 
 
@@ -75,6 +143,20 @@ const Orders = ({}) => {
       <Head>
         <title>Mes commandes</title>
       </Head>
+      {openModal && (
+        <Modal open={openModal} setOpen={setOpenModal} onClick={() => setOpenModal(false)}>
+          <img src="/cuteCat.svg" alt="cute cat" className="cuteCat"/>
+          <div className="sure">Êtes-vous sur ?</div>
+          <div className="buttonsContainer">
+            <a onClick={() => setOpenModal(false)}>
+              <Button color="Transparent" >Annuler</Button>
+            </a>
+            <a onClick={() => {if (!load) {setLoad(true); openModalFunction.function();}}}>
+              <Button color="White" >{load ? 'Confirmation...' : 'Confirmer'}</Button>
+            </a>
+          </div>
+        </Modal>
+        )}
       <div className="container">
         <h1 className="h1">Mes commandes</h1>
         <div className="ordersRow">
@@ -88,16 +170,21 @@ const Orders = ({}) => {
             return (
               <div className="commande">
                 <div className="left">
-                  <img src={commande.product.imageCover.url} alt="" className="productImg"/>
+                  <img src={getStrapiMedia(commande.product.imageCover.url)} alt="" className="productImg"/>
                   <div className="middle">
                     <div className="up">
-                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${commande.status === 'draft' ? 'draft' : now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{commande.status === 'draft' ? 'En attente de validation' : now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} 
+                        <div className={`statut ${commande.status === 'draft' ? 'draft' : !commande.sendCollector ? 'later' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'done' : 'later' :  moment(commande.endDate) > moment() ? 'now' : 'later' : 'later'}`} >
+                          {commande.status === 'draft' ? (<><img src="/pending.svg" alt="icon pending" /> En attente de validation</>) : !commande.sendCollector ? (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Terminée' : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</> :  moment(commande.endDate) > moment() ? <><img src="/enCours.svg" alt="icon pending" />Location en cours</> : (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</>}
+                        </div>
+                      </div>
                       <div className="ownerContainer">
-                        <img src={commande.owner.profilPic.formats.thumbnail.url} alt="profil picture collectionneur"/> 
+                        <img src={getStrapiMedia(commande.owner.profilPic.formats.thumbnail.url)} alt="profil picture collectionneur"/> 
                         <div><span>{commande.owner.username}</span>&nbsp; | {commande.owner.ville}  ({commande.owner.departement})</div>
                       </div>
                     </div>
                     <div className="down">
+                      {(commande.owner.phone && commande.status !== 'draft') && (<p><span>Téléphone :</span> {commande.owner.phone}</p>)}
                       <p><span>Livraison :</span> {commande.delivery}</p>
                       <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
                       <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
@@ -106,6 +193,7 @@ const Orders = ({}) => {
                 </div>
                 <div className="middleRight">
                   <div className="down">
+                    {(commande.owner.phone && commande.status !== 'draft') && (<p><span>Téléphone :</span> {commande.owner.phone}</p>)}
                     <p><span>Livraison :</span> {commande.delivery}</p>
                     <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
                     <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
@@ -118,7 +206,9 @@ const Orders = ({}) => {
                       <Button color={'Transparent'} functionOnClick={() => {commande.status === 'draft' ? cancel(commande.id, 'lecteur') : null}}>{commande.status === 'draft' ? 'Annuler la commande' : now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
                     </a>
                     <a>
-                      <Button color={'White'} >{commande.status === 'draft' ? 'Attente de validation...' : now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
+                      <Button color={'White'} functionOnClick={() => {commande.status === 'draft' ? null : !commande.sendCollector ? null : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? null : null : moment(commande.endDate) > moment() ? null : sent(commande.id, 'lecteur') : receive(commande.id, 'lecteur')}}>
+                        {commande.status === 'draft' ? 'En attente de validation..' : !commande.sendCollector ? 'En attente de l\'envoi' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Laisser un avis' : 'En transit...' :  moment(commande.endDate) > moment() ? 'En location...' : 'Confirmer l\'envoi' : 'Confirmer réception'}
+                      </Button>
                     </a>
                   </div>
                 </div>
@@ -131,18 +221,23 @@ const Orders = ({}) => {
             return (
               <div className="commande">
                 <div className="left">
-                  <img src={commande.product.imageCover.url} alt="" className="productImg"/>
+                  <img src={getStrapiMedia(commande.product.imageCover.url)} alt="" className="productImg"/>
                   <div className="middle">
                     <div className="up">
-                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${commande.status === 'draft' ? 'draft' : now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{commande.status === 'draft' ? 'En attente de validation' : now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className="main">{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} 
+                        <div className={`statut ${commande.status === 'draft' ? 'draft' : !commande.sendCollector ? 'later' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'done' : 'later' :  moment(commande.endDate) > moment() ? 'now' : 'later' : 'later'}`} >
+                          {commande.status === 'draft' ? (<><img src="/pending.svg" alt="icon pending" /> En attente de validation</>) : !commande.sendCollector ? (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Terminée' : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</> :  moment(commande.endDate) > moment() ? <><img src="/enCours.svg" alt="icon pending" />Location en cours</> : (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</>}
+                        </div>
+                      </div>
                       <div className="ownerContainer">
                         {commande.not_owner.profilPic && (
-                          <img src={commande.not_owner.profilPic.formats ? commande.not_owner.profilPic.formats.thumbnail.url : commande.not_owner.profilPic.url} alt="profil picture collectionneur"/> 
+                          <img src={commande.not_owner.profilPic.formats ? getStrapiMedia(commande.not_owner.profilPic.formats.thumbnail.url) : getStrapiMedia(commande.not_owner.profilPic.url)} alt="profil picture collectionneur"/> 
                         )}
                         <div><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
                       </div>
                     </div>
                     <div className="down">
+                      {(commande.not_owner.phone && commande.status !== 'draft') && (<p><span>Téléphone :</span> {commande.not_owner.phone}</p>)}
                       <p><span>Livraison :</span> {commande.delivery}</p>
                       <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
                       <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
@@ -151,6 +246,7 @@ const Orders = ({}) => {
                 </div>
                 <div className="middleRight">
                   <div className="down">
+                    {(commande.not_owner.phone && commande.status !== 'draft') && (<p><span>Téléphone :</span> {commande.not_owner.phone}</p>)}
                     <p><span>Livraison :</span> {commande.delivery}</p>
                     <p><span>Prix :</span> {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(commande.priceTot)}</p>
                     <p><span>Dates :</span> {moment(commande.startDate).format('Do MMMM')}-{moment(commande.endDate).format('Do MMMM')}</p>
@@ -163,8 +259,10 @@ const Orders = ({}) => {
                       <Button color={'Transparent'} functionOnClick={() => {commande.status === 'draft' ? cancel(commande.id, 'collectionneur') : null}}>{commande.status === 'draft' ? 'Annuler la commande' : now ? 'Réclamation' : moment(commande.endDate) > moment() ? 'Annuler la commande' : 'Signaler un problème'}</Button>
                     </a>
                     <a>
-                      <Button color={'White'} functionOnClick={() => {commande.status === 'draft' ? validate(commande.id) : null}}>{commande.status === 'draft' ? 'Valider la commande' : now ? 'Envoyer un message' : moment(commande.endDate) > moment() ? 'Envoyer un message' : 'Laisser un avis'}</Button>
-                    </a>   
+                      <Button color={'White'} functionOnClick={() => {commande.status === 'draft' ? validate(commande.id) : !commande.sendCollector ? sent(commande.id, 'collectionneur') : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? null : receive(commande.id, 'collectionneur') :  moment(commande.endDate) > moment() ? null : null : null}}>
+                        {commande.status === 'draft' ? 'Valider la commande' : !commande.sendCollector ? 'Confirmer l\'envoi' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Laisser un avis' : 'Confirmer réception' :  moment(commande.endDate) > moment() ? 'En location...' : 'En attente de l\'envoi' : 'En transit...'}
+                      </Button>
+                    </a>
                   </div>
                 </div>
               </div>
