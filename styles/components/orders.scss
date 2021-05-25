@@ -45,7 +45,7 @@
 
     .left {
       display: inline-flex;
-      width: 50%;
+      width: 60%;
     }
 
     .productImg {
@@ -93,6 +93,10 @@
       height: 100%;
       margin-left: 20px;
 
+      .fontSize12 {
+        font-size: 12px !important;
+      }
+
       .up {
         display: flex;
         flex-direction: column;
@@ -115,7 +119,7 @@
           &:first-child {
             font-size: 22px;
             font-weight: 400;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
           }
 
           font-size: 12px;
@@ -134,6 +138,7 @@
           padding: 4px 7px 2px;
           line-height: 16px;
           font-size: 13px !important;
+          height: 22px;
 
           img {
             height: 14px;
@@ -150,6 +155,7 @@
 
           &.later, &.draft {
             background-color: color(orange);
+            min-width: 200px;
           }
 
           &.done {
