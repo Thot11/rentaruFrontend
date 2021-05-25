@@ -8,6 +8,7 @@ import {getMe, updateMe, logOut} from '../store'
 import { useRouter } from "next/router";
 import Dashboard from '../components/Dashboard'
 import Params from '../components/Params'
+import Link from "next/link";
 
 const Profil = () => {
 
@@ -53,6 +54,11 @@ const Profil = () => {
           <Dashboard user={user} setTabs={setTabs}/>
         )}
       </div>
+      {tabs !== 'params' &&
+        <div className="bottomContainer">
+          <Link href='/orders'><button className='buttonRed'>Voir mes commandes</button></Link>
+        </div>
+      }
     </div>
   );
 };

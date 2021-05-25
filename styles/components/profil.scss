@@ -638,6 +638,22 @@
   }
 }
 
+.bottomContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 32px;
+  padding: 0 calc((100% - 1280px)/2);
+  background-color: color(primary);
+
+  .buttonRed {
+    width: 240px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 3px;
+  }
+}
+
 @media only screen and (max-width: 700px) {
   .headerProfil {
     display: flex;
@@ -914,6 +930,22 @@
           }
         }
       }
+    }
+  }
+
+  .bottomContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 32px;
+    padding: 0 calc((100% - 1280px)/2);
+    background-color: transparent;
+  
+    .buttonRed {
+      width: 240px;
+      height: 40px;
+      font-size: 16px;
+      border-radius: 3px;
     }
   }
 }
