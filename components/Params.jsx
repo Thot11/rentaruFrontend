@@ -9,6 +9,7 @@ import CheckBox from "../elements/CheckBox";
 import DropDown from "../elements/DropDown";
 import { getMangaCollection } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
+import Link from "next/link";
 
 
 const Params = ({ user, logOut }) => {
@@ -98,6 +99,7 @@ const Params = ({ user, logOut }) => {
               <div className="offSet" />
               <div className="mainText"> Bonjour {user.username}</div>
               <label className="subText" htmlFor="pp">Changer photo de profil</label>
+              <Link href={`/users/${user.id}`}><label className="subText" htmlFor="pp">Voir mon profil public</label></Link>
           </div>
         </div>
         <div className="right">
