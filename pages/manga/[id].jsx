@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProductsList from "../../components/ProductsList";
 import { getManga, getMangaCollection, getProductsByTitle } from "../../utils/api";
 import { getStrapiMedia } from "../../utils/medias";
@@ -42,6 +42,8 @@ const MangaPage = ({ manga, products }) => {
   if (router.isFallback) {
     return <div>Loading products...</div>;
   }
+
+  const listEl = useRef(null);
 
   const dispatch = useDispatch();
   const { session } = useSelector((state) => state);
@@ -85,6 +87,12 @@ const MangaPage = ({ manga, products }) => {
   useEffect(() => {
     getMangaList()
   }, [session])
+
+  useEffect(() => {
+    if(listEl.current) {
+      setTimeout(() => listEl.current.scrollIntoView({behavior: 'smooth'}), 300);
+    }
+  }, [listEl.current])
 
   const getMangaList = () => {
     getMangaCollection(session).then(resp => {
@@ -187,7 +195,6 @@ const MangaPage = ({ manga, products }) => {
           return a.booked.length - b.booked.length;
         });
       }
-      console.log(productList)
       setChanges(!changes)
       setProductList(newProductList)
     }
@@ -206,7 +213,6 @@ const MangaPage = ({ manga, products }) => {
  
   const saveDate = () => {
     if(startDate && endDate) {
-      console.log('here')
       dispatch(paiementData([], startDate, endDate));
     }
   }
@@ -279,7 +285,6 @@ const MangaPage = ({ manga, products }) => {
           </div>
           <div className="links">
             {manga.links.map((link) => {
-              console.log(manga.categories)
               return (
                 <a href={link.link} className='link'>Lien sens critique</a>
               )
@@ -418,7 +423,9 @@ const MangaPage = ({ manga, products }) => {
             </button>
         </div>
       </div>
-      <ProductsList products={productList} saveDate={saveDate}/>
+      <div className="result" ref={listEl}>
+        <ProductsList products={productList} saveDate={saveDate}/>
+      </div>
     </div>
   );
 };

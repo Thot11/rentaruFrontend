@@ -83,7 +83,6 @@ const TrendingPage = ({ products }) => {
       if(manga.products.length > 0) {
         let goodCategory = false;
         manga.categories.forEach((_category) => {
-          console.log(_category)
           if(_category.slug === category) {
             goodCategory = true;
           }
