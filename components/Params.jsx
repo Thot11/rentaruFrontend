@@ -170,7 +170,7 @@ const Params = ({ user, logOut }) => {
             :
             <div className="top" onClick={() => setChangeDocuments(true)}>Modifier mes documents</div>
             }
-            <Verification checked={idChecked} checkedText={idChecked} notCheckedText={'Faire vérifier un id'} input={changeDocuments} changeInput={setIdChecked}/>
+            <Verification checked={idChecked} checkedText={idChecked} notCheckedText={'Faire vérifier un id'} input={changeDocuments} changeInput={setIdChecked} index={1}/>
             <Verification checked={phoneChecked} checkedText={phoneChecked} notCheckedText={'Faire vérifier un numéro'} input={changeDocuments} changeInput={setPhoneChecked}/>
             <Verification checked={mailChecked} checkedText={mailChecked} notCheckedText={'Faire vérifier un mail'} input={changeDocuments} changeInput={setMailChecked}/>
             {changeDocuments && <Button color='Red' functionOnClick={() => {updateInfo({phone: phoneChecked, email: mailChecked}); setChangeDocuments(false)}}>Enregistrer</Button>}
@@ -232,10 +232,10 @@ const Params = ({ user, logOut }) => {
 };
 
 
-const Verification = ({checked, checkedText, notCheckedText, input, changeInput}) => {
+const Verification = ({checked, checkedText, notCheckedText, input, changeInput, index}) => {
 
   return (
-    <div className="verif">
+    <div className={index ? "verif verif1" : 'verif'}>
       {checked ? (
         <>
           <img src="/checkGreen.svg" alt=""/>
