@@ -571,18 +571,30 @@
                 margin-left: 15px;
                 padding: 4px 7px 2px;
                 line-height: 16px;
-
-
+                font-size: 13px !important;
+                height: 22px;
+      
+                img {
+                  height: 14px;
+                  width: 14px;
+                  min-width: auto;
+                  min-height: auto;
+                  max-width: auto;
+                  max-height: auto;
+                }
+      
                 &.now {
-                  background-color: color(green3);
+                  background-color: color(newBlue);
                 }
-
-                &.later {
+      
+                &.later, &.draft {
                   background-color: color(orange);
+                  min-width: 200px;
                 }
-
+      
                 &.done {
-                  background-color: color(blue);
+                  color: color(secondary);
+                  background-color: color(backgroundCheckboxSometimes);
                 }
               }
             }

@@ -212,10 +212,14 @@ const Dashboard = ({ user, setTabs }) => {
               const now = range.contains(moment())
               return (
                 <div className="commande">
-                  <img src={commande.product.imageCover.formats.thumbnail.url} alt=""/>
+                  <img src={getStrapiMedia(commande.product.imageCover.formats.thumbnail.url)} alt=""/>
                   <div className="middle">
                     <div className="up">
-                      <div className='header'>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className='header'>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} 
+                        <div className={`statut ${commande.status === 'draft' ? 'draft' : !commande.sendCollector ? 'later' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'done' : 'later' :  moment(commande.endDate) > moment() ? 'now' : 'later' : 'later'}`} >
+                          {commande.status === 'draft' ? (<><img src="/pending.svg" alt="icon pending" /> En attente de validation</>) : !commande.sendCollector ? (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Terminée' : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</> :  moment(commande.endDate) > moment() ? <><img src="/enCours.svg" alt="icon pending" />Location en cours</> : (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</>}
+                        </div>
+                      </div>
                       <div><span>{commande.owner.username}</span>&nbsp; | {commande.owner.ville}  ({commande.owner.departement})</div>
                     </div>
                     <div className="down">
@@ -231,10 +235,14 @@ const Dashboard = ({ user, setTabs }) => {
               const now = range.contains(moment())
               return (
                 <div className="commande">
-                  <img src={commande.product.imageCover.formats.thumbnail.url} alt=""/>
+                  <img src={getStrapiMedia(commande.product.imageCover.formats.thumbnail.url)} alt=""/>
                   <div className="middle">
                     <div className="up">
-                      <div className='header'>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} <div className={`statut ${now ? 'now' : moment(commande.endDate) > moment() ? 'later' : 'done'}`} >{now ? 'En cours' : moment(commande.endDate) > moment() ? 'À venir' : 'Terminée'}</div></div>
+                      <div className='header'>{commande.product.title} | Tome {commande.product.tomeInitial} à {commande.product.tomeFinal} 
+                        <div className={`statut ${commande.status === 'draft' ? 'draft' : !commande.sendCollector ? 'later' : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'done' : 'later' :  moment(commande.endDate) > moment() ? 'now' : 'later' : 'later'}`} >
+                          {commande.status === 'draft' ? (<><img src="/pending.svg" alt="icon pending" /> En attente de validation</>) : !commande.sendCollector ? (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : commande.receiveReader ? commande.sendReader ? commande.receiveCollector ? 'Terminée' : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</> :  moment(commande.endDate) > moment() ? <><img src="/enCours.svg" alt="icon pending" />Location en cours</> : (<><img src="/pending.svg" alt="icon pending" />En attente de l’envoi</>) : <><img src="/pending.svg" alt="icon pending" />En cours de livraison</>}
+                        </div>
+                      </div>
                       <div><span>{commande.not_owner.username}</span>&nbsp; | {commande.not_owner.ville}  ({commande.not_owner.departement})</div>
                     </div>
                     <div className="down">
