@@ -36,7 +36,7 @@ const Footer = () => {
                 Centre d'aide
               </a>
             </Link>
-            <Link href="/">
+            <Link href="/contact">
               <a className="linkElement">
                 Contactez nous
               </a>
