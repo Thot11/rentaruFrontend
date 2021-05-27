@@ -6,99 +6,201 @@
   width: 100%;
   height: auto;
   overflow: hidden;
-  padding: 98px 0 50px calc((100% - 1280px)/2);
+  display: flex;
 
-  .background {
-    position: absolute;
-    top: -136px;
-    right: 0;
-    z-index: -1;
-  }
-
-  h2 {
-    margin-bottom: 38px;
-    color: color(secondary);
-    font-weight: 200;
-    font-size: 25px;
-  }
-
-  .loginWrapper {
-    width: fit-content;
-    padding: 31px 43px 81px 35px;
-    border: 0.2px solid color(secondary, 0.4);
-    border-radius: 3px;
-    background-color: color(primary);
-
-    h3 {
-      margin-bottom: 56px;
-      font-size: 18px;
-      font-weight: 400;
-    }
-
-    .error {
-      margin-bottom: 10px;
-      font-size: 12px;
-      font-weight: 200;
-      color: color(red);
-    }
-
-    .inputText {
-      width: 100%;
-      margin-bottom: 20px;
-      padding: 9px 16px;
+  .leftContent {
+    width: 50%;
+    padding-top: 98px;
+    padding-bottom: 50px;
+    padding-left: calc((100% - 1280px)/2);
+    h2 {
+      margin-bottom: 38px;
       color: color(secondary);
-      font-size: 12px;
-      background-color: color(dark);
+      font-weight: 200;
+      font-size: 25px;
+    }
+  
+    .loginWrapper {
+      width: fit-content;
+      padding: 31px 43px 81px 35px;
+      border: 0.2px solid color(secondary, 0.4);
       border-radius: 3px;
-
-      &.password {
-        margin-bottom: 30px;
+      background-color: color(primary);
+  
+      h3 {
+        margin-bottom: 56px;
+        font-size: 18px;
+        font-weight: 400;
       }
-
-      &::placeholder {
+  
+      .error {
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: 200;
+        color: color(red);
+      }
+  
+      .inputText {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 9px 16px;
         color: color(secondary);
         font-size: 12px;
+        background-color: color(dark);
+        border-radius: 3px;
+  
+        &.password {
+          margin-bottom: 30px;
+        }
+  
+        &::placeholder {
+          color: color(secondary);
+          font-size: 12px;
+        }
       }
-    }
-
-    .rememberMe {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-
-      p {
+  
+      .rememberMe {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+  
+        p {
+          font-size: 14px;
+        }
+  
+        input {
+          width: 20px;
+          height: 20px;
+          padding: 7px;
+        }
+      }
+  
+      .btnUnderline {
+        text-decoration: underline;
         font-size: 14px;
+        margin-bottom: 71px;
       }
-
-      input {
-        width: 20px;
-        height: 20px;
-        padding: 7px;
-      }
-    }
-
-    .btnUnderline {
-      text-decoration: underline;
-      font-size: 14px;
-      margin-bottom: 71px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .button {
-        margin-bottom: 20px;
-
-        &:last-child {
-          margin-bottom: 0;
+  
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+  
+        .button {
+          margin-bottom: 20px;
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
       }
     }
+
   }
+
+  .rightContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 1;
+    width: 50%;
+    height: auto;
+    background-color: color(primary-300);
+
+    .back {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      z-index: -1;
+      overflow:hidden;
+
+      .background {
+        top: 0;
+        right: 0;
+        z-index: 0;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .substract {
+        margin-top: -90px;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .pancarteContainer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 649px;
+      height: 329px;
+      margin-bottom: -335px;
+      padding: 40px;
+
+      .quote {
+        width: 384px;
+        margin-bottom: 22px;
+
+        .quoteIcon {
+          font-weight: 600;
+          font-size: 81px;
+          color: color(primary-300);
+          margin-bottom: -55px;
+          margin-left: -23px;
+        }
+
+        .quoteText {
+          color: color(secondary);
+          line-height: 30px;
+          font-size: 18px;
+          font-weight: 325;
+
+        }
+      }
+
+      .customerInfo {
+        display: flex;
+        align-items: center;
+        width: 384px;
+
+        img {
+          margin-right: 25px;
+        }
+
+        .userName {
+          color: color(secondary);
+          font-size: 21px;
+          font-weight: 350;
+        }
+      }
+
+      .pancarte {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    }
+
+    .pancarteFoot {
+      // margin-top: -60px;
+    }
+  }
+
+  
 }
 
 @media only screen and (max-width: 700px) {
