@@ -201,6 +201,47 @@
     }
   }
 
+  .middleContainerDashboard {
+    .left {
+      .top.cagnotte {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 200px;
+
+        .header {
+          display: inline-flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          width: 100%;
+
+          .title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 300;
+          }
+
+          img {
+            padding: 7px;
+            cursor: pointer;
+            opacity: .8;
+            transition: all .3 ease;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+
+        button {
+          align-self: center;
+        }
+
+        
+      }
+    }
+  }
+
   .middleContainer {
     display: inline-flex;
     width: 100%;
