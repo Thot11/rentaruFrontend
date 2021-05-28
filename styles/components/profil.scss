@@ -211,7 +211,7 @@
 
         .header {
           display: inline-flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           width: 100%;
 
@@ -221,15 +221,15 @@
             font-weight: 300;
           }
 
-          img {
-            padding: 7px;
-            cursor: pointer;
-            opacity: .8;
-            transition: all .3 ease;
-
-            &:hover {
-              opacity: 1;
-            }
+        }
+        
+        .money {
+          .solde {
+            font-size: 32px;
+          }
+          span {
+            font-size: 8px;
+            font-weight: 300;
           }
         }
 
@@ -238,6 +238,13 @@
         }
 
         
+      }
+      .middle {
+        .title {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 300;
+        }
       }
     }
   }
