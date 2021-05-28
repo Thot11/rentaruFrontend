@@ -109,93 +109,24 @@ const Dashboard = ({ user, setTabs }) => {
 
   return (
     <>
-      {windowWidth >= 700 &&
-        <div className="topContainer">
-          <div className="left">
-            {user.profilPic ? (
-              <img src={getStrapiMedia(user.profilPic?.url)} alt="profilPic"/>
-            ) : (
-              <div className="emptyProfilPic">{user.username?.charAt(0)}</div>
-            )}
-            <div className="hello">
-                <div className="mainText"> Bonjour {user.username}</div>
-                <p className="link" onClick={() => setTabs('params')}>Modifier votre profil <img src="/chevronLink.svg" /></p>
-                <Link href="/myCollection">
-                  <p className="link" >Voir ma collection <img src="/chevronLink.svg" /></p>
-                </Link>
-            </div>
-          </div>
-          <div className="right">
-            <div className="top">
-              <div>Votre Grade</div>
-              <a><p>Comment marche les grades ?</p> <img src="/chevronLink.svg" /> </a>
-            </div>
-            <div className="middle">
-              <img src="/chuninBadge.svg" alt=""/>
-              <img src="/senpaiBadge.svg" alt=""/>
-              <img src="/wakaSensei.svg" alt=""/>
-              <img src="/senseiBadge.svg" alt=""/>
-              <img src="/gsenseiBadge.svg" alt=""/>
-            </div>
-            <div className="bot">
-              <div className="subLine" />
-              <div className="progression" style={{width: '60%'}}/>
-            </div>
-          </div>
-        </div>
-      }
       <div className={"middleContainer middleContainerDashboard"}>
         {windowWidth >= 700 &&
           <div className="left">
-            <div className="top">
-              <div className="title">Préférences</div>
-              <div className="prefLivraison">
-                <div>
-                  <img src="/hand-shake1.svg" alt=""/>
-                  <p>Remise en main propre</p>
-                </div>
-                <CheckBox checked={handToHand} setChecked={setHandToHand} info={true} resetInfo={false}/>
+            <div className="top cagnotte">
+              <div className="header">
+                <div className="title">Solde Rentaru</div>
+                <img src="/3dots.svg" alt="3 petits points" />
               </div>
-              <div className="prefLivraison">
-                <div>
-                  <img src="/cardboard.svg" alt=""/>
-                  <p>Envoi postal</p>
-                </div>
-                <CheckBox checked={relaiColis} setChecked={setRelaiColis} info={true} resetInfo={false}/>
+              <div className="money">
+                <div className="solde">{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(user.cagnotte)}</div>
+                <span>Disponible</span>
               </div>
+              <Button color="Red">
+                Transférer l'argent
+              </Button> 
             </div>
             <div className="middle">
-              <div className="title">Vérification</div>
-              <Verification checked={idChecked} checkedText={'Id vérifié'} notCheckedText={'Faire vérifier un id'} input={false} />
-              <Verification checked={phoneChecked} checkedText={'Téléphone vérifié'} notCheckedText={'Faire vérifier un numéro'} input={false} />
-              <Verification checked={mailChecked} checkedText={'Mail vérifié'} notCheckedText={'Faire vérifier un mail'} input={false} />
-              <p className="link" onClick={() => setTabs('params')}>Compléter les vérifications <img src="/chevronLink.svg" /></p>
-            </div>
-            <div className="bot">
-              <div className="title">Activité</div>
-              <div className="rewards">
-                <div className="cardReward">
-                  <img src="/book.svg" alt="book"/>
-                  <div className="infoReward">
-                    <p className='number'>{ user && user.products?.length}</p>
-                    <p className='title'>Série{user && user.products?.length > 1 ? 's' : ''} de manga mise{user && user.products?.length > 1 ? 'nt' : ''} en location</p>
-                  </div>
-                </div>
-                <div className="cardReward">
-                  <img src="/transaction.svg" alt="transaction"/>
-                  <div className="infoReward">
-                    <p className='number'>{user.commandes && user.ownerCommandes ? user.commandes?.length + user.ownerCommandes?.length : "..."}</p>
-                    <p className='title'>Transactions réalisés</p>
-                  </div>
-                </div>
-                <div className="cardReward">
-                  <img src="/clock.svg" alt="transaction"/>
-                  <div className="infoReward">
-                    <p className='number'>{memberSince}</p>
-                    <p className='title'>Jour{memberSince > 1 ? 's' : ''} d'ancienneté</p>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         }
