@@ -91,8 +91,6 @@ const Login = () => {
           <svg className='pancarteFoot' width="51" height="470" viewBox="0 0 51 470" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 21C0 9.40201 9.40202 0 21 0H30C41.598 0 51 9.40202 51 21V470H0V21Z" fill="#171F25"/>
           </svg>
-
-
         </div>
         
       </div>
