@@ -116,6 +116,11 @@ export async function getCategories() {
   return categories;
 }
 
+export async function getQuotes() {
+  const quotes = await fetchAPI("/quotes");
+  return quotes;
+}
+
 export async function getMe(token) {
   const me = await fetchAPI(`/users/me?token=${token}`);
   return me;
