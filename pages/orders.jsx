@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Link from "next/link";
 import Button from "../elements/Button";
 import { getCguPage } from "../utils/api";
+import {updateMe} from '../store'
 import { getStrapiMedia } from "../utils/medias";
 
 import Dropdown from "../components/dropdown"
@@ -19,6 +20,7 @@ import Modal from "../components/Modal";
 const Orders = ({}) => {
 
   const moment = extendMoment(Moment);
+  const dispatch = useDispatch()
 
   const { session, user } = useSelector((state) => state);
 
@@ -95,7 +97,9 @@ const Orders = ({}) => {
     if (type === 'collectionneur') {
       setOpenModal(true)
       setOpenModalFunction({function: () => {
-        updateCommande(commandeId, {receiveCollector : true}, session).then(() => {
+        updateCommande(commandeId, {receiveCollector : true}, session).then((resp) => {
+          const data = {cagnotte: resp.data.priceOwner + user.cagnotte}
+          dispatch(updateMe(data, session))
           const temp = myCollectionOrders.findIndex((order) => order.id === commandeId)
           myCollectionOrders[temp].receiveCollector = true
           setMyCollectionOrders([...myCollectionOrders])
