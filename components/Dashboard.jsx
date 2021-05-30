@@ -33,6 +33,7 @@ const Dashboard = ({ user, setTabs }) => {
   const [selectedCommandes, setSelectedCommandes] = useState(0)
   const [lastCommandes, setLastCommandes] =  useState([])
   const [endOrders, setEndOrders] =  useState([])
+  const [showMoreTransactions, setShowMoreTransactions] = useState(false)
   const [myLastCommandes, setMyLastCommandes] =  useState([])
 
   const [memberSince, setMemberSince] = useState('');
@@ -47,7 +48,6 @@ const Dashboard = ({ user, setTabs }) => {
   const updateSize = () => {
     setWindowWidth(window.innerWidth)
   }
-
 
   const calculDate = () => {
     const now = Date.now();
@@ -137,7 +137,7 @@ const Dashboard = ({ user, setTabs }) => {
   return (
     <>
       <div className={"middleContainer middleContainerDashboard"}>
-        {windowWidth >= 700 &&
+        {/* {windowWidth >= 700 && */}
           <div className="left">
             <div className="top cagnotte">
               <div className="header">
@@ -153,10 +153,48 @@ const Dashboard = ({ user, setTabs }) => {
             </div>
             <div className="middle">
               <div className="title">Historique des transactions</div>
-              
+              <div className="ordersEndContainer">
+                {endOrders.map((order, index) => {
+                  const mine = order.owner.username === user.username;
+                  if (index > 3 && !showMoreTransactions) return null;
+                  return (
+                    <div className="order">
+                      <div className='header'>
+                        <div className="leftMiddle">
+                          {order.product.title} | Tome {order.product.tomeInitial} à {order.product.tomeFinal}
+                        </div>
+                        <div className="price">
+                          {mine ? new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(order.priceOwner) : new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(order.priceTot)}
+                        </div>
+                      </div>
+                      <div className="body">
+                        <div className="date">
+                        {moment(order.startDate).format('Do MMMM')}-{moment(order.endDate).format('Do MMMM')}
+                        </div>
+                        <div className="rightMiddle">
+                          {mine ? (
+                            <>
+                              Reçu 
+                              <img src="/arrowRight.svg" alt="flèche" className="reverse" />
+                            </>
+                          ) : (
+                            <>
+                              Envoyé 
+                              <img src="/arrowRight.svg" alt="flèche" />
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              {endOrders.length > 4 && (
+                <p className="showMore" onClick={() => setShowMoreTransactions(true)}>Voir toutes les transactions</p>
+              )}
             </div>
           </div>
-        }
+        {/* } */}
         <div className="right">
           <div className="topBox">
             <div className="title">
