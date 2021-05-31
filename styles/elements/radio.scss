@@ -1,0 +1,23 @@
+@import './../color.scss';
+
+.radio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  background-color: color(primary);
+
+  &.radioChecked {
+    background-color: color(red) !important;
+  }
+
+  .fillRadio {
+    width: 8px;
+    height: 8px;
+    margin-left: 0;
+    border-radius: 50%;
+    background-color: color(secondary);
+  }
+}

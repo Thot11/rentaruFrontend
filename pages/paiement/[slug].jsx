@@ -10,8 +10,10 @@ import 'moment/locale/fr'
 import { extendMoment } from 'moment-range';
 import { getStrapiMedia } from "../../utils/medias";
 import CheckBox from "../../elements/CheckBox";
+import Radio from "../../elements/Radio";
 import Link from "next/link";
-import PaiementStripe from "../../components/paiementStripe"
+import PaiementStripe from "../../components/paiementStripe" 
+import {updateMe} from '../../store'
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -27,6 +29,7 @@ const PaiementPage = ({ product, stripeKey }) => {
   const stripePromise = loadStripe(stripeKey);
 
   const moment = extendMoment(Moment);
+  const dispatch = useDispatch();
 
   const { rent, user, session } = useSelector((state) => state);
 
@@ -35,6 +38,7 @@ const PaiementPage = ({ product, stripeKey }) => {
   const [cglAccepted, setCglAccepted] = useState(false);
   const [price, setPrice] = useState(product.price)
   const [deliveryWording, setDeliveryWording] = useState()
+  const [useCagnotte, setUseCagnotte] = useState(false)
   
   useEffect(() => {
     if(delivery === 'Livraison Mondial Relay') {
@@ -65,15 +69,23 @@ const PaiementPage = ({ product, stripeKey }) => {
       } else if (days < 14) {
         setPrice((1-((14-days)*0.05))*product.price)
       } else {
-        setPrice(product.price*1.1+0.2)
+        setPrice(product.price)
       }
     }
   }, [rent.startDate, rent.endDate])
 
+  useEffect(() => {
+    if (useCagnotte && user.cagnotte < price*1.1+0.2) {
+      setUseCagnotte(false)
+    }
+  }, [useCagnotte])
+
   const go = (stripeToken) => {
 
-    if (stripeToken && cglAccepted) {
-      postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, price*1.1+0.2, deliveryPrice, deliveryWording, stripeToken.token.id, session).then((resp) => {
+    if ((stripeToken || (useCagnotte && user.cagnotte > (price*1.1+0.2))) && cglAccepted) {
+      postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, (price*1.1+0.2), deliveryPrice, deliveryWording, stripeToken ? stripeToken.token.id : '', useCagnotte, session).then((resp) => {
+        const data = {cagnotte: user.cagnotte - (price*1.1+0.2)}
+        dispatch(updateMe(data, session))
         updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
       })
     }
@@ -107,7 +119,7 @@ const PaiementPage = ({ product, stripeKey }) => {
             {product.delivery !== 'Envoi postal' && (
               <div className="price">
                 <div className="leftPart">
-                  <CheckBox checked={delivery === 'Remise en main propre'} setChecked={setDelivery} info={'Remise en main propre'} resetInfo={''} />                
+                  <Radio checked={delivery === 'Remise en main propre'} setChecked={setDelivery} info={'Remise en main propre'} resetInfo={''} />                
                   <p className="label">Remise en main propre</p>
                 </div>
                 <p className="priceNumber">0,00 €</p>
@@ -124,14 +136,14 @@ const PaiementPage = ({ product, stripeKey }) => {
               <>
                 <div className="price">
                   <div className="leftPart">
-                    <CheckBox checked={delivery === 'Livraison Mondial Relay'} setChecked={setDelivery} info={'Livraison Mondial Relay'} resetInfo={''} />  
+                    <Radio checked={delivery === 'Livraison Mondial Relay'} setChecked={setDelivery} info={'Livraison Mondial Relay'} resetInfo={''} />  
                     <p className="label">Livraison Mondial Relay</p>
                   </div>
                   <p className="priceNumber">13,00 €</p>
                 </div>
                 <div className="price">
                   <div className="leftPart">
-                    <CheckBox checked={delivery === 'Livraison Colissimo'} setChecked={setDelivery} info={'Livraison Colissimo'} resetInfo={''} /> 
+                    <Radio checked={delivery === 'Livraison Colissimo'} setChecked={setDelivery} info={'Livraison Colissimo'} resetInfo={''} /> 
                     <p className="label">Livraison Colissimo</p>
                   </div>
                   <p className="priceNumber">20,00 €</p>
@@ -147,8 +159,16 @@ const PaiementPage = ({ product, stripeKey }) => {
                   <img src="/stripe-logo-blue.png" alt="stripe"/>
                 </div>
               </div>
+              <div className="cagnotte">
+                <div className="left">
+                  <Radio checked={useCagnotte} setChecked={setUseCagnotte} info={true} resetInfo={false} />
+                  <img src="/bank.svg" alt="pièce d'or" />
+                  <div className="body">Mon porte-monnaie Rentaru</div>
+                </div>
+                <div className="solde">{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(user.cagnotte)}</div>
+              </div>
               <Elements stripe={stripePromise}>
-                <PaiementStripe cglAccepted={cglAccepted} go={go}>
+                <PaiementStripe cglAccepted={cglAccepted} go={go} checked={!useCagnotte} setChecked={setUseCagnotte} info={false} resetInfo={true}>
                   <div className="acceptCGL">
                     <CheckBox checked={cglAccepted} setChecked={setCglAccepted} info={true} resetInfo={false} />
                       <p onClick={() => setCglAccepted(!cglAccepted)}>En cochant cette case vous acceptez les <span className="underline" onClick={e => e.stopPropagation()}><Link href="/CGL" >CGL</Link></span></p>

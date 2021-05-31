@@ -3,7 +3,7 @@ import { useState } from "react";
 import DropDown from "../elements/DropDown";
 
 
-const PaiementStripe = ({children, cglAccepted, go}) => {
+const PaiementStripe = ({children, cglAccepted, go, checked, setChecked, info, resetInfo}) => {
 
   const stripe = useStripe();
   const elements = useElements();
@@ -13,16 +13,17 @@ const PaiementStripe = ({children, cglAccepted, go}) => {
   async function preGo() {
     if (elements) {
       const cardElement = elements.getElement(CardNumberElement);
-      if (!cardElement) {setError('Vérifier vos informations puis réessayer svp'); return}
-      const tokenStripe = await stripe.createToken(cardElement);
-      if (tokenStripe.error) {setError('Vérifier vos informations puis réessayer svp'); return}
+      let tokenStripe;
+      if (!cardElement && checked) {setError('Vérifier vos informations puis réessayer svp'); return}
+      if (checked) tokenStripe = await stripe.createToken(cardElement);
+      if (tokenStripe && tokenStripe.error && checked) {setError('Vérifier vos informations puis réessayer svp'); return}
       go(tokenStripe)
     }
   }
 
   return (
     <>
-      <DropDown title='Carte de crédit ou de débit' color={'dark'} isImage={true}>
+      <DropDown title='Carte de crédit ou de débit' color={'dark'} isImage={true} radio={true} checked={checked} setChecked={setChecked} info={info} resetInfo={resetInfo}>
         <div className="card">
           <CardNumberElement className="cardNumber" options={{style: {base : {color: '#fff', '::placeholder' : {color: '#fff'}}}}}/>
           <div className="cardMore">

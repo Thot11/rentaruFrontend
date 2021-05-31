@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useSelector, useDispatch } from 'react-redux';
 import Link from "next/link";
 import Button from "../elements/Button";
-import { getCguPage } from "../utils/api";
+import { updateUser } from "../utils/api";
 import {updateMe} from '../store'
 import { getStrapiMedia } from "../utils/medias";
 
@@ -125,6 +125,11 @@ const Orders = ({}) => {
     setOpenModal(true)
     setOpenModalFunction({function: () => {
       deleteCommande(commandeId, session).then(() => {
+        const tempOrders = [...myReadingsOrders, ...myCollectionOrders]
+        const deletedOrder = tempOrders.filter((order) => order.id === commandeId)
+        if (deletedOrder[0].cagnotte) {
+          updateUser(deletedOrder[0].not_owner.id, {cagnotte: deletedOrder[0].not_owner.cagnotte + deletedOrder[0].priceTot}, session)
+        }
         if (type === 'lecteur') {
           const temp = myReadingsOrders.filter((order) => order.id !== commandeId)
           setMyReadingsOrders(temp)

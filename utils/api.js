@@ -161,6 +161,7 @@ export async function postCommande(
   deliveryPrice,
   delivery,
   stripeToken,
+  useCagnotte,
   token
 ) {
   const {data} = await axios.post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/commandes?token=${token}`, {
@@ -175,7 +176,8 @@ export async function postCommande(
     priceTot,
     deliveryPrice,
     delivery,
-    stripeToken
+    stripeToken,
+    cagnotte: useCagnotte
   })
   return data;
 }
@@ -244,6 +246,12 @@ export async function updateMe(data, token) {
   const resp = await axios
   .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/me?token=${token}`, data)
   
+  return resp;
+}
+
+export async function updateUser(id, data, token) {
+  const resp = await axios
+  .put(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/users/${id}?token=${token}`, data)
   return resp;
 }
 
