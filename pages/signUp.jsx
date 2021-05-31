@@ -12,9 +12,9 @@ import Step3 from "../components/signUpStep/Step3";
 import { getStrapiMedia } from "../utils/medias";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Mousewheel } from 'swiper';
+import SwiperCore, { Navigation, Mousewheel, Autoplay } from 'swiper';
 
-SwiperCore.use([Navigation, Mousewheel])
+SwiperCore.use([Navigation, Mousewheel, Autoplay])
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -101,7 +101,8 @@ const SignUp = () => {
                 freeMode={false}
                 mousewheel={{invert:true, forceToAxis: true}}
                 slidesPerView={1}
-                autoplay={5000}
+                spaceBetween={50}                
+                autoplay={{delay: 5000}}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
               >

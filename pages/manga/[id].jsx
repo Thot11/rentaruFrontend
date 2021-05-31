@@ -79,6 +79,8 @@ const MangaPage = ({ manga, products }) => {
 
   const [changes, setChanges] = useState(false);
 
+  const [tabSelected, setTabSelected] = useState(0);
+
   useEffect(() => {
     setWindowWidth(window.innerWidth);
     window.addEventListener('resize', updateSize);
@@ -89,7 +91,7 @@ const MangaPage = ({ manga, products }) => {
   }, [session])
 
   useEffect(() => {
-    if(listEl.current) {
+    if(listEl.current && windowWidth > 700) {
       setTimeout(() => listEl.current.scrollIntoView({behavior: 'smooth'}), 300);
     }
   }, [listEl.current])
@@ -235,6 +237,18 @@ const MangaPage = ({ manga, products }) => {
       <Head>
         <title>{manga.title} </title>
       </Head>
+      {windowWidth < 700 && 
+        <div className="tabulations">
+          <div className={tabSelected === 0 ? "tabulation tabSelected" : "tabulation"} onClick={() => setTabSelected(0)}>
+            Informations
+          </div>
+          <div className={tabSelected === 1 ? "tabulation tabSelected" : "tabulation"}  onClick={() => setTabSelected(1)}>
+            Annonces
+          </div>
+        </div>
+      
+      }
+      {(tabSelected === 0 || windowWidth >= 700) &&
       <div className="mangaInfo">
         <img src={getStrapiMedia(manga.cover.url)} alt="cover" className="cover"/>
         <div className="rightContainer">
@@ -278,11 +292,14 @@ const MangaPage = ({ manga, products }) => {
               </div>
             </div>
           </div>
+          {windowWidth >= 700 && 
           <div className="info infoSynopsis">
             <p className="label">Synopsis</p>
             <p className={synopsisOpen ? "answer answerOpen" : "answer"} dangerouslySetInnerHTML={{__html: manga.synopsis}}></p>
             <p className="seemore" onClick={() => setSynopsisOpen(!synopsisOpen)}>{synopsisOpen ? 'Voir moins...' : 'Voir plus...'}</p>
           </div>
+          }
+          {windowWidth >= 700 && 
           <div className="links">
             {manga.links.map((link) => {
               return (
@@ -290,9 +307,28 @@ const MangaPage = ({ manga, products }) => {
               )
             })}
           </div>
+          }
         </div>
+        {windowWidth < 700 && 
+          <div className="info infoSynopsis">
+            <p className="label">Synopsis</p>
+            <p className={synopsisOpen ? "answer answerOpen" : "answer"} dangerouslySetInnerHTML={{__html: manga.synopsis}}></p>
+            <p className="seemore" onClick={() => setSynopsisOpen(!synopsisOpen)}>{synopsisOpen ? 'Voir moins...' : 'Voir plus...'}</p>
+          </div>
+          }
+          {windowWidth > 700 && 
+          <div className="links">
+            {manga.links.map((link) => {
+              return (
+                <a href={link.link} className='link'>Lien sens critique</a>
+              )
+            })}
+          </div>
+          }
       </div>
-      <div className="filterBar">
+      }
+      {(tabSelected === 1 || windowWidth >= 700) && 
+      <div className="filterBar" ref={listEl}>
         <h3>Recherche avancée</h3>
         <div className="filters">
           <div className="filter">
@@ -423,9 +459,12 @@ const MangaPage = ({ manga, products }) => {
             </button>
         </div>
       </div>
-      <div className="result" ref={listEl}>
-        <ProductsList products={productList} saveDate={saveDate}/>
-      </div>
+      }
+      {(tabSelected === 1 || windowWidth >= 700) && 
+        <div className="result">
+          <ProductsList products={productList} saveDate={saveDate}/>
+        </div>
+      }
     </div>
   );
 };

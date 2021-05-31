@@ -150,40 +150,45 @@
       margin-bottom: -335px;
       padding: 40px;
 
-      .quote {
-        width: 384px;
-        margin-bottom: 22px;
-
-        .quoteIcon {
-          font-weight: 600;
-          font-size: 81px;
-          color: color(primary-300);
-          margin-bottom: -55px;
-          margin-left: -23px;
-        }
-
-        .quoteText {
-          color: color(secondary);
-          line-height: 30px;
-          font-size: 18px;
-          font-weight: 325;
-
-        }
-      }
-
-      .customerInfo {
-        display: flex;
-        align-items: center;
+      .quoteContainer {
         width: 384px;
 
-        img {
-          margin-right: 25px;
+        .quote {
+          margin-bottom: 22px;
+    
+          .quoteIcon {
+            font-weight: 600;
+            font-size: 81px;
+            color: color(primary-300);
+            margin-bottom: -55px;
+            margin-left: 0;
+          }
+    
+          .quoteText {
+            color: color(secondary);
+            line-height: 30px;
+            font-size: 18px;
+            font-weight: 325;    
+          }
         }
-
-        .userName {
-          color: color(secondary);
-          font-size: 21px;
-          font-weight: 350;
+    
+        .customerInfo {
+          display: flex;
+          align-items: center;
+          // width: 384px;
+    
+          img {
+            width: 58px;
+            height: 58px;
+            margin-right: 25px;
+            border-radius: 50%;
+          }
+    
+          .userName {
+            color: color(secondary);
+            font-size: 21px;
+            font-weight: 350;
+          }
         }
       }
 

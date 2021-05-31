@@ -353,3 +353,182 @@
 
   
 }
+
+@media only screen and (max-width: 700px) {
+  .mangaPage {  
+    padding: 0;
+    padding-top: 35px;
+
+    .tabulations {
+      display: flex;
+      width: 100%;
+
+      .tabulation {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 50px;
+        color: color(againWeirdOtherColor);
+        font-weight: bold;
+        font-size: 14px;
+
+        &.tabSelected {
+          border-bottom: 2px solid color(secondary);
+        }
+      }
+    }
+
+    .mangaInfo {
+      display: flex;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 21px 20px 24px 20px;
+      border-radius: 3px;
+      margin-bottom: 23px;
+
+      .cover {
+        width: 127px;
+        height: 199px;
+        object-fit: cover;
+        margin-right: 8px;
+      }
+  
+      .rightContainer {
+        width: auto;
+
+        .header {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          margin-bottom: 27px;
+  
+          h2 {
+            font-size: 20px;
+            font-weight: 350;
+            color: color(secondary);
+            margin-bottom: 17px;
+          }
+  
+          .ranking {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+  
+            h3 {
+              color: color(secondary);
+              margin-bottom: 0;
+              font-weight: bold;
+              font-size: 20px;
+            }
+  
+            .label {
+              font-size: 8px;
+              font-weight: 350;
+              color: color(secondary, 0.6);
+            }
+          }
+        }
+
+        .info {
+          display: flex;
+          margin-bottom: 10px;
+  
+          .label {
+            width: 100px;
+            margin-right: 12px;
+            font-size: 10px;
+            font-weight: 350;
+            color: color(secondary, 0.6);
+          }
+  
+          .answer {
+            font-size: 10px;
+            font-weight: 350;
+            color: color(secondary);
+            line-height: 12px;
+          }
+  
+          .frenchVolumes,
+          .japVolumes {
+            p {
+              display: flex;
+              align-items: center;
+  
+              img {
+                width: 10px;
+                margin: 0 4px;
+              }
+            }
+          }
+        }
+      }
+
+      .infoSynopsis {
+        flex-direction: column;
+
+        .label {
+          margin-right: 0;
+          margin-bottom: 12px;
+          font-size: 10px;
+          font-weight: 350;
+          color: color(secondary, 0.6);
+        }
+
+        .answer {
+          white-space: pre-wrap;
+          height: 101px;
+          overflow: hidden;
+          margin-bottom: 20px;
+          font-size: 10px;
+          font-weight: 350;
+          color: color(secondary);
+          line-height: 12px;
+
+          &.answerOpen {
+            height: auto;
+          }
+        }
+
+        .seemore {
+          display: flex;
+          align-self: flex-end;
+          cursor: pointer;
+          font-size: 10px;
+          text-decoration: underline;
+        }
+      }
+
+      .links {
+        display: flex;
+        .link {
+          margin-right: 33px;
+          text-decoration: underline;
+          font-weight: 325;
+          font-size: 14px;
+          color: color(blue);
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .filterBar {
+      width: 100%;
+      margin-bottom: 23px;
+      padding: 25px 45px 26px 20px;
+      background-color: color(dark);
+      border-radius: 3px;
+
+      .filters {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+  }
+}
