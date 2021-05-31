@@ -29,9 +29,9 @@
 .profilContainer {
   display: flex;
   flex-direction: column;
-  background-color: color(dark);
+  // background-color: color(dark);
   border-radius: 3px;
-  padding: 15px 20px;
+  // padding: 15px 20px;
 
   .link {
     display: flex;
@@ -52,9 +52,11 @@
 
   .topContainer {
     display: inline-flex;
-    height: 120px;
+    height: 146px;
     padding-bottom: 20px;
-    border-bottom: .5px solid color(someLine, 0.4);
+    background-color: color(dark);
+    border-radius: 3px;
+    padding: 20px;
 
     .left {
       width: 30%;
@@ -121,6 +123,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border-radius: 3px;
 
       .top {
         display: inline-flex;
@@ -203,15 +206,21 @@
 
   .middleContainerDashboard {
     .left {
+      background-color: transparent !important;
+
       .top.cagnotte {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 200px;
+        background-color: color(dark);
+        margin-bottom: 20px;
+        border-radius: 3px;
+        border: 0 !important;
 
         .header {
           display: inline-flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: space-between;
           width: 100%;
 
@@ -221,15 +230,15 @@
             font-weight: 300;
           }
 
-          img {
-            padding: 7px;
-            cursor: pointer;
-            opacity: .8;
-            transition: all .3 ease;
-
-            &:hover {
-              opacity: 1;
-            }
+        }
+        
+        .money {
+          .solde {
+            font-size: 32px;
+          }
+          span {
+            font-size: 8px;
+            font-weight: 300;
           }
         }
 
@@ -238,6 +247,78 @@
         }
 
         
+      }
+      .middle {
+        border-radius: 3px;
+        border: 0 !important;
+        background-color: color(dark);
+        max-height: 277px;
+        overflow: auto;
+        padding-bottom: 0 !important;
+
+        .showMore {
+          text-decoration: underline;
+          font-size: 11px;
+          cursor: pointer;
+          padding-bottom: 10px;
+        }
+
+        .title {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 300;
+        }
+        
+        .ordersEndContainer {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 10px 0;
+          color: color(secondary);
+
+          .order {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 5px 0 10px 0;
+            border-bottom: .2px solid color(someLine, 0.4);
+
+            .header {
+              display: inline-flex;
+              justify-content: space-between;
+              width: 100%;
+              margin-top: 4px;
+              font-size: 14px;
+              
+              .price {
+                font-weight: 300;
+              }
+            }
+
+            .body {
+              display: inline-flex;
+              justify-content: space-between;
+              width: 100%;
+              font-size: 9px;
+              font-weight: 300px;
+              margin-top: 5px;
+
+              .rightMiddle {
+                display: inline-flex;
+                align-items: center;
+                color: color(secondary, .8);
+
+                img {
+                  margin-left: 5px;
+                }
+
+                .reverse {
+                  transform: rotate(180deg);
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -249,8 +330,10 @@
 
     .left {
       width: 30%;
-      padding-right: 20px;
-      border-right: .2px solid color(someLine, 0.4);
+      margin-right: 20px;
+      // border-right: .2px solid color(someLine, 0.4);
+      background-color: color(dark);
+      border-radius: 3px;
       
       .title {
         font-size: 18px;
@@ -262,6 +345,7 @@
         flex-direction: column;
         padding-bottom: 30px;
         border-bottom: .2px solid color(someLine, 0.4);
+        padding: 20px;
 
         .prefLivraison {
           display: inline-flex;
@@ -300,6 +384,7 @@
         margin-top: 20px;
         padding-bottom: 30px;
         border-bottom: .2px solid color(someLine, 0.4);
+        padding: 20px;
 
       }
 
@@ -307,6 +392,7 @@
         display: flex;
         flex-direction: column;
         margin-top: 20px;
+        padding: 20px;
 
         .rewards {
           display: flex;
@@ -351,6 +437,9 @@
     .right {
       width: 70%;
       padding-left: 30px;
+      background-color: color(dark);
+      border-radius: 3px;
+      padding: 20px;
 
       .top {
         align-self: flex-end;
@@ -923,6 +1012,29 @@
 
     .middleContainerDashboard {
       margin-top: 0;
+
+      .left {
+
+        .top.cagnotte {
+          padding-bottom: 20px;
+
+          .title {
+            color: color(secondary);
+            padding-left: 0;
+          }
+
+          .buttonRed {
+            width: auto;
+            padding: 0 10px;
+          }
+        }
+        .middle {
+          display: flex;
+          height: auto;
+          max-height: none;
+          margin-bottom: 20px;
+        }
+      }
 
       .right {
         .topBox {
