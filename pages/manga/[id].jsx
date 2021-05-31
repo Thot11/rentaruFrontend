@@ -292,7 +292,7 @@ const MangaPage = ({ manga, products }) => {
           </div>
         </div>
       </div>
-      <div className="filterBar">
+      <div className="filterBar" ref={listEl}>
         <h3>Recherche avancée</h3>
         <div className="filters">
           <div className="filter">
@@ -423,7 +423,7 @@ const MangaPage = ({ manga, products }) => {
             </button>
         </div>
       </div>
-      <div className="result" ref={listEl}>
+      <div className="result">
         <ProductsList products={productList} saveDate={saveDate}/>
       </div>
     </div>
