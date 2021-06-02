@@ -33,7 +33,7 @@ const Orders = ({}) => {
   const [notifs, setNotifs] = useState([])
 
   useEffect(() => {
-    if (session) {
+    if (session && user.id) {
       getMyCollectionsOrders(user.id, session).then(resp => {
         if (resp) {
           resp.sort((a,b) => {
@@ -187,7 +187,7 @@ const Orders = ({}) => {
           <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} notifs={notifs}/>
         </div>
         <div className="commandesContainer">
-        {selectedCommandes === 0 && myReadingsOrders.map((commande) => {
+        {/* {selectedCommandes === 0 && myReadingsOrders.map((commande) => {
             const range =  moment.range(commande.startDate, commande.endDate)
             const now = range.contains(moment())
             return (
@@ -292,7 +292,7 @@ const Orders = ({}) => {
                 </div>
               </div>
             )
-          })}
+          })} */}
         </div>
       </div>
     </div>
