@@ -11,13 +11,13 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
 
   useEffect(() => {
     if (notifs.length > 0) {
-      console.log(notifs);
-      let newNumber = 0;
-      notifs.forEach((item) => {
-        newNumber += item.nb;
-      })
-      console.log(newNumber);
-      setAllNotifs(newNumber);
+      // console.log(notifs);
+      // let newNumber = 0;
+      // notifs.forEach((item) => {
+      //   newNumber += item.nb;
+      // })
+      // console.log(newNumber);
+      setAllNotifs(3);
     }
   }, [notifs])
 
