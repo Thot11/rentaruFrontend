@@ -23,28 +23,27 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
         {(allNotifs > 0 && !openDispositionDropdown) && (
           <div className="notif">{allNotifs}</div>
         )}
-        {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
+        {/* {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
           const notif = notifs.filter(_notif => _notif.index === selectedItem);
-          // if(_filter) {
-          //   return (
-          //     <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
-          //       <div>
-          //         {_filter}
-          //         {(notif.length === 1 && openDispositionDropdown) && (
-          //           <>&nbsp; ({notif[0].nb})</>
-          //         )}
+          if(_filter) {
+            return (
+              <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
+                <div>
+                  {_filter}
+                  {(notif.length === 1 && openDispositionDropdown) && (
+                    <>&nbsp; ({notif[0].nb})</>
+                  )}
                   
-          //       </div>
+                </div>
                 
-          //       <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
-          //     </div>
-          //   )
-          // }
-          // else {
-          //   return null;
-          // }
-          return null
-        })}
+                <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
+              </div>
+            )
+          }
+          else {
+            return null;
+          }
+        })} */}
         {selectedItem === -1 && (
           <div className="selectedElement" key={'select'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
             <div className="placeholder">Selectionner...</div>
