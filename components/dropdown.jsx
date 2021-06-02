@@ -12,8 +12,9 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   useEffect(() => {
     if (notifs.length > 0) {
       const newArray = notifs.reduce((a,b) => {
-        return parseInt(a.nb) + parseInt(b.nb);
+        return a.nb + b.nb;
       })
+      console.log(newArray);
       setAllNotifs(newArray);
     }
   }, [notifs])
