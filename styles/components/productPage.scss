@@ -212,6 +212,7 @@
             .btnRent {
               margin: 5px auto;
               border-radius: 3px;
+              width: 100%;
             }
   
             .btnInfo {
@@ -277,11 +278,23 @@
               margin-bottom: 5px;
               font-size: 14px;
               font-weight: 600;
+              text-decoration: line-through;
             }
   
             p {
               font-size: 10px;
               font-weight: 400;
+              text-decoration: line-through;
+            }
+
+            .conclusion {
+              margin-top: 10px;
+              width: 80%;
+              color: color(secondary);
+              font-style: italic;
+              font-size: 10px;
+              font-weight: 300;
+              text-align: center;
             }
           }
         }

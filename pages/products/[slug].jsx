@@ -302,10 +302,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
               <div className="priceContainer">
                 <h3>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format((product.tomeFinal - product.tomeInitial + 1) * 7)}</h3>
                 <p>Neuf</p>
+                <div className="conclusion">= {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format((product.tomeFinal - product.tomeInitial + 1) * 7 - price)} d'économisés</div>
               </div>
               <div className="priceContainer">
-                <h3>{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format((product.tomeFinal - product.tomeInitial + 1) * 3)}</h3>
+                <h3>≈ {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format((product.tomeFinal - product.tomeInitial + 1) * 3)}</h3>
                 <p>En occasion</p>
+                <div className="conclusion">= {new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format((product.tomeFinal - product.tomeInitial + 1) * 3 - price)} d'économisés</div>
               </div>
             </div>
           </div>
