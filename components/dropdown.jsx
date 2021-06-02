@@ -44,12 +44,12 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
             return null;
           }
         })} */}
-        {selectedItem === -1 && (
+        {/* {selectedItem === -1 && (
           <div className="selectedElement" key={'select'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
             <div className="placeholder">Selectionner...</div>
             <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
           </div>
-        )}
+        )} */}
 
         {openDispositionDropdown && (
           <div className="listContainer">
