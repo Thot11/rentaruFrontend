@@ -184,7 +184,7 @@ const Orders = ({}) => {
         <h1 className="h1">Mes commandes</h1>
         <div className="ordersRow">
           <h3 className="selected">Locations Effectuées</h3>
-          <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} notifs={notifs}/>
+          {/* <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} notifs={notifs}/> */}
         </div>
         <div className="commandesContainer">
         {/* {selectedCommandes === 0 && myReadingsOrders.map((commande) => {
