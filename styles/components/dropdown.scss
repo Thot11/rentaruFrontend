@@ -13,11 +13,22 @@
     justify-content: space-between;
     width: 100%;
 
+    & > div {
+      position: relative;
+      width: fit-content;
+
+      .notif {
+        right: -17px;
+      }
+    }
+
     .placeholder {
       color: color(secondary, 0.6)
     }
     
   }
+
+
 
   .listContainer {
     position: absolute;
@@ -57,7 +68,22 @@
     font-weight: 325;
     border-radius: 3px;
 
+    .notif {
+      position: absolute;
+      border-radius: 50%;
+      background-color: color(red);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: color(secondary);
+      right: -5px;
+      top: -10px;
+    }
+
     .listElement {
+      position: relative;
       color: color(secondary, 0.6);
       font-size: 12px;
       font-weight: 325;
@@ -65,6 +91,18 @@
       padding-right: 5px;
       border-bottom: 0.5px solid color(secondary, 0.12);
       cursor: pointer;
+      width: 100%;
+
+      .toolBarText {
+        width: fit-content;
+        position: relative;
+
+        .notif {
+          right: -17px;
+        }
+      }
+
+     
       
       &:last-child {
         border-bottom: 0;

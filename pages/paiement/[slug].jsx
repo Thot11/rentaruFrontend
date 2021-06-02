@@ -84,8 +84,10 @@ const PaiementPage = ({ product, stripeKey }) => {
 
     if ((stripeToken || (useCagnotte && user.cagnotte > (price*1.1+0.2))) && cglAccepted) {
       postCommande(product.id, user.id, user.stripeId, product.user.id, rent.startDate, rent.endDate, price, (price*1.1+0.2), deliveryPrice, deliveryWording, stripeToken ? stripeToken.token.id : '', useCagnotte, session).then((resp) => {
-        const data = {cagnotte: user.cagnotte - (price*1.1+0.2)}
-        dispatch(updateMe(data, session))
+        if (useCagnotte) {
+          const data = {cagnotte: user.cagnotte - (price*1.1+0.2)}
+          dispatch(updateMe(data, session))
+        }
         updateProduct(product.id, {booked : rent.bookings}, session).then(() => router.push(`/`))
       })
     }

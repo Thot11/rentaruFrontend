@@ -30,6 +30,7 @@ const Orders = ({}) => {
   const [openModal, setOpenModal] = useState(false)
   const [load, setLoad] = useState(false)
   const [openModalFunction, setOpenModalFunction] = useState({function: () => null})
+  const [notifs, setNotifs] = useState([])
 
   useEffect(() => {
     if (session) {
@@ -53,6 +54,19 @@ const Orders = ({}) => {
       });
     }
   }, [user])
+
+  useEffect(() => {
+    const temp1 = myReadingsOrders.filter(order => order.status === 'draft')
+    const temp2 = myCollectionOrders.filter(order => order.status === 'draft')
+    const temp3 = []
+    if (temp1.length > 0) {
+      temp3.push({index: 0, nb: temp1.length})
+    }
+    if (temp2.length > 0) {
+      temp3.push({index: 1, nb: temp2.length})
+    }
+    setNotifs(temp3)
+  }, [myReadingsOrders, myCollectionOrders])
 
   const validate = (commandeId) => {
     setOpenModal(true)
@@ -170,7 +184,7 @@ const Orders = ({}) => {
         <h1 className="h1">Mes commandes</h1>
         <div className="ordersRow">
           <h3 className="selected">Locations Effectuées</h3>
-          <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} />
+          <Dropdown filters={['Mes lectures', 'Ma collection']} selectedItem={selectedCommandes} setSelectedItem={setSelectedCommandes} notifs={notifs}/>
         </div>
         <div className="commandesContainer">
         {selectedCommandes === 0 && myReadingsOrders.map((commande) => {
