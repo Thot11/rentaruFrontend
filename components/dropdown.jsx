@@ -12,7 +12,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   useEffect(() => {
     if (notifs.length > 0) {
       setAllNotifs(notifs.reduce((a,b) => {
-        return parseInt(a.nb) + parseInt(b.nb)
+        return parseInt(a.nb) + parseInt(b.nb);
       }))
     }
   }, [notifs])
@@ -24,7 +24,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
           <div className="notif">{allNotifs}</div>
         )}
         {filters && selectedItem !== -1 && filters.filter((filter, index) => index === selectedItem).map((filter, index) => {
-          const notif = notifs.filter(notif => notif.index === selectedItem)
+          const notif = notifs.filter(notif => notif.index === selectedItem);
            return filter ? (
             <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
               <div>
@@ -51,7 +51,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
             {
               filters.map((filter, index) => {
                 const selected = index === selectedItem;
-                const notif = notifs.filter(notif => notif.index === index)
+                const notif = notifs.filter(notif => notif.index === index);
                 return !selected ? (
                   <div
                     className="listElement"
