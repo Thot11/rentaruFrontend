@@ -57,7 +57,7 @@ const Dashboard = ({ user, setTabs }) => {
 
   useEffect(() => {
     calculDate();
-    if (session) {
+    if (session && user.id) {
       getMyCollectionsOrders(user.id, session).then(resp => {
         if (resp) {
           const filterEnd = resp.filter(order => order.receiveCollector)

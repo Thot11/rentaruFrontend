@@ -19,8 +19,10 @@ const Profil = () => {
   const [tabs, setTabs] = useState()
 
   useEffect(() => {
-    dispatch(getMe(session))
-  }, [])
+    if (session) {
+      dispatch(getMe(session))
+    }
+  }, [session])
 
   useEffect(() => {
     const {
