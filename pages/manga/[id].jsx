@@ -59,6 +59,8 @@ const MangaPage = ({ manga, products }) => {
   const [rank, setRank] = useState(0);
 
   //FilterBar
+  const [filterOpen, setFilterOpen] = useState(false);
+
   const [tomeInitial, setTomeInitial] = useState();
   const [tomeFinal, setTomeFinal] = useState();
 
@@ -92,7 +94,11 @@ const MangaPage = ({ manga, products }) => {
 
   useEffect(() => {
     if(listEl.current && windowWidth > 700) {
-      setTimeout(() => listEl.current.scrollIntoView({behavior: 'smooth'}), 300);
+      setTimeout(() => {
+        if(listEl.current && windowWidth > 700) {
+          listEl.current.scrollIntoView({behavior: 'smooth'})
+        }
+      }, 300);
     }
   }, [listEl.current])
 
@@ -328,7 +334,7 @@ const MangaPage = ({ manga, products }) => {
       </div>
       }
       {(tabSelected === 1 || windowWidth >= 700) && 
-      <div className="filterBar" ref={listEl}>
+      <div className={windowWidth > 700 ? "filterBar" : filterOpen ? 'filterBar filterBarMobile filterBarMobileOpen' : 'filterBar filterBarMobile'} ref={windowWidth > 700 ? listEl : null}>
         <h3>Recherche avancée</h3>
         <div className="filters">
           <div className="filter">
@@ -463,6 +469,13 @@ const MangaPage = ({ manga, products }) => {
       {(tabSelected === 1 || windowWidth >= 700) && 
         <div className="result">
           <ProductsList products={productList} saveDate={saveDate}/>
+        </div>
+      }
+      {(tabSelected === 1 && windowWidth < 700) && 
+        <div className="footer">
+          <button className="btnOpenFilter" onClick={() => setFilterOpen(!filterOpen)}>
+            {filterOpen ? 'Appliquer' : 'Recherche avancée'}
+          </button>
         </div>
       }
     </div>
