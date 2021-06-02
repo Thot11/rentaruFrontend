@@ -20,10 +20,10 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   return (
     <div className="choiceBar">
       <div className="selectDropdownList">
-        {/* {(allNotifs > 0 && !openDispositionDropdown) && (
+        {(allNotifs > 0 && !openDispositionDropdown) && (
           <div className="notif">{allNotifs}</div>
-        )} */}
-        {/* {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
+        )}
+        {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
           const notif = notifs.filter(_notif => _notif.index === selectedItem);
           if(_filter) {
             return (
@@ -43,13 +43,13 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
           else {
             return null;
           }
-        })} */}
-        {/* {selectedItem === -1 && (
+        })}
+        {selectedItem === -1 && (
           <div className="selectedElement" key={'select'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
             <div className="placeholder">Selectionner...</div>
             <img src="/chevronLeftS.svg" alt="arrow" className={`arrow ${openDispositionDropdown ? 'reverse' : ''}`} />
           </div>
-        )} */}
+        )}
 
         {openDispositionDropdown && (
           <div className="listContainer">
