@@ -20,9 +20,9 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   return (
     <div className="choiceBar">
       <div className="selectDropdownList">
-        {(allNotifs > 0 && !openDispositionDropdown) && (
+        {/* {(allNotifs > 0 && !openDispositionDropdown) && (
           <div className="notif">{allNotifs}</div>
-        )}
+        )} */}
         {/* {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
           const notif = notifs.filter(_notif => _notif.index === selectedItem);
           if(_filter) {
