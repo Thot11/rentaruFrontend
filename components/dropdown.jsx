@@ -9,13 +9,14 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   const [openDispositionDropdown, setOpenDispositionDropdown] = useState(false);
   const [allNotifs, setAllNotifs] = useState(0);
 
-  // useEffect(() => {
-  //   if (notifs.length > 0) {
-  //     setAllNotifs(notifs.reduce((a,b) => {
-  //       return parseInt(a.nb) + parseInt(b.nb);
-  //     }))
-  //   }
-  // }, [notifs])
+  useEffect(() => {
+    if (notifs.length > 0) {
+      const newArray = notifs.reduce((a,b) => {
+        return parseInt(a.nb) + parseInt(b.nb);
+      })
+      setAllNotifs(newArray);
+    }
+  }, [notifs])
 
   return (
     <div className="choiceBar">
