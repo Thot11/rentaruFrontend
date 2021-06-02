@@ -10,9 +10,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
   const [allNotifs, setAllNotifs] = useState(0);
 
   useEffect(() => {
-    console.log(notifs)
     if (notifs.length > 0) {
-      console.log(notifs)
       setAllNotifs(notifs.reduce((a,b) => {
         return parseInt(a.nb) + parseInt(b.nb);
       }))
@@ -25,12 +23,12 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
         {(allNotifs > 0 && !openDispositionDropdown) && (
           <div className="notif">{allNotifs}</div>
         )}
-        {filters && selectedItem !== -1 && filters.filter((filter, index) => index === selectedItem).map((filter, index) => {
+        {filters && selectedItem !== -1 && filters.filter((item, index) => index === selectedItem).map((_filter, index) => {
           const notif = notifs.filter(_notif => _notif.index === selectedItem);
-           return filter ? (
+           return _filter ? (
             <div className="selectedElement" key={'selected'} onClick={() => setOpenDispositionDropdown(!openDispositionDropdown)}>
               <div>
-                {filter}
+                {_filter}
                 {(notif.length === 1 && openDispositionDropdown) && (
                   <>&nbsp; ({notif[0].nb})</>
                 )}
@@ -51,7 +49,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
         {openDispositionDropdown && (
           <div className="listContainer">
             {
-              filters.map((filter, index) => {
+              filters.map((_filter, index) => {
                 const selected = index === selectedItem;
                 const notif = notifs.filter(_notif => _notif.index === index);
                 return !selected ? (
@@ -64,7 +62,7 @@ const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
                     }}
                   >
                     <div className="toolBarText">
-                      {filter} 
+                      {_filter} 
                       {notif.length === 1 && (
                         <>&nbsp; ({notif[0].nb})</>
                       )}
