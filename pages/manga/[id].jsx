@@ -88,6 +88,11 @@ const MangaPage = ({ manga, products }) => {
     window.addEventListener('resize', updateSize);
   }, []);
 
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
+
   useEffect(() => {
     getMangaList()
   }, [session])
@@ -207,10 +212,6 @@ const MangaPage = ({ manga, products }) => {
       setProductList(newProductList)
     }
   }, [productList, filterSelected]);
-
-  const updateSize = () => {
-    setWindowWidth(window.innerWidth)
-  }
 
   const removeCity = (index) => {
     const newArray = cityList;

@@ -35,6 +35,17 @@ const SignUp = () => {
   const [step, setStep] = useState(1);
   const [quotes, setQuotes] = useState([])
 
+  const [windowWidth, setWindowWidth] = useState(1281);
+  
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', updateSize);
+  }, []);
+
+  const updateSize = () => {
+    setWindowWidth(window.innerWidth)
+  }
+
   const signUp = () => {
     if (password === confirmPassword) {
       dispatch(
@@ -83,6 +94,7 @@ const SignUp = () => {
           {/* <Link href={"/login"}> Connexion </Link> */}
         </div>
       </div>
+      {windowWidth >= 700 &&
         <div className="rightContent">
           <div className="back">
             <img src="/backgroundJap.png" alt="background" className='substract'/>
@@ -131,6 +143,7 @@ const SignUp = () => {
             <path d="M0 21C0 9.40201 9.40202 0 21 0H30C41.598 0 51 9.40202 51 21V470H0V21Z" fill="#171F25"/>
           </svg>
         </div>
+      }
     </div>
   );
 };
