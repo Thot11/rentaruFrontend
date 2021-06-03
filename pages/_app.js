@@ -14,13 +14,6 @@ const MyApp = ({ Component, pageProps }) => {
     <Provider store={store} >
       <Layout categories={pageProps.categories}>
         <Head>
-          <link rel="preconnect" href="https://app.snipcart.com" />
-          <link rel="preconnect" href="https://cdn.snipcart.com" />
-          <link
-            rel="stylesheet"
-            href="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.css"
-          />
-          <script src="https://cdn.snipcart.com/themes/v3.0.16/default/snipcart.js" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-XM1RXZ6R6M"></script>
           {/* <script dangerouslySetInnerHTML={
             { __html: `
