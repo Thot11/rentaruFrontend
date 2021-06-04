@@ -232,6 +232,13 @@ export async function postUploadImg(data, token) {
   return resp
 }
 
+export async function postTransfert(data, token) {
+
+  const resp = await axios
+  .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/transfert-bancaires?token=${token}`,data)
+  
+  return resp
+}
 
 
 export async function postProduct(data, token) {

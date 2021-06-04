@@ -31,6 +31,8 @@ const Params = ({ user, logOut }) => {
   const [description, setDescription] = useState()
   const [changeDescription, setChangeDescription] = useState(false)
   const [changeDocuments, setChangeDocuments] = useState(false)
+  const [IBAN, setIBAN] = useState('')
+  const [accountName, setAccountName] = useState('')
   
   const [windowWidth, setWindowWidth] = useState(1281);  
 
@@ -50,6 +52,8 @@ const Params = ({ user, logOut }) => {
     setAddress(user.address)
     setVille(user.ville)
     setDepartment(user.departement)
+    setIBAN(user.IBAN)
+    setAccountName(user.accountName)
     if (user.handToHand !== handToHand) setHandToHand(user.handToHand)
     if (user.relaiColis !== relaiColis) setRelaiColis(user.relaiColis)
   }, [user])
@@ -209,7 +213,7 @@ const Params = ({ user, logOut }) => {
                 </div>
                 <Button color='Red' functionOnClick={() => {updateInfo({ville, address, departement : department.toString()})}}>Enregistrer</Button>
             </DropDown>
-            <h4>Détail du paiement</h4>
+            {/* <h4>Détail du paiement</h4>
             <DropDown title="Ajouter une carte" color="Primary">
             <div className="card">
                 <input type="text" placeholder='Numéro de carte 🔒' className='cardNumber' />
@@ -221,9 +225,13 @@ const Params = ({ user, logOut }) => {
               <input type="text" placeholder='Code Postal' className="postalCode"/>
               <input type="text" placeholder='Pays/région' className="country"/>
               <button className='button buttonRed'>Enregistrer</button>
-            </DropDown>
+            </DropDown> */}
             <h4>Méthode de versement</h4>
-            <DropDown title="Ajouter un compte" color="Primary">blabla</DropDown>
+            <DropDown title="Ajouter un compte" color="Primary">
+              <input type="text" placeholder='Nom de compte' className="postalCode" value={accountName} onChange={(e) => setAccountName(e.target.value)}/>
+              <input type="text" placeholder='IBAN' className="country" value={IBAN} onChange={(e) => setIBAN(e.target.value)}/>
+              <button className='button buttonRed' onClick={() => updateInfo({IBAN, accountName})}>Enregistrer</button>
+            </DropDown>
             <div className="logOut" onClick={() => logOut()}>Deconnexion</div>
             <div className="deleteAccount">Fermer mon compte</div>
           </div>
