@@ -2,16 +2,16 @@
   .header {
     position: relative;
     // padding: 67px 0 0 calc((100% - 1280px)/2);
-    height: 472px;
+    // height: 472px;
     overflow: hidden;
 
-    @media only screen and (min-width: 1900px) {
-      height: 500px;
-    }
+    // @media only screen and (min-width: 1900px) {
+    //   height: 500px;
+    // }
 
-    @media only screen and (min-width: 2000px) {
-      height: 650px;
-    }
+    // @media only screen and (min-width: 2000px) {
+    //   height: 650px;
+    // }
 
     .back {
       position: relative;
@@ -26,7 +26,7 @@
         right: 0;
         z-index: 0;
         width: 100%;
-        height: 300px;
+        // height: 300px;
         object-fit: cover;
       }
 
@@ -40,34 +40,36 @@
       }
 
       
-      @media only screen and (min-width: 1370px) {
-        .background {
-          height: 370px;
-        }
-
-        .substract {
-          margin-top: -50px;
-        }
+      @media only screen and (min-width: 1480px) {
+        display: none;
       }
       
-      @media only screen and (min-width: 1500px) {
-        .background {
-          height: 400px;
-        }
+      // @media only screen and (min-width: 1500px) {
+      //   .background {
+      //     height: 400px;
+      //   }
         
-        .substract {
-          margin-top: -70px;
-        }
-      }
+      //   .substract {
+      //     margin-top: -70px;
+      //   }
+      // }
 
-      @media only screen and (min-width: 2000px) {
-        .background {
-          height: 520px;
-        }
+      // @media only screen and (min-width: 2000px) {
+      //   .background {
+      //     height: 520px;
+      //   }
 
-        .substract {
-          margin-top: -90px;
-        }
+      //   .substract {
+      //     margin-top: -90px;
+      //   }
+      // }
+    }
+
+    .backHuge {
+      display: none;
+
+      @media only screen and (min-width: 1480px) {
+        display: block;
       }
     }
 
@@ -199,6 +201,11 @@
 
   .collectorPart {
     margin-top: 30px;
+
+    @media only screen and (min-width: 1480px) {
+      margin-top: 0;
+      padding-top: 0;
+    }
   }
 
   .readerPart {
@@ -234,8 +241,8 @@
     }
 
     .header {
-      margin-top: 65px;
-      height: 250px;
+      margin-top: 30px;
+      width: 100%;
 
       .back {
         display: none;
@@ -245,14 +252,12 @@
         display: block;
         height: 250px;
         position: relative;
-        margin-top: -30px;
 
         img.background {
-          height: 250px;
+          width: 100%;
           position: absolute;
           top: 0;
-          right: -80px;
-          object-fit: contain;
+          object-fit: cover;
         }
         .substract {
           position: absolute;

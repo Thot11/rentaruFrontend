@@ -17,9 +17,10 @@ const About = ({about}) => {
             <div className="filter"></div>
             <img src={getStrapiMedia(about.banner[0].url)} alt="background" className='background'/>
           </div>
-          <h1 className="h1">{about.title} </h1>
+          {/* <h1 className="h1">{about.title} </h1> */}
         </div>
         <div className="storyContainer">
+          <h1 className="h1">{about.title} </h1>
           <p className='story'>{about.story}</p>
         </div>
         <div className="cardsContainer">
@@ -28,28 +29,28 @@ const About = ({about}) => {
               <div className="card" key={key}>
                 <img src={getStrapiMedia(card.image[0].url)} alt="online"/>
                 <h3>{card.titleCard}</h3>
-                <p>{card.descriptionCard}</p>             
+                <p>{card.descriptionCard}</p>
               </div>
             )
           })}
         </div>
-        <div className="storyContainer">
+        {/* <div className="storyContainer">
           <p className='story storyFeedback'>{about.storyFeedback}</p>
-        </div>
+        </div> */}
         <div className="ecoloBullshitContainer">
           <div className="text">
             <h2>{about.titleEcoloBullshit}</h2>
             <p className="descriptionEcolo">{about.textEcoloBullshit}</p>
           </div>
-          <img src={getStrapiMedia(about.imageEcoloBullshit.url)} alt="ecolo" />
+          {/* <img src={getStrapiMedia(about.imageEcoloBullshit.url)} alt="ecolo" /> */}
         </div>
-        <div className="engagementBullshitContainer">
+        {/* <div className="engagementBullshitContainer">
           <img src={getStrapiMedia(about.imageEngagementBullshit.url)} alt="engagement" />
           <div className="text">
             <h2>{about.titleEngagementBullshit}</h2>
             <p className="descriptionEcolo">{about.textEngagementBullshit}</p>
           </div>
-        </div>
+        </div> */}
         <div className="crewContainer">
           <h2>{about.titleCrew}</h2>
           <div className="membersContainer">

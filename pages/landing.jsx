@@ -31,13 +31,14 @@ const Landing = ({landing}) => {
       </Head>
       <div className="landingContainer">
         <div className="header">
+          <div className="backHuge back">
+            <img src="/header2k.png" alt="background" className='background'/>
+          </div>
           <div className="back">
-            <img src="/headerBackground3.png" alt="background" className='background'/>
-            <img src="/substract.png" alt="background" className='substract'/>
+            <img src="/headerBackgroundTest.png" alt="background" className='background'/>
           </div>
           <div className="backMobile">
-            <img src="/headerBackground3.png" alt="background" className='background'/>
-            <img src="/separation4.png" alt="background" className='substract'/>
+            <img src="/headerBackround23.png" alt="background" className='background'/>
           </div>
           <h1>{landing.title} </h1>
           <p className="subtitle">{landing.subtitle} </p>

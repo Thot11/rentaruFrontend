@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {updateMe, updatePP} from '../store'
 
+import DropDown from "../elements/DropDown";
 import Button from "../elements/Button";
 import CheckBox from "../elements/CheckBox";
-import { getCommandesById, getMyCollectionsOrders, getMyReadings } from "../utils/api";
+import { getCommandesById, getMyCollectionsOrders, getMyReadings, postTransfert } from "../utils/api";
 import { getStrapiMedia } from "../utils/medias";
 import Dropdown from "./dropdown"
+import Modal from "./Modal"
 
 import Moment from 'moment';
 import 'moment/locale/fr'
@@ -35,6 +37,12 @@ const Dashboard = ({ user, setTabs }) => {
   const [endOrders, setEndOrders] =  useState([])
   const [showMoreTransactions, setShowMoreTransactions] = useState(false)
   const [myLastCommandes, setMyLastCommandes] =  useState([])
+  const [openGiveMoneyBack, setOpenGiveMoneyBack] = useState(false)
+  const [modalStep, setModalStep] = useState(1)
+  const [IBAN, setIBAN] = useState('')
+  const [accountName, setAccountName] = useState('')
+  const [amountToMove, setAmountToMove] = useState(0)
+  const [error, setError] = useState('')
 
   const [memberSince, setMemberSince] = useState('');
   
@@ -55,6 +63,18 @@ const Dashboard = ({ user, setTabs }) => {
     setMemberSince(Math.trunc(currentDate/1000/60/60/24))
   }
 
+  const createTransfert = (data) => {
+    postTransfert(data, session).then(resp => {
+      if (resp) {
+        const data = {cagnotte: user.cagnotte - resp.data.amount}
+        dispatch(updateMe(data, session))
+        setModalStep(2)
+      }
+    }).catch(() => {
+      setError('Problème, veuillez réessayer ou nous contacter svp')
+    })
+  }
+
   useEffect(() => {
     calculDate();
     if (session && user.id) {
@@ -70,6 +90,8 @@ const Dashboard = ({ user, setTabs }) => {
           setMyReadingsOrders(filterEnd);
         }
       });
+      setIBAN(user.IBAN)
+      setAccountName(user.accountName)
     }
   }, [user])
 
@@ -95,6 +117,12 @@ const Dashboard = ({ user, setTabs }) => {
     dispatch(updateMe(data, session))
   }
   
+  useEffect(() => {
+    if (amountToMove > user.cagnotte) {
+      setAmountToMove(user.cagnotte)
+    }
+  }, [amountToMove, user.cagnotte])
+
   useEffect(() => {
     if (handToHand !== user.handToHand) {
       updateInfo({handToHand})
@@ -136,6 +164,42 @@ const Dashboard = ({ user, setTabs }) => {
 
   return (
     <>
+    {openGiveMoneyBack && (
+      <Modal open={openGiveMoneyBack} setOpen={setOpenGiveMoneyBack} onClick={() => setModalStep(1)}>
+        {modalStep === 1 ? (
+          <>
+            <div className="title">Transférer une somme</div>
+            <div className="cagnotte">
+              <div className="left">
+                <img src="/bank.svg" alt="pièce d'or" />
+                <div className="body">Mon porte-monnaie Rentaru</div>
+              </div>
+              <div className="solde">{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(user.cagnotte)}</div>
+            </div>
+            <div className="arrowContainer">
+              <img src="/arrowLongDown.svg" alt="" className="arrowDown"/>
+            </div>
+            <DropDown title="Mon compte" color="Dark">
+              <input type="text" placeholder='Nom de compte' className="postalCode" value={accountName} onChange={(e) => setAccountName(e.target.value)}/>
+              <input type="text" placeholder='IBAN' className="country" value={IBAN} onChange={(e) => setIBAN(e.target.value)}/>
+            </DropDown>
+            <div className="inputContainer">
+              <input type="number" value={amountToMove} onChange={(e) => setAmountToMove(e.target.value)} />
+              <div className="all" onClick={() => setAmountToMove(user.cagnotte)}>Max</div>
+            </div>
+            {error && (<div className="error">{error}</div>)}
+            <Button color="Red" functionOnClick={() => createTransfert({user: user.id, IBAN, accountName, amount: amountToMove})}>
+              Valider le transfert
+            </Button>
+          </>
+        ) : (
+          <>
+            <img src="/cuteCat.svg" alt="cute cat" className="cuteCat"/>
+            <div className="endTransfert">Ton transfert a été complété avec succès, en cas de soucis veuillez nous contacter via la page contact. Merci</div>
+          </>
+        )}
+      </Modal>
+    )}
       <div className={"middleContainer middleContainerDashboard"}>
         {/* {windowWidth >= 700 && */}
           <div className="left">
@@ -147,9 +211,9 @@ const Dashboard = ({ user, setTabs }) => {
                 <div className="solde">{new Intl.NumberFormat('fr-FR',{ style: 'currency', currency: 'EUR' }).format(user.cagnotte)}</div>
                 <span>Disponible</span>
               </div>
-              <Button color="Red">
+              <Button color="Red" functionOnClick={() => setOpenGiveMoneyBack(true)}>
                 Transférer l'argent
-              </Button> 
+              </Button>
             </div>
             <div className="middle">
               <div className="title">Historique des transactions</div>

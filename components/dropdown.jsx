@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// import { useEffect } from 'react/cjs/react.development';
 
 
 const Dropdown = ({ filters, selectedItem, setSelectedItem, notifs = [] }) => {
 
   // States
-
   const [openDispositionDropdown, setOpenDispositionDropdown] = useState(false);
   const [allNotifs, setAllNotifs] = useState(0);
 

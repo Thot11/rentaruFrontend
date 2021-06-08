@@ -3,9 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import emailjs from 'emailjs-com'
-import apiKeys from '../utils/apikeys'
 
-const Contact = ({}) => {
+const Contact = ({apiKeys}) => {
+
   
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -48,7 +48,7 @@ const Contact = ({}) => {
       <div className="contactContainer">
         <h1 className="h1">Contact</h1>
         <form action="" method='POST' className="form formContainer">
-          <p>Poour toute demande, remplir le formulaire ci-dessous.</p>
+          <p>Pour toute demande, remplir le formulaire ci-dessous.</p>
           <div className="inputsWrapper">
             <div>
               <input name={'firstName'} value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder='Prénom'></input>
@@ -66,5 +66,13 @@ const Contact = ({}) => {
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const apiKeys = {SERVICE_ID: '', TEMPLATE_ID: '',USER_ID: ''}
+  apiKeys.SERVICE_ID = process.env.APIKEYS_SERVICE_ID;
+  apiKeys.TEMPLATE_ID = process.env.APIKEYS_TEMPLATE_ID;
+  apiKeys.USER_ID = process.env.APIKEYS_USER_ID;
+  return { props: { apiKeys } };
+}
 
 export default Contact;
