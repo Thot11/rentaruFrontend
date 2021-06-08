@@ -90,7 +90,7 @@ const Login = () => {
         {windowWidth >= 700 && 
           <div className="rightContent">
             <div className="back">
-              <img src="/backgroundJap.png" alt="background" className='substract'/>
+              <img src="/headerBackground13@2x.png" alt="background" className='substract'/>
             </div>
             <div className="pancarteContainer">
               <svg className='pancarte' width="649" height="329" viewBox="0 0 649 329" fill="none" xmlns="http://www.w3.org/2000/svg">
