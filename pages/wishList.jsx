@@ -15,6 +15,7 @@ const WishList = () => {
   }, [])
   
 
+  console.log(user);
   return (
     <div>
       <Head>

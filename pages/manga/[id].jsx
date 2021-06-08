@@ -257,7 +257,7 @@ const MangaPage = ({ manga, products }) => {
       }
       {(tabSelected === 0 || windowWidth >= 700) &&
       <div className="mangaInfo">
-        <img src={getStrapiMedia(manga.cover.url)} alt="cover" className="cover"/>
+        <img src={manga.cover ? getStrapiMedia(manga.cover.url) : '/cuteCat.svg'} alt="cover" className="cover"/>
         <div className="rightContainer">
           <div className="header">
             <h2>{manga.title}</h2>

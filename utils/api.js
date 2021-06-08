@@ -240,6 +240,14 @@ export async function postProduct(data, token) {
   return resp;
 }
 
+export async function postNewManga(data, token) {
+  const resp = await axios
+  .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/manga-apis?token=${token}`, data)
+  return resp;
+}
+
+
+
 // PUT Request
 
 export async function updateMe(data, token) {

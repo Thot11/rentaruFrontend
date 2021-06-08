@@ -9,6 +9,7 @@ import Step4 from "../../components/createProductStep/Step4"
 import Step5 from "../../components/createProductStep/Step5"
 import PreviewProduct from "../../components/createProductStep/PreviewProduct"
 import { postProduct } from '../../store'
+import {postNewManga} from '../../utils/api'
 import Button from "../../elements/Button";
 import Link from "next/link";
 
@@ -26,6 +27,7 @@ const CreateProduct = () => {
   const [step, setStep] = useState(1)
   const [data, setData] = useState()
   const [preview, setPreview] = useState()
+  const [mangaId, setMangaId] = useState(true);
 
   useEffect(() => {
     if (createdProduct && createdProduct.slug && errorState.type !== "createProduct") {
@@ -35,6 +37,7 @@ const CreateProduct = () => {
 
   useEffect(() => {
     if(step === 6) {
+
       const formData = new FormData()
       
       if (data.images?.length > 0) {
@@ -44,7 +47,7 @@ const CreateProduct = () => {
         delete data.images
       }
       formData.append('data', JSON.stringify(data))
-      dispatch(postProduct(formData, session))
+      dispatch(postProduct(formData, session, mangaId));
     }
   }, [step])
 
@@ -66,7 +69,7 @@ const CreateProduct = () => {
             switch (step) {
               case 1:
                 return (
-                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} session={session} />
+                  <Step1 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} session={session} mangaId={mangaId} setMangaId={setMangaId}/>
                 )
               case 2:
                 return (

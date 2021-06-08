@@ -7,7 +7,8 @@ const PreviewProduct = ({ data, user }) => {
   return (
     <div className="cardProduct">
       <a>
-        {data.imageCover.url && (<img src={getStrapiMedia(data.imageCover.url)} alt="cover"/>)}
+        {data.imageCover && data.imageCover.url && (<img src={getStrapiMedia(data.imageCover.url)} alt="cover"/>)}
+        {data.imageCover === null && (<img src='/cuteCat.svg' alt="cover"/>)}
         <div className="info">
           <div className="upperInfo">
             <div className="titles">

@@ -191,15 +191,28 @@ export const postConnect = (mail, password) => {
   };
 };
 
-export const postProduct = (data, token) => {
+export const postProduct = (data, token, mangaId) => {
 
   return (dispatch) => {
     GlobalAPI.postProduct(data, token)
       .then((resp) => {
         if (resp) {     
-          GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id)}, token).then((resp) => {
+          GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id), manga_api: mangaId !== -1 ? mangaId : null}, token).then((resp) => {
             dispatch(createProductAction(resp.data));
           })
+          console.log(mangaId)
+          if(mangaId === -1) {
+            const newData = {
+              title: resp.data.title,
+              products: [resp.data.id],
+            }
+            GlobalAPI.postNewManga(newData, token).then((response) => {
+              console.log(response);
+            });
+          }
+          else {
+
+          }
         } else {
           console.log('error');
         }

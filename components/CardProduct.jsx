@@ -83,7 +83,7 @@ const CardProduct = ({ product, key, user, saveDate }) => {
       }
       <Link href={`/products/${product.slug}`} >
         <a onClick={saveDate}>
-          <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
+          <img src={product.manga_api.cover ? getStrapiMedia(product.manga_api.cover.url) : '/cuteCat.svg'} alt="cover"/>
           <div className="info">
             <div className="upperInfo">
               <div className="titles">
@@ -121,7 +121,7 @@ const CardProduct = ({ product, key, user, saveDate }) => {
                         
                       })}
                     </div> */}
-                    <p className="city">{ownerUser.ville.toLowerCase()} ({ownerUser.departement.substring(0, 2)})</p>
+                    <p className="city">{ownerUser.ville?.toLowerCase()} ({ownerUser.departement?.substring(0, 2)})</p>
                   </div>
                 </a>
               </Link>
