@@ -16,7 +16,7 @@ const CardProductSearch = ({ mangaCollection, key }) => {
 
   return (
     <div className="cardProductSearch" key={key}>
-      <img src={getStrapiMedia(mangaCollection.cover.url)} alt="cover"/>
+      <img src={mangaCollection.cover ? getStrapiMedia(mangaCollection.cover.url) : '/cuteCat.svg'} alt="cover"/>
       <div className="info">
         <div className="upperInfo">
           <div className="titles">
