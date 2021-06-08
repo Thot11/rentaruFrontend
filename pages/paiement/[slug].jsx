@@ -183,7 +183,7 @@ const PaiementPage = ({ product, stripeKey }) => {
       </div>
       <div className="rightContent">
         <div className="card">
-          <img src={getStrapiMedia(product.imageCover.url)} alt="cover"/>
+          <img src={product.manga_api.cover ? getStrapiMedia(product.manga_api.cover.url) : '/cuteCat.svg'} alt="cover"/>
           <div className="productInfo">
             <h2>{product.title}</h2>
             <p className='tomes'> Tome {product.tomeInitial} à {product.tomeFinal}</p>
