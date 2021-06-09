@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -49,7 +48,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
 
   const [sliderImageVisible, setSliderImageVisible] = useState(0);
 
-  const isBlocked = date => {
+  const isBlocked = (date) => {
     let bookedRanges = [];
     let blocked;
     
@@ -91,6 +90,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
       setTime(`/${days} jours`)
     }
   }, [startDate, endDate])
+
+  useEffect(() => {
+    if (product.booked.length > 0) {
+      setBookings(product.booked)
+    }
+  }, [product.booked])
 
   useEffect(() => {
     if(refSliderImgVisible.current) {
@@ -269,7 +274,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                   onDatesChange={({ startDate, endDate }) => {setStartDate(startDate); setEndDate(endDate);}} // PropTypes.func.isRequired,
                   focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                   onFocusChange={focusedInput => setFocusedInput(focusedInput)} // PropTypes.func.isRequired,
-                  isDayBlocked={isBlocked}
+                  isDayBlocked={(date) => isBlocked(date)}
                   minimumNights={3}
                   numberOfMonths={windowWidth > 700 ? 2 : 1}
                 />
