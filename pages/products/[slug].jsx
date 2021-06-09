@@ -97,6 +97,8 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     }
   }, [product.booked])
 
+  console.log(bookings);
+
   useEffect(() => {
     if(refSliderImgVisible.current) {
       refSliderImgVisible.current.style.left = "0px";
