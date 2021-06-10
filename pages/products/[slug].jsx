@@ -38,8 +38,8 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   
   const [windowWidth, setWindowWidth] = useState(1281);
   
-  const [startDate, setStartDate] = useState(state.rent.startDate ?? undefined)
-  const [endDate, setEndDate] = useState(state.rent.endDate ?? undefined)
+  const [startDate, setStartDate] = useState()
+  const [endDate, setEndDate] = useState()
   const [focusedInput, setFocusedInput] = useState()
   const [bookings, setBookings] = useState(product.booked ?? [])
   const [price, setPrice] = useState(product.price*1.1+0.2)
@@ -76,6 +76,13 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     setWindowWidth(window.innerWidth);
     window.addEventListener('resize', updateSize);
   }, []);
+
+  useEffect(() => {
+    console.log(startDate);
+    console.log(typeof startDate);
+    console.log(endDate)
+    console.log(typeof endDate)
+  }, [startDate, endDate]);
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -262,9 +269,9 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                   customArrowIcon={<img src="/lineSpace.svg" alt=""/>}
                   startDatePlaceholderText={'Du'}
                   endDatePlaceholderText={'au'}
-                  startDate={startDate} // momentPropTypes.momentObj or null,
+                  startDate={typeof startDate === null || typeof startDate === 'object' ? startDate : null} // momentPropTypes.momentObj or null,
                   startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-                  endDate={endDate} // momentPropTypes.momentObj or null,
+                  endDate={typeof endDate === null || typeof endDate === 'object' ? endDate : null} // momentPropTypes.momentObj or null,
                   endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
                   onDatesChange={({ startDate, endDate }) => {setStartDate(startDate); setEndDate(endDate);}} // PropTypes.func.isRequired,
                   focusedInput={focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
@@ -273,7 +280,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                   minimumNights={3}
                   numberOfMonths={windowWidth > 700 ? 2 : 1}
                 />
-                <a onClick={() => goToPaiement()}>
+                <a onClick={() => {goToPaiement()}}>
                   <button
                     className={`buttonRed button btnRent ${product.user.username === me.username ? 'disable' : ''}`}
                   >
