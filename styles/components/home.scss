@@ -87,6 +87,29 @@
 @media only screen and (max-width: 700px) {
   .homeContainer {
     margin-top: 65px;
+
+    .tempWarning {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      background-color: color(secondary);
+  
+      p {
+        line-height: 17px;
+        font-size: 14px;
+        font-weight: 400;
+        color: color(dark);
+        text-align: center;
+  
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+
     .banner {
       height: 270px;
 
