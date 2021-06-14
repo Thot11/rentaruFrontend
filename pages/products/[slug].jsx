@@ -99,7 +99,7 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   }, [startDate, endDate])
 
   useEffect(() => {
-    if (product.booked.length > 0) {
+    if (product.booked && product.booked.length > 0) {
       setBookings(product.booked)
     }
   }, [product.booked])
