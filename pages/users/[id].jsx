@@ -159,7 +159,6 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const users = await getUsers();
-  if (users.length === 0) return;
   return {
     paths: users.map((_user) => {
       return {
