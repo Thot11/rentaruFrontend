@@ -118,14 +118,15 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
 
   const goToPaiement = () => {
     if (product.user.username === me.username) return;
-    if (startDate && endDate) {
-      setBookings([...bookings, {startDate, endDate}])
-      const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
-      dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
-      router.push(`/paiement/${product.slug}`)
-    } else {
-      setError('Veuillez renseigner des dates svp')
-    }
+    // if (startDate && endDate) {
+    //   setBookings([...bookings, {startDate, endDate}])
+    //   const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
+    //   dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
+    //   router.push(`/paiement/${product.slug}`)
+    // } else {
+    //   setError('Veuillez renseigner des dates svp')
+    // }
+    setError('Mode Béta paiement indisponible pour le moment'); // BETA
   }
 
   const handleSliderMovement = (sens) => {
@@ -346,8 +347,8 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
             </div>
             {windowWidth >= 600 && <button className={'button buttonWhite'}>Envoyer un message</button>}
             {windowWidth < 600 && <img className='imgMessage' src='/bigArrow.svg' alt='arrow'/>}
-          </div>    
-        </div>     
+          </div>
+        </div>
       </div>
 
       <div className="descriptionContent">
