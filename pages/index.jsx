@@ -61,6 +61,9 @@ const HomePage = ({ home }) => {
           </Link>
         </div>
       </Modal>)}
+      <div className="tempWarning">
+        <p>Le site est actuellement en Bêta, seul <span>le dépôt d’annonce est disponible</span> pour le moment. <span>La location arrive bientôt !</span></p>
+      </div>
       <div className='banner'>
         <img src={getStrapiMedia(home.slider[0].url)} alt="cover" className="cover" />
         <img src="/Separation3.png" alt="background" className='substract'/>
