@@ -27,6 +27,10 @@
     background-color: color(dark);
     border-radius: 3px;
 
+    input {
+      width: 100%;
+    }
+
     .options, .autocompletion {
       position: absolute;
       top: calc(100% + 4px);
