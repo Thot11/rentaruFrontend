@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/rules-of-hooks */
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -17,7 +18,7 @@ import { getProducts, getProduct, getProductsByCategory, getProductsByTitle } fr
 import { getStrapiMedia } from "../../utils/medias";
 import Link from "next/link";
 
-const ProductPage = ({ product, productsCategory, productsTitle }) => {
+const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -37,11 +38,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   
   const [windowWidth, setWindowWidth] = useState(1281);
   
+  const [product, setProduct] = useState()
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
   const [focusedInput, setFocusedInput] = useState()
-  const [bookings, setBookings] = useState(product.booked ?? [])
-  const [price, setPrice] = useState(product.price*1.1+0.2)
+  const [bookings, setBookings] = useState()
+  const [price, setPrice] = useState()
   const [time, setTime] = useState('/2 semaines')
   const [error, setError] = useState(false)
   const [likeIds, setLikeIds] = useState([])
@@ -74,14 +76,18 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   useEffect(() => {
     setWindowWidth(window.innerWidth);
     window.addEventListener('resize', updateSize);
+
+    getProduct(productSlug).then((resp) => {
+      setProduct(resp)
+    })
   }, []);
 
   useEffect(() => {
-    console.log(startDate);
-    console.log(typeof startDate);
-    console.log(endDate)
-    console.log(typeof endDate)
-  }, [startDate, endDate]);
+    if (product) {
+      setPrice(product.price*1.1+0.2)
+      setBookings(product.booked ?? [])
+    }
+  }, [product])
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -99,12 +105,10 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
   }, [startDate, endDate])
 
   useEffect(() => {
-    if (product.booked.length > 0) {
+    if (product && product.booked && product.booked.length > 0) {
       setBookings(product.booked)
     }
-  }, [product.booked])
-
-  console.log(bookings);
+  }, [product])
 
   useEffect(() => {
     if(refSliderImgVisible.current) {
@@ -118,14 +122,15 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
 
   const goToPaiement = () => {
     if (product.user.username === me.username) return;
-    if (startDate && endDate) {
-      setBookings([...bookings, {startDate, endDate}])
-      const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
-      dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
-      router.push(`/paiement/${product.slug}`)
-    } else {
-      setError('Veuillez renseigner des dates svp')
-    }
+    // if (startDate && endDate) {
+    //   setBookings([...bookings, {startDate, endDate}])
+    //   const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
+    //   dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
+    //   router.push(`/paiement/${product.slug}`)
+    // } else {
+    //   setError('Veuillez renseigner des dates svp')
+    // }
+    setError('Mode Béta paiement indisponible pour le moment'); // BETA
   }
 
   const handleSliderMovement = (sens) => {
@@ -165,11 +170,13 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
     dispatch(updateMe(data, session))
   }
 
+  if (!product) {
+    return <div>Loading product...</div>;
+  }
   return (
     <div className="productPage">
-      
       <Head>
-        <title>{product.title} product</title>
+        <title>{product.title} announce</title>
       </Head>
       <div className="mainContent">
         <div className="leftContent">
@@ -289,12 +296,12 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
                 />
                 <a onClick={() => {goToPaiement()}}>
                   <button
-                    className={`buttonRed button btnRent ${product.user.username === me.username ? 'disable' : ''}`}
+                    className={`buttonRed button btnRent ${product.user && product.user.username === me.username ? 'disable' : ''}`}
                   >
                     Louer la série
                   </button>
                 </a>
-                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>{product.user.username === me.username ? 'Voyons... ceci est votre collection' : 'Vous ne serez pas encore débité'}</p>)}
+                {error ? (<p className="error">{error}</p>) : (<p className='btnInfo'>{product.user && product.user.username === me.username ? 'Voyons... ceci est votre collection' : 'Vous ne serez pas encore débité'}</p>)}
               </div>
               <div className="delivery">
                 {(product.delivery === 'Indifférent' || product.delivery === 'Remise en main propre' || !product.delivery) && (
@@ -325,29 +332,31 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
               </div>
             </div>
           </div>
-          <div className="collectorInfo">
-            <div className="collector">
-              <div className="profilPic">
-              <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : <div className="emptyProfilPic">{product.user.username?.charAt(0)}</div>}</Link>
-              </div>
-              <div className="moreInfo">
-               <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
-                <div className="stars">
-                  {
-                  [1,2,3,4,5].map((el, index) => {
-                    return (
-                      <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg" key={index} className={index < product.user.note ? 'starFill' : 'starEmpty'}>
-                        <path d="M2.19947 0.463526C2.34915 0.0028702 3.00085 0.0028702 3.15053 0.463526L3.38783 1.19387C3.45477 1.39988 3.64675 1.53936 3.86336 1.53936H4.63129C5.11565 1.53936 5.31704 2.15917 4.92518 2.44387L4.30391 2.89525C4.12867 3.02257 4.05534 3.24825 4.12228 3.45427L4.35958 4.18461C4.50926 4.64527 3.98202 5.02833 3.59016 4.74363L2.96889 4.29225C2.79365 4.16493 2.55635 4.16493 2.38111 4.29225L1.75984 4.74363C1.36798 5.02833 0.840741 4.64527 0.990417 4.18461L1.22772 3.45427C1.29466 3.24825 1.22133 3.02257 1.04609 2.89525L0.424816 2.44387C0.0329596 2.15917 0.234347 1.53936 0.718709 1.53936H1.48664C1.70325 1.53936 1.89523 1.39988 1.96217 1.19387L2.19947 0.463526Z" fill="white"/>
-                      </svg>
-                    )                    
-                  })}
+          {product.user && (
+            <div className="collectorInfo">
+              <div className="collector">
+                <div className="profilPic">
+                <Link href={`/users/${product.user.id}`}>{product.user.profilPic ? <img src={getStrapiMedia(product.user.profilPic.url)} alt="profilPic"/> : <div className="emptyProfilPic">{product.user.username?.charAt(0)}</div>}</Link>
+                </div>
+                <div className="moreInfo">
+                <p><span>{product.user.username}</span> | {product.user.ville} ({product.user.departement})</p>
+                  <div className="stars">
+                    {
+                    [1,2,3,4,5].map((el, index) => {
+                      return (
+                        <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg" key={index} className={index < product.user.note ? 'starFill' : 'starEmpty'}>
+                          <path d="M2.19947 0.463526C2.34915 0.0028702 3.00085 0.0028702 3.15053 0.463526L3.38783 1.19387C3.45477 1.39988 3.64675 1.53936 3.86336 1.53936H4.63129C5.11565 1.53936 5.31704 2.15917 4.92518 2.44387L4.30391 2.89525C4.12867 3.02257 4.05534 3.24825 4.12228 3.45427L4.35958 4.18461C4.50926 4.64527 3.98202 5.02833 3.59016 4.74363L2.96889 4.29225C2.79365 4.16493 2.55635 4.16493 2.38111 4.29225L1.75984 4.74363C1.36798 5.02833 0.840741 4.64527 0.990417 4.18461L1.22772 3.45427C1.29466 3.24825 1.22133 3.02257 1.04609 2.89525L0.424816 2.44387C0.0329596 2.15917 0.234347 1.53936 0.718709 1.53936H1.48664C1.70325 1.53936 1.89523 1.39988 1.96217 1.19387L2.19947 0.463526Z" fill="white"/>
+                        </svg>
+                      )                    
+                    })}
+                  </div>
                 </div>
               </div>
+              {windowWidth >= 600 && <button className={'button buttonWhite'}>Envoyer un message</button>}
+              {windowWidth < 600 && <img className='imgMessage' src='/bigArrow.svg' alt='arrow'/>}
             </div>
-            {windowWidth >= 600 && <button className={'button buttonWhite'}>Envoyer un message</button>}
-            {windowWidth < 600 && <img className='imgMessage' src='/bigArrow.svg' alt='arrow'/>}
-          </div>    
-        </div>     
+          )}
+        </div>
       </div>
 
       <div className="descriptionContent">
@@ -359,19 +368,21 @@ const ProductPage = ({ product, productsCategory, productsTitle }) => {
         </div>    
         {windowWidth >= 600 && <img className='adImg' src="/pub.jpg" alt="pub"/> }
       </div>
-
-      <div className="moreContent">
-        {productsTitle.length > 1 && 
+      
+      {product.title && product.categories && (
+        <div className="moreContent">
+          {product.title.length > 1 && 
+            <div className="sameManga">
+              <h2>Les autres collections {product.title}</h2>
+              <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
+            </div>
+          }
           <div className="sameManga">
-            <h2>Les autres collections {product.title}</h2>          
-            <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
+            <h2>Les lecteurs de {product.title} aiment aussi</h2>
+            <ProductsList products={productsCategory} maxLength={5} notWantedProductId={product.id} />
           </div>
-        }
-        <div className="sameManga">
-          <h2>Les lecteurs de {product.title} aiment aussi</h2>
-          <ProductsList products={productsCategory} maxLength={5} notWantedProductId={product.id} />
         </div>
-      </div>
+      )}
     </div>
   );
 };
@@ -382,7 +393,7 @@ export async function getStaticProps({ params }) {
   const product = await getProduct(params.slug);
   const productsCategory = await getProductsByCategory(product.categories);
   const productsTitle = await getProductsByTitle(product.title);
-  return { props: { product, productsCategory, productsTitle } };
+  return { props: { productSlug : params.slug, productsCategory, productsTitle } };
 }
 
 export async function getStaticPaths() {

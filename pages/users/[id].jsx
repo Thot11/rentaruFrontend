@@ -154,7 +154,6 @@ export default UserPage;
 
 export async function getStaticProps({ params }) {
   const user = await getUser(params.id);
-
   return { props: { user } };
 }
 

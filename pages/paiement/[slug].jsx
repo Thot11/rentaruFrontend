@@ -33,7 +33,8 @@ const PaiementPage = ({ product, stripeKey }) => {
 
   const { rent, user, session } = useSelector((state) => state);
 
-  const [delivery, setDelivery] = useState(product.delivery === 'Remise en main propre' || product.delivery === 'Indifférent' ? 'Remise en main propre' : 'Livraison Mondial Relay');
+  // const [delivery, setDelivery] = useState(product.delivery === 'Remise en main propre' || product.delivery === 'Indifférent' ? 'Remise en main propre' : 'Livraison Mondial Relay');
+  const [delivery, setDelivery] = useState('Remise en main propre');
   const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [cglAccepted, setCglAccepted] = useState(false);
   const [price, setPrice] = useState(product.price)
@@ -57,7 +58,7 @@ const PaiementPage = ({ product, stripeKey }) => {
 
   useEffect(() => {
     if (product.delivery === 'Remise en main propre' || product.delivery === 'Indifférent') setDelivery('Remise en main propre')
-    else setDelivery('Livraison Mondial Relay')
+    // else setDelivery('Livraison Mondial Relay')
   }, [product.user.handToHand])
 
   useEffect(() => {
@@ -118,7 +119,7 @@ const PaiementPage = ({ product, stripeKey }) => {
             <p className="dateNumber">{moment(rent.startDate).format('Do MMMM')}-{moment(rent.endDate).format('Do MMMM')}</p>
           </div>
           <div className="prices">
-            {product.delivery !== 'Envoi postal' && (
+            {/* {product.delivery !== 'Envoi postal' && ( */}
               <div className="price">
                 <div className="leftPart">
                   <Radio checked={delivery === 'Remise en main propre'} setChecked={setDelivery} info={'Remise en main propre'} resetInfo={''} />                
@@ -126,7 +127,7 @@ const PaiementPage = ({ product, stripeKey }) => {
                 </div>
                 <p className="priceNumber">0,00 €</p>
               </div>
-            )}
+            {/* )} */}
             {/* <div className="price">
               <div className="leftPart">
                 <CheckBox checked={delivery === 'Relais colis'} setChecked={setDelivery} info={'Relais colis'} resetInfo={''} />  
@@ -138,17 +139,17 @@ const PaiementPage = ({ product, stripeKey }) => {
               <>
                 <div className="price">
                   <div className="leftPart">
-                    <Radio checked={delivery === 'Livraison Mondial Relay'} setChecked={setDelivery} info={'Livraison Mondial Relay'} resetInfo={''} />  
+                    <Radio checked={delivery === 'Livraison Mondial Relay'} setChecked={() => null} info={'Livraison Mondial Relay'} resetInfo={''} />  
                     <p className="label">Livraison Mondial Relay</p>
                   </div>
-                  <p className="priceNumber">13,00 €</p>
+                  <p className="priceNumber">bientôt disponible</p>
                 </div>
                 <div className="price">
                   <div className="leftPart">
-                    <Radio checked={delivery === 'Livraison Colissimo'} setChecked={setDelivery} info={'Livraison Colissimo'} resetInfo={''} /> 
+                    <Radio checked={delivery === 'Livraison Colissimo'} setChecked={() => null} info={'Livraison Colissimo'} resetInfo={''} /> 
                     <p className="label">Livraison Colissimo</p>
                   </div>
-                  <p className="priceNumber">20,00 €</p>
+                  <p className="priceNumber">bientôt disponible</p>
                 </div>
               </>
             )}
