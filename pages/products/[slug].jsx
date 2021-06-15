@@ -122,15 +122,15 @@ const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
 
   const goToPaiement = () => {
     if (product.user.username === me.username) return;
-    if (startDate && endDate) {
-      setBookings([...bookings, {startDate, endDate}])
-      const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
-      dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
-      router.push(`/paiement/${product.slug}`)
-    } else {
-      setError('Veuillez renseigner des dates svp')
-    }
-    // setError('Mode Béta paiement indisponible pour le moment'); // BETA
+    // if (startDate && endDate) {
+    //   setBookings([...bookings, {startDate, endDate}])
+    //   const newBookings = [...bookings, {startDate: startDate.toDate(), endDate: endDate.toDate()}]
+    //   dispatch(paiementData(newBookings, startDate.toDate(), endDate.toDate()))
+    //   router.push(`/paiement/${product.slug}`)
+    // } else {
+    //   setError('Veuillez renseigner des dates svp')
+    // }
+    setError('Mode Béta paiement indisponible pour le moment'); // BETA
   }
 
   const handleSliderMovement = (sens) => {

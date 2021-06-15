@@ -23,21 +23,21 @@ const PaiementStripe = ({
   const [error, setError] = useState();
 
   async function preGo() {
-    if (elements) {
-      const cardElement = elements.getElement(CardNumberElement);
-      let tokenStripe;
-      if (!cardElement && checked) {
-        setError("Vérifier vos informations puis réessayer svp");
-        return;
-      }
-      if (checked) tokenStripe = await stripe.createToken(cardElement);
-      if (tokenStripe && tokenStripe.error && checked) {
-        setError("Vérifier vos informations puis réessayer svp");
-        return;
-      }
-      go(tokenStripe);
-    }
-    // setError("Mode Béta paiement indisponible pour le moment"); // BETA
+    // if (elements) {
+    //   const cardElement = elements.getElement(CardNumberElement);
+    //   let tokenStripe;
+    //   if (!cardElement && checked) {
+    //     setError("Vérifier vos informations puis réessayer svp");
+    //     return;
+    //   }
+    //   if (checked) tokenStripe = await stripe.createToken(cardElement);
+    //   if (tokenStripe && tokenStripe.error && checked) {
+    //     setError("Vérifier vos informations puis réessayer svp");
+    //     return;
+    //   }
+    //   go(tokenStripe);
+    // }
+    setError("Mode Béta paiement indisponible pour le moment"); // BETA
   }
 
   return (
