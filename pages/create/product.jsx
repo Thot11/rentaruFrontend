@@ -162,7 +162,7 @@ const CreateProduct = () => {
       <div className="bottomContainer">
           {step === 4 ? (
             <div className="first">
-              Prix définit sur une durée de <span className="bold">14 jours </span> garantissant un temps de lecture optimale <br /> <br /> Entre : 0.80€ - 2€ le tome
+              Prix définit sur une durée de <span className="bold">14 jours </span> garantissant un temps de lecture optimale <br /> <br /> Entre : 0.50€ - 2.50€ le tome
             </div>
           ) : (
             <div className="first">
