@@ -69,7 +69,7 @@ const Step1 = ({ session, step, setStep, user, data, setData, preview, setPrevie
         {/* <Dropdown filters={mangaCollection?.map(manga => {return manga.title})} selectedItem={selectedManga} setSelectedItem={setSelectedManga} /> */}
         <div className="inputContainer">
           <input type="text" value={selectedManga} onChange={(e) => {setSelectedManga(e.target.value); setMangaId(-1)}} />
-          {selectedManga.length > 2 && mangaId === -1 &&
+          {selectedManga.length > 0 && mangaId === -1 &&
             <div className="autocompletion">
               {mangaCollection.map((manga, key) => {         
                 if(manga.title.toLowerCase().startsWith(selectedManga.toLowerCase())) {
