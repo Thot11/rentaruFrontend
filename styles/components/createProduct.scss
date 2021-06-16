@@ -243,6 +243,7 @@
       .languageContainer {
         display: inline-flex;
         justify-content: flex-start;
+        align-items: center;
         margin-bottom: 30px;
 
         .select {
@@ -250,7 +251,7 @@
         }
 
         p {
-          margin-top: 8px;
+          // margin-top: 8px;
           color: color(secondary, 0.8);
           font-size: 15px;
         }

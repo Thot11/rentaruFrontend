@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/rules-of-hooks */
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Dropdown from "../dropdown";
@@ -14,10 +16,9 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
   const [etat, setEtat] = useState(data.etat ?? '')
   
   const languages = ['Français', 'Anglais', 'Japonais', 'Italie']
-  const editors = ['Glénat', 'Pika', 'Ki-oon', 'Kana', 'Delcourt']
+  // const editors = ['Glénat', 'Pika', 'Ki-oon', 'Kana', 'Delcourt']
 
   const [selectedLanguage, setSelectedLanguage] = useState(data.langue ? languages.findIndex(language => language === data.langue) : 0)
-  const [selectedEditor, setEditor] = useState(data.edition ? editors.findIndex(editor => editor === data.edition) : 0)
   
   const [error, setError] = useState(false)
 
@@ -54,12 +55,6 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
     }
   }, [selectedLanguage])
 
-  useEffect(() => {
-    if (selectedEditor !== -1) {
-      setEdition(editors[selectedEditor])
-    }
-  }, [selectedEditor])
-
 
   return (
     <>
@@ -81,11 +76,9 @@ const Step2 = ({ step, setStep, user, data, setData, preview, setPreview }) => {
           <Dropdown filters={languages} selectedItem={selectedLanguage} setSelectedItem={setSelectedLanguage} />
         </div>
       </div>
-      <div className="languageContainer">
-        <p>Editeurs :&nbsp;</p>
-        <div className="select">
-          <Dropdown filters={editors} selectedItem={selectedEditor} setSelectedItem={setEditor} />
-        </div>
+      <div className="tomeContainer">
+        <p>Edition : </p>
+        <input type="text" defaultValue={edition} onChange={(e) => setEdition(e.target.value)} />
       </div>
       <div className="tomeContainer">
         <p>Etat : </p>
