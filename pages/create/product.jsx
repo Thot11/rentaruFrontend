@@ -49,6 +49,7 @@ const CreateProduct = () => {
       formData.append('data', JSON.stringify(data))
       dispatch(postProduct(formData, session, mangaId));
     }
+    router.push({ pathname: "/create/product", query: `step${step}`})
   }, [step])
 
   return (

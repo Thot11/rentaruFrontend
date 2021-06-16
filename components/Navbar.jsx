@@ -165,7 +165,7 @@ const Navbar = () => {
         </div>
         {connected ? (
           <>
-          <Link href="/create/product">
+          <Link href="/create/product?step1">
             <a onClick={() => setOpenBurger(!openBurger)}>
               <Button color="Red">
                   Déposer une annonce
@@ -276,7 +276,7 @@ const Navbar = () => {
           <a href="/about" className={`navElement ${path === '/about' ? 'active':''}`}>À propos</a>
         </div>
         {connected && (
-        <Link href="/create/product">
+        <Link href="/create/product?step1">
           <a>
             <Button color="Red">
               Déposer une annonce

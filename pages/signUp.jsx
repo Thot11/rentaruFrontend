@@ -76,8 +76,10 @@ const SignUp = () => {
   }, [])
 
   useEffect(() => {
-    console.log(quotes)
-  }, [quotes])
+    router.push({ pathname: "/signUp", query: `step${step}`})
+  }, [step])
+
+  
 
 
   return (

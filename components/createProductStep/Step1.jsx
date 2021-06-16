@@ -84,9 +84,9 @@ const Step1 = ({ session, step, setStep, user, data, setData, preview, setPrevie
       </div>
       <div className="buttonsContainer">
         <div />
-        <Button color={'Red'} functionOnClick={() => {
-          if (selectedManga !== -1) nextStep()
-        }}>Continuer</Button>
+          <Button color={'Red'} functionOnClick={() => {
+            if (selectedManga !== -1) nextStep()
+          }}>Continuer</Button>
       </div>
     </>
   );
