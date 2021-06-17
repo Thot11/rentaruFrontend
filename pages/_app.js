@@ -34,6 +34,16 @@ const MyApp = ({ Component, pageProps }) => {
 
           <noscript dangerouslySetInnerHTML={{__html:`<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PC3BPBZ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe>`}}></noscript>
+
+
+          <script dangerouslySetInnerHTML={{__html:`(function(h,o,t,j,a,r){
+            h.hj=h.hjfunction(){(h.hj.q=h.hj.q[]).push(arguments)};
+            h._hjSettings={hjid:2457670,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+            })(window,document,'https://static.hotjar.com/c/hotjar-%27,%27.js?sv=%27);`}} ></script>
         </Head>
         <Component {...pageProps} />
       </Layout>
