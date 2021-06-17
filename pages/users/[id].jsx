@@ -116,6 +116,7 @@ const UserPage = ({ user }) => {
           <div className="description">
             <p className='title'>Description</p>
             <p className='descriptionContent'>{user.description}</p>
+           {console.log(user.description)}
           </div>
           {windowWidth >= 600 &&
             <div className="top">
@@ -128,7 +129,7 @@ const UserPage = ({ user }) => {
           <div className="reviews">
             <p className="title">Dernier avis</p>
             <div className="review">
-            J’ai enfin pu me replonger dans One piece sans me ruiner ! La collection est en bon état, je l’ai reçue en 4 jours ! {user.username} est réactif aux questions et aux messages, je recommande !
+            WIP: Fonctionnalité à venir. See you soon. XoXo
             </div>
           </div>
         </div>
