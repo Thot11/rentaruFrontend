@@ -2,7 +2,7 @@
 import Button from "../elements/Button";
 import Link from "next/link";
 
-export default function error() {
+export default function Custom404() {
   return (
     <div className="div404">
       <h1>404</h1>
