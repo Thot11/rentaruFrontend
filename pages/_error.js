@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import Button from "../elements/Button";
 import Link from "next/link";
 
