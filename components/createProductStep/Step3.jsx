@@ -90,7 +90,7 @@ const Step3 = ({ step, setStep, data, setData }) => {
       </div>
       <div className="buttonsContainer">
         <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
-        <Button color={'Red'} functionOnClick={() => {if (selectedFile.length > 0 && selectedFile.length < 4 ) nextStep(); else setError('Minimum 1 image, maximum 3, svp') }}>Continuer</Button>
+        <Button color={'Red'} functionOnClick={() => {if (selectedFile.length > 0 && selectedFile.length < 4 && !error) nextStep(); else setError('Minimum 1 image, maximum 3, svp') }}>Continuer</Button>
       </div>
     </>
   );
