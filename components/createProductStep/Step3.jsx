@@ -10,7 +10,6 @@ const Step3 = ({ step, setStep, data, setData }) => {
   const [previewImages, setPreviewImages] = useState([])
   const [bool, setBool] = useState(false)
   const [error, setError] = useState()
-  console.log(selectedFile);
 
   const nextStep = () => {
     setData({

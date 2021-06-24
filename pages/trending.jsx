@@ -135,8 +135,8 @@ const TrendingPage = ({ products }) => {
             disabledClass
             spaceBetween={windowWidth > 700 ? 30 : 10}
             slidesPerView={windowWidth > 700 ? 5 : 2.4}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
           >
             {topManga.map((manga, key) => {
               return (
@@ -169,8 +169,8 @@ const TrendingPage = ({ products }) => {
             disabledClass
             spaceBetween={windowWidth > 700 ? 30 : 10}
             slidesPerView={windowWidth > 700 ? 5 : 2.4}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
           >
             {topShonen.map((manga, key) => {
               return (
@@ -203,8 +203,8 @@ const TrendingPage = ({ products }) => {
             disabledClass
             spaceBetween={windowWidth > 700 ? 30 : 10}
             slidesPerView={windowWidth > 700 ? 5 : 2.4}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
           >
             {topSeinen.map((manga, key) => {
               return (

@@ -108,8 +108,8 @@ const Login = () => {
                   slidesPerView={1}
                   spaceBetween={50}                
                   autoplay={{delay: 5000}}
-                  onSlideChange={() => console.log('')}
-                  onSwiper={(swiper) => console.log('')}
+                  // onSlideChange={() => console.log('')}
+                  // onSwiper={(swiper) => console.log('')}
                 >
                   {quotes.map((quote, key) => {
                     return (

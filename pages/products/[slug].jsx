@@ -19,7 +19,6 @@ import { getStrapiMedia } from "../../utils/medias";
 import Link from "next/link";
 
 const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
-  console.log('slug', productSlug);
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
