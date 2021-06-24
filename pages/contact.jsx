@@ -29,12 +29,10 @@ const Contact = ({apiKeys, captchaKey}) => {
     .sendForm(apiKeys.SERVICE_ID, apiKeys.TEMPLATE_ID, e.target, apiKeys.USER_ID)
     .then(
       result => {
-        console.log(result.text)
         setSubmitMessage('Sucess')
       },
       error => {
         setSubmitMessage('Error')
-        console.log(error.text)
       }
     )
     setLastName('');
