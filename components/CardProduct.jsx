@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
-import {getUser} from "../utils/api";
+import {getUser, getManga} from "../utils/api";
 import {updateMe} from '../store'
 
 const CardProduct = ({ product, key, user, saveDate }) => {
@@ -15,6 +15,7 @@ const CardProduct = ({ product, key, user, saveDate }) => {
   const me = state.user
   const [likeIds, setLikeIds] = useState([])
   const [ownerUser, setOwnerUser] = useState(user)
+  const [coverUrl, setCoverUrl] = useState('')
 
   useEffect(() => {
     if (me.likes) {
@@ -29,6 +30,18 @@ const CardProduct = ({ product, key, user, saveDate }) => {
   useEffect(() => {
     setOwnerUser(user)
   }, [user])
+
+  useEffect(() => {
+    if(typeof product.manga_api === 'number') {
+      console.log(typeof product.manga_api);
+      getManga(product.manga_api).then((res) => {
+        setCoverUrl(res.cover.url)
+      })
+    }
+    else {
+      setCoverUrl(product.manga_api.cover.url);
+    }
+  }, [product])
 
   useEffect(() => {
     if (typeof ownerUser === "number") {
@@ -83,7 +96,7 @@ const CardProduct = ({ product, key, user, saveDate }) => {
       }
       <Link href={`/products/${product.slug}`} >
         <a onClick={saveDate}>
-          <img src={product.manga_api && product.manga_api.cover ? getStrapiMedia(product.manga_api.cover.url) : '/cuteCat.svg'} alt="cover"/>
+          <img src={coverUrl !== '' ? getStrapiMedia(coverUrl) : '/cuteCat.svg'} alt="cover"/>
           <div className="info">
             <div className="upperInfo">
               <div className="titles">

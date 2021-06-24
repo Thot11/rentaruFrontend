@@ -1,10 +1,28 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable prettier/prettier */
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getStrapiMedia } from "../utils/medias";
+import {getManga} from "../utils/api";
 import Button from "../elements/Button";
 
 const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
+
+  
+  const [coverUrl, setCoverUrl] = useState('')
+
+  useEffect(() => {
+    if(typeof product.manga_api === 'number') {
+      console.log(typeof product.manga_api);
+      getManga(product.manga_api).then((res) => {
+        setCoverUrl(res.cover.url)
+      })
+    }
+    else {
+      setCoverUrl(product.manga_api.cover.url);
+    }
+  }, [product])
+
   return (
     <div className={`cardProduct ${product.status === 'draft' ? 'draft' : ''}`} key={key}>
       {product.integrale && (
@@ -24,7 +42,7 @@ const CardProduct = ({ product, key, setOpenModal, setInfoModal }) => {
         </div>
       }
         <a>
-          <img src={product.manga_api.cover ? getStrapiMedia(product.manga_api.cover.url) : '/cuteCat.svg'} alt="cover"/>
+          <img src={coverUrl !== '' ? getStrapiMedia(coverUrl) : '/cuteCat.svg'} alt="cover"/>
           <div className="info">
             <div className="upperInfo">
               <div className="titles">

@@ -10,12 +10,14 @@ const WishList = () => {
   const dispatch = useDispatch();
   const { session, user } = useSelector((state) => state);
 
+  const [mangaList, setMangaList] = useState([])
+
   useEffect(() => {
     dispatch(getMe(session))
   }, [])
   
 
-  console.log(user);
+  console.log(user.likes);
   return (
     <div>
       <Head>
