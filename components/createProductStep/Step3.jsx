@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/rules-of-hooks */
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "../../elements/Button"
@@ -7,7 +9,8 @@ const Step3 = ({ step, setStep, data, setData }) => {
   const [selectedFile, setSelectedFile] = useState(data.images ?? [])
   const [previewImages, setPreviewImages] = useState([])
   const [bool, setBool] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState()
+  console.log(selectedFile);
 
   const nextStep = () => {
     setData({
@@ -31,7 +34,14 @@ const Step3 = ({ step, setStep, data, setData }) => {
       });
     }
     setPreviewImages(previewImage)
-  }, [selectedFile])
+
+    if (selectedFile) {
+      const tempFiles = selectedFile.filter(file => file.name.length > 150)
+      if (tempFiles.length > 0) {
+        setError('Nom du fichier trop long, veuillez le raccourcir svp')
+      } else {setError('')}
+    }
+  }, [selectedFile, bool])
 
   return (
     <>
@@ -44,7 +54,7 @@ const Step3 = ({ step, setStep, data, setData }) => {
           id="file-upload"
           onChange={(e) => setSelectedFile([...selectedFile, ...e.target.files])}
         />
-        {error && (<p className="error" >Minimum 1 image, maximum 3, svp</p>)}
+        {error && (<p className="error" >{error}</p>)}
         <label for="file-upload" className="addImages">
           <svg width="65" height="65" viewBox="0 0 65 65" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0)">
@@ -80,7 +90,7 @@ const Step3 = ({ step, setStep, data, setData }) => {
       </div>
       <div className="buttonsContainer">
         <Button color={'Transparent'} functionOnClick={previousStep}>Retour</Button>
-        <Button color={'Red'} functionOnClick={() => {if (selectedFile.length > 0 && selectedFile.length < 4 ) nextStep(); else setError(true) }}>Continuer</Button>
+        <Button color={'Red'} functionOnClick={() => {if (selectedFile.length > 0 && selectedFile.length < 4 ) nextStep(); else setError('Minimum 1 image, maximum 3, svp') }}>Continuer</Button>
       </div>
     </>
   );
