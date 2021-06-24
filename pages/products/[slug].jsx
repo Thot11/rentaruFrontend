@@ -19,6 +19,7 @@ import { getStrapiMedia } from "../../utils/medias";
 import Link from "next/link";
 
 const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
+  console.log(productSlug);
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -392,6 +393,7 @@ const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
 export default ProductPage;
 
 export async function getStaticProps({ params }) {
+  console.log('te',params);
   const product = await getProduct(params.slug);
   const productsCategory = await getProductsByCategory(product.categories);
   const productsTitle = await getProductsByTitle(product.title);
@@ -404,12 +406,18 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const products = await getProducts();
+  // console.log(products);
+  // console.log(products.map((_product) => {
+  //   return {
+  //     params: { slug: _product.slug },
+  //   };
+  // }));
   return {
     paths: products.map((_product) => {
       return {
         params: { slug: _product.slug },
       };
     }),
-    fallback: false,
+    fallback: true,
   };
 }
