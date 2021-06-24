@@ -27,7 +27,7 @@ const ProductPage = ({ product }) => {
   const { session, user, errorState, createdProduct } = state;
   
   const [step, setStep] = useState(2)
-  const [data, setData] = useState({
+  const [data, setData] = useState(product ? {
     tomeInitial: product.tomeInitial,
     tomeFinal: product.tomeFinal,
     etat: product.etat,
@@ -38,17 +38,23 @@ const ProductPage = ({ product }) => {
     price: product.price,
     description: product.description,
     delivery: product.delivery
-  })
-  const [preview, setPreview] = useState({
+  } : null)
+  const [preview, setPreview] = useState(product ? {
     title: product.title,
     imageCover: product.imageCover
-  })
+  } : null)
 
   useEffect(() => {
     if (step < 2) {
       setStep(2)
     }
   }, [step])
+
+  useEffect(() => {
+    if (!product) {
+      router.push('/404')
+    }
+  }, [])
 
   useEffect(() => {
     if(step === 6) {
@@ -70,84 +76,92 @@ const ProductPage = ({ product }) => {
     }
   }, [step])
 
-  if (user.username !== product.user.username) {
-    return <div>Ceci n'est pas votre produit, j'appelle la police</div>;
+  
+  if (!product) {
+    return <div>Loading...</div>;
+  } else {
+
+    if (user.username !== product.user.username) {
+      return <div>Ceci n'est pas votre produit, j'appelle la police</div>;
+    }
+
+    return (
+      <div className="createProductContainer">
+        
+        <Head>
+          <title>Modifier votre annonce : {product.title}</title>
+        </Head>
+        <div className="topContainer">
+          <div className="stepCount">{step-1}/5</div>
+          <h2>Modification d'une annonce</h2>
+        </div>
+
+        <div className="middleContainer">
+          <div className="step">
+            
+            {(() => {
+        
+              switch (step) {
+                case 2:
+                  return (
+                    <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
+                  )
+                case 3:
+                  return (
+                    <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
+                  )
+                case 4:
+                  return (
+                    <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
+                  )
+                case 5:
+                  return (
+                    <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
+                  )
+                case 6:
+                  return errorState.type === "createProduct" ? (
+                    <div>{errorState.message}</div>
+                  ) : (<div className="finalStep">
+                      Annonce modifiée, Merci... 
+                      {createdProduct.slug && (
+                        <div className="btnContainer">
+                          <Link href={`/products/${createdProduct.slug}`} >
+                            <a>
+                              <Button color="White">Voir mon annonce</Button>
+                            </a>
+                          </Link>
+                      </div>
+                      )}
+                    </div>)
+                default:
+                  return (
+                    <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
+                  )
+              }
+
+            })()}
+          </div>
+          <div className="preview">
+            {preview && (
+              <PreviewProduct data={preview} user={user}/>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+    
   }
-
-  return (
-    <div className="createProductContainer">
-      
-      <Head>
-        <title>Modifier votre annonce : {product.title}</title>
-      </Head>
-      <div className="topContainer">
-        <div className="stepCount">{step-1}/5</div>
-        <h2>Modification d'une annonce</h2>
-      </div>
-
-      <div className="middleContainer">
-        <div className="step">
-          
-          {(() => {
-      
-            switch (step) {
-              case 2:
-                return (
-                  <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
-                )
-              case 3:
-                return (
-                  <Step3 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
-                )
-              case 4:
-                return (
-                  <Step4 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
-                )
-              case 5:
-                return (
-                  <Step5 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
-                )
-              case 6:
-                return errorState.type === "createProduct" ? (
-                  <div>{errorState.message}</div>
-                ) : (<div className="finalStep">
-                    Annonce modifiée, Merci... 
-                    {createdProduct.slug && (
-                      <div className="btnContainer">
-                        <Link href={`/products/${createdProduct.slug}`} >
-                          <a>
-                            <Button color="White">Voir mon annonce</Button>
-                          </a>
-                        </Link>
-                    </div>
-                    )}
-                  </div>)
-              default:
-                return (
-                  <Step2 step={step} setStep={setStep} user={user} data={data} setData={setData} preview={preview} setPreview={setPreview} />
-                )
-            }
-
-          })()}
-        </div>
-        <div className="preview">
-          {preview && (
-            <PreviewProduct data={preview} user={user}/>
-          )}
-        </div>
-      </div>
-    </div>
-  );
 };
+
 
 export default ProductPage;
 
 export async function getStaticProps({ params }) {
-  const product = await getProduct(params.slug);
-  if (!product) return {  redirect: {
-    destination: '/404',
-    permanent: false
-  }}
+  let product = null;
+  try {
+    product = await getProduct(params.slug);
+  } catch (err) {}
+  if (!product) return { props: { product : null }}
   return { props: { product } };
 }
 
@@ -159,6 +173,6 @@ export async function getStaticPaths() {
         params: { slug: _product.slug },
       };
     }),
-    fallback: false,
+    fallback: true,
   };
 }
