@@ -97,7 +97,7 @@ const MangaPage = ({ manga, products }) => {
       router.push('/404')
     }
   }, [])
-  
+
   useEffect(() => {
     getMangaList()
   }, [session])
@@ -509,7 +509,7 @@ export async function getStaticPaths() {
         params: { id: _manga.id.toString() },
       };
     }),
-    fallback: false,
+    fallback: true,
   };
 }
 
