@@ -35,11 +35,15 @@ const CardProduct = ({ product, key, user, saveDate }) => {
     if(typeof product.manga_api === 'number') {
       console.log(typeof product.manga_api);
       getManga(product.manga_api).then((res) => {
-        setCoverUrl(res.cover.url)
+        if(res.cover) {
+          setCoverUrl(res.cover.url)
+        }
       })
     }
     else {
-      setCoverUrl(product.manga_api.cover.url);
+      if(product.manga_api.cover) {
+        setCoverUrl(product.manga_api.cover.url);
+      }
     }
   }, [product])
 
