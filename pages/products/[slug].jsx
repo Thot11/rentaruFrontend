@@ -371,16 +371,18 @@ const ProductPage = ({ productSlug, productsCategory, productsTitle}) => {
       
       {product.title && product.categories && (
         <div className="moreContent">
-          {product.title.length > 1 && 
+          {productsTitle.length > 1 && 
             <div className="sameManga">
               <h2>Les autres collections {product.title}</h2>
               <ProductsList products={productsTitle} maxLength={5} notWantedProductId={product.id} />
             </div>
           }
+          {productsCategory.length > 1 && 
           <div className="sameManga">
             <h2>Les lecteurs de {product.title} aiment aussi</h2>
             <ProductsList products={productsCategory} maxLength={5} notWantedProductId={product.id} />
           </div>
+          }
         </div>
       )}
     </div>
@@ -393,10 +395,10 @@ export async function getStaticProps({ params }) {
   const product = await getProduct(params.slug);
   const productsCategory = await getProductsByCategory(product.categories);
   const productsTitle = await getProductsByTitle(product.title);
-  if (!product) return {  redirect: {
-    destination: '/404',
-    permanent: false
-  }}
+  // if (!product) return {  redirect: {
+  //   destination: '/404',
+  //   permanent: false
+  // }}
   return { props: { productSlug : params.slug, productsCategory, productsTitle } };
 }
 
