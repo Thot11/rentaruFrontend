@@ -92,7 +92,12 @@ const MangaPage = ({ manga, products }) => {
     setWindowWidth(window.innerWidth)
   }
 
-
+  useEffect(() => {
+    if (!manga && !products) {
+      router.push('/404')
+    }
+  }, [])
+  
   useEffect(() => {
     getMangaList()
   }, [session])
@@ -237,6 +242,10 @@ const MangaPage = ({ manga, products }) => {
   const formatDate = (date) => {
     let d = new Date(date);
     return [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('/');
+  }
+
+  if (!products && !manga) {
+    return <div>Loading...</div>;
   }
   
   return (
@@ -488,10 +497,7 @@ export default MangaPage;
 export async function getStaticProps({ params }) {
   const manga = await getManga(params.id);  
   const products = await getProductsByTitle(manga.title);
-  if (!products || !manga) return {  redirect: {
-    destination: '/404',
-    permanent: false
-  }}
+  if (!products || !manga) return { props: { manga : null, products : null }}
   return { props: { manga, products } };
 }
 

@@ -94,18 +94,18 @@ const Navbar = () => {
           <div className={`right ${connected ? '' : 'notConnected'}`}>
             {connected ? (
               <>
-                <Link href="/create/product">
-                  <a>
-                    <img src="/message.svg" alt=""/>
+                {/* <Link href="/create/product"> */}
+                  <a className="disable">
+                    <img src="/message.svg" className="disable" alt=""/>
                     <div className="subTitle">Messages</div>
                   </a>
-                </Link>
-                <Link href={{ pathname: "/profil", query: { tab: "params" } }}>
-                  <a>
-                    <img src="/notif.svg" alt=""/>
+                {/* </Link> */}
+                {/* <Link href={{ pathname: "/profil", query: { tab: "params" } }}> */}
+                  <a className="disable">
+                    <img src="/notif.svg" className="disable" alt=""/>
                     <div className="subTitle">Notifs</div>
                   </a>
-                </Link>
+                {/* </Link> */}
                 <Link href="/wishList">
                   <a>
                     <img src="/like2.svg" alt=""/>
