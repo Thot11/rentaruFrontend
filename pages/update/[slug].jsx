@@ -169,9 +169,16 @@ export async function getStaticPaths() {
   const products = await getProducts();
   return {
     paths: products.map((_product) => {
-      return {
-        params: { slug: _product.slug },
-      };
+      if(_product.slug) {
+        return {
+          params: { slug: _product.slug },
+        };
+      }
+      else {
+        return {
+          params: { slug: '' },
+        }
+      }
     }),
     fallback: true,
   };
