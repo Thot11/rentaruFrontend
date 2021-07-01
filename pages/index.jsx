@@ -1,22 +1,19 @@
 /* eslint-disable prettier/prettier */
 import Head from "next/head";
 import ProductsList from "../components/ProductsList";
-import { getHomePage, getConnect } from "../utils/api";
+import { getHomePage } from "../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStrapiMedia } from "../utils/medias";
 import { useEffect, useState } from "react";
 import {getProducts, resetCreateProduct} from '../store'
 import Link from "next/link";
 import Modal from "../components/Modal"
-import { useRouter } from "next/router";
 import Button from "../elements/Button"
 
 const HomePage = ({ home }) => {
 
-  const router = useRouter();
-
   const dispatch = useDispatch();
-  const { info, products, session, createdProduct } = useSelector((state) => state);
+  const { products, session, createdProduct } = useSelector((state) => state);
 
   const [openModal, setOpenModal] = useState(false);
 
