@@ -198,7 +198,7 @@ export const postProduct = (data, token, mangaId) => {
       .then((resp) => {
         if (resp) {     
           if(mangaId !== -1) {
-            GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id, {remove: "'"}), manga_api: mangaId}, token).then((resp) => {
+            GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id, {remove: /[#`°;µ¨*+~.()'"!:@^]/g}), manga_api: mangaId}, token).then((resp) => {
               dispatch(createProductAction(resp.data));
             })
           }
@@ -207,7 +207,7 @@ export const postProduct = (data, token, mangaId) => {
               title: resp.data.title,
             }
             GlobalAPI.postNewManga(newData, token).then((response) => {
-              GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id, {remove: "'"}), manga_api: response.data.id}, token).then((resp) => {
+              GlobalAPI.updateProduct(resp.data.id, {slug: slugify(resp.data.title + '-' + resp.data.id, {remove: /[#`°;µ¨*+~.()'"!:@^]/g}), manga_api: response.data.id}, token).then((resp) => {
                 dispatch(createProductAction(resp.data));
               })
             });
